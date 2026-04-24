@@ -50,13 +50,13 @@
     }
 
     [data-theme="light"] {
-      --bg-primary: #fff9f0;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255, 255, 255, 0.9);
+      --bg-primary: #fffdf8;
+      --bg-secondary: #fff9f0;
+      --bg-card: rgba(255, 255, 255, 0.95);
       --bg-card-hover: rgba(255, 255, 255, 0.98);
       --text-primary: #2d3436;
-      --text-secondary: #636e72;
-      --text-muted: #b2bec3;
+      --text-secondary: #4a5568;
+      --text-muted: #7a8fa6;
       --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
       --shadow-card-hover: 0 16px 48px rgba(0,0,0,0.12);
       --shadow-glow: 0 0 40px rgba(255,107,107,0.15);
@@ -552,16 +552,25 @@
       position: absolute;
       top: 0; left: 0; right: 0; bottom: 0;
       background: linear-gradient(
-        to right,
-        rgba(13, 27, 42, 0.92) 0%,
-        rgba(13, 27, 42, 0.6) 50%,
-        transparent 100%
+        135deg,
+        rgba(13, 27, 42, 0.90) 0%,
+        rgba(13, 27, 42, 0.50) 100%
       );
       display: flex;
       flex-direction: column;
       justify-content: center;
       padding: 48px;
     }
+    [data-theme="light"] .hero-banner-overlay {
+      background: linear-gradient(
+        135deg,
+        rgba(255, 253, 248, 0.92) 0%,
+        rgba(255, 253, 248, 0.55) 100%
+      );
+    }
+    [data-theme="light"] .hero-banner-overlay .hero-banner-title,
+    [data-theme="light"] .hero-banner-overlay .hero-banner-desc { color: #2d3436; }
+    [data-theme="light"] .hero-banner-overlay .highlight { color: #e74c3c; }
 
     [data-theme="light"] .hero-banner-overlay {
       background: linear-gradient(
