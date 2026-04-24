@@ -1,30 +1,49 @@
 <!DOCTYPE html>
-<html lang="zh-TW">
+<html lang="zh-TW" data-theme="dark">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phase 1｜靈感發想 | AI 旅遊工作坊 v2</title>
+  <title>Phase 1｜靈感發想 | AI 旅遊工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
-    :root {
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --secondary: #06b6d4;
-      --accent: #f59e0b;
-      --bg-dark: #0f172a;
-      --bg-card: rgba(30, 41, 59, 0.8);
-      --text-primary: #f8fafc;
-      --text-secondary: #94a3b8;
-      --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+:root {
+      --bg-primary: #0d1b2a;
+      --bg-secondary: #1b2838;
+      --bg-card: rgba(27, 40, 56, 0.85);
+      --bg-card-solid: #1b2838;
+      --text-primary: #ffffff;
+      --text-secondary: #a8c0d6;
+      --text-muted: #6b8299;
+      --border: var(--border);
+      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
+      --shadow: 0 8px 32px rgba(0,0,0,0.3);
+      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
+      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
     }
+    [data-theme="light"] {
+      --bg-primary: #fff9f0;
+      --bg-secondary: #fff5e6;
+      --bg-card: rgba(255,255,255,0.9);
+      --bg-card-solid: #ffffff;
+      --text-primary: #2d3436;
+      --text-secondary: #636e72;
+      --text-muted: #b2bec3;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
       font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg-dark);
+      background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       padding: 24px;
@@ -42,7 +61,7 @@
       gap: 16px;
       margin-bottom: 48px;
       padding-bottom: 24px;
-      border-bottom: 1px solid rgba(255,255,255,0.1);
+      border-bottom: 1px solid var(--border);
     }
 
     .phase-badge {
@@ -64,11 +83,11 @@
       margin-left: auto;
     }
 
-    .back-link:hover { color: var(--primary); }
+    .back-link:hover { color: #ff6b6b; }
 
     /* Progress */
     .progress-bar {
-      background: rgba(255,255,255,0.1);
+      background: var(--border);
       border-radius: 20px;
       height: 8px;
       margin-bottom: 48px;
@@ -87,7 +106,7 @@
     .quiz-card {
       background: var(--bg-card);
       backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.1);
+      border: 1px solid var(--border);
       border-radius: 24px;
       padding: 32px;
       margin-bottom: 24px;
@@ -100,7 +119,7 @@
     }
 
     .question-number {
-      color: var(--primary);
+      color: #ff6b6b;
       font-weight: 700;
       margin-right: 8px;
     }
@@ -125,12 +144,12 @@
 
     .option:hover {
       background: rgba(99, 102, 241, 0.1);
-      border-color: var(--primary);
+      border-color: #ff6b6b;
     }
 
     .option.selected {
       background: rgba(99, 102, 241, 0.2);
-      border-color: var(--primary);
+      border-color: #ff6b6b;
     }
 
     .option-letter {
@@ -203,7 +222,7 @@
 
     .result-tag {
       background: rgba(99, 102, 241, 0.2);
-      color: var(--primary);
+      color: #ff6b6b;
       padding: 8px 16px;
       border-radius: 20px;
       font-size: 0.875rem;
@@ -283,7 +302,7 @@
     }
 
     .btn-secondary {
-      background: rgba(255,255,255,0.1);
+      background: var(--border);
       color: var(--text-primary);
     }
 
@@ -297,7 +316,7 @@
       justify-content: space-between;
       margin-top: 48px;
       padding-top: 24px;
-      border-top: 1px solid rgba(255,255,255,0.1);
+      border-top: 1px solid var(--border);
     }
 
     .nav-btn {
@@ -309,7 +328,18 @@
       font-size: 0.875rem;
     }
 
-    .nav-btn:hover { color: var(--primary); }
+    .nav-btn:hover { color: #ff6b6b; }
+
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,0.1);
+      color: var(--text-secondary); font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
+    
   </style>
 </head>
 <body>
@@ -318,6 +348,7 @@
       <span class="phase-badge">Phase 1</span>
       <h1>💡 靈感發想</h1>
       <a href="../../index.html" class="back-link">← 返回首頁</a>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
     </header>
 
     <div class="progress-bar">
@@ -561,5 +592,18 @@
       document.getElementById('result-section').classList.remove('show');
     }
   </script>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+    }
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+  <\/script>
 </body>
 </html>
