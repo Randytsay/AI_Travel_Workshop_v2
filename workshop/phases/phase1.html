@@ -1,149 +1,257 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phase 1｜靈感發想 | AI 旅遊工作坊</title>
+  <title>Phase 1 | 靈感發想 | AI 旅遊工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d1d1f'/%3E%3Cpath d='M10 22l6-14 6 14M12 18h8' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"> <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff6b6b'/><stop offset='0.5' stop-color='%23f39c12'/><stop offset='1' stop-color='%23ffd93d'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='%230d1b2a'/><text y='22' x='4' font-size='18'>✈</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
+    /* ═══════════════════════════════════════
+       APPLE-STYLE THEME VARIABLES
+    ═══════════════════════════════════════ */
     :root {
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27, 40, 56, 0.85);
-      --bg-card-solid: #1b2838;
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-      --border-subtle: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.4);
-      --shadow-glow: 0 0 40px rgba(255, 217, 61, 0.15);
-      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
-      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
-      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
-      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.9);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-tertiary: #fbfbfd;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      
+      --phase-color: #ff6259;
+      --phase-bg: rgba(255, 98, 89, 0.08);
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+      --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.1);
+      
+      --accent-blue: #0071e3;
     }
 
+    [data-theme="dark"] {
+      --bg-primary: #000000;
+      --bg-secondary: #1d1d1f;
+      --bg-tertiary: #0d0d0d;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --phase-bg: rgba(255, 98, 89, 0.15);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.5);
+    }
 
+    /* ═══════════════════════════════════════
+       RESET & BASE
+    ═══════════════════════════════════════ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
     body {
-      padding-top: 0;
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 24px;
+      transition: background 0.3s ease, color 0.3s ease;
+      font-size: 17px;
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
     }
 
-    .container {
-      max-width: 100%;
-      padding: 0 5%;
+    /* ═══════════════════════════════════════
+       NAVIGATION
+    ═══════════════════════════════════════ */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+    
+    [data-theme="dark"] .nav {
+      background: rgba(29, 29, 31, 0.72);
     }
 
-    /* Header */
-    .header {
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
       display: flex;
       align-items: center;
-      gap: 16px;
-      margin-bottom: 48px;
-      padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+      justify-content: space-between;
+      height: 48px;
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+      letter-spacing: -0.02em;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      font-weight: 400;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover {
+      color: var(--text-primary);
+    }
+
+    .nav-link.active {
+      color: var(--phase-color);
+      font-weight: 500;
+    }
+
+    .theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+      transition: all 0.2s ease;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* ═══════════════════════════════════════
+       CONTAINER
+    ═══════════════════════════════════════ */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* ═══════════════════════════════════════
+       HERO SECTION
+    ═══════════════════════════════════════ */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
     }
 
     .phase-badge {
-      background: var(--accent-sunset);
-      padding: 8px 16px;
-      border-radius: 12px;
-      font-weight: 700;
-      font-size: 0.875rem;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 980px;
+      background: var(--phase-bg);
+      color: var(--phase-color);
+      margin-bottom: 16px;
     }
 
-    .header h1 {
-      font-size: 1.5rem;
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.003em;
+      margin-bottom: 8px;
     }
 
-    .back-link {
+    .hero-subtitle {
+      font-size: 17px;
       color: var(--text-secondary);
-      text-decoration: none;
-      font-size: 0.875rem;
-      margin-left: auto;
+      margin-bottom: 24px;
     }
 
-    .back-link:hover { color: #ff6b6b; }
+    /* ═══════════════════════════════════════
+       PROGRESS BAR
+    ═══════════════════════════════════════ */
+    .progress-section {
+      padding: 20px 0 40px;
+    }
 
-    /* Progress */
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
     .progress-bar {
-      background: var(--border);
-      border-radius: 20px;
-      height: 8px;
-      margin-bottom: 48px;
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      height: 4px;
       overflow: hidden;
     }
 
     .progress-fill {
-      background: var(--accent-sunset);
+      background: var(--phase-color);
       height: 100%;
       width: 17%;
-      border-radius: 20px;
+      border-radius: 4px;
       transition: width 0.5s ease;
     }
 
-    /* Quiz Card */
+    /* ═══════════════════════════════════════
+       QUIZ CARDS
+    ═══════════════════════════════════════ */
+    .quiz-section {
+      padding-bottom: 40px;
+    }
+
     .quiz-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
       padding: 32px;
-      margin-bottom: 24px;
+      margin-bottom: 20px;
     }
 
     .question {
-      font-size: 1.125rem;
-      font-weight: 500;
+      font-size: 19px;
+      font-weight: 600;
+      line-height: 1.4;
       margin-bottom: 24px;
+      color: var(--text-primary);
     }
 
     .question-number {
-      color: #ff6b6b;
-      font-weight: 700;
+      color: var(--phase-color);
       margin-right: 8px;
     }
 
@@ -156,50 +264,97 @@
     .option {
       display: flex;
       align-items: flex-start;
-      gap: 16px;
+      gap: 14px;
       padding: 16px;
-      background: rgba(255,255,255,0.05);
+      background: var(--bg-primary);
       border: 2px solid transparent;
-      border-radius: 16px;
+      border-radius: 14px;
       cursor: pointer;
-      transition: all 0.3s ease;
+      transition: all 0.2s ease;
     }
 
     .option:hover {
-      background: rgba(99, 102, 241, 0.1);
-      border-color: #ff6b6b;
+      border-color: var(--border-color);
+      box-shadow: var(--shadow-subtle);
     }
 
     .option.selected {
-      background: rgba(99, 102, 241, 0.2);
-      border-color: #ff6b6b;
+      border-color: var(--phase-color);
+      background: var(--phase-bg);
     }
 
     .option-letter {
-      background: var(--accent-sunset);
-      width: 32px;
-      height: 32px;
+      background: var(--phase-color);
+      color: #ffffff;
+      width: 28px;
+      height: 28px;
       border-radius: 8px;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-weight: 700;
-      font-size: 0.875rem;
+      font-weight: 600;
+      font-size: 13px;
       flex-shrink: 0;
     }
 
     .option-text {
-      font-size: 0.95rem;
+      font-size: 15px;
       line-height: 1.5;
+      color: var(--text-primary);
+      padding-top: 3px;
     }
 
-    /* Result Card */
+    /* ═══════════════════════════════════════
+       BUTTONS
+    ═══════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--phase-color);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      opacity: 0.9;
+    }
+
+    .btn-secondary {
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border-color);
+    }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 32px;
+    }
+
+    /* ═══════════════════════════════════════
+       RESULT CARD
+    ═══════════════════════════════════════ */
     .result-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 2px solid var(--primary);
+      background: var(--bg-secondary);
       border-radius: 24px;
-      padding: 48px;
+      padding: 48px 36px;
       text-align: center;
       display: none;
     }
@@ -207,383 +362,169 @@
     .result-card.show { display: block; }
 
     .result-icon {
-      font-size: 4rem;
-      margin-bottom: 24px;
+      font-size: 56px;
+      margin-bottom: 20px;
     }
 
     .result-title {
-      font-size: 2rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-      background: var(--accent-sunset);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
+      font-size: 32px;
+      font-weight: 600;
+      line-height: 1.12;
+      margin-bottom: 6px;
+      color: var(--text-primary);
     }
 
     .result-subtitle {
+      font-size: 17px;
       color: var(--text-secondary);
-      margin-bottom: 32px;
+      margin-bottom: 28px;
     }
 
     .result-description {
       text-align: left;
-      line-height: 1.8;
-      margin-bottom: 32px;
-      padding: 24px;
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
+      font-size: 15px;
+      line-height: 1.6;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+      padding: 20px;
+      background: var(--bg-primary);
+      border-radius: 14px;
     }
 
     .result-tags {
       display: flex;
       justify-content: center;
-      gap: 12px;
+      gap: 10px;
       flex-wrap: wrap;
       margin-bottom: 32px;
     }
 
     .result-tag {
-      background: rgba(99, 102, 241, 0.2);
-      color: #ff6b6b;
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.875rem;
+      background: var(--phase-bg);
+      color: var(--phase-color);
+      padding: 8px 14px;
+      border-radius: 980px;
+      font-size: 14px;
+      font-weight: 500;
     }
 
-    /* Prompt Section */
+    /* ═══════════════════════════════════════
+       PROMPT SECTION
+    ═══════════════════════════════════════ */
     .prompt-section {
-      background: rgba(255,255,255,0.05);
+      background: var(--bg-primary);
       border-radius: 16px;
-      padding: 24px;
-      margin-top: 32px;
+      padding: 20px;
+      margin-top: 20px;
+      text-align: left;
     }
 
     .prompt-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 16px;
+      margin-bottom: 12px;
     }
 
     .prompt-title {
       font-weight: 600;
-      display: flex;
-      align-items: center;
-      gap: 8px;
+      font-size: 15px;
+      color: var(--text-primary);
     }
 
     .copy-btn {
-      background: var(--accent-sunset);
+      background: var(--phase-color);
       border: none;
       color: white;
-      padding: 8px 16px;
-      border-radius: 8px;
+      padding: 6px 14px;
+      border-radius: 980px;
       cursor: pointer;
-      font-size: 0.875rem;
+      font-size: 13px;
       font-weight: 500;
+      transition: opacity 0.2s;
     }
 
-    .copy-btn:hover { opacity: 0.9; }
+    .copy-btn:hover { opacity: 0.85; }
 
     .prompt-box {
-      background: rgba(0,0,0,0.3);
+      background: var(--bg-secondary);
       border-radius: 12px;
       padding: 16px;
-      font-family: monospace;
-      font-size: 0.875rem;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
       line-height: 1.6;
       white-space: pre-wrap;
       color: var(--text-secondary);
     }
 
-    /* Actions */
-    .actions {
-      display: flex;
-      gap: 16px;
-      margin-top: 32px;
-      flex-wrap: wrap;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 32px;
-      border-radius: 16px;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-      font-size: 1rem;
-    }
-
-    .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-
-    .btn-secondary {
-      background: var(--border);
-      color: var(--text-primary);
-    }
-
-    .btn:hover {
-      transform: translateY(-2px);
-    }
-
-    /* Navigation */
+    /* ═══════════════════════════════════════
+       NAVIGATION BUTTONS
+    ═══════════════════════════════════════ */
     .nav-buttons {
       display: flex;
       justify-content: space-between;
-      margin-top: 48px;
-      padding-top: 24px;
-      border-top: 1px solid var(--border);
+      align-items: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
     }
 
     .nav-btn {
-      color: var(--text-secondary);
+      color: var(--accent-blue);
       text-decoration: none;
+      font-size: 17px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      font-size: 0.875rem;
+      gap: 6px;
+      transition: opacity 0.2s;
     }
 
-    .nav-btn:hover { color: #ff6b6b; }
-
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
+    .nav-btn:hover {
+      opacity: 0.7;
     }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    
-
-    .hero-banner {
-      width: 100%;
-      height: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .hero-banner img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .hero-banner-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.4) 100%);
-      display: flex; flex-direction: column;
-      justify-content: center; padding: 32px 40px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(135deg, rgba(255,253,248,0.88) 0%, rgba(255,253,248,0.5) 100%);
-    }
-    .hero-banner-overlay h2 {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
-      color: white;
-    }
-    [data-theme="light"] .hero-banner-overlay h2 { color: #2d3436; }
-    .hero-banner-overlay p {
-      font-size: 0.9rem; color: rgba(255,255,255,0.8);
-    }
-    [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
-    
-
-    /* Topnav — mirrors index.html */
-    .topnav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      margin: -24px -24px 32px -24px;
-      width: calc(100% + 48px);
-    }
-    .topnav-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; gap: 6px;
-      height: 56px; overflow-x: auto; scrollbar-width: none;
-    }
-    .topnav-inner::-webkit-scrollbar { display: none; }
-    .topnav-logo {
-      display: flex; align-items: center; gap: 6px;
-      font-weight: 700; font-size: 0.9rem;
-      color: var(--text-primary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0; margin-right: 4px;
-    }
-    .topnav-logo span { font-size: 1.2rem; }
-    .topnav-divider {
-      width: 1px; height: 20px;
-      background: var(--border); flex-shrink: 0; margin: 0 4px;
-    }
-    .topnav-link {
-      display: flex; align-items: center; gap: 5px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-secondary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-    .topnav-link.active,
-    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
-    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
-    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
-    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
-    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
-    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
-    .topnav-spacer { flex: 1; }
-    /* also update .theme-toggle to not be inside header */
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
-
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      text-decoration: none;
-      transition: all 0.25s ease;
-    }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
-    }
-
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
-    }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
-    }
-
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
-
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation Bar -->
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a href="../../index.html" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
-      </a>
-      <div class="topnav-divider"></div>
-      <a href="phase1.html" class="topnav-link active" data-phase="1">
-        <span>💡</span><span class="link-text">靈感</span>
-      </a>
-      <a href="phase2.html" class="topnav-link" data-phase="2">
-        <span>📊</span><span class="link-text">規劃</span>
-      </a>
-      <a href="phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span><span class="link-text">知識庫</span>
-      </a>
-      <a href="phase4.html" class="topnav-link" data-phase="4">
-        <span>🎨</span><span class="link-text">視覺</span>
-      </a>
-      <a href="phase5.html" class="topnav-link" data-phase="5">
-        <span>🗾</span><span class="link-text">生存</span>
-      </a>
-      <a href="phase6.html" class="topnav-link" data-phase="6">
-        <span>💰</span><span class="link-text">變現</span>
-      </a>
-      <div class="topnav-spacer"></div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">AI 旅遊工作坊</a>
+      
+      <div class="nav-links">
+        <a href="phase1.html" class="nav-link active">靈感</a>
+        <a href="phase2.html" class="nav-link">規劃</a>
+        <a href="phase3.html" class="nav-link">知識庫</a>
+        <a href="phase4.html" class="nav-link">視覺</a>
+        <a href="phase5.html" class="nav-link">生存</a>
+        <a href="phase6.html" class="nav-link">變現</a>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="切換主題">
+          <span id="themeIcon">&#9789;</span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="phase-badge">Phase 1</div>
+      <h1>靈感發想</h1>
+      <p class="hero-subtitle">Find Your Travel Style</p>
+    </section>
 
-  <div class="container">
-    
-
-    <div class="progress-bar">
-      <div class="progress-fill"></div>
-    </div>
+    <!-- Progress -->
+    <section class="progress-section">
+      <div class="progress-label">
+        <span>Phase 1 of 6</span>
+        <span>17%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
 
     <!-- Quiz Section -->
-    <div id="quiz-section">
+    <section class="quiz-section" id="quiz-section">
       <div class="quiz-card">
         <div class="question">
           <span class="question-number">Q1</span>
@@ -659,116 +600,112 @@
         </div>
       </div>
 
-      <div class="actions" style="justify-content: center;">
+      <div class="actions">
         <button class="btn btn-primary" id="get-result-btn">
-          🎯 取得我的旅遊人格
+          取得我的旅遊人格
         </button>
       </div>
-    </div>
+    </section>
 
     <!-- Result Section -->
-    <div class="result-card" id="result-section">
-      <div class="result-icon" id="result-icon">🌿⚖️</div>
+    <section class="result-card" id="result-section">
+      <div class="result-icon" id="result-icon"></div>
       <h2 class="result-title" id="result-title">慢活平衡大師</h2>
       <p class="result-subtitle" id="result-subtitle">Slow Living Balance Master</p>
 
       <div class="result-description" id="result-description">
         你喜歡深度體驗，勝過跑遍景點。一天中精心安排 2-3 個定點，其餘時間留給自己探索。
-        適合前往节奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。
+        適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。
       </div>
 
       <div class="result-tags" id="result-tags">
-        <span class="result-tag">🌿 慢活者</span>
-        <span class="result-tag">⚖️ 平衡大師</span>
-        <span class="result-tag">🤖 科技旅人</span>
+        <span class="result-tag">慢活者</span>
+        <span class="result-tag">平衡大師</span>
+        <span class="result-tag">科技旅人</span>
       </div>
 
       <div class="prompt-section">
         <div class="prompt-header">
-          <span class="prompt-title">🎨 卡通頭像 Prompt</span>
+          <span class="prompt-title">卡通頭像 Prompt</span>
           <button class="copy-btn" onclick="copyPrompt()">複製</button>
         </div>
         <div class="prompt-box" id="cartoon-prompt"></div>
       </div>
 
-      <div class="prompt-section" style="margin-top: 16px;">
+      <div class="prompt-section">
         <div class="prompt-header">
-          <span class="prompt-title">✨ Gemini 行程規劃 Prompt</span>
+          <span class="prompt-title">Gemini 行程規劃 Prompt</span>
           <button class="copy-btn" onclick="copyPrompt2()">複製</button>
         </div>
-        <div class="prompt-box" id="行程-prompt"></div>
+        <div class="prompt-box" id="trip-prompt"></div>
       </div>
 
       <div class="actions">
         <a href="phase2.html" class="btn btn-primary">
-          下一步：深度規劃 →
+          下一步：深度規劃 &#8594;
         </a>
         <button class="btn btn-secondary" onclick="retakeQuiz()">
           重新測驗
         </button>
       </div>
-    </div>
+    </section>
 
+    <!-- Navigation -->
     <nav class="nav-buttons">
       <span></span>
       <a href="phase2.html" class="nav-btn">
-        Phase 2：深度規劃 →
+        Phase 2：深度規劃 &#8594;
       </a>
     </nav>
-  </div>
+  </main>
 
   <script>
     // ============================================================
     //  64 種旅遊人格完整查表
-    //  Answer Key = Q1 + Q2 + Q3 (each A/B/C/D)
-    //  架構：Base (Q1) × Modifier (Q2+Q3)
     // ============================================================
 
-    // ── Base 定義 (Q1 決定主要人格) ──────────────────────────
     const BASE = {
       A: {
-        emoji: '🌿', name: '慢活旅行者', en: 'Slow Living Explorer',
-        tags: ['🌿 慢活者', '📚 深度探索', '☕ 咖啡旅人'],
+        emoji: '&#127807;', name: '慢活旅行者', en: 'Slow Living Explorer',
+        tags: ['慢活者', '深度探索', '咖啡旅人'],
         cartoonStyle: '日系漫畫（Anime style），背景：淺草寺仲見世通，馬卡龍色系，附加：飄落櫻花花瓣'
       },
       B: {
-        emoji: '🏃', name: '極速旅人', en: 'Speed Demon',
-        tags: ['🏃 打卡達人', '📸 九宮格專家', '⚡ 精力旺盛'],
+        emoji: '&#127939;', name: '極速旅人', en: 'Speed Demon',
+        tags: ['打卡達人', '九宮格專家', '精力旺盛'],
         cartoonStyle: '美式潮流風格（Pop Art），背景：東京澀谷十字路口，霓虹色彩，附加：速度感線條'
       },
       C: {
-        emoji: '🏺', name: '文化沉澱者', en: 'Culture Diver',
-        tags: ['🏺 深度文化', '🦋 心靈探索', '🍵 茶道美學'],
+        emoji: '&#127994;', name: '文化沉澱者', en: 'Culture Diver',
+        tags: ['深度文化', '心靈探索', '茶道美學'],
         cartoonStyle: '水墨手繪風格（Ink Wash Painting），背景：京都金閣寺，傳統配色，附加：飛翔白鶴'
       },
       D: {
-        emoji: '⚡', name: '冒險先驅', en: 'Adventure Seeker',
-        tags: ['⚡ 挑戰極限', '🧗 攀登者', '🌊 野外探索'],
+        emoji: '&#9889;', name: '冒險先驅', en: 'Adventure Seeker',
+        tags: ['挑戰極限', '攀登者', '野外探索'],
         cartoonStyle: '寫實冒險風格（Adventure Illustration），背景：富士山日出，大地色系，附加：雲海光環'
       }
     };
 
-    // ── Modifier 定義 (Q2+Q3 決定副標/特質/Prompt) ─────────
     const MOD = {
-      AA: { suffix: '·科技適應型',   tag: '🤖 AI 嚮導',    prompt: '必去：高科技景點、AI 互動體驗、科幻博物館',            avoid: '避開：偏鄉野外、網路死角' },
-      AB: { suffix: '·隨遇而安型',   tag: '🦋 彈性大師',   prompt: '必去：當地人常去的隱藏版景點、巷弄美食',                avoid: '避開：過度商業化的觀光區' },
-      AC: { suffix: '·從容探索型',   tag: '☕ 從容派',     prompt: '必去：質感咖啡廳、文創園區、藝術展覽',                  avoid: '避開：擁擠排隊名店' },
-      AD: { suffix: '·嚴謹慢活型',   tag: '📋 精算生活家', prompt: '必去：預約制餐廳、預訂門票的文化遺址',                 avoid: '避開：現場候補的熱門景點' },
-      BA: { suffix: '·打卡爆肝型',   tag: '📸 網美獵人',   prompt: '必去：IG 熱門打卡點、網美咖啡廳、夕陽觀景台',          avoid: '避開：安靜的寺廟或圖書館' },
-      BB: { suffix: '·狂野隨興型',   tag: '🌀 自由靈魂',   prompt: '必去：隨機發現的驚喜景點、路邊小吃',                   avoid: '避開：事先預訂的行程' },
-      BC: { suffix: '·率真漫遊型',   tag: '🌈 隨性玩咖',   prompt: '必去：當地夜市、街邊美食、路人推薦的店',               avoid: '避開：米其林預約餐廳' },
-      BD: { suffix: '·精算達人型',   tag: '💹 性價比追求者', prompt: '必去：高 CP 值景點、免費博物館、特價商品',            avoid: '避開：昂貴的網紅店' },
-      CA: { suffix: '·智能導航型',   tag: '🗺️ 智慧行者',   prompt: '必去：科技園區、AI 展覽館、智能城市應用展示',          avoid: '避開：沒有網路服務的偏遠地區' },
-      CB: { suffix: '·直覺冒險型',   tag: '🔮 第六感強',    prompt: '必去：隨心所欲探索、迷路時發現的秘密基地',             avoid: '避開：嚴格的行程表' },
-      CC: { suffix: '·創意漫遊型',   tag: '🎨 藝術靈魂',   prompt: '必去：街頭藝術、獨立書店、設計師小店',                 avoid: '避開：連鎖品牌商場' },
-      CD: { suffix: '·策展達人型',   tag: '📐 策劃高手',   prompt: '必去：預約制工作坊、導覽行程、文化深度論壇',           avoid: '避開：走馬看花的觀光團' },
-      DA: { suffix: '·跳島遊走型',   tag: '🏝️ 彈性跳島',   prompt: '必去：周邊小島一日來回、跳點行程、海上活動',           avoid: '避開：定點深度之旅' },
-      DB: { suffix: '·順流漫遊型',   tag: '🌊 順其自然',   prompt: '必去：海邊、湖邊、讓心情決定的路線',                  avoid: '避開：需要體力的登山行程' },
-      DC: { suffix: '·平衡漫遊型',   tag: '⚖️ 平衡生活家', prompt: '必去：半天行程、半天自由活動，輕鬆不趕',              avoid: '避開：太緊湊或太閒散的行程' },
-      DD: { suffix: '·精算漫遊型',   tag: '🧮 細節掌控者', prompt: '必去：預算內所有高評價景點、詳細路線規劃',             avoid: '避開：說走就走的衝動行程' }
+      AA: { suffix: '·科技適應型',   tag: 'AI 嚮導',    prompt: '必去：高科技景點、AI 互動體驗、科幻博物館',            avoid: '避開：偏鄉野外、網路死角' },
+      AB: { suffix: '·隨遇而安型',   tag: '彈性大師',   prompt: '必去：當地人常去的隱藏版景點、巷弄美食',                avoid: '避開：過度商業化的觀光區' },
+      AC: { suffix: '·從容探索型',   tag: '從容派',     prompt: '必去：質感咖啡廳、文創園區、藝術展覽',                  avoid: '避開：擁擠排隊名店' },
+      AD: { suffix: '·嚴謹慢活型',   tag: '精算生活家', prompt: '必去：預約制餐廳、預訂門票的文化遺址',                 avoid: '避開：現場候補的熱門景點' },
+      BA: { suffix: '·打卡爆肝型',   tag: '網美獵人',   prompt: '必去：IG 熱門打卡點、網美咖啡廳、夕陽觀景台',          avoid: '避開：安靜的寺廟或圖書館' },
+      BB: { suffix: '·狂野隨興型',   tag: '自由靈魂',   prompt: '必去：隨機發現的驚喜景點、路邊小吃',                   avoid: '避開：事先預訂的行程' },
+      BC: { suffix: '·率真漫遊型',   tag: '隨性玩咖',   prompt: '必去：當地夜市、街邊美食、路人推薦的店',               avoid: '避開：米其林預約餐廳' },
+      BD: { suffix: '·精算達人型',   tag: '性價比追求者', prompt: '必去：高 CP 值景點、免費博物館、特價商品',            avoid: '避開：昂貴的網紅店' },
+      CA: { suffix: '·智能導航型',   tag: '智慧行者',   prompt: '必去：科技園區、AI 展覽館、智能城市應用展示',          avoid: '避開：沒有網路服務的偏遠地區' },
+      CB: { suffix: '·直覺冒險型',   tag: '第六感強',    prompt: '必去：隨心所欲探索、迷路時發現的秘密基地',             avoid: '避開：嚴格的行程表' },
+      CC: { suffix: '·創意漫遊型',   tag: '藝術靈魂',   prompt: '必去：街頭藝術、獨立書店、設計師小店',                 avoid: '避開：連鎖品牌商場' },
+      CD: { suffix: '·策展達人型',   tag: '策劃高手',   prompt: '必去：預約制工作坊、導覽行程、文化深度論壇',           avoid: '避開：走馬看花的觀光團' },
+      DA: { suffix: '·跳島遊走型',   tag: '彈性跳島',   prompt: '必去：周邊小島一日來回、跳點行程、海上活動',           avoid: '避開：定點深度之旅' },
+      DB: { suffix: '·順流漫遊型',   tag: '順其自然',   prompt: '必去：海邊、湖邊、讓心情決定的路線',                  avoid: '避開：需要體力的登山行程' },
+      DC: { suffix: '·平衡漫遊型',   tag: '平衡生活家', prompt: '必去：半天行程、半天自由活動，輕鬆不趕',              avoid: '避開：太緊湊或太閒散的行程' },
+      DD: { suffix: '·精算漫遊型',   tag: '細節掌控者', prompt: '必去：預算內所有高評價景點、詳細路線規劃',             avoid: '避開：說走就走的衝動行程' }
     };
 
-    // ── 完整 64 種人格查表（自動生成） ──────────────────────
     const PERSONALITIES = {};
     ['A','B','C','D'].forEach(q1 => {
       ['A','B','C','D'].forEach(q2 => {
@@ -831,18 +768,15 @@ ${mod.avoid}
       const key        = answers[1] + answers[2] + answers[3];
       const personality = PERSONALITIES[key];
 
-      // 更新結果顯示
-      document.getElementById('result-icon').textContent    = personality.icon;
+      document.getElementById('result-icon').innerHTML    = personality.icon;
       document.getElementById('result-title').textContent   = personality.title;
       document.getElementById('result-subtitle').textContent= personality.subtitle;
       document.getElementById('result-description').textContent = personality.desc;
       document.getElementById('result-tags').innerHTML      = personality.tags.map(t => `<span class="result-tag">${t}</span>`).join('');
 
-      // 動態填入 Prompt
       document.getElementById('cartoon-prompt').textContent = personality.cartoonPrompt;
-      document.getElementById('行程-prompt').textContent   = personality.tripPrompt;
+      document.getElementById('trip-prompt').textContent   = personality.tripPrompt;
 
-      // 切換顯示
       document.getElementById('quiz-section').style.display   = 'none';
       document.getElementById('result-section').classList.add('show');
     });
@@ -860,22 +794,28 @@ ${mod.avoid}
     }
 
     function copyPrompt2() {
-      navigator.clipboard.writeText(document.getElementById('行程-prompt').textContent);
+      navigator.clipboard.writeText(document.getElementById('trip-prompt').textContent);
       alert('已複製到剪貼簿！');
     }
-  </script>
 
-  <script>
+    // Theme Toggle
     function toggleTheme() {
       const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      updateThemeIcon(next);
     }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('themeIcon');
+      icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9789;';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
   </script>
 </body>
 </html>

@@ -1,694 +1,662 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AI 旅遊工作坊 | 玩轉日本夢幻之旅</title>
   <meta name="description" content="用 Gemini 3.1 從零開始規劃日本夢幻之旅，結合 LINE Bot 互動與社群分享">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d1d1f'/%3E%3Cpath d='M10 22l6-14 6 14M12 18h8' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
   
   <style>
     /* ═══════════════════════════════════════
-       THEME VARIABLES — Joyful Vacation Palette
+       APPLE-STYLE THEME VARIABLES
     ═══════════════════════════════════════ */
     :root {
-      /* Dark Theme (default) */
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27, 40, 56, 0.85);
-      --bg-card-hover: rgba(27, 40, 56, 0.95);
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-
-      /* Phase Colors — Warm & Joyful */
-      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
-      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
-      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
-
-      --phase1-icon: #ff6b6b;
-      --phase2-icon: #00cec9;
-      --phase3-icon: #55efc4;
-      --phase4-icon: #fdcb6e;
-      --phase5-icon: #74b9ff;
-      --phase6-icon: #fd79a8;
-
-      /* Borders */
-      --border-subtle: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-
+      /* Light Theme (default) - Apple Style */
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-tertiary: #fbfbfd;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      
+      /* Apple-softened Phase Colors */
+      --phase1-color: #ff6259;
+      --phase2-color: #30d158;
+      --phase3-color: #32d9a0;
+      --phase4-color: #ff9f0a;
+      --phase5-color: #0a84ff;
+      --phase6-color: #bf5af2;
+      
+      /* Borders & Shadows */
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+      --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.1);
+      
       /* Accent */
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --accent-sun: #ffd93d;
-      --accent-ocean: #6c9bcf;
-      --accent-coral: #ff8585;
-      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
-
-      /* Shadows */
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.4);
-      --shadow-glow: 0 0 40px rgba(255,217,61,0.15);
+      --accent-blue: #0071e3;
     }
 
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff9f0;
-      --bg-card: rgba(255, 255, 255, 0.95);
-      --bg-card-hover: rgba(255, 255, 255, 0.98);
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.12);
-      --shadow-glow: 0 0 40px rgba(255,107,107,0.15);
+    [data-theme="dark"] {
+      --bg-primary: #000000;
+      --bg-secondary: #1d1d1f;
+      --bg-tertiary: #0d0d0d;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
+      --shadow-card-hover: 0 8px 40px rgba(0, 0, 0, 0.5);
     }
 
     /* ═══════════════════════════════════════
        RESET & BASE
     ═══════════════════════════════════════ */
     * { margin: 0; padding: 0; box-sizing: border-box; }
-
-    html { scroll-behavior: smooth; }
+    
+    html { 
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
 
     body {
-      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, 'SF Pro Text', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      transition: background 0.4s ease, color 0.3s ease;
-      overflow-x: hidden;
+      transition: background 0.3s ease, color 0.3s ease;
+      font-size: 17px;
+      line-height: 1.47059;
+      font-weight: 400;
+      letter-spacing: -0.022em;
     }
 
     /* ═══════════════════════════════════════
-       ANIMATED BACKGROUND
+       NAVIGATION - Apple Style
     ═══════════════════════════════════════ */
-    .bg-layer {
-      position: fixed;
-      top: 0; left: 0;
-      width: 100%; height: 100%;
-      z-index: -2;
-      background: var(--bg-primary);
-      transition: background 0.4s ease;
-    }
-
-    .bg-decor {
-      position: fixed;
-      z-index: -1;
-      pointer-events: none;
-      opacity: 0.6;
-    }
-
-    .bg-sun {
-      top: -80px; right: -80px;
-      width: 300px; height: 300px;
-      background: radial-gradient(circle, rgba(255,217,61,0.4) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: pulse-sun 6s ease-in-out infinite;
-    }
-
-    .bg-ocean {
-      bottom: -100px; left: -100px;
-      width: 400px; height: 400px;
-      background: radial-gradient(circle, rgba(0,206,201,0.25) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: pulse-ocean 8s ease-in-out infinite;
-    }
-
-    .bg-clouds {
-      top: 10%; left: 10%;
-      width: 200px; height: 80px;
-      background: radial-gradient(ellipse, rgba(255,255,255,0.15) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float-cloud 20s ease-in-out infinite;
-    }
-
-    .bg-clouds-2 {
-      top: 30%; right: 5%;
-      width: 150px; height: 60px;
-      background: radial-gradient(ellipse, rgba(255,255,255,0.1) 0%, transparent 70%);
-      border-radius: 50%;
-      animation: float-cloud 25s ease-in-out infinite reverse;
-    }
-
-    @keyframes pulse-sun {
-      0%, 100% { transform: scale(1); opacity: 0.6; }
-      50% { transform: scale(1.1); opacity: 0.8; }
-    }
-    @keyframes pulse-ocean {
-      0%, 100% { transform: scale(1) translateY(0); }
-      50% { transform: scale(1.05) translateY(-10px); }
-    }
-    @keyframes float-cloud {
-      0%, 100% { transform: translateX(0); }
-      50% { transform: translateX(30px); }
-    }
-
-    /* ═══════════════════════════════════════
-       TOP NAVIGATION BAR
-    ═══════════════════════════════════════ */
-    .topnav {
+    .nav {
       position: sticky;
       top: 0;
       z-index: 100;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid rgba(255,255,255,0.08);
-      padding: 0 24px;
-      transition: background 0.4s ease;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-color);
+      transition: background 0.3s ease;
+    }
+    
+    [data-theme="dark"] .nav {
+      background: rgba(29, 29, 31, 0.72);
     }
 
-    .topnav-inner {
-      max-width: 1200px;
+    .nav-inner {
+      max-width: 980px;
       margin: 0 auto;
+      padding: 0 22px;
       display: flex;
       align-items: center;
-      gap: 8px;
-      height: 60px;
-      overflow-x: auto;
-      scrollbar-width: none;
+      justify-content: space-between;
+      height: 48px;
     }
-    .topnav-inner::-webkit-scrollbar { display: none; }
 
-    .topnav-logo {
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      font-weight: 700;
-      font-size: 1rem;
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
       color: var(--text-primary);
       text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      margin-right: 8px;
+      letter-spacing: -0.02em;
     }
 
-    .topnav-logo span { font-size: 1.3rem; }
-
-    .topnav-divider {
-      width: 1px;
-      height: 24px;
-      background: rgba(255,255,255,0.15);
-      flex-shrink: 0;
-      margin: 0 8px;
-    }
-
-    .topnav-link {
+    .nav-links {
       display: flex;
       align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 20px;
-      font-size: 0.8rem;
-      font-weight: 500;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      font-weight: 400;
       color: var(--text-secondary);
       text-decoration: none;
-      white-space: nowrap;
-      flex-shrink: 0;
-      transition: all 0.2s ease;
+      transition: color 0.2s ease;
+      letter-spacing: 0;
     }
 
-    .topnav-link:hover {
-      background: rgba(255,255,255,0.1);
+    .nav-link:hover {
       color: var(--text-primary);
     }
 
-    .topnav-link[data-phase="1"]:hover,
-    .topnav-link[data-phase="2"]:hover,
-    .topnav-link[data-phase="3"]:hover,
-    .topnav-link[data-phase="4"]:hover,
-    .topnav-link[data-phase="5"]:hover,
-    .topnav-link[data-phase="6"]:hover {
-      background: rgba(255,255,255,0.08);
-      border-radius: 20px;
+    .nav-link.active {
+      color: var(--text-primary);
     }
 
-    .topnav-spacer { flex: 1; }
-
-    .theme-toggle {
-      width: 40px; height: 40px;
+    .theme-btn {
+      width: 32px;
+      height: 32px;
       border-radius: 50%;
       border: none;
-      background: rgba(255,255,255,0.1);
+      background: transparent;
       color: var(--text-secondary);
-      font-size: 1.1rem;
       cursor: pointer;
-      display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
       transition: all 0.2s ease;
     }
-    .theme-toggle:hover {
-      background: rgba(255,255,255,0.2);
-      color: var(--accent-sun);
-      transform: scale(1.1);
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    /* Mobile nav toggle */
+    .nav-toggle {
+      display: none;
+      width: 32px;
+      height: 32px;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      flex-direction: column;
+      justify-content: center;
+      gap: 4px;
+    }
+
+    .nav-toggle span {
+      width: 18px;
+      height: 1.5px;
+      background: var(--text-primary);
+      transition: all 0.2s ease;
+    }
+
+    @media (max-width: 768px) {
+      .nav-links {
+        display: none;
+      }
+      .nav-toggle {
+        display: flex;
+      }
     }
 
     /* ═══════════════════════════════════════
        CONTAINER
     ═══════════════════════════════════════ */
-    .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
+    .container {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    .container-wide {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
 
     /* ═══════════════════════════════════════
-       HERO SECTION
+       HERO SECTION - Apple Style
     ═══════════════════════════════════════ */
     .hero {
       padding: 80px 0 60px;
       text-align: center;
-      position: relative;
+      background: var(--bg-primary);
     }
 
-    .hero-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      background: var(--bg-card);
-      border: 1px solid rgba(255,217,61,0.3);
-      padding: 8px 20px;
-      border-radius: 30px;
-      font-size: 0.85rem;
-      color: var(--accent-sun);
-      margin-bottom: 24px;
-      backdrop-filter: blur(10px);
+    .hero-eyebrow {
+      font-size: 17px;
+      font-weight: 400;
+      color: var(--phase1-color);
+      margin-bottom: 8px;
+      letter-spacing: 0;
     }
 
     .hero h1 {
-      font-size: clamp(2rem, 5vw, 3.2rem);
-      font-weight: 900;
-      line-height: 1.2;
-      margin-bottom: 16px;
-      letter-spacing: -0.02em;
-    }
-
-    .hero h1 .highlight {
-      background: var(--accent-sunset);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero .subtitle {
-      font-size: 1.1rem;
-      color: var(--text-secondary);
-      max-width: 560px;
-      margin: 0 auto 32px;
-      line-height: 1.7;
-    }
-
-    .hero-tags {
-      display: flex;
-      justify-content: center;
-      flex-wrap: wrap;
-      gap: 10px;
-      margin-bottom: 40px;
-    }
-
-    .hero-tag {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      background: var(--bg-card);
-      border: 1px solid rgba(255,255,255,0.1);
-      padding: 8px 16px;
-      border-radius: 20px;
-      font-size: 0.85rem;
-      color: var(--text-secondary);
-      backdrop-filter: blur(10px);
-    }
-
-    .hero-tag .emoji { font-size: 1rem; }
-
-    .hero-actions {
-      display: flex;
-      justify-content: center;
-      gap: 16px;
-      flex-wrap: wrap;
-    }
-
-    /* ═══════════════════════════════════════
-       STATS ROW
-    ═══════════════════════════════════════ */
-    .stats-row {
-      display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 16px;
-      margin: 48px 0;
-    }
-
-    .stat-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 20px;
-      padding: 24px 16px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-
-    .stat-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card-hover);
-    }
-
-    .stat-icon { font-size: 2rem; margin-bottom: 8px; }
-    .stat-value {
-      font-size: 2rem;
-      font-weight: 900;
-      background: var(--accent-sunset);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-    }
-    .stat-label {
-      font-size: 0.8rem;
-      color: var(--text-muted);
-      margin-top: 4px;
-    }
-
-    /* ═══════════════════════════════════════
-       SECTION HEADER
-    ═══════════════════════════════════════ */
-    .section-header {
-      text-align: center;
-      margin-bottom: 40px;
-    }
-
-    .section-header h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
-      margin-bottom: 8px;
-    }
-
-    .section-header p {
-      color: var(--text-secondary);
-      font-size: 1rem;
-    }
-
-    /* ═══════════════════════════════════════
-       PHASE CARDS
-    ═══════════════════════════════════════ */
-    .phase-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 24px;
-      margin-bottom: 64px;
-    }
-
-    .phase-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
-      border-radius: 24px;
-      padding: 0;
-      overflow: hidden;
-      cursor: pointer;
-      text-decoration: none;
-      color: inherit;
-      display: block;
-      transition: all 0.35s cubic-bezier(0.4, 0, 0.2, 1);
-      position: relative;
-    }
-
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: 0 0 0 1px var(--phase-icon-color, var(--accent-primary)),
-                  0 16px 40px rgba(0,0,0,0.4);
-      border-color: transparent;
-    }
-
-    .phase-card-header {
-      padding: 28px 28px 24px;
-      position: relative;
-      overflow: hidden;
-    }
-
-    .phase-card-header::before {
-      content: '';
-      position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      opacity: 0.15;
-      transition: opacity 0.3s ease;
-    }
-
-    .phase-card:hover .phase-card-header::before { opacity: 0.25; }
-
-    .phase-card[data-phase="1"] .phase-card-header::before { background: var(--phase1-bg); }
-    .phase-card[data-phase="2"] .phase-card-header::before { background: var(--phase2-bg); }
-    .phase-card[data-phase="3"] .phase-card-header::before { background: var(--phase3-bg); }
-    .phase-card[data-phase="4"] .phase-card-header::before { background: var(--phase4-bg); }
-    .phase-card[data-phase="5"] .phase-card-header::before { background: var(--phase5-bg); }
-    .phase-card[data-phase="6"] .phase-card-header::before { background: var(--phase6-bg); }
-
-    .phase-card-badge {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 4px 12px;
-      border-radius: 12px;
-      font-size: 0.75rem;
-      font-weight: 700;
+      font-size: clamp(40px, 8vw, 56px);
+      font-weight: 600;
+      line-height: 1.07143;
+      letter-spacing: -0.005em;
       margin-bottom: 12px;
-      letter-spacing: 0.05em;
-      text-transform: uppercase;
+      color: var(--text-primary);
     }
 
-    .phase-card[data-phase="1"] .phase-card-badge { background: var(--phase1-bg); color: white; }
-    .phase-card[data-phase="2"] .phase-card-badge { background: var(--phase2-bg); color: white; }
-    .phase-card[data-phase="3"] .phase-card-badge { background: var(--phase3-bg); color: #2d3436; }
-    .phase-card[data-phase="4"] .phase-card-badge { background: var(--phase4-bg); color: #2d3436; }
-    .phase-card[data-phase="5"] .phase-card-badge { background: var(--phase5-bg); color: white; }
-    .phase-card[data-phase="6"] .phase-card-badge { background: var(--phase6-bg); color: white; }
+    .hero-subtitle {
+      font-size: clamp(19px, 3vw, 21px);
+      font-weight: 400;
+      color: var(--text-secondary);
+      line-height: 1.381;
+      max-width: 600px;
+      margin: 0 auto 28px;
+    }
 
-    .phase-card-icon {
-      font-size: 2.5rem;
+    .hero-cta {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
+    }
+
+    /* ═══════════════════════════════════════
+       BUTTONS - Apple Style
+    ═══════════════════════════════════════ */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
+      text-decoration: none;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
+      letter-spacing: 0;
+    }
+
+    .btn-primary {
+      background: var(--accent-blue);
+      color: #ffffff;
+    }
+
+    .btn-primary:hover {
+      background: #0077ed;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--accent-blue);
+    }
+
+    .btn-secondary:hover {
+      text-decoration: underline;
+    }
+
+    .btn-icon {
+      font-size: 14px;
+    }
+
+    /* ═══════════════════════════════════════
+       TOOLS SECTION
+    ═══════════════════════════════════════ */
+    .tools-section {
+      padding: 40px 0;
+      background: var(--bg-secondary);
+    }
+
+    .tools-grid {
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 32px;
+    }
+
+    .tool-item {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 14px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .tool-item:hover {
+      color: var(--text-primary);
+    }
+
+    .tool-icon {
+      font-size: 20px;
+    }
+
+    /* ═══════════════════════════════════════
+       STATS SECTION - Apple Style
+    ═══════════════════════════════════════ */
+    .stats-section {
+      padding: 80px 0;
+      background: var(--bg-primary);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 24px;
+      text-align: center;
+    }
+
+    .stat-item {
+      padding: 32px 16px;
+    }
+
+    .stat-value {
+      font-size: 48px;
+      font-weight: 600;
+      color: var(--text-primary);
+      line-height: 1.08365;
+      letter-spacing: -0.003em;
       margin-bottom: 8px;
     }
 
-    .phase-card-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      margin-bottom: 6px;
-    }
-
-    .phase-card-subtitle {
-      font-size: 0.85rem;
-      opacity: 0.8;
-    }
-
-    .phase-card-body {
-      padding: 0 28px 24px;
-    }
-
-    .phase-card-desc {
-      font-size: 0.9rem;
+    .stat-label {
+      font-size: 17px;
       color: var(--text-secondary);
-      line-height: 1.6;
-      margin-bottom: 16px;
     }
 
-    .phase-card-tools {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+    @media (max-width: 600px) {
+      .stats-grid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+      }
     }
-
-    .phase-tool {
-      font-size: 0.75rem;
-      padding: 4px 10px;
-      border-radius: 12px;
-      background: rgba(255,255,255,0.08);
-      color: var(--text-muted);
-      border: 1px solid rgba(255,255,255,0.06);
-    }
-
-    .phase-card-arrow {
-      position: absolute;
-      right: 24px;
-      top: 50%;
-      transform: translateY(-50%);
-      font-size: 1.5rem;
-      opacity: 0.3;
-      transition: all 0.3s ease;
-    }
-
-    .phase-card:hover .phase-card-arrow {
-      opacity: 1;
-      transform: translateY(-50%) translateX(4px);
-    }
-
-    .phase-card[data-phase="1"] .phase-card-arrow { color: var(--phase1-icon); }
-    .phase-card[data-phase="2"] .phase-card-arrow { color: var(--phase2-icon); }
-    .phase-card[data-phase="3"] .phase-card-arrow { color: var(--phase3-icon); }
-    .phase-card[data-phase="4"] .phase-card-arrow { color: var(--phase4-icon); }
-    .phase-card[data-phase="5"] .phase-card-arrow { color: var(--phase5-icon); }
-    .phase-card[data-phase="6"] .phase-card-arrow { color: var(--phase6-icon); }
 
     /* ═══════════════════════════════════════
-       IMAGE HERO BANNER
+       BANNER SECTION - Apple Style
     ═══════════════════════════════════════ */
-    .hero-banner {
-      width: 100%;
-      height: 320px;
-      border-radius: 24px;
-      overflow: hidden;
+    .banner-section {
+      padding: 0;
+      background: var(--bg-secondary);
+    }
+
+    .banner {
       position: relative;
-      margin: 64px 0;
+      height: 580px;
+      overflow: hidden;
     }
 
-    .hero-banner img {
-      width: 100%; height: 100%;
+    .banner img {
+      width: 100%;
+      height: 100%;
       object-fit: cover;
-      display: block;
     }
 
-    .hero-banner-overlay {
+    .banner-overlay {
       position: absolute;
-      top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(
-        135deg,
-        rgba(13, 27, 42, 0.90) 0%,
-        rgba(13, 27, 42, 0.50) 100%
-      );
+      inset: 0;
       display: flex;
       flex-direction: column;
       justify-content: center;
+      align-items: center;
+      text-align: center;
       padding: 48px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
       background: linear-gradient(
-        135deg,
-        rgba(255, 253, 248, 0.92) 0%,
-        rgba(255, 253, 248, 0.55) 100%
+        to bottom,
+        rgba(255, 255, 255, 0) 0%,
+        rgba(255, 255, 255, 0.85) 60%,
+        rgba(255, 255, 255, 0.95) 100%
       );
     }
-    [data-theme="light"] .hero-banner-overlay .hero-banner-title,
-    [data-theme="light"] .hero-banner-overlay .hero-banner-desc { color: #2d3436; }
-    [data-theme="light"] .hero-banner-overlay .highlight { color: #e74c3c; }
 
-    .hero-banner-title {
-      font-size: clamp(1.5rem, 3vw, 2.2rem);
-      font-weight: 900;
+    [data-theme="dark"] .banner-overlay {
+      background: linear-gradient(
+        to bottom,
+        rgba(0, 0, 0, 0) 0%,
+        rgba(0, 0, 0, 0.7) 60%,
+        rgba(0, 0, 0, 0.9) 100%
+      );
+    }
+
+    .banner-content {
+      max-width: 600px;
+      margin-top: auto;
+      padding-bottom: 60px;
+    }
+
+    .banner-title {
+      font-size: clamp(28px, 5vw, 40px);
+      font-weight: 600;
+      line-height: 1.1;
       margin-bottom: 12px;
-      max-width: 500px;
+      color: var(--text-primary);
     }
 
-    .hero-banner-title .highlight {
-      background: var(--accent-sunset);
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero-banner-desc {
+    .banner-desc {
+      font-size: 17px;
       color: var(--text-secondary);
-      max-width: 400px;
-      font-size: 1rem;
-      line-height: 1.6;
-      margin-bottom: 24px;
+      line-height: 1.47;
+      margin-bottom: 20px;
+    }
+
+    @media (max-width: 768px) {
+      .banner {
+        height: 480px;
+      }
     }
 
     /* ═══════════════════════════════════════
-       FEATURES ROW
+       PHASE SECTION - Apple Style Cards
     ═══════════════════════════════════════ */
+    .phase-section {
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+
+    .section-header {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .section-eyebrow {
+      font-size: 17px;
+      font-weight: 600;
+      color: var(--text-secondary);
+      text-transform: uppercase;
+      letter-spacing: 0.03em;
+      margin-bottom: 8px;
+    }
+
+    .section-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      letter-spacing: -0.003em;
+      color: var(--text-primary);
+    }
+
+    .phase-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 800px) {
+      .phase-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    .phase-card {
+      position: relative;
+      background: var(--bg-secondary);
+      border-radius: 20px;
+      padding: 36px;
+      text-decoration: none;
+      color: inherit;
+      transition: all 0.3s ease;
+      display: flex;
+      flex-direction: column;
+      overflow: hidden;
+    }
+
+    .phase-card:hover {
+      transform: scale(1.02);
+      box-shadow: var(--shadow-card-hover);
+    }
+
+    .phase-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 16px;
+      padding: 6px 12px;
+      border-radius: 980px;
+      width: fit-content;
+    }
+
+    .phase-card[data-phase="1"] .phase-badge { background: rgba(255, 98, 89, 0.12); color: var(--phase1-color); }
+    .phase-card[data-phase="2"] .phase-badge { background: rgba(48, 209, 88, 0.12); color: var(--phase2-color); }
+    .phase-card[data-phase="3"] .phase-badge { background: rgba(50, 217, 160, 0.12); color: var(--phase3-color); }
+    .phase-card[data-phase="4"] .phase-badge { background: rgba(255, 159, 10, 0.12); color: var(--phase4-color); }
+    .phase-card[data-phase="5"] .phase-badge { background: rgba(10, 132, 255, 0.12); color: var(--phase5-color); }
+    .phase-card[data-phase="6"] .phase-badge { background: rgba(191, 90, 242, 0.12); color: var(--phase6-color); }
+
+    .phase-title {
+      font-size: 24px;
+      font-weight: 600;
+      line-height: 1.16667;
+      letter-spacing: 0.009em;
+      margin-bottom: 4px;
+      color: var(--text-primary);
+    }
+
+    .phase-subtitle {
+      font-size: 14px;
+      color: var(--text-muted);
+      margin-bottom: 12px;
+    }
+
+    .phase-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.47;
+      margin-bottom: 20px;
+      flex-grow: 1;
+    }
+
+    .phase-tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+
+    .phase-tool {
+      font-size: 12px;
+      padding: 6px 12px;
+      border-radius: 980px;
+      background: var(--bg-primary);
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+
+    .phase-tool:hover {
+      color: var(--text-primary);
+      background: var(--border-color);
+    }
+
+    .phase-arrow {
+      position: absolute;
+      right: 28px;
+      top: 50%;
+      transform: translateY(-50%);
+      font-size: 20px;
+      color: var(--text-muted);
+      opacity: 0;
+      transition: all 0.3s ease;
+    }
+
+    .phase-card:hover .phase-arrow {
+      opacity: 1;
+      right: 24px;
+    }
+
+    /* ═══════════════════════════════════════
+       FEATURES SECTION - Apple Style
+    ═══════════════════════════════════════ */
+    .features-section {
+      padding: 100px 0;
+      background: var(--bg-secondary);
+    }
+
     .features-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-      gap: 20px;
-      margin: 64px 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 24px;
+    }
+
+    @media (max-width: 700px) {
+      .features-grid {
+        grid-template-columns: 1fr;
+      }
     }
 
     .feature-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
+      background: var(--bg-primary);
       border-radius: 20px;
-      padding: 28px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
+      padding: 36px;
       transition: all 0.3s ease;
     }
 
     .feature-card:hover {
-      transform: translateY(-4px);
-      box-shadow: var(--shadow-card-hover);
+      box-shadow: var(--shadow-card);
     }
 
     .feature-icon {
-      font-size: 2.2rem;
-      flex-shrink: 0;
+      font-size: 40px;
+      margin-bottom: 20px;
     }
 
     .feature-title {
-      font-weight: 700;
-      font-size: 1rem;
-      margin-bottom: 6px;
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.19;
+      margin-bottom: 8px;
+      color: var(--text-primary);
     }
 
     .feature-desc {
-      font-size: 0.85rem;
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.5;
-    }
-
-
-    .line-green {
-      border: 2px solid #00B900;
-      background: rgba(0, 185, 0, 0.08) !important;
-    }
-    .line-logo-row {
-      display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;
-    }
-    .line-logo-row h2 { margin: 0; }
-    .line-icon {
-      width: 40px; height: 40px; flex-shrink: 0;
-    }
-    .keyword-chip {
-      background: rgba(0, 185, 0, 0.15) !important;
-      color: #00d26a !important;
-      border-color: rgba(0, 185, 0, 0.35) !important;
-    }
-    [data-theme="light"] .line-section {
-      background: rgba(0, 185, 0, 0.06) !important;
-    }
-    [data-theme="light"] .keyword-chip {
-      background: rgba(0, 185, 0, 0.12) !important;
-      color: #008000 !important;
+      line-height: 1.47;
     }
 
     /* ═══════════════════════════════════════
-       LINE BOT SECTION
+       LINE BOT SECTION - Apple Style
     ═══════════════════════════════════════ */
     .line-section {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid rgba(255,255,255,0.08);
+      padding: 100px 0;
+      background: var(--bg-primary);
+    }
+
+    .line-card {
+      background: var(--bg-secondary);
       border-radius: 28px;
-      padding: 48px;
-      margin: 64px 0;
+      padding: 60px 48px;
       text-align: center;
+      border: 2px solid #06c755;
     }
 
-    .line-section h2 {
-      font-size: 1.5rem;
-      font-weight: 700;
-      margin-bottom: 8px;
+    .line-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 12px;
+      margin-bottom: 12px;
     }
 
-    .line-section p {
+    .line-icon {
+      width: 36px;
+      height: 36px;
+    }
+
+    .line-title {
+      font-size: 28px;
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .line-desc {
+      font-size: 17px;
       color: var(--text-secondary);
       margin-bottom: 32px;
     }
@@ -698,236 +666,120 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 10px;
-      margin-bottom: 32px;
     }
 
     .keyword-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 18px;
-      border-radius: 20px;
-      font-size: 0.85rem;
+      font-size: 14px;
       font-weight: 500;
-      background: rgba(0,200,100,0.15);
-      color: #55efc4;
-      border: 1px solid rgba(0,200,100,0.3);
+      padding: 8px 16px;
+      border-radius: 980px;
+      background: rgba(6, 199, 85, 0.1);
+      color: #06c755;
+    }
+
+    [data-theme="dark"] .keyword-chip {
+      background: rgba(6, 199, 85, 0.15);
     }
 
     /* ═══════════════════════════════════════
-       CTA SECTION
+       CTA SECTION - Apple Style
     ═══════════════════════════════════════ */
     .cta-section {
+      padding: 100px 0;
       text-align: center;
-      padding: 64px 0;
+      background: var(--bg-secondary);
     }
 
-    .cta-section h2 {
-      font-size: 1.75rem;
-      font-weight: 700;
+    .cta-title {
+      font-size: clamp(32px, 5vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
       margin-bottom: 12px;
-    }
-
-    .cta-section p {
-      color: var(--text-secondary);
-      margin-bottom: 32px;
-    }
-
-    .btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 8px;
-      padding: 16px 36px;
-      border-radius: 16px;
-      font-weight: 700;
-      font-size: 1rem;
-      text-decoration: none;
-      transition: all 0.3s ease;
-      cursor: pointer;
-      border: none;
-    }
-
-    .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-      box-shadow: 0 8px 24px rgba(255,107,107,0.3);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-3px);
-      box-shadow: 0 12px 32px rgba(255,107,107,0.4);
-    }
-
-    .btn-secondary {
-      background: rgba(255,255,255,0.1);
       color: var(--text-primary);
-      border: 1px solid rgba(255,255,255,0.15);
     }
 
-    .btn-secondary:hover {
-      background: rgba(255,255,255,0.15);
-      transform: translateY(-2px);
+    .cta-desc {
+      font-size: 21px;
+      color: var(--text-secondary);
+      margin-bottom: 28px;
+    }
+
+    .cta-actions {
+      display: flex;
+      justify-content: center;
+      gap: 16px;
+      flex-wrap: wrap;
     }
 
     /* ═══════════════════════════════════════
-       FOOTER
+       FOOTER - Apple Style
     ═══════════════════════════════════════ */
     footer {
-      padding: 40px 0;
-      border-top: 1px solid rgba(255,255,255,0.06);
-      text-align: center;
-      color: var(--text-muted);
-      font-size: 0.85rem;
+      padding: 20px 0;
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border-color);
     }
 
-    /* ═══════════════════════════════════════
-       RESPONSIVE
-    ═══════════════════════════════════════ */
-    @media (max-width: 768px) {
-      .stats-row { grid-template-columns: repeat(2, 1fr); }
-      .hero-banner { height: 240px; margin: 32px 0; }
-      .hero-banner-overlay { padding: 24px; }
-      .phase-grid { grid-template-columns: 1fr; }
-      .line-section { padding: 32px 24px; }
-      .hero { padding: 48px 0 32px; }
-      .hero-banner-title { font-size: 1.3rem; }
-    }
-
-    @media (max-width: 480px) {
-      .topnav-link .link-text { display: none; }
-      .topnav-link { padding: 6px 10px; }
-      .stats-row { grid-template-columns: repeat(2, 1fr); gap: 12px; }
-    }
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
       align-items: center;
-      gap: 8px;
+      flex-wrap: wrap;
+      gap: 16px;
+    }
+
+    .footer-text {
+      font-size: 12px;
+      color: var(--text-muted);
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+    }
+
+    .footer-link {
+      font-size: 12px;
+      color: var(--text-muted);
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: color 0.2s ease;
     }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
+
+    .footer-link:hover {
       color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
     }
 
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
+    @media (max-width: 600px) {
+      .footer-inner {
+        flex-direction: column;
+        text-align: center;
+      }
     }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
-    }
-
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
-
   </style>
 </head>
 <body>
-  <!-- Animated Background -->
-  <div class="bg-layer"></div>
-  <div class="bg-decor bg-sun"></div>
-  <div class="bg-decor bg-ocean"></div>
-  <div class="bg-decor bg-clouds"></div>
-  <div class="bg-decor bg-clouds-2"></div>
-
-  <!-- Top Navigation Bar -->
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a href="/" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
-      </a>
-      <div class="topnav-divider"></div>
-      <a href="workshop/phases/phase1.html" class="topnav-link active" data-phase="1">
-        <span>💡</span>
-        <span class="link-text">靈感</span>
-      </a>
-      <a href="workshop/phases/phase2.html" class="topnav-link" data-phase="2">
-        <span>📊</span>
-        <span class="link-text">規劃</span>
-      </a>
-      <a href="workshop/phases/phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span>
-        <span class="link-text">知識庫</span>
-      </a>
-      <a href="workshop/phases/phase4.html" class="topnav-link" data-phase="4">
-        <span>🎨</span>
-        <span class="link-text">視覺</span>
-      </a>
-      <a href="workshop/phases/phase5.html" class="topnav-link" data-phase="5">
-        <span>🗾</span>
-        <span class="link-text">生存</span>
-      </a>
-      <a href="workshop/phases/phase6.html" class="topnav-link" data-phase="6">
-        <span>💰</span>
-        <span class="link-text">變現</span>
-      </a>
-      <div class="topnav-spacer"></div>
-      <button class="theme-toggle" onclick="toggleTheme()" title="切換主題" id="themeBtn">🌙</button>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="/" class="nav-logo">AI 旅遊工作坊</a>
+      
+      <div class="nav-links">
+        <a href="workshop/phases/phase1.html" class="nav-link">靈感</a>
+        <a href="workshop/phases/phase2.html" class="nav-link">規劃</a>
+        <a href="workshop/phases/phase3.html" class="nav-link">知識庫</a>
+        <a href="workshop/phases/phase4.html" class="nav-link">視覺</a>
+        <a href="workshop/phases/phase5.html" class="nav-link">生存</a>
+        <a href="workshop/phases/phase6.html" class="nav-link">變現</a>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="切換主題">
+          <span id="themeIcon">&#9789;</span>
+        </button>
+      </div>
+      
+      <button class="nav-toggle" onclick="toggleMenu()" aria-label="選單">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
     </div>
   </nav>
 
@@ -935,292 +787,297 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-
-        <h1>
-          用 <span class="highlight">AI</span> 從零規劃<br>
-          日本夢幻之旅 ✈️
-        </h1>
-        <p class="subtitle">
-          Gemini 3.1 + Gemini Live + Google Flights AI
+        <p class="hero-eyebrow">AI Travel Workshop</p>
+        <h1>用 AI 規劃<br>日本夢幻之旅</h1>
+        <p class="hero-subtitle">
+          結合 Gemini 3.1、Gemini Live 與 Google Flights AI，<br>
+          從靈感發想到商業變現的完整學習旅程。
         </p>
-
-        <div class="hero-tags">
-          <a href="https://aistudio.google.com" target="_blank" class="hero-tag"><span class="emoji">🤖</span> Gemini 3.1</a>
-          <a href="https://gemini.google.com" target="_blank" class="hero-tag"><span class="emoji">🎙️</span> Gemini Live</a>
-          <a href="https://flights.google.com" target="_blank" class="hero-tag"><span class="emoji">✈️</span> Google Flights AI</a>
-          <a href="https://notebooklm.google.com" target="_blank" class="hero-tag"><span class="emoji">📓</span> NotebookLM</a>
-          <a href="https://line.me" target="_blank" class="hero-tag"><span class="emoji">💬</span> LINE Bot</a>
-        </div>
-
-        <div class="hero-actions">
+        <div class="hero-cta">
           <a href="workshop/phases/phase1.html" class="btn btn-primary">
-            🚀 開始學習
+            開始學習
+            <span class="btn-icon">&#8594;</span>
           </a>
           <a href="#phases" class="btn btn-secondary">
-            📚 看所有單元
+            了解更多
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Stats -->
-    <section class="container">
-      <div class="stats-row">
-        <div class="stat-card">
-          <div class="stat-icon">📚</div>
-          <div class="stat-value">6</div>
-          <div class="stat-label">學習單元</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">⏱️</div>
-          <div class="stat-value">4h</div>
-          <div class="stat-label">課程時長</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">💬</div>
-          <div class="stat-value">8+</div>
-          <div class="stat-label">LINE 關鍵字</div>
-        </div>
-      </div>
-    </section>
-
-    <!-- Hero Banner with Image -->
-    <section class="container">
-      <div class="hero-banner">
-        <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=1400&q=80" alt="日本旅遊" loading="lazy">
-        <div class="hero-banner-overlay">
-          <div class="hero-banner-title">
-            告別攻略地獄，<br><span class="highlight">交給 AI 就對了</span>
-          </div>
-          <div class="hero-banner-desc">
-            從靈感發想到商業變現，6 個 Phase 帶你用 AI 完整規劃一趟日本之旅。
-            不只是學工具，是學一套系統。
-          </div>
-          <a href="workshop/phases/phase1.html" class="btn btn-primary">
-            立即開始 →
+    <!-- Tools Section -->
+    <section class="tools-section">
+      <div class="container">
+        <div class="tools-grid">
+          <a href="https://aistudio.google.com" target="_blank" class="tool-item">
+            <span class="tool-icon">&#10024;</span>
+            <span>Gemini 3.1</span>
+          </a>
+          <a href="https://gemini.google.com" target="_blank" class="tool-item">
+            <span class="tool-icon">&#127908;</span>
+            <span>Gemini Live</span>
+          </a>
+          <a href="https://flights.google.com" target="_blank" class="tool-item">
+            <span class="tool-icon">&#9992;</span>
+            <span>Google Flights</span>
+          </a>
+          <a href="https://notebooklm.google.com" target="_blank" class="tool-item">
+            <span class="tool-icon">&#128211;</span>
+            <span>NotebookLM</span>
+          </a>
+          <a href="https://line.me" target="_blank" class="tool-item">
+            <span class="tool-icon">&#128172;</span>
+            <span>LINE Bot</span>
           </a>
         </div>
       </div>
     </section>
 
-    <!-- Phase Cards -->
-    <section class="container" id="phases">
-      <div class="section-header">
-        <h2>🎯 6 階段學習地圖</h2>
-        <p>點擊任一卡片進入該單元</p>
-      </div>
-
-      <div class="phase-grid">
-        <!-- Phase 1 -->
-        <a href="workshop/phases/phase1.html" class="phase-card" data-phase="1">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 1</div>
-            <div class="phase-card-icon">💡</div>
-            <div class="phase-card-title">靈感發想</div>
-            <div class="phase-card-subtitle">Find Your Travel Style</div>
+    <!-- Stats Section -->
+    <section class="stats-section">
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <div class="stat-value">6</div>
+            <div class="stat-label">學習單元</div>
           </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <div class="stat-item">
+            <div class="stat-value">4h</div>
+            <div class="stat-label">課程時長</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">8+</div>
+            <div class="stat-label">LINE 關鍵字</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Banner Section -->
+    <section class="banner-section">
+      <div class="banner">
+        <img src="https://images.unsplash.com/photo-1503899036084-c55cdd92da26?w=1600&q=80" alt="日本東京街景" loading="lazy">
+        <div class="banner-overlay">
+          <div class="banner-content">
+            <h2 class="banner-title">告別攻略地獄<br>交給 AI 就對了</h2>
+            <p class="banner-desc">
+              從靈感發想到商業變現，6 個階段帶你用 AI 完整規劃一趟日本之旅。
+              不只是學工具，是學一套系統。
+            </p>
+            <a href="workshop/phases/phase1.html" class="btn btn-primary">
+              立即開始
+              <span class="btn-icon">&#8594;</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Phase Section -->
+    <section class="phase-section" id="phases">
+      <div class="container-wide">
+        <div class="section-header">
+          <p class="section-eyebrow">Learning Path</p>
+          <h2 class="section-title">6 階段學習地圖</h2>
+        </div>
+
+        <div class="phase-grid">
+          <!-- Phase 1 -->
+          <a href="workshop/phases/phase1.html" class="phase-card" data-phase="1">
+            <div class="phase-badge">Phase 1</div>
+            <div class="phase-title">靈感發想</div>
+            <div class="phase-subtitle">Find Your Travel Style</div>
+            <div class="phase-desc">
               透過 MBTI 風格測驗找出你的旅遊人格，Gemini Live 語音互動即時規劃行程
             </div>
-            <div class="phase-card-tools">
-              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Gemini 3.1</a>
-              <a href="https://gemini.google.com" target="_blank" class="phase-tool">Gemini Live</a>
-              <a href="https://www.16personalities.com" target="_blank" class="phase-tool">人格測驗</a>
+            <div class="phase-tools">
+              <span class="phase-tool">Gemini 3.1</span>
+              <span class="phase-tool">Gemini Live</span>
+              <span class="phase-tool">人格測驗</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
 
-        <!-- Phase 2 -->
-        <a href="workshop/phases/phase2.html" class="phase-card" data-phase="2">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 2</div>
-            <div class="phase-card-icon">📊</div>
-            <div class="phase-card-title">深度規劃</div>
-            <div class="phase-card-subtitle">Deep Plan with AI</div>
-          </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <!-- Phase 2 -->
+          <a href="workshop/phases/phase2.html" class="phase-card" data-phase="2">
+            <div class="phase-badge">Phase 2</div>
+            <div class="phase-title">深度規劃</div>
+            <div class="phase-subtitle">Deep Plan with AI</div>
+            <div class="phase-desc">
               Deep Research 生成專業行程表，Google Flights AI 幫你選擇最佳航班
             </div>
-            <div class="phase-card-tools">
-              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Deep Research</a>
-              <a href="https://flights.google.com" target="_blank" class="phase-tool">Google Flights</a>
-              <a href="https://www.jrpass.com" target="_blank" class="phase-tool">JR Pass</a>
+            <div class="phase-tools">
+              <span class="phase-tool">Deep Research</span>
+              <span class="phase-tool">Google Flights</span>
+              <span class="phase-tool">JR Pass</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
 
-        <!-- Phase 3 -->
-        <a href="workshop/phases/phase3.html" class="phase-card" data-phase="3">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 3</div>
-            <div class="phase-card-icon">📓</div>
-            <div class="phase-card-title">知識庫建立</div>
-            <div class="phase-card-subtitle">Build Your Travel Brain</div>
-          </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <!-- Phase 3 -->
+          <a href="workshop/phases/phase3.html" class="phase-card" data-phase="3">
+            <div class="phase-badge">Phase 3</div>
+            <div class="phase-title">知識庫建立</div>
+            <div class="phase-subtitle">Build Your Travel Brain</div>
+            <div class="phase-desc">
               NotebookLM 建立專屬旅遊助理，行程表一鍵變成 Podcast 語音導覽
             </div>
-            <div class="phase-card-tools">
-              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">NotebookLM</a>
-              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">Audio Overview</a>
-              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">知識庫</a>
+            <div class="phase-tools">
+              <span class="phase-tool">NotebookLM</span>
+              <span class="phase-tool">Audio Overview</span>
+              <span class="phase-tool">知識庫</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
 
-        <!-- Phase 4 -->
-        <a href="workshop/phases/phase4.html" class="phase-card" data-phase="4">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 4</div>
-            <div class="phase-card-icon">🎨</div>
-            <div class="phase-card-title">視覺生成</div>
-            <div class="phase-card-subtitle">Create Visual Content</div>
-          </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <!-- Phase 4 -->
+          <a href="workshop/phases/phase4.html" class="phase-card" data-phase="4">
+            <div class="phase-badge">Phase 4</div>
+            <div class="phase-title">視覺生成</div>
+            <div class="phase-subtitle">Create Visual Content</div>
+            <div class="phase-desc">
               ChatGPT 生成卡通人格圖，一鍵製作出 LINE 分享長圖
             </div>
-            <div class="phase-card-tools">
-              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Gemini 生圖</a>
-              <a href="https://chat.openai.com" target="_blank" class="phase-tool">卡通頭像</a>
-              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">LINE 分享圖</a>
+            <div class="phase-tools">
+              <span class="phase-tool">Gemini 生圖</span>
+              <span class="phase-tool">卡通頭像</span>
+              <span class="phase-tool">LINE 分享圖</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
 
-        <!-- Phase 5 -->
-        <a href="workshop/phases/phase5.html" class="phase-card" data-phase="5">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 5</div>
-            <div class="phase-card-icon">🗾</div>
-            <div class="phase-card-title">現場生存</div>
-            <div class="phase-card-subtitle">Survive on the Ground</div>
-          </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <!-- Phase 5 -->
+          <a href="workshop/phases/phase5.html" class="phase-card" data-phase="5">
+            <div class="phase-badge">Phase 5</div>
+            <div class="phase-title">現場生存</div>
+            <div class="phase-subtitle">Survive on the Ground</div>
+            <div class="phase-desc">
               Google Lens 即時翻譯日文菜單，Gemini Live 語音對話解決現場溝通
             </div>
-            <div class="phase-card-tools">
-              <a href="https://lens.google.com" target="_blank" class="phase-tool">Google Lens</a>
-              <a href="https://gemini.google.com" target="_blank" class="phase-tool">Gemini Live</a>
-              <a href="https://gemini.google.com" target="_blank" class="phase-tool">即時翻譯</a>
+            <div class="phase-tools">
+              <span class="phase-tool">Google Lens</span>
+              <span class="phase-tool">Gemini Live</span>
+              <span class="phase-tool">即時翻譯</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
 
-        <!-- Phase 6 -->
-        <a href="workshop/phases/phase6.html" class="phase-card" data-phase="6">
-          <div class="phase-card-header">
-            <div class="phase-card-badge">Phase 6</div>
-            <div class="phase-card-icon">💰</div>
-            <div class="phase-card-title">商業變現</div>
-            <div class="phase-card-subtitle">Monetize Your Influence</div>
-          </div>
-          <div class="phase-card-body">
-            <div class="phase-card-desc">
+          <!-- Phase 6 -->
+          <a href="workshop/phases/phase6.html" class="phase-card" data-phase="6">
+            <div class="phase-badge">Phase 6</div>
+            <div class="phase-title">商業變現</div>
+            <div class="phase-subtitle">Monetize Your Influence</div>
+            <div class="phase-desc">
               AI 生成 Shop.com 導購文案，打造個人旅遊影響力並實際變現
             </div>
-            <div class="phase-card-tools">
-              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Gemini 文案</a>
-              <a href="https://shop.com" target="_blank" class="phase-tool">Shop.com</a>
-              <a href="https://chat.openai.com" target="_blank" class="phase-tool">導購技巧</a>
+            <div class="phase-tools">
+              <span class="phase-tool">Gemini 文案</span>
+              <span class="phase-tool">Shop.com</span>
+              <span class="phase-tool">導購技巧</span>
             </div>
-          </div>
-          <div class="phase-card-arrow">→</div>
-        </a>
+            <span class="phase-arrow">&#8594;</span>
+          </a>
+        </div>
       </div>
     </section>
 
-    <!-- Features -->
-    <section class="container">
-      <div class="section-header">
-        <h2>✨ 為什麼要學這堂課？</h2>
-        <p>不只是工具教學，是一套可複製的 AI 旅遊系統</p>
-      </div>
+    <!-- Features Section -->
+    <section class="features-section">
+      <div class="container-wide">
+        <div class="section-header">
+          <p class="section-eyebrow">Why This Course</p>
+          <h2 class="section-title">為什麼要學這堂課</h2>
+        </div>
 
-      <div class="features-grid">
-        <div class="feature-card">
-          <div class="feature-icon">⚡</div>
-          <div>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">&#9889;</div>
             <div class="feature-title">省下 80% 規劃時間</div>
-            <div class="feature-desc">用 Deep Research 一次搜尋幾十篇資料，AI 幫你整理成結構化行程表</div>
+            <div class="feature-desc">
+              用 Deep Research 一次搜尋幾十篇資料，AI 幫你整理成結構化行程表
+            </div>
           </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">🌐</div>
-          <div>
+          <div class="feature-card">
+            <div class="feature-icon">&#127760;</div>
             <div class="feature-title">語言不再是障礙</div>
-            <div class="feature-desc">Gemini Live 即時語音翻譯，點餐、問路、入住飯店全程無壓力</div>
+            <div class="feature-desc">
+              Gemini Live 即時語音翻譯，點餐、問路、入住飯店全程無壓力
+            </div>
           </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">📸</div>
-          <div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128247;</div>
             <div class="feature-title">社群分享超吸睛</div>
-            <div class="feature-desc">AI 生成的卡通頭像和 LINE 分享圖，讓你的旅遊貼文鶴立雞群</div>
+            <div class="feature-desc">
+              AI 生成的卡通頭像和 LINE 分享圖，讓你的旅遊貼文鶴立雞群
+            </div>
           </div>
-        </div>
-        <div class="feature-card">
-          <div class="feature-icon">💎</div>
-          <div>
+          <div class="feature-card">
+            <div class="feature-icon">&#128142;</div>
             <div class="feature-title">知識變現能力</div>
-            <div class="feature-desc">用 AI 幫親朋好友規劃行程，Shop.com 導購被動收入不停歇</div>
+            <div class="feature-desc">
+              用 AI 幫親朋好友規劃行程，Shop.com 導購被動收入不停歇
+            </div>
           </div>
         </div>
       </div>
     </section>
 
     <!-- LINE Bot Section -->
-    <section class="container">
-      <div class="line-section line-green">
-        <div class="line-logo-row">
-          <svg class="line-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
-            <path fill="#00B900" d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4z"/>
-            <path fill="#fff" d="M34.1 32.5c-.6-.4-3.5-1.7-4-1.9-.5-.2-.9-.3-1.3.3-.4.6-1.5 1.9-1.8 2.3-.3.4-.6.5-1.1.2-.5-.3-2.1-.9-4-2.9-1.5-1.6-2.5-3.5-2.8-4.1-.3-.6 0-.9.3-1.2.3-.3.6-.7.9-1.1.3-.4.4-.7.1-1-.3-.3-.8-.9-1.2-1.4-.4-.5-.7-.6-1-.6-.3 0-.6 0-.9.1-.3.1-.7.2-1 .3-.2.1-.4.1-.5.2-4.2 1.8-7 6.5-7.2 6.8-.2.4-.2.8-.1 1.2.2.4.8 1.2 1.9 1.8.6.3 1.2.5 1.6.7.6.2 1.1.2 1.5.3.5.1.9 0 1.3-.2.4-.2 1.6-.9 1.8-.9.3-.1.5-.2.7-.2.3 0 .6.2.8.7.2.5.7 1.7.8 1.8.1.2.2.3.3.5.1.2.2.3.4.5.2.2.4.4.6.6.2.2.3.4.4.7.1.2.1.5.1.8-.1.3-.2.7-.5 1.1-.2.2-.4.5-.6.7-.2.2-.4.4-.6.6-.2.2-.4.5-.6.8-.2.3-.4.6-.4.8 0 .2.1.4.2.6.2.2.8.9 2 1.5 1.1.6 1.1.7 1.3.9.2.2.3.4.2.8-.1.4-.4 1.6-.8 2.2-.4.6-.8 1-1.5 1.3-.6.4-1.3.7-2 .9-.7.2-1.3.3-1.8.4-.5.1-1.1 0-1.5-.1-.4-.1-.9-.3-1.4-.6-.5-.3-1-.7-1.4-1.1-.3-.3-.5-.5-.7-.7-.2-.2-.3-.3-.4-.4-.1-.1-.1-.2-.1-.3 0 0 0 0 0 0s1.5 1.4 2.2 1.9c.7.5 1 .8 1.4 1 .4.2.8.3 1.2.2.4-.1.9-.3 1.4-.6.5-.3.9-.6 1.3-.9.4-.3.8-.6 1.2-.7.5-.1.9-.2 1.3-.3.4-.1.9-.1 1.3.1.4.2.8.5 1.1.8.4.3.8.6 1.2.7.4.1.8.2 1.2.1.4-.1.9-.3 1.4-.6.5-.3 1-.7 1.4-1 .4-.3.8-.6 1.1-.8.3-.2.5-.3.6-.4.1-.1.1-.1.2-.2 0 0 0 0 0 0 .4-.3.7-.6 1-.8.1.1 0 0 0 0z"/></svg>
-          <h2>加入 LINE Bot 取得提示詞</h2>
-        </div>
-        <p>工作坊後持續取得各單元提示詞，輸入關鍵字即刻獲得</p>
-
-        <div class="keyword-chips">
-          <span class="keyword-chip">人格</span>
-          <span class="keyword-chip">卡通</span>
-          <span class="keyword-chip">行程</span>
-          <span class="keyword-chip">機票</span>
-          <span class="keyword-chip">翻譯</span>
-          <span class="keyword-chip">生圖</span>
-          <span class="keyword-chip">回憶</span>
-          <span class="keyword-chip">問題</span>
+    <section class="line-section">
+      <div class="container">
+        <div class="line-card">
+          <div class="line-header">
+            <svg class="line-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+              <circle cx="24" cy="24" r="24" fill="#06c755"/>
+              <path fill="#fff" d="M39 21.8c0-7-7-12.7-15.5-12.7S8 14.8 8 21.8c0 6.3 5.6 11.5 13.1 12.5.5.1 1.2.3 1.4.8.2.4.1 1-.1 1.4 0 0-.2 1.1-.2 1.4-.1.4-.3 1.4 1.2.8 1.5-.7 8.2-4.8 11.2-8.3 2-2.3 3.4-4.6 3.4-7.6zm-21.8 4.6h-3.4c-.4 0-.7-.3-.7-.7v-6.1c0-.4.3-.7.7-.7s.7.3.7.7v5.4h2.7c.4 0 .7.3.7.7s-.3.7-.7.7zm3.2-.7c0 .4-.3.7-.7.7s-.7-.3-.7-.7v-6.1c0-.4.3-.7.7-.7s.7.3.7.7v6.1zm7.6 0c0 .3-.2.6-.5.7-.1 0-.1 0-.2 0-.2 0-.4-.1-.5-.3l-3.5-4.7v4.3c0 .4-.3.7-.7.7s-.7-.3-.7-.7v-6.1c0-.3.2-.6.5-.7.2-.1.5 0 .7.2l3.5 4.7v-4.2c0-.4.3-.7.7-.7s.7.3.7.7v6.1zm5.3-3.9c.4 0 .7.3.7.7s-.3.7-.7.7h-2.7v1.8h2.7c.4 0 .7.3.7.7s-.3.7-.7.7h-3.4c-.4 0-.7-.3-.7-.7v-6.1c0-.4.3-.7.7-.7h3.4c.4 0 .7.3.7.7s-.3.7-.7.7h-2.7v1.8h2.7z"/>
+            </svg>
+            <h3 class="line-title">加入 LINE Bot</h3>
+          </div>
+          <p class="line-desc">工作坊後持續取得各單元提示詞，輸入關鍵字即刻獲得</p>
+          <div class="keyword-chips">
+            <span class="keyword-chip">人格</span>
+            <span class="keyword-chip">卡通</span>
+            <span class="keyword-chip">行程</span>
+            <span class="keyword-chip">機票</span>
+            <span class="keyword-chip">翻譯</span>
+            <span class="keyword-chip">生圖</span>
+            <span class="keyword-chip">回憶</span>
+            <span class="keyword-chip">問題</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- CTA -->
-    <section class="container cta-section">
-      <h2>準備好出發了嗎？✈️</h2>
-      <p>從 Phase 1 開始，跟著 6 個步驟用 AI 玩轉日本</p>
-      <div class="hero-actions">
-        <a href="workshop/phases/phase1.html" class="btn btn-primary">
-          🚀 立刻開始
-        </a>
-        <a href="docs/workshop-plan.html" class="btn btn-secondary">
-          📋 看教案大綱
-        </a>
+    <!-- CTA Section -->
+    <section class="cta-section">
+      <div class="container">
+        <h2 class="cta-title">準備好出發了嗎</h2>
+        <p class="cta-desc">從 Phase 1 開始，跟著 6 個步驟用 AI 玩轉日本</p>
+        <div class="cta-actions">
+          <a href="workshop/phases/phase1.html" class="btn btn-primary">
+            立刻開始
+            <span class="btn-icon">&#8594;</span>
+          </a>
+          <a href="docs/workshop-plan.html" class="btn btn-secondary">
+            看教案大綱
+          </a>
+        </div>
       </div>
     </section>
   </main>
 
+  <!-- Footer -->
   <footer>
     <div class="container">
-      <p>AI 旅遊工作坊</p>
-      <p style="margin-top: 8px;">整合 Gemini 3.1 / Gemini Live / Google Flights AI / NotebookLM / LINE Bot</p>
+      <div class="footer-inner">
+        <p class="footer-text">AI 旅遊工作坊 &copy; 2025</p>
+        <div class="footer-links">
+          <span class="footer-link">Gemini 3.1</span>
+          <span class="footer-link">Gemini Live</span>
+          <span class="footer-link">Google Flights</span>
+          <span class="footer-link">NotebookLM</span>
+        </div>
+      </div>
     </div>
   </footer>
 
@@ -1232,30 +1089,24 @@
       const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      updateThemeIcon(next);
     }
 
-    // Restore theme
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
-
-    // Highlight active nav link based on scroll
-    const sections = document.querySelectorAll('.phase-card');
-    const navLinks = document.querySelectorAll('.topnav-link[data-phase]');
-
-    function updateActiveNav() {
-      let current = '';
-      sections.forEach(section => {
-        const rect = section.getBoundingClientRect();
-        if (rect.top <= 150) current = section.getAttribute('href');
-      });
-      navLinks.forEach(link => {
-        link.classList.toggle('active', link.getAttribute('href') === current);
-      });
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('themeIcon');
+      icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9789;';
     }
 
-    window.addEventListener('scroll', updateActiveNav, { passive: true });
+    // Restore theme - default to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
+
+    // Mobile menu toggle
+    function toggleMenu() {
+      const links = document.querySelector('.nav-links');
+      links.style.display = links.style.display === 'flex' ? 'none' : 'flex';
+    }
   </script>
 </body>
 </html>

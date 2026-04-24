@@ -1,491 +1,544 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phase 6｜商業變現 | AI 旅遊工作坊</title>
+  <title>Phase 6 | 商業變現 | AI 旅遊工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d1d1f'/%3E%3Cpath d='M10 22l6-14 6 14M12 18h8' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"> <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff6b6b'/><stop offset='0.5' stop-color='%23f39c12'/><stop offset='1' stop-color='%23ffd93d'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='%230d1b2a'/><text y='22' x='4' font-size='18'>✈</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27, 40, 56, 0.85);
-      --bg-card-solid: #1b2838;
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-      --border-subtle: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.4);
-      --shadow-glow: 0 0 40px rgba(255, 217, 61, 0.15);
-      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
-      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
-      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-tertiary: #fbfbfd;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      
+      --phase-color: #bf5af2;
+      --phase-bg: rgba(191, 90, 242, 0.08);
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+      
+      --accent-blue: #0071e3;
     }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
-      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.9);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+
+    [data-theme="dark"] {
+      --bg-primary: #000000;
+      --bg-secondary: #1d1d1f;
+      --bg-tertiary: #0d0d0d;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --phase-bg: rgba(191, 90, 242, 0.15);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
     body {
-      padding-top: 0;
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 24px;
-    }
-    .container { max-width: 900px; margin: 0 auto; }
-    .header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 48px; padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .phase-badge {
-      background: var(--accent-sunset);
-      padding: 8px 16px; border-radius: 12px;
-      font-weight: 700; font-size: 0.875rem;
-    }
-    .header h1 { font-size: 1.5rem; }
-    .back-link {
-      color: var(--text-secondary); text-decoration: none;
-      font-size: 0.875rem; margin-left: auto;
-    }
-    .progress-bar {
-      background: var(--border); border-radius: 20px;
-      height: 8px; margin-bottom: 48px;
-    }
-    .progress-fill {
-      background: var(--accent-sunset); height: 100%;
-      width: 100%; border-radius: 20px;
+      font-size: 17px;
+      line-height: 1.47;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    [data-theme="dark"] .nav {
+      background: rgba(29, 29, 31, 0.72);
+    }
+
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--phase-color); font-weight: 500; }
+
+    .theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .phase-badge {
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 980px;
+      background: var(--phase-bg);
+      color: var(--phase-color);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+    }
+
+    /* Progress */
+    .progress-section {
+      padding: 20px 0 40px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--phase-color);
+      height: 100%;
+      width: 100%;
+      border-radius: 4px;
+    }
+
+    /* Section Card */
     .section-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
       padding: 32px;
       margin-bottom: 24px;
     }
 
     .section-header {
-      display: flex; align-items: center; gap: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       margin-bottom: 24px;
     }
-    .section-icon { font-size: 2rem; }
-    .section-title { font-size: 1.25rem; font-weight: 600; }
-    .section-subtitle { font-size: 0.875rem; color: var(--text-secondary); }
 
-    .prompt-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px; padding: 20px;
-      font-family: monospace; font-size: 0.875rem;
-      line-height: 1.7; white-space: pre-wrap;
-      color: var(--text-secondary); margin: 16px 0;
-    }
-    .copy-btn {
-      background: var(--accent-sunset);
-      border: none; color: white;
-      padding: 8px 16px; border-radius: 8px;
-      cursor: pointer; font-size: 0.875rem; font-weight: 500;
-      float: right;
+    .section-icon {
+      font-size: 32px;
+      flex-shrink: 0;
     }
 
-    .content-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 24px;
-      margin-bottom: 16px;
+    .section-title {
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
     }
-    .content-card h4 {
-      font-size: 1rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-    .content-card p {
-      font-size: 0.9rem;
+
+    .section-subtitle {
+      font-size: 15px;
       color: var(--text-secondary);
-      line-height: 1.6;
     }
 
-    .highlight-box {
-      background: linear-gradient(135deg, rgba(236, 72, 153, 0.2), rgba(219, 39, 119, 0.2));
-      border: 2px solid rgba(236, 72, 153, 0.3);
-      border-radius: 16px;
-      padding: 24px;
-      margin: 20px 0;
-    }
-    .highlight-title {
-      font-weight: 700;
-      font-size: 1.125rem;
-      margin-bottom: 12px;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
+    /* Flow Diagram */
     .flow-diagram {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 16px;
       flex-wrap: wrap;
-      margin: 32px 0;
+      gap: 12px;
+      padding: 20px 0;
     }
+
     .flow-step {
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      padding: 16px 24px;
       text-align: center;
+      padding: 16px;
+      background: var(--bg-primary);
+      border-radius: 14px;
+      min-width: 100px;
     }
-    .flow-step-icon { font-size: 2rem; margin-bottom: 8px; }
-    .flow-step-title { font-weight: 600; font-size: 0.9rem; }
-    .flow-arrow { font-size: 1.5rem; color: var(--text-secondary); }
 
-    .example-box {
-      background: rgba(236, 72, 153, 0.1);
-      border-left: 4px solid var(--primary);
-      padding: 16px; border-radius: 0 12px 12px 0;
-      margin: 16px 0;
-    }
-    .example-label {
-      font-size: 0.75rem; color: #ff6b6b;
-      font-weight: 600; margin-bottom: 8px;
-    }
-    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
-
-    .step-list {
-      list-style: none;
-      padding: 0;
-    }
-    .step-list li {
-      display: flex; gap: 16px;
-      padding: 16px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
-    }
-    .step-list li:last-child { border-bottom: none; }
-    .step-number {
-      background: var(--accent-sunset);
-      width: 32px; height: 32px;
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-weight: 700; font-size: 0.875rem; flex-shrink: 0;
-    }
-    .step-content h4 { font-size: 1rem; margin-bottom: 4px; }
-    .step-content p { font-size: 0.85rem; color: var(--text-secondary); }
-
-    .final-section {
-      background: linear-gradient(135deg, var(--accent-sunset), var(--gradient-2));
-      border-radius: 24px;
-      padding: 48px;
-      text-align: center;
-      margin: 48px 0;
-    }
-    .final-icon { font-size: 4rem; margin-bottom: 16px; }
-    .final-title {
-      font-size: 1.75rem;
-      font-weight: 700;
+    .flow-step-icon {
+      font-size: 28px;
       margin-bottom: 8px;
     }
-    .final-desc {
-      font-size: 1rem;
-      opacity: 0.9;
+
+    .flow-step-title {
+      font-size: 13px;
+      font-weight: 600;
+    }
+
+    .flow-arrow {
+      font-size: 20px;
+      color: var(--text-muted);
+    }
+
+    /* Highlight Box */
+    .highlight-box {
+      background: var(--phase-bg);
+      border-radius: 14px;
+      padding: 20px;
       margin-bottom: 24px;
     }
 
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 14px;
-      font-weight: 600; text-decoration: none;
-      transition: all 0.3s ease; border: none;
-      font-size: 0.95rem; cursor: pointer;
-    }
-    .btn-white {
-      background: white;
-      color: #0f172a;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; justify-content: center; }
-    .nav-buttons {
-      display: flex; justify-content: space-between;
-      margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .nav-btn {
-      color: var(--text-secondary); text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.875rem;
-    }
-    .nav-btn:hover { color: #ff6b6b; }
-
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    
-
-    .hero-banner {
-      width: 100%;
-      height: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .hero-banner img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .hero-banner-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.4) 100%);
-      display: flex; flex-direction: column;
-      justify-content: center; padding: 32px 40px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(135deg, rgba(255,253,248,0.88) 0%, rgba(255,253,248,0.5) 100%);
-    }
-    .hero-banner-overlay h2 {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
-      color: white;
-    }
-    [data-theme="light"] .hero-banner-overlay h2 { color: #2d3436; }
-    .hero-banner-overlay p {
-      font-size: 0.9rem; color: rgba(255,255,255,0.8);
-    }
-    [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
-    
-
-    /* Topnav — mirrors index.html */
-    .topnav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      margin: -24px -24px 32px -24px;
-      width: calc(100% + 48px);
-    }
-    .topnav-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; gap: 6px;
-      height: 56px; overflow-x: auto; scrollbar-width: none;
-    }
-    .topnav-inner::-webkit-scrollbar { display: none; }
-    .topnav-logo {
-      display: flex; align-items: center; gap: 6px;
-      font-weight: 700; font-size: 0.9rem;
-      color: var(--text-primary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0; margin-right: 4px;
-    }
-    .topnav-logo span { font-size: 1.2rem; }
-    .topnav-divider {
-      width: 1px; height: 20px;
-      background: var(--border); flex-shrink: 0; margin: 0 4px;
-    }
-    .topnav-link {
-      display: flex; align-items: center; gap: 5px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-secondary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-    .topnav-link.active,
-    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
-    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
-    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
-    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
-    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
-    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
-    .topnav-spacer { flex: 1; }
-    /* also update .theme-toggle to not be inside header */
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
-
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
+    .highlight-title {
+      font-size: 15px;
       font-weight: 600;
-      font-size: 0.95rem;
+      margin-bottom: 8px;
+    }
+
+    .highlight-box p {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Prompt Box */
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .prompt-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: var(--phase-color);
       border: none;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 980px;
       cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .copy-btn:hover { opacity: 0.85; }
+
+    .prompt-box {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+    }
+
+    /* Example Box */
+    .example-box {
+      background: var(--bg-primary);
+      border-left: 3px solid var(--phase-color);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 20px;
+    }
+
+    .example-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--phase-color);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .example-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Content Card */
+    .content-card {
+      background: var(--bg-primary);
+      border-radius: 14px;
+      padding: 20px;
+      margin-bottom: 16px;
+    }
+
+    .content-card h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .content-card p {
+      font-size: 14px;
+      color: var(--text-secondary);
+      margin-bottom: 12px;
+    }
+
+    .content-card .prompt-box {
+      margin-top: 12px;
+      font-size: 12px;
+    }
+
+    /* Step List */
+    .step-list {
+      list-style: none;
+      padding: 0;
+      counter-reset: step;
+    }
+
+    .step-list li {
+      display: flex;
+      gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .step-list li:last-child {
+      border-bottom: none;
+    }
+
+    .step-number {
+      background: var(--phase-color);
+      color: #fff;
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 600;
+      font-size: 14px;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .step-content p {
+      font-size: 14px;
+      color: var(--text-secondary);
+    }
+
+    /* Final Section */
+    .final-section {
+      background: var(--phase-bg);
+      border-radius: 24px;
+      padding: 48px 32px;
+      text-align: center;
+      margin-top: 40px;
+    }
+
+    .final-icon {
+      font-size: 48px;
+      margin-bottom: 16px;
+    }
+
+    .final-title {
+      font-size: 28px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .final-desc {
+      font-size: 17px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 24px;
+    }
+
+    /* Buttons */
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
     }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
+
     .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
+      background: var(--phase-color);
+      color: #fff;
     }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
+
+    .btn-primary:hover { opacity: 0.9; }
+
+    .btn-white {
+      background: var(--bg-primary);
       color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
+      margin: 0 6px;
     }
 
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
-    }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
+    .btn-white:hover {
+      opacity: 0.9;
     }
 
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
     }
 
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
     }
 
+    .nav-btn {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 17px;
+      transition: opacity 0.2s;
+    }
+
+    .nav-btn:hover { opacity: 0.7; }
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation Bar -->
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a href="../../index.html" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
-      </a>
-      <div class="topnav-divider"></div>
-      <a href="phase1.html" class="topnav-link" data-phase="1">
-        <span>💡</span><span class="link-text">靈感</span>
-      </a>
-      <a href="phase2.html" class="topnav-link" data-phase="2">
-        <span>📊</span><span class="link-text">規劃</span>
-      </a>
-      <a href="phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span><span class="link-text">知識庫</span>
-      </a>
-      <a href="phase4.html" class="topnav-link" data-phase="4">
-        <span>🎨</span><span class="link-text">視覺</span>
-      </a>
-      <a href="phase5.html" class="topnav-link" data-phase="5">
-        <span>🗾</span><span class="link-text">生存</span>
-      </a>
-      <a href="phase6.html" class="topnav-link active" data-phase="6">
-        <span>💰</span><span class="link-text">變現</span>
-      </a>
-      <div class="topnav-spacer"></div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">AI 旅遊工作坊</a>
+      
+      <div class="nav-links">
+        <a href="phase1.html" class="nav-link">靈感</a>
+        <a href="phase2.html" class="nav-link">規劃</a>
+        <a href="phase3.html" class="nav-link">知識庫</a>
+        <a href="phase4.html" class="nav-link">視覺</a>
+        <a href="phase5.html" class="nav-link">生存</a>
+        <a href="phase6.html" class="nav-link active">變現</a>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="切換主題">
+          <span id="themeIcon">&#9789;</span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="phase-badge">Phase 6</div>
+      <h1>商業變現</h1>
+      <p class="hero-subtitle">Monetize Your Influence</p>
+    </section>
 
-  <div class="container">
-    
-
-    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <!-- Progress -->
+    <section class="progress-section">
+      <div class="progress-label">
+        <span>Phase 6 of 6</span>
+        <span>100%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
 
     <!-- Introduction -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">💡</span>
+        <span class="section-icon">&#128161;</span>
         <div>
           <div class="section-title">用 AI 放大你的旅遊影響力</div>
           <div class="section-subtitle">把個人體驗轉化成實際收入</div>
@@ -494,31 +547,31 @@
 
       <div class="flow-diagram">
         <div class="flow-step">
-          <div class="flow-step-icon">🎯</div>
+          <div class="flow-step-icon">&#127919;</div>
           <div class="flow-step-title">你的旅遊體驗</div>
         </div>
-        <span class="flow-arrow">→</span>
+        <span class="flow-arrow">&#8594;</span>
         <div class="flow-step">
-          <div class="flow-step-icon">✨</div>
+          <div class="flow-step-icon">&#10024;</div>
           <div class="flow-step-title">AI 生成內容</div>
         </div>
-        <span class="flow-arrow">→</span>
+        <span class="flow-arrow">&#8594;</span>
         <div class="flow-step">
-          <div class="flow-step-icon">📱</div>
+          <div class="flow-step-icon">&#128241;</div>
           <div class="flow-step-title">社群分享</div>
         </div>
-        <span class="flow-arrow">→</span>
+        <span class="flow-arrow">&#8594;</span>
         <div class="flow-step">
-          <div class="flow-step-icon">💰</div>
+          <div class="flow-step-icon">&#128176;</div>
           <div class="flow-step-title">實際變現</div>
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Shop.com Integration -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🛒</span>
+        <span class="section-icon">&#128722;</span>
         <div>
           <div class="section-title">Shop.com 導購變現</div>
           <div class="section-subtitle">AI 幫你生成導購文案，社群分享連結帶來獎金</div>
@@ -526,15 +579,16 @@
       </div>
 
       <div class="highlight-box">
-        <div class="highlight-title">💎 為什麼推薦 Shop.com？</div>
-        <p style="font-size: 0.9rem; line-height: 1.7;">
-          美安的 Shop.com 是全球最大導購平台。當你分享旅遊相關商品<br>
-          （如：行李箱、旅遊APP、翻譯機、保養品等），透過你的連結購買，<br>
-          你就能獲得獎金。而且是自動化被動收入，不需要自己囤貨。
+        <div class="highlight-title">&#128142; 為什麼推薦 Shop.com？</div>
+        <p>
+          美安的 Shop.com 是全球最大導購平台。當你分享旅遊相關商品（如：行李箱、旅遊APP、翻譯機、保養品等），透過你的連結購買，你就能獲得獎金。而且是自動化被動收入，不需要自己囤貨。
         </p>
       </div>
 
-      <button class="copy-btn" onclick="copyPrompt('shop-prompt')">複製導購 Prompt</button>
+      <div class="prompt-header">
+        <span class="prompt-title">導購 Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt('shop-prompt')">複製</button>
+      </div>
       <div class="prompt-box" id="shop-prompt">請幫我生成一段 Shop.com 導購文案：
 
 【商品資訊】
@@ -545,43 +599,34 @@
 推廣獎金：[百分比]%
 
 【文案風格】
-• 目標受眾：去日本旅遊的台灣人
-• 風格：自然、不像業配、像朋友推薦
-• 長度：200-300 字（適合 LINE 分享）
-• 格式：開頭有吸引力、中間說明優點、結尾呼籲行動
+&#8226; 目標受眾：去日本旅遊的台灣人
+&#8226; 風格：自然、不像業配、像朋友推薦
+&#8226; 長度：200-300 字（適合 LINE 分享）
+&#8226; 格式：開頭有吸引力、中間說明優點、結尾呼籲行動
 
 【必須包含】
 1. 為什麼這個東西去日本旅遊一定用得到
 2. 和市面上其他產品比起來的差異
 3. 限時優惠的急迫感（如果有的話）
-4. Shop.com 連結 + 呼籲「點連結看更多」
-
-【結尾格式】
-「⭐ 購買連結：https://shop.pchome.com.tw/...
-🏷️ 標籤：#日本旅遊 #懶人包 #旅遊好物 #Shop.com優惠」</div>
+4. Shop.com 連結 + 呼籲「點連結看更多」</div>
 
       <div class="example-box">
-        <div class="example-label">💡 範例：翻譯機導購文案</div>
+        <div class="example-label">範例：翻譯機導購文案</div>
         <div class="example-text">
-          「去日本最怕語言不通？這台翻譯機讓我點菜不用比手畫腳！
-
-          ✅ 即時翻譯 70+ 語言（不只是日文，連泰文都有）
-          ✅ 拍照翻譯功能，看菜單直接翻成中文
-          ✅ 離線也能用，網路不穩的地方也不怕
-
-          💡 重點是——現在 Shop.com 有限時優惠，
-          比我之前買的時候便宜了 NT$500！
-
-          ⭐ 購買連結：https://shop.pchome.com.tw/...
-          🏷️ #日本旅遊 #翻譯機 #日本自由行」
+          「去日本最怕語言不通？這台翻譯機讓我點菜不用比手畫腳！<br><br>
+          &#10004; 即時翻譯 70+ 語言（不只是日文，連泰文都有）<br>
+          &#10004; 拍照翻譯功能，看菜單直接翻成中文<br>
+          &#10004; 離線也能用，網路不穩的地方也不怕<br><br>
+          &#128161; 重點是 - 現在 Shop.com 有限時優惠，比我之前買的時候便宜了 NT$500！<br><br>
+          &#11088; 購買連結：https://shop.pchome.com.tw/...」
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Content Generation -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">📝</span>
+        <span class="section-icon">&#128221;</span>
         <div>
           <div class="section-title">AI 生成各平台內容</div>
           <div class="section-subtitle">一魚多吃，同時經營多個社群平台</div>
@@ -589,10 +634,9 @@
       </div>
 
       <div class="content-card">
-        <h4>📸 Instagram 短文案</h4>
+        <h4>&#128248; Instagram 短文案</h4>
         <p>圖片已經生成好了？讓 AI 幫你想 caption！</p>
-        <div class="prompt-box" style="margin-top: 12px; font-size: 0.8rem;">
-請幫我想 3 個 IG caption 選項：
+        <div class="prompt-box">請幫我想 3 個 IG caption 選項：
 
 圖片內容：[描述圖片]
 目標：讓人想去日本旅遊、點讚追蹤
@@ -600,37 +644,35 @@
 長度：每個不超過 150 字
 
 必須包含：
-• Hashtag（10-15 個）
-• 第一行要有「鉤子」（讓人停下來看）
-• 結尾要有互動呼籲（問問題、tag朋友）</div>
+&#8226; Hashtag（10-15 個）
+&#8226; 第一行要有「鉤子」（讓人停下來看）
+&#8226; 結尾要有互動呼籲（問問題、tag朋友）</div>
       </div>
 
       <div class="content-card">
-        <h4>💬 LINE 群長文案</h4>
+        <h4>&#128172; LINE 群長文案</h4>
         <p>要發 LINE 群公告？讓 AI 幫你一次寫好</p>
-        <div class="prompt-box" style="margin-top: 12px; font-size: 0.8rem;">
-幫我寫一篇 LINE 群發文，格式如下：
+        <div class="prompt-box">幫我寫一篇 LINE 群發文，格式如下：
 
-📍 [地點] [天數] 天行程來了！
+&#128205; [地點] [天數] 天行程來了！
 Day 1：[行程]
 Day 2：[行程]
 ...
 
-✈️ 這次用了 [交通票券]，總花費約 [金額]
-🍜 美食預算：[金額]
-💰 總預算：[金額]
+&#9992; 這次用了 [交通票券]，總花費約 [金額]
+&#127836; 美食預算：[金額]
+&#128176; 總預算：[金額]
 
-🏷️ #hashtag1 #hashtag2 #hashtag3
+&#127991; #hashtag1 #hashtag2 #hashtag3
 
-⚠️ 有興趣的人留言『+1』！
-轉發請標記我 🙏</div>
+&#9888; 有興趣的人留言『+1』！
+轉發請標記我 &#128591;</div>
       </div>
 
       <div class="content-card">
-        <h4>🎥 YouTube 影片腳本</h4>
+        <h4>&#127909; YouTube 影片腳本</h4>
         <p>想要錄 YouTube 影片？AI 幫你寫腳本！</p>
-        <div class="prompt-box" style="margin-top: 12px; font-size: 0.8rem;">
-幫我寫一支 [時長] 分鐘的 YouTube 影片腳本：
+        <div class="prompt-box">幫我寫一支 [時長] 分鐘的 YouTube 影片腳本：
 
 主題：[例如：東京 5 天 4 夜懶人包]
 風格：[vlog/知識型/教學型]
@@ -643,12 +685,12 @@ Day 2：[行程]
 ...（以此類推）
 [最後 30 秒] 總結 + 呼籲按讚訂閱 + 留言問題</div>
       </div>
-    </div>
+    </section>
 
     <!-- Action Steps -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🚀</span>
+        <span class="section-icon">&#128640;</span>
         <div>
           <div class="section-title">立刻開始行動</div>
           <div class="section-subtitle">跟著以下步驟，用 AI 開始你的導購事業</div>
@@ -686,33 +728,34 @@ Day 2：[行程]
         </li>
         <li>
           <span class="step-number">5</span>
-          <span class="step-content">
+          <div class="step-content">
             <h4>被動收入自動入帳</h4>
             <p>有人透過你的連結購買，你不用做什麼，獎金自動入帳</p>
-          </span>
+          </div>
         </li>
       </ol>
-    </div>
+    </section>
 
     <!-- Completion Section -->
-    <div class="final-section">
-      <div class="final-icon">🎉</div>
+    <section class="final-section">
+      <div class="final-icon">&#127881;</div>
       <div class="final-title">恭喜完成所有 Phase！</div>
       <div class="final-desc">
         你已經學會了用 AI 完整規劃日本旅遊的全套技能<br>
-        現在就差一個行動——買機票，出發！
+        現在就差一個行動 - 買機票，出發！
       </div>
       <div class="actions">
         <a href="phase1.html" class="btn btn-white">重新學習</a>
         <a href="../../index.html" class="btn btn-white">返回首頁</a>
       </div>
-    </div>
+    </section>
 
+    <!-- Navigation -->
     <nav class="nav-buttons">
-      <a href="phase5.html" class="nav-btn">← Phase 5</a>
+      <a href="phase5.html" class="nav-btn">&#8592; Phase 5</a>
       <span></span>
     </nav>
-  </div>
+  </main>
 
   <script>
     function copyPrompt(id) {
@@ -720,19 +763,24 @@ Day 2：[行程]
       navigator.clipboard.writeText(text);
       alert('已複製到剪貼簿！');
     }
-  </script>
 
-  <script>
     function toggleTheme() {
       const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      updateThemeIcon(next);
     }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('themeIcon');
+      icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9789;';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
   </script>
 </body>
 </html>

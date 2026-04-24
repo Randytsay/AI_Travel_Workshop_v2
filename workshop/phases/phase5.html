@@ -1,522 +1,564 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phase 5｜現場生存 | AI 旅遊工作坊</title>
+  <title>Phase 5 | 現場生存 | AI 旅遊工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d1d1f'/%3E%3Cpath d='M10 22l6-14 6 14M12 18h8' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"> <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff6b6b'/><stop offset='0.5' stop-color='%23f39c12'/><stop offset='1' stop-color='%23ffd93d'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='%230d1b2a'/><text y='22' x='4' font-size='18'>✈</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27, 40, 56, 0.85);
-      --bg-card-solid: #1b2838;
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-      --border-subtle: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.4);
-      --shadow-glow: 0 0 40px rgba(255, 217, 61, 0.15);
-      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
-      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
-      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-tertiary: #fbfbfd;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      
+      --phase-color: #0a84ff;
+      --phase-bg: rgba(10, 132, 255, 0.08);
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+      
+      --accent-blue: #0071e3;
     }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
-      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.9);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+
+    [data-theme="dark"] {
+      --bg-primary: #000000;
+      --bg-secondary: #1d1d1f;
+      --bg-tertiary: #0d0d0d;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --phase-bg: rgba(10, 132, 255, 0.15);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
     body {
-      padding-top: 0;
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 24px;
-    }
-    .container { max-width: 100%; padding: 0 5%; }
-    .header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 48px; padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .phase-badge {
-      background: var(--accent-sunset);
-      padding: 8px 16px; border-radius: 12px;
-      font-weight: 700; font-size: 0.875rem;
-    }
-    .header h1 { font-size: 1.5rem; }
-    .back-link {
-      color: var(--text-secondary); text-decoration: none;
-      font-size: 0.875rem; margin-left: auto;
-    }
-    .progress-bar {
-      background: var(--border); border-radius: 20px;
-      height: 8px; margin-bottom: 48px;
-    }
-    .progress-fill {
-      background: var(--accent-sunset); height: 100%;
-      width: 84%; border-radius: 20px;
+      font-size: 17px;
+      line-height: 1.47;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    [data-theme="dark"] .nav {
+      background: rgba(29, 29, 31, 0.72);
+    }
+
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--phase-color); font-weight: 500; }
+
+    .theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .phase-badge {
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 980px;
+      background: var(--phase-bg);
+      color: var(--phase-color);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+    }
+
+    /* Progress */
+    .progress-section {
+      padding: 20px 0 40px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--phase-color);
+      height: 100%;
+      width: 83%;
+      border-radius: 4px;
+    }
+
+    /* Section Card */
     .section-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
       padding: 32px;
       margin-bottom: 24px;
     }
 
     .section-header {
-      display: flex; align-items: center; gap: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       margin-bottom: 24px;
     }
-    .section-icon { font-size: 2rem; }
-    .section-title { font-size: 1.25rem; font-weight: 600; }
-    .section-subtitle { font-size: 0.875rem; color: var(--text-secondary); }
 
+    .section-icon {
+      font-size: 32px;
+      flex-shrink: 0;
+    }
+
+    .section-title {
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
+      color: var(--text-secondary);
+    }
+
+    /* Scene Grid */
     .scene-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 20px;
-      margin: 24px 0;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-bottom: 24px;
     }
+
+    @media (max-width: 500px) {
+      .scene-grid { grid-template-columns: 1fr; }
+    }
+
     .scene-card {
-      background: rgba(255,255,255,0.05);
-      border-radius: 16px;
-      padding: 24px;
-      text-align: center;
-      transition: all 0.3s ease;
-    }
-    .scene-card:hover {
-      background: rgba(239, 68, 68, 0.1);
-      transform: translateY(-4px);
-    }
-    .scene-icon { font-size: 3rem; margin-bottom: 12px; }
-    .scene-title { font-weight: 600; margin-bottom: 8px; }
-    .scene-desc { font-size: 0.85rem; color: var(--text-secondary); line-height: 1.5; }
-
-    .prompt-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px; padding: 20px;
-      font-family: monospace; font-size: 0.875rem;
-      line-height: 1.7; white-space: pre-wrap;
-      color: var(--text-secondary); margin: 16px 0;
-    }
-    .copy-btn {
-      background: var(--accent-sunset);
-      border: none; color: white;
-      padding: 8px 16px; border-radius: 8px;
-      cursor: pointer; font-size: 0.875rem; font-weight: 500;
-      float: right;
-    }
-
-    .demo-box {
-      background: rgba(239, 68, 68, 0.1);
-      border: 2px dashed rgba(239, 68, 68, 0.3);
-      border-radius: 16px; padding: 24px;
-      margin: 20px 0;
+      background: var(--bg-primary);
+      border-radius: 14px;
+      padding: 20px;
       text-align: center;
     }
-    .demo-icon { font-size: 3rem; margin-bottom: 12px; }
-    .demo-title { font-weight: 600; margin-bottom: 8px; }
-    .demo-desc { font-size: 0.9rem; color: var(--text-secondary); }
 
+    .scene-icon {
+      font-size: 32px;
+      margin-bottom: 10px;
+    }
+
+    .scene-title {
+      font-size: 15px;
+      font-weight: 600;
+      margin-bottom: 6px;
+    }
+
+    .scene-desc {
+      font-size: 13px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Feature List */
     .feature-list {
       list-style: none;
       padding: 0;
-      margin: 16px 0;
     }
+
     .feature-list li {
-      display: flex; align-items: flex-start; gap: 12px;
-      padding: 12px 0;
-      border-bottom: 1px solid rgba(255,255,255,0.05);
+      display: flex;
+      gap: 14px;
+      padding: 16px 0;
+      border-bottom: 1px solid var(--border-color);
     }
-    .feature-list li:last-child { border-bottom: none; }
-    .feature-icon { font-size: 1.5rem; flex-shrink: 0; }
-    .feature-text { font-size: 0.9rem; line-height: 1.5; }
 
+    .feature-list li:last-child {
+      border-bottom: none;
+    }
+
+    .feature-icon {
+      font-size: 24px;
+      flex-shrink: 0;
+    }
+
+    .feature-text {
+      font-size: 15px;
+      line-height: 1.5;
+      color: var(--text-secondary);
+    }
+
+    .feature-text strong {
+      color: var(--text-primary);
+    }
+
+    /* Example Box */
     .example-box {
-      background: rgba(239, 68, 68, 0.1);
-      border-left: 4px solid var(--primary);
-      padding: 16px; border-radius: 0 12px 12px 0;
-      margin: 16px 0;
+      background: var(--bg-primary);
+      border-left: 3px solid var(--phase-color);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 20px;
     }
+
     .example-label {
-      font-size: 0.75rem; color: #ff6b6b;
-      font-weight: 600; margin-bottom: 8px;
-    }
-    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
-
-    .nav-buttons {
-      display: flex; justify-content: space-between;
-      margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .nav-btn {
-      color: var(--text-secondary); text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.875rem;
-    }
-    .nav-btn:hover { color: #ff6b6b; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 14px;
-      font-weight: 600; text-decoration: none;
-      transition: all 0.3s ease; border: none;
-      font-size: 0.95rem;
-    }
-    .btn-primary { background: var(--accent-sunset); color: white; }
-    .btn:hover { transform: translateY(-2px); }
-    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
-
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    
-
-    .hero-banner {
-      width: 100%;
-      height: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .hero-banner img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .hero-banner-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.4) 100%);
-      display: flex; flex-direction: column;
-      justify-content: center; padding: 32px 40px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(135deg, rgba(255,253,248,0.88) 0%, rgba(255,253,248,0.5) 100%);
-    }
-    .hero-banner-overlay h2 {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
-      color: white;
-    }
-    [data-theme="light"] .hero-banner-overlay h2 { color: #2d3436; }
-    .hero-banner-overlay p {
-      font-size: 0.9rem; color: rgba(255,255,255,0.8);
-    }
-    [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
-    
-
-    /* Topnav — mirrors index.html */
-    .topnav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      margin: -24px -24px 32px -24px;
-      width: calc(100% + 48px);
-    }
-    .topnav-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; gap: 6px;
-      height: 56px; overflow-x: auto; scrollbar-width: none;
-    }
-    .topnav-inner::-webkit-scrollbar { display: none; }
-    .topnav-logo {
-      display: flex; align-items: center; gap: 6px;
-      font-weight: 700; font-size: 0.9rem;
-      color: var(--text-primary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0; margin-right: 4px;
-    }
-    .topnav-logo span { font-size: 1.2rem; }
-    .topnav-divider {
-      width: 1px; height: 20px;
-      background: var(--border); flex-shrink: 0; margin: 0 4px;
-    }
-    .topnav-link {
-      display: flex; align-items: center; gap: 5px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-secondary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-    .topnav-link.active,
-    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
-    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
-    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
-    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
-    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
-    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
-    .topnav-spacer { flex: 1; }
-    /* also update .theme-toggle to not be inside header */
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
-
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
+      font-size: 12px;
       font-weight: 600;
-      font-size: 0.95rem;
+      color: var(--phase-color);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .example-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Prompt Box */
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .prompt-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
+    }
+
+    .copy-btn {
+      background: var(--phase-color);
       border: none;
+      color: #fff;
+      padding: 6px 14px;
+      border-radius: 980px;
       cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
+    }
+
+    .copy-btn:hover { opacity: 0.85; }
+
+    .prompt-box {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+    }
+
+    /* Demo Box */
+    .demo-box {
+      background: var(--phase-bg);
+      border-radius: 16px;
+      padding: 28px;
+      text-align: center;
+      margin-top: 24px;
+    }
+
+    .demo-icon {
+      font-size: 36px;
+      margin-bottom: 12px;
+    }
+
+    .demo-title {
+      font-size: 17px;
+      font-weight: 600;
+      margin-bottom: 8px;
+    }
+
+    .demo-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.5;
+    }
+
+    /* Buttons */
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
     }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
+
     .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--phase-color);
+      color: #fff;
     }
 
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
-    }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
+    .btn-primary:hover { opacity: 0.9; }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 40px;
     }
 
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
     }
 
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
+    .nav-btn {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 17px;
+      transition: opacity 0.2s;
     }
 
+    .nav-btn:hover { opacity: 0.7; }
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation Bar -->
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a href="../../index.html" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
-      </a>
-      <div class="topnav-divider"></div>
-      <a href="phase1.html" class="topnav-link" data-phase="1">
-        <span>💡</span><span class="link-text">靈感</span>
-      </a>
-      <a href="phase2.html" class="topnav-link" data-phase="2">
-        <span>📊</span><span class="link-text">規劃</span>
-      </a>
-      <a href="phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span><span class="link-text">知識庫</span>
-      </a>
-      <a href="phase4.html" class="topnav-link" data-phase="4">
-        <span>🎨</span><span class="link-text">視覺</span>
-      </a>
-      <a href="phase5.html" class="topnav-link active" data-phase="5">
-        <span>🗾</span><span class="link-text">生存</span>
-      </a>
-      <a href="phase6.html" class="topnav-link" data-phase="6">
-        <span>💰</span><span class="link-text">變現</span>
-      </a>
-      <div class="topnav-spacer"></div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">AI 旅遊工作坊</a>
+      
+      <div class="nav-links">
+        <a href="phase1.html" class="nav-link">靈感</a>
+        <a href="phase2.html" class="nav-link">規劃</a>
+        <a href="phase3.html" class="nav-link">知識庫</a>
+        <a href="phase4.html" class="nav-link">視覺</a>
+        <a href="phase5.html" class="nav-link active">生存</a>
+        <a href="phase6.html" class="nav-link">變現</a>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="切換主題">
+          <span id="themeIcon">&#9789;</span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="phase-badge">Phase 5</div>
+      <h1>現場生存</h1>
+      <p class="hero-subtitle">Survive on the Ground</p>
+    </section>
 
-  <div class="container">
-    
-
-    <div class="progress-bar"><div class="progress-fill"></div></div>
+    <!-- Progress -->
+    <section class="progress-section">
+      <div class="progress-label">
+        <span>Phase 5 of 6</span>
+        <span>83%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
 
     <!-- Google Lens Section -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">📷</span>
+        <span class="section-icon">&#128247;</span>
         <div>
-          <div class="section-title">Google Lens — 拍照翻譯</div>
+          <div class="section-title">Google Lens - 拍照翻譯</div>
           <div class="section-subtitle">對著日文文字拍照，立刻翻譯成中文</div>
         </div>
       </div>
 
       <div class="scene-grid">
         <div class="scene-card">
-          <div class="scene-icon">🍜</div>
+          <div class="scene-icon">&#127836;</div>
           <div class="scene-title">餐廳點餐</div>
           <div class="scene-desc">對著菜單拍照，即時翻譯每道菜的內容與價格</div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">💊</div>
+          <div class="scene-icon">&#128138;</div>
           <div class="scene-title">藥妝店</div>
           <div class="scene-desc">掃描藥品說明書，了解成分、用途、副作用</div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">🚃</div>
+          <div class="scene-icon">&#128643;</div>
           <div class="scene-title">車站指標</div>
           <div class="scene-desc">拍照翻譯地鐵圖、出口方向、月台編號</div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">🏨</div>
+          <div class="scene-icon">&#127976;</div>
           <div class="scene-title">飯店設施</div>
           <div class="scene-desc">了解飯店設施說明、入住須知、早餐時間</div>
         </div>
       </div>
 
       <div class="example-box">
-        <div class="example-label">💡 使用方式</div>
+        <div class="example-label">使用方式</div>
         <div class="example-text">
           Step 1：打開 Google Lens（或 Google App 裡的相機圖示）<br>
           Step 2：切換到「翻譯」模式（左手邊第二個）<br>
-          Step 3：選擇「日文 → 中文」<br>
+          Step 3：選擇「日文 &#8594; 中文」<br>
           Step 4：對準日文文字拍照<br>
           Step 5：點擊任意文字查看詳細翻譯
         </div>
       </div>
-    </div>
+    </section>
 
     <!-- Gemini Live Section -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🎙️</span>
+        <span class="section-icon">&#127908;</span>
         <div>
-          <div class="section-title">Gemini Live — 即時語音翻譯</div>
+          <div class="section-title">Gemini Live - 即時語音翻譯</div>
           <div class="section-subtitle">對著手機說話，AI 幫你翻譯並大聲說出日文</div>
         </div>
       </div>
 
       <ul class="feature-list">
         <li>
-          <span class="feature-icon">🌐</span>
+          <span class="feature-icon">&#127760;</span>
           <span class="feature-text">
-            <strong>45+ 語言即時翻譯</strong> — 不只是日文，韓文、泰文、英文統統都可以
+            <strong>45+ 語言即時翻譯</strong> - 不只是日文，韓文、泰文、英文統統都可以
           </span>
         </li>
         <li>
-          <span class="feature-icon">📸</span>
+          <span class="feature-icon">&#128247;</span>
           <span class="feature-text">
-            <strong>Camera Share</strong> — 分享手機鏡頭給 Gemini，看到你週遭的畫面即時分析
+            <strong>Camera Share</strong> - 分享手機鏡頭給 Gemini，看到你週遭的畫面即時分析
           </span>
         </li>
         <li>
-          <span class="feature-icon">🗣️</span>
+          <span class="feature-icon">&#128483;</span>
           <span class="feature-text">
-            <strong>自然對話打斷</strong> — 可以隨時改變話題、追問，Gemini 會記住上下文
+            <strong>自然對話打斷</strong> - 可以隨時改變話題、追問，Gemini 會記住上下文
           </span>
         </li>
         <li>
-          <span class="feature-icon">🔄</span>
+          <span class="feature-icon">&#128260;</span>
           <span class="feature-text">
-            <strong>來回翻譯</strong> — 讓 Gemini 幫你用日文說一句話，然後把對方的回應翻譯成中文
+            <strong>來回翻譯</strong> - 讓 Gemini 幫你用日文說一句話，然後把對方的回應翻譯成中文
           </span>
         </li>
       </ul>
 
-      <button class="copy-btn" onclick="copyPrompt()">複製實用 Prompt</button>
-      <div class="prompt-box">【飯店入住】
+      <div class="prompt-header" style="margin-top: 24px;">
+        <span class="prompt-title">實用 Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt()">複製</button>
+      </div>
+      <div class="prompt-box" id="survival-prompt">【飯店入住】
 「我要去 [飯店名] 入住，請幫我準備這些日語：
  1. 你好，我預約了 [名字] 的房間
  2. 請問早餐幾點供應？
@@ -539,12 +581,12 @@
  2. 我迷路了，我的地址是 [地址]
  3. 我的護照遺失了
  4. 請幫我聯絡大使館」</div>
-    </div>
+    </section>
 
     <!-- Live Demo Section -->
-    <div class="section-card">
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🎭</span>
+        <span class="section-icon">&#127917;</span>
         <div>
           <div class="section-title">工作坊現場演示橋段</div>
           <div class="section-subtitle">這些場景強烈建議在工作坊現場示範</div>
@@ -553,79 +595,83 @@
 
       <div class="scene-grid">
         <div class="scene-card">
-          <div class="scene-icon">🍣</div>
+          <div class="scene-icon">&#127843;</div>
           <div class="scene-title">橋段 1：日文菜單翻譯</div>
           <div class="scene-desc">
-            拿一張日文菜單（或手機顯示圖片）對著鏡頭：<br>
-            「這道菜是什麼？我不吃辣，幫我問老闆能不能調整」
+            拿一張日文菜單對著鏡頭：「這道菜是什麼？我不吃辣，幫我問老闆能不能調整」
           </div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">💰</div>
+          <div class="scene-icon">&#128176;</div>
           <div class="scene-title">橋段 2：藥妝店比價</div>
           <div class="scene-desc">
-            拍兩罐相似的藥妝：<br>
-            「這兩罐哪個更適合蚊蟲叮咬？」
+            拍兩罐相似的藥妝：「這兩罐哪個更適合蚊蟲叮咬？」
           </div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">🚇</div>
+          <div class="scene-icon">&#128647;</div>
           <div class="scene-title">橋段 3：地鐵迷路</div>
           <div class="scene-desc">
-            鏡頭對著地鐵圖：<br>
-            「我要去淺草，應該搭哪條線？」
+            鏡頭對著地鐵圖：「我要去淺草，應該搭哪條線？」
           </div>
         </div>
         <div class="scene-card">
-          <div class="scene-icon">📞</div>
+          <div class="scene-icon">&#128222;</div>
           <div class="scene-title">橋段 4：電話求助翻譯</div>
           <div class="scene-desc">
-            老師假裝接到飯店電話：<br>
-            「Gemini，請幫我說：『請幫我叫救護車』的日文」
+            老師假裝接到飯店電話：「Gemini，請幫我說請幫我叫救護車的日文」
           </div>
         </div>
       </div>
 
       <div class="demo-box">
-        <div class="demo-icon">✨</div>
+        <div class="demo-icon">&#10024;</div>
         <div class="demo-title">這個橋段是全場「哇」時刻</div>
         <div class="demo-desc">
           讓全場學員安靜，聽老師對著手機說話，<br>
-          Gemini 立刻語音回覆 — 這一刻的震撼力超強
+          Gemini 立刻語音回覆 - 這一刻的震撼力超強
         </div>
       </div>
+    </section>
+
+    <!-- Actions -->
+    <div class="actions">
+      <a href="phase6.html" class="btn btn-primary">
+        下一步：商業變現 &#8594;
+      </a>
     </div>
 
-    <div class="actions" style="justify-content: center;">
-      <a href="phase4.html" class="btn btn-primary">← Phase 4：視覺生成</a>
-      <a href="phase6.html" class="btn btn-primary">Phase 6：商業變現 →</a>
-    </div>
-
+    <!-- Navigation -->
     <nav class="nav-buttons">
-      <a href="phase4.html" class="nav-btn">← Phase 4</a>
-      <a href="phase6.html" class="nav-btn">Phase 6：商業變現 →</a>
+      <a href="phase4.html" class="nav-btn">&#8592; Phase 4</a>
+      <a href="phase6.html" class="nav-btn">Phase 6 &#8594;</a>
     </nav>
-  </div>
+  </main>
 
   <script>
     function copyPrompt() {
-      const text = document.querySelector('.prompt-box').textContent;
+      const text = document.getElementById('survival-prompt').textContent;
       navigator.clipboard.writeText(text);
       alert('已複製到剪貼簿！');
     }
-  </script>
 
-  <script>
     function toggleTheme() {
       const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      updateThemeIcon(next);
     }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('themeIcon');
+      icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9789;';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
   </script>
 </body>
 </html>

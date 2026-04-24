@@ -1,436 +1,439 @@
 <!DOCTYPE html>
-<html lang="zh-TW" data-theme="dark">
+<html lang="zh-TW" data-theme="light">
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Phase 2｜深度規劃 | AI 旅遊工作坊</title>
+  <title>Phase 2 | 深度規劃 | AI 旅遊工作坊</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Ccircle cx='16' cy='16' r='16' fill='%231d1d1f'/%3E%3Cpath d='M10 22l6-14 6 14M12 18h8' stroke='%23fff' stroke-width='2' fill='none'/%3E%3C/svg%3E">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"> <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff6b6b'/><stop offset='0.5' stop-color='%23f39c12'/><stop offset='1' stop-color='%23ffd93d'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='%230d1b2a'/><text y='22' x='4' font-size='18'>✈</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+  
   <style>
     :root {
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27, 40, 56, 0.85);
-      --bg-card-solid: #1b2838;
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-      --border-subtle: rgba(255, 255, 255, 0.05);
-      --border: rgba(255, 255, 255, 0.08);
-      --border-strong: rgba(255, 255, 255, 0.18);
-      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
-      --accent-primary: #ff6b6b;
-      --accent-secondary: #6c9bcf;
-      --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0,0,0,0.4);
-      --shadow-glow: 0 0 40px rgba(255, 217, 61, 0.15);
-      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
-      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
-      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
-      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
-      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
-      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
+      --bg-primary: #ffffff;
+      --bg-secondary: #f5f5f7;
+      --bg-tertiary: #fbfbfd;
+      --text-primary: #1d1d1f;
+      --text-secondary: #6e6e73;
+      --text-muted: #86868b;
+      
+      --phase-color: #30d158;
+      --phase-bg: rgba(48, 209, 88, 0.08);
+      
+      --border-color: rgba(0, 0, 0, 0.08);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.04);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.06);
+      
+      --accent-blue: #0071e3;
     }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255, 255, 255, 0.92);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
-      --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.9);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+
+    [data-theme="dark"] {
+      --bg-primary: #000000;
+      --bg-secondary: #1d1d1f;
+      --bg-tertiary: #0d0d0d;
+      --text-primary: #f5f5f7;
+      --text-secondary: #a1a1a6;
+      --text-muted: #6e6e73;
+      --phase-bg: rgba(48, 209, 88, 0.15);
+      --border-color: rgba(255, 255, 255, 0.1);
+      --shadow-subtle: 0 2px 8px rgba(0, 0, 0, 0.3);
+      --shadow-card: 0 4px 24px rgba(0, 0, 0, 0.4);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    html { 
+      scroll-behavior: smooth;
+      -webkit-font-smoothing: antialiased;
+    }
+
     body {
-      padding-top: 0;
-      font-family: 'Noto Sans TC', sans-serif;
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
-      padding: 24px;
-    }
-    .container { max-width: 100%; padding: 0 5%; }
-    .header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 48px; padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .phase-badge {
-      background: var(--accent-sunset);
-      padding: 8px 16px; border-radius: 12px;
-      font-weight: 700; font-size: 0.875rem;
-    }
-    .header h1 { font-size: 1.5rem; }
-    .back-link {
-      color: var(--text-secondary); text-decoration: none;
-      font-size: 0.875rem; margin-left: auto;
-    }
-    .back-link:hover { color: #ff6b6b; }
-    .progress-bar {
-      background: var(--border); border-radius: 20px;
-      height: 8px; margin-bottom: 48px; overflow: hidden;
-    }
-    .progress-fill {
-      background: var(--accent-sunset); height: 100%;
-      width: 34%; border-radius: 20px;
+      font-size: 17px;
+      line-height: 1.47;
+      transition: background 0.3s ease, color 0.3s ease;
     }
 
+    /* Navigation */
+    .nav {
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      background: rgba(255, 255, 255, 0.72);
+      backdrop-filter: saturate(180%) blur(20px);
+      -webkit-backdrop-filter: saturate(180%) blur(20px);
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    [data-theme="dark"] .nav {
+      background: rgba(29, 29, 31, 0.72);
+    }
+
+    .nav-inner {
+      max-width: 980px;
+      margin: 0 auto;
+      padding: 0 22px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      height: 48px;
+    }
+
+    .nav-logo {
+      font-size: 21px;
+      font-weight: 600;
+      color: var(--text-primary);
+      text-decoration: none;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+    }
+
+    .nav-link {
+      font-size: 12px;
+      color: var(--text-secondary);
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+
+    .nav-link:hover { color: var(--text-primary); }
+    .nav-link.active { color: var(--phase-color); font-weight: 500; }
+
+    .theme-btn {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: none;
+      background: transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 16px;
+    }
+
+    .theme-btn:hover {
+      color: var(--text-primary);
+      background: var(--bg-secondary);
+    }
+
+    @media (max-width: 768px) {
+      .nav-links { display: none; }
+    }
+
+    /* Container */
+    .container {
+      max-width: 680px;
+      margin: 0 auto;
+      padding: 0 22px;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+
+    .phase-badge {
+      display: inline-flex;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      padding: 6px 14px;
+      border-radius: 980px;
+      background: var(--phase-bg);
+      color: var(--phase-color);
+      margin-bottom: 16px;
+    }
+
+    .hero h1 {
+      font-size: clamp(32px, 6vw, 48px);
+      font-weight: 600;
+      line-height: 1.08;
+      margin-bottom: 8px;
+    }
+
+    .hero-subtitle {
+      font-size: 17px;
+      color: var(--text-secondary);
+    }
+
+    /* Progress */
+    .progress-section {
+      padding: 20px 0 40px;
+    }
+
+    .progress-label {
+      display: flex;
+      justify-content: space-between;
+      font-size: 12px;
+      color: var(--text-muted);
+      margin-bottom: 8px;
+    }
+
+    .progress-bar {
+      background: var(--bg-secondary);
+      border-radius: 4px;
+      height: 4px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--phase-color);
+      height: 100%;
+      width: 34%;
+      border-radius: 4px;
+    }
+
+    /* Section Card */
     .section-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
+      background: var(--bg-secondary);
+      border-radius: 20px;
       padding: 32px;
       margin-bottom: 24px;
     }
 
     .section-header {
-      display: flex; align-items: center; gap: 16px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       margin-bottom: 24px;
     }
+
     .section-icon {
-      font-size: 2rem;
-    }
-    .section-title {
-      font-size: 1.25rem; font-weight: 600;
-    }
-    .section-subtitle {
-      font-size: 0.875rem; color: var(--text-secondary);
+      font-size: 32px;
+      flex-shrink: 0;
     }
 
-    .prompt-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px; padding: 20px;
-      font-family: monospace; font-size: 0.875rem;
-      line-height: 1.7; white-space: pre-wrap;
+    .section-title {
+      font-size: 21px;
+      font-weight: 600;
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+
+    .section-subtitle {
+      font-size: 15px;
       color: var(--text-secondary);
-      margin: 16px 0;
+    }
+
+    /* Prompt Box */
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .prompt-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: var(--text-muted);
     }
 
     .copy-btn {
-      background: var(--accent-sunset);
-      border: none; color: white;
-      padding: 8px 16px; border-radius: 8px;
-      cursor: pointer; font-size: 0.875rem; font-weight: 500;
-      float: right;
+      background: var(--phase-color);
+      border: none;
+      color: #000;
+      padding: 6px 14px;
+      border-radius: 980px;
+      cursor: pointer;
+      font-size: 13px;
+      font-weight: 500;
     }
-    .copy-btn:hover { opacity: 0.9; }
 
+    .copy-btn:hover { opacity: 0.85; }
+
+    .prompt-box {
+      background: var(--bg-primary);
+      border-radius: 12px;
+      padding: 20px;
+      font-family: 'SF Mono', Monaco, monospace;
+      font-size: 13px;
+      line-height: 1.7;
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+    }
+
+    /* Example Box */
     .example-box {
-      background: rgba(6, 182, 212, 0.1);
-      border-left: 4px solid var(--primary);
-      padding: 16px; border-radius: 0 12px 12px 0;
-      margin: 16px 0;
+      background: var(--bg-primary);
+      border-left: 3px solid var(--phase-color);
+      padding: 16px 20px;
+      border-radius: 0 12px 12px 0;
+      margin-top: 20px;
     }
-    .example-label {
-      font-size: 0.75rem; color: #ff6b6b;
-      font-weight: 600; margin-bottom: 8px;
-      text-transform: uppercase;
-    }
-    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
 
-    /* Flight Card Grid */
+    .example-label {
+      font-size: 12px;
+      font-weight: 600;
+      color: var(--phase-color);
+      text-transform: uppercase;
+      letter-spacing: 0.04em;
+      margin-bottom: 8px;
+    }
+
+    .example-text {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+    }
+
+    /* Flight Types Grid */
     .flight-types {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 16px;
-      margin-top: 24px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 12px;
+      margin-top: 20px;
     }
+
+    @media (max-width: 500px) {
+      .flight-types { grid-template-columns: 1fr; }
+    }
+
     .flight-type {
-      background: rgba(255,255,255,0.05);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px;
-      cursor: pointer; transition: all 0.3s ease;
+      background: var(--bg-primary);
+      border-radius: 14px;
+      padding: 20px;
+      transition: all 0.2s ease;
+      cursor: default;
     }
+
     .flight-type:hover {
-      border-color: #ff6b6b;
-      background: rgba(6, 182, 212, 0.1);
+      box-shadow: var(--shadow-subtle);
     }
-    .flight-type h4 { margin-bottom: 8px; font-size: 1rem; }
-    .flight-type p { font-size: 0.8rem; color: var(--text-secondary); }
 
-    .nav-buttons {
-      display: flex; justify-content: space-between;
-      margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .nav-btn {
-      color: var(--text-secondary); text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.875rem;
-    }
-    .nav-btn:hover { color: #ff6b6b; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 14px;
-      font-weight: 600; text-decoration: none;
-      transition: all 0.3s ease; cursor: pointer; border: none;
-      font-size: 0.95rem;
-    }
-    .btn-primary {
-      background: var(--accent-sunset); color: white;
-    }
-    .btn:hover { transform: translateY(-2px); }
-    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
-
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    
-
-    .hero-banner {
-      width: 100%;
-      height: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .hero-banner img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .hero-banner-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.4) 100%);
-      display: flex; flex-direction: column;
-      justify-content: center; padding: 32px 40px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(135deg, rgba(255,253,248,0.88) 0%, rgba(255,253,248,0.5) 100%);
-    }
-    .hero-banner-overlay h2 {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
-      color: white;
-    }
-    [data-theme="light"] .hero-banner-overlay h2 { color: #2d3436; }
-    .hero-banner-overlay p {
-      font-size: 0.9rem; color: rgba(255,255,255,0.8);
-    }
-    [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
-    
-
-    /* Topnav — mirrors index.html */
-    .topnav {
-      position: sticky; top: 0; z-index: 100;
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border-bottom: 1px solid var(--border);
-      padding: 0 24px;
-      margin: -24px -24px 32px -24px;
-      width: calc(100% + 48px);
-    }
-    .topnav-inner {
-      max-width: 800px; margin: 0 auto;
-      display: flex; align-items: center; gap: 6px;
-      height: 56px; overflow-x: auto; scrollbar-width: none;
-    }
-    .topnav-inner::-webkit-scrollbar { display: none; }
-    .topnav-logo {
-      display: flex; align-items: center; gap: 6px;
-      font-weight: 700; font-size: 0.9rem;
-      color: var(--text-primary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0; margin-right: 4px;
-    }
-    .topnav-logo span { font-size: 1.2rem; }
-    .topnav-divider {
-      width: 1px; height: 20px;
-      background: var(--border); flex-shrink: 0; margin: 0 4px;
-    }
-    .topnav-link {
-      display: flex; align-items: center; gap: 5px;
-      padding: 5px 12px; border-radius: 20px;
-      font-size: 0.75rem; font-weight: 500;
-      color: var(--text-secondary); text-decoration: none;
-      white-space: nowrap; flex-shrink: 0;
-      transition: all 0.2s;
-    }
-    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-    .topnav-link.active,
-    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
-    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
-    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
-    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
-    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
-    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
-    .topnav-spacer { flex: 1; }
-    /* also update .theme-toggle to not be inside header */
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
-
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
+    .flight-type h4 {
+      font-size: 15px;
       font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
+      margin-bottom: 6px;
+    }
+
+    .flight-type p {
+      font-size: 13px;
+      color: var(--text-secondary);
+    }
+
+    /* Buttons */
+    .btn {
       display: inline-flex;
       align-items: center;
-      gap: 8px;
+      justify-content: center;
+      gap: 6px;
+      padding: 12px 24px;
+      border-radius: 980px;
+      font-size: 17px;
+      font-weight: 400;
       text-decoration: none;
-      transition: all 0.25s ease;
+      transition: all 0.2s ease;
+      cursor: pointer;
+      border: none;
     }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
-    }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
+
     .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
-      color: var(--text-primary);
-      border: 1px solid var(--border);
-    }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
+      background: var(--phase-color);
+      color: #000;
     }
 
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
-    }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
+    .btn-primary:hover { opacity: 0.9; }
+
+    .actions {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-top: 40px;
     }
 
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
+    /* Navigation Buttons */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 40px 0;
+      border-top: 1px solid var(--border-color);
+      margin-top: 40px;
     }
 
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
+    .nav-btn {
+      color: var(--accent-blue);
+      text-decoration: none;
+      font-size: 17px;
+      transition: opacity 0.2s;
     }
 
+    .nav-btn:hover { opacity: 0.7; }
+
+    .section-desc {
+      font-size: 15px;
+      color: var(--text-secondary);
+      line-height: 1.6;
+      margin-bottom: 20px;
+    }
   </style>
 </head>
 <body>
-
-  <!-- Top Navigation Bar -->
-  <nav class="topnav">
-    <div class="topnav-inner">
-      <a href="../../index.html" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
-      </a>
-      <div class="topnav-divider"></div>
-      <a href="phase1.html" class="topnav-link" data-phase="1">
-        <span>💡</span><span class="link-text">靈感</span>
-      </a>
-      <a href="phase2.html" class="topnav-link active" data-phase="2">
-        <span>📊</span><span class="link-text">規劃</span>
-      </a>
-      <a href="phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span><span class="link-text">知識庫</span>
-      </a>
-      <a href="phase4.html" class="topnav-link" data-phase="4">
-        <span>🎨</span><span class="link-text">視覺</span>
-      </a>
-      <a href="phase5.html" class="topnav-link" data-phase="5">
-        <span>🗾</span><span class="link-text">生存</span>
-      </a>
-      <a href="phase6.html" class="topnav-link" data-phase="6">
-        <span>💰</span><span class="link-text">變現</span>
-      </a>
-      <div class="topnav-spacer"></div>
-      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+  <!-- Navigation -->
+  <nav class="nav">
+    <div class="nav-inner">
+      <a href="../../index.html" class="nav-logo">AI 旅遊工作坊</a>
+      
+      <div class="nav-links">
+        <a href="phase1.html" class="nav-link">靈感</a>
+        <a href="phase2.html" class="nav-link active">規劃</a>
+        <a href="phase3.html" class="nav-link">知識庫</a>
+        <a href="phase4.html" class="nav-link">視覺</a>
+        <a href="phase5.html" class="nav-link">生存</a>
+        <a href="phase6.html" class="nav-link">變現</a>
+        <button class="theme-btn" onclick="toggleTheme()" id="themeBtn" title="切換主題">
+          <span id="themeIcon">&#9789;</span>
+        </button>
+      </div>
     </div>
   </nav>
 
+  <main class="container">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="phase-badge">Phase 2</div>
+      <h1>深度規劃</h1>
+      <p class="hero-subtitle">Deep Plan with AI</p>
+    </section>
 
-  <div class="container">
-    
+    <!-- Progress -->
+    <section class="progress-section">
+      <div class="progress-label">
+        <span>Phase 2 of 6</span>
+        <span>34%</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+    </section>
 
-    <div class="progress-bar"><div class="progress-fill"></div></div>
-
-    <!-- Gemini Deep Research Section -->
-    <div class="section-card">
+    <!-- Deep Research Section -->
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🔬</span>
+        <span class="section-icon">&#128300;</span>
         <div>
           <div class="section-title">Gemini Deep Research 行程規劃</div>
           <div class="section-subtitle">AI 自動搜尋最新資訊，生成專業行程表</div>
         </div>
       </div>
 
-      <button class="copy-btn" onclick="copyPrompt('research-prompt')">複製 Prompt</button>
+      <div class="prompt-header">
+        <span class="prompt-title">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt('research-prompt')">複製</button>
+      </div>
       <div class="prompt-box" id="research-prompt">我要去 [目的地]（[國家]），幫我規劃 [天數] 天行程。
 
 【基本資訊】
@@ -461,51 +464,54 @@
 5. 行程總預算表（機票/住宿/交通/餐飲/門票）</div>
 
       <div class="example-box">
-        <div class="example-label">💡 範例輸入</div>
+        <div class="example-label">範例輸入</div>
         <div class="example-text">
           「我要去日本東京，幫我規劃 5 天慢活行程。家庭旅遊 2 大 1 小，小孩 8 歲。
            預算 50000 / 人。打算購買東京廣域周遊券。想吃拉麵、壽司，
            不吃生魚片。想去淺草寺、富士山、鎌倉。不想太趕，每天不要超過 3 個定點。」
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- Google Flights AI Section -->
-    <div class="section-card">
+    <!-- Google Flights Section -->
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">✈️</span>
+        <span class="section-icon">&#9992;</span>
         <div>
           <div class="section-title">Google Flights AI 選機票</div>
           <div class="section-subtitle">自然語言搜尋，AI 幫你找出最佳航班組合</div>
         </div>
       </div>
 
-      <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
-        打開 <strong>flights.google.com</strong> 或直接對 Gemini 說出你的需求，AI 就會幫你分析。
-        支援以下旅遊類型：
+      <p class="section-desc">
+        打開 flights.google.com 或直接對 Gemini 說出你的需求，AI 就會幫你分析。支援以下旅遊類型：
       </p>
 
       <div class="flight-types">
         <div class="flight-type">
-          <h4>👨‍👩‍👧 家庭旅遊款</h4>
+          <h4>&#128106; 家庭旅遊款</h4>
           <p>有小孩、長輩同行，優先舒適度與起降時間</p>
         </div>
         <div class="flight-type">
-          <h4>💑 情侶出遊款</h4>
+          <h4>&#128145; 情侶出遊款</h4>
           <p>浪漫行程，午去午回 or 午去晚回</p>
         </div>
         <div class="flight-type">
-          <h4>🎒 背包客款</h4>
+          <h4>&#127890; 背包客款</h4>
           <p>省錢優先，廉航 + 紅眼班機可接受</p>
         </div>
         <div class="flight-type">
-          <h4>👴 銀髮族款</h4>
+          <h4>&#128116; 銀髮族款</h4>
           <p>不走太多路，大飛機、單程直航優先</p>
         </div>
       </div>
 
-      <button class="copy-btn" onclick="copyPrompt('flights-prompt')" style="margin-top: 24px;">複製 Prompt</button>
-      <div class="prompt-box" id="flights-prompt">幫我找 [月份] [目的地] 來回機票：
+      <div style="margin-top: 24px;">
+        <div class="prompt-header">
+          <span class="prompt-title">Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt('flights-prompt')">複製</button>
+        </div>
+        <div class="prompt-box" id="flights-prompt">幫我找 [月份] [目的地] 來回機票：
 
 • 出發城市：台北（TPE）
 • 人數：[幾] 人
@@ -524,58 +530,65 @@
 2. 最便宜的出發日期組合
 3. 建議的航空公司
 4. 和一般搜尋相比，AI 找到了什麼差異？</div>
+      </div>
 
       <div class="example-box">
-        <div class="example-label">💡 實際操作方式</div>
+        <div class="example-label">實際操作方式</div>
         <div class="example-text">
           方式一：直接對 Gemini App 說「幫我找 12 月東京來回機票，2 大 1 小，聖誕節前後」<br>
           方式二：去 flights.google.com，點左側「Flight Deals」，用自然語言搜尋
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- JR Pass Calculator -->
-    <div class="section-card">
+    <!-- JR Pass Section -->
+    <section class="section-card">
       <div class="section-header">
-        <span class="section-icon">🚃</span>
+        <span class="section-icon">&#128643;</span>
         <div>
           <div class="section-title">JR Pass 計算機</div>
           <div class="section-subtitle">AI 幫你算划不划算</div>
         </div>
       </div>
 
-      <button class="copy-btn" onclick="copyPrompt('jrpass-prompt')">複製 Prompt</button>
+      <div class="prompt-header">
+        <span class="prompt-title">Prompt</span>
+        <button class="copy-btn" onclick="copyPrompt('jrpass-prompt')">複製</button>
+      </div>
       <div class="prompt-box" id="jrpass-prompt">我要去 [日期]，從 [出發站] 到 [目的地站]，
 幫我比較：
 
 【選項 A】
 • 單買車票
-• 去程：[出發站] → [目的地站]
-• 回程：[目的地站] → [出發站]
+• 去程：[出發站] &#8594; [目的地站]
+• 回程：[目的地站] &#8594; [出發站]
 • 總金額：?
 
 【選項 B】
 • 購買 [JR Pass 名稱]（例如：JR 東京廣域周遊券）
 • 金額：NT$ [票價]
-• 可用範圍：[覆盖的主要路線]
+• 可用範圍：[覆蓋的主要路線]
 
 請幫我：
 1. 計算「如果買 JR Pass，能坐多少次車」才回本
 2. 這次行程的「實際使用次數」預估
 3. 哪個更划算？附上計算過程
 4. 如果買 Pass，買「連續幾日」版本最合適？</div>
+    </section>
+
+    <!-- Actions -->
+    <div class="actions">
+      <a href="phase3.html" class="btn btn-primary">
+        下一步：知識庫 &#8594;
+      </a>
     </div>
 
-    <div class="actions" style="justify-content: center;">
-      <a href="phase1.html" class="btn btn-primary">← Phase 1：靈感發想</a>
-      <a href="phase3.html" class="btn btn-primary">Phase 3：知識庫 →</a>
-    </div>
-
+    <!-- Navigation -->
     <nav class="nav-buttons">
-      <a href="phase1.html" class="nav-btn">← Phase 1</a>
-      <a href="phase3.html" class="nav-btn">Phase 3：知識庫 →</a>
+      <a href="phase1.html" class="nav-btn">&#8592; Phase 1</a>
+      <a href="phase3.html" class="nav-btn">Phase 3 &#8594;</a>
     </nav>
-  </div>
+  </main>
 
   <script>
     function copyPrompt(id) {
@@ -583,19 +596,24 @@
       navigator.clipboard.writeText(text);
       alert('已複製到剪貼簿！');
     }
-  </script>
 
-  <script>
     function toggleTheme() {
       const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      const current = html.getAttribute('data-theme');
+      const next = current === 'dark' ? 'light' : 'dark';
       html.setAttribute('data-theme', next);
       localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+      updateThemeIcon(next);
     }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    function updateThemeIcon(theme) {
+      const icon = document.getElementById('themeIcon');
+      icon.innerHTML = theme === 'dark' ? '&#9728;' : '&#9789;';
+    }
+
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    document.documentElement.setAttribute('data-theme', savedTheme);
+    updateThemeIcon(savedTheme);
   </script>
 </body>
 </html>
