@@ -42,6 +42,7 @@
     * { margin: 0; padding: 0; box-sizing: border-box; }
 
     body {
+      padding-top: 0;
       font-family: 'Noto Sans TC', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
@@ -372,16 +373,102 @@
     }
     [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
     
+
+    /* Topnav — mirrors index.html */
+    .topnav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+      margin: -24px -24px 32px -24px;
+      width: calc(100% + 48px);
+    }
+    .topnav-inner {
+      max-width: 800px; margin: 0 auto;
+      display: flex; align-items: center; gap: 6px;
+      height: 56px; overflow-x: auto; scrollbar-width: none;
+    }
+    .topnav-inner::-webkit-scrollbar { display: none; }
+    .topnav-logo {
+      display: flex; align-items: center; gap: 6px;
+      font-weight: 700; font-size: 0.9rem;
+      color: var(--text-primary); text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; margin-right: 4px;
+    }
+    .topnav-logo span { font-size: 1.2rem; }
+    .topnav-divider {
+      width: 1px; height: 20px;
+      background: var(--border); flex-shrink: 0; margin: 0 4px;
+    }
+    .topnav-link {
+      display: flex; align-items: center; gap: 5px;
+      padding: 5px 12px; border-radius: 20px;
+      font-size: 0.75rem; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+    .topnav-link.active,
+    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
+    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
+    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
+    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
+    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
+    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
+    .topnav-spacer { flex: 1; }
+    /* also update .theme-toggle to not be inside header */
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,0.1);
+      color: var(--text-secondary); font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
+    [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
+
   </style>
 </head>
 <body>
-  <div class="container">
-    <header class="header">
-      <span class="phase-badge">Phase 1</span>
-      <h1>💡 靈感發想</h1>
-      <a href="../../index.html" class="back-link">← 返回首頁</a>
+
+  <!-- Top Navigation Bar -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../../index.html" class="topnav-logo">
+        <span>✈️</span>
+        <span>AI 旅遊工作坊</span>
+      </a>
+      <div class="topnav-divider"></div>
+      <a href="phase1.html" class="topnav-link active" data-phase="1">
+        <span>💡</span><span class="link-text">靈感</span>
+      </a>
+      <a href="phase2.html" class="topnav-link" data-phase="2">
+        <span>📊</span><span class="link-text">規劃</span>
+      </a>
+      <a href="phase3.html" class="topnav-link" data-phase="3">
+        <span>📓</span><span class="link-text">知識庫</span>
+      </a>
+      <a href="phase4.html" class="topnav-link" data-phase="4">
+        <span>🎨</span><span class="link-text">視覺</span>
+      </a>
+      <a href="phase5.html" class="topnav-link" data-phase="5">
+        <span>🗾</span><span class="link-text">生存</span>
+      </a>
+      <a href="phase6.html" class="topnav-link" data-phase="6">
+        <span>💰</span><span class="link-text">變現</span>
+      </a>
+      <div class="topnav-spacer"></div>
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
-    </header>
+    </div>
+  </nav>
+
+
+  <div class="container">
+    
 
     <div class="progress-bar">
       <div class="progress-fill"></div>

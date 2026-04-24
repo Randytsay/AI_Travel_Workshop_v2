@@ -572,15 +572,6 @@
     [data-theme="light"] .hero-banner-overlay .hero-banner-desc { color: #2d3436; }
     [data-theme="light"] .hero-banner-overlay .highlight { color: #e74c3c; }
 
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(
-        to right,
-        rgba(255, 249, 240, 0.95) 0%,
-        rgba(255, 249, 240, 0.7) 50%,
-        transparent 100%
-      );
-    }
-
     .hero-banner-title {
       font-size: clamp(1.5rem, 3vw, 2.2rem);
       font-weight: 900;
@@ -645,6 +636,31 @@
       font-size: 0.85rem;
       color: var(--text-secondary);
       line-height: 1.5;
+    }
+
+
+    .line-green {
+      border: 2px solid #00B900;
+      background: rgba(0, 185, 0, 0.08) !important;
+    }
+    .line-logo-row {
+      display: flex; align-items: center; justify-content: center; gap: 12px; margin-bottom: 8px;
+    }
+    .line-logo-row h2 { margin: 0; }
+    .line-icon {
+      width: 40px; height: 40px; flex-shrink: 0;
+    }
+    .keyword-chip {
+      background: rgba(0, 185, 0, 0.15) !important;
+      color: #00d26a !important;
+      border-color: rgba(0, 185, 0, 0.35) !important;
+    }
+    [data-theme="light"] .line-section {
+      background: rgba(0, 185, 0, 0.06) !important;
+    }
+    [data-theme="light"] .keyword-chip {
+      background: rgba(0, 185, 0, 0.12) !important;
+      color: #008000 !important;
     }
 
     /* ═══════════════════════════════════════
@@ -827,9 +843,7 @@
     <!-- Hero Section -->
     <section class="hero">
       <div class="container">
-        <div class="hero-badge">
-          🌟 美安店主 × 群友限定
-        </div>
+
         <h1>
           用 <span class="highlight">AI</span> 從零規劃<br>
           日本夢幻之旅 ✈️
@@ -839,11 +853,11 @@
         </p>
 
         <div class="hero-tags">
-          <span class="hero-tag"><span class="emoji">🤖</span> Gemini 3.1</span>
-          <span class="hero-tag"><span class="emoji">🎙️</span> Gemini Live</span>
-          <span class="hero-tag"><span class="emoji">✈️</span> Google Flights AI</span>
-          <span class="hero-tag"><span class="emoji">📓</span> NotebookLM</span>
-          <span class="hero-tag"><span class="emoji">💬</span> LINE Bot</span>
+          <a href="https://aistudio.google.com" target="_blank" class="hero-tag"><span class="emoji">🤖</span> Gemini 3.1</a>
+          <a href="https://gemini.google.com" target="_blank" class="hero-tag"><span class="emoji">🎙️</span> Gemini Live</a>
+          <a href="https://flights.google.com" target="_blank" class="hero-tag"><span class="emoji">✈️</span> Google Flights AI</a>
+          <a href="https://notebooklm.google.com" target="_blank" class="hero-tag"><span class="emoji">📓</span> NotebookLM</a>
+          <a href="https://line.me" target="_blank" class="hero-tag"><span class="emoji">💬</span> LINE Bot</a>
         </div>
 
         <div class="hero-actions">
@@ -867,18 +881,13 @@
         </div>
         <div class="stat-card">
           <div class="stat-icon">⏱️</div>
-          <div class="stat-value">2.5h</div>
+          <div class="stat-value">4h</div>
           <div class="stat-label">課程時長</div>
         </div>
         <div class="stat-card">
           <div class="stat-icon">💬</div>
           <div class="stat-value">8+</div>
           <div class="stat-label">LINE 關鍵字</div>
-        </div>
-        <div class="stat-card">
-          <div class="stat-icon">🎁</div>
-          <div class="stat-value">Free</div>
-          <div class="stat-label">免費參加</div>
         </div>
       </div>
     </section>
@@ -923,9 +932,9 @@
               透過 MBTI 風格測驗找出你的旅遊人格，Gemini Live 語音互動即時規劃行程
             </div>
             <div class="phase-card-tools">
-              <span class="phase-tool">Gemini 3.1</span>
-              <span class="phase-tool">Gemini Live</span>
-              <span class="phase-tool">人格測驗</span>
+              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Gemini 3.1</a>
+              <a href="https://gemini.google.com" target="_blank" class="phase-tool">Gemini Live</a>
+              <a href="https://www.16personalities.com" target="_blank" class="phase-tool">人格測驗</a>
             </div>
           </div>
           <div class="phase-card-arrow">→</div>
@@ -944,9 +953,9 @@
               Deep Research 生成專業行程表，Google Flights AI 幫你選擇最佳航班
             </div>
             <div class="phase-card-tools">
-              <span class="phase-tool">Deep Research</span>
-              <span class="phase-tool">Google Flights</span>
-              <span class="phase-tool">JR Pass</span>
+              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Deep Research</a>
+              <a href="https://flights.google.com" target="_blank" class="phase-tool">Google Flights</a>
+              <a href="https://www.jrpass.com" target="_blank" class="phase-tool">JR Pass</a>
             </div>
           </div>
           <div class="phase-card-arrow">→</div>
@@ -965,9 +974,9 @@
               NotebookLM 建立專屬旅遊助理，行程表一鍵變成 Podcast 語音導覽
             </div>
             <div class="phase-card-tools">
-              <span class="phase-tool">NotebookLM</span>
-              <span class="phase-tool">Audio Overview</span>
-              <span class="phase-tool">知識庫</span>
+              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">NotebookLM</a>
+              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">Audio Overview</a>
+              <a href="https://notebooklm.google.com" target="_blank" class="phase-tool">知識庫</a>
             </div>
           </div>
           <div class="phase-card-arrow">→</div>
@@ -983,12 +992,12 @@
           </div>
           <div class="phase-card-body">
             <div class="phase-card-desc">
-              Gemini nanobanana 生成卡通人格圖，一鍵製作出 LINE 分享長圖
+              ChatGPT 生成卡通人格圖，一鍵製作出 LINE 分享長圖
             </div>
             <div class="phase-card-tools">
-              <span class="phase-tool">Gemini 生圖</span>
-              <span class="phase-tool">卡通頭像</span>
-              <span class="phase-tool">LINE 分享圖</span>
+              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">Gemini 生圖</a>
+              <a href="https://chat.openai.com" target="_blank" class="phase-tool">卡通頭像</a>
+              <a href="https://aistudio.google.com" target="_blank" class="phase-tool">LINE 分享圖</a>
             </div>
           </div>
           <div class="phase-card-arrow">→</div>
@@ -1007,9 +1016,9 @@
               Google Lens 即時翻譯日文菜單，Gemini Live 語音對話解決現場溝通
             </div>
             <div class="phase-card-tools">
-              <span class="phase-tool">Google Lens</span>
-              <span class="phase-tool">Gemini Live</span>
-              <span class="phase-tool">即時翻譯</span>
+              <a href="https://lens.google.com" target="_blank" class="phase-tool">Google Lens</a>
+              <a href="https://gemini.google.com" target="_blank" class="phase-tool">Gemini Live</a>
+              <a href="https://gemini.google.com" target="_blank" class="phase-tool">即時翻譯</a>
             </div>
           </div>
           <div class="phase-card-arrow">→</div>
@@ -1079,8 +1088,14 @@
 
     <!-- LINE Bot Section -->
     <section class="container">
-      <div class="line-section">
-        <h2>💬 加入 LINE Bot 取得提示詞</h2>
+      <div class="line-section line-green">
+        <div class="line-logo-row">
+          <svg class="line-icon" viewBox="0 0 48 48" xmlns="http://www.w3.org/2000/svg">
+            <path fill="#00B900" d="M24 4C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4z"/>
+            <path fill="#fff" d="M34.1 32.5c-.6-.4-3.5-1.7-4-1.9-.5-.2-.9-.3-1.3.3-.4.6-1.5 1.9-1.8 2.3-.3.4-.6.5-1.1.2-.5-.3-2.1-.9-4-2.9-1.5-1.6-2.5-3.5-2.8-4.1-.3-.6 0-.9.3-1.2.3-.3.6-.7.9-1.1.3-.4.4-.7.1-1-.3-.3-.8-.9-1.2-1.4-.4-.5-.7-.6-1-.6-.3 0-.6 0-.9.1-.3.1-.7.2-1 .3-.2.1-.4.1-.5.2-4.2 1.8-7 6.5-7.2 6.8-.2.4-.2.8-.1 1.2.2.4.8 1.2 1.9 1.8.6.3 1.2.5 1.6.7.6.2 1.1.2 1.5.3.5.1.9 0 1.3-.2.4-.2 1.6-.9 1.8-.9.3-.1.5-.2.7-.2.3 0 .6.2.8.7.2.5.7 1.7.8 1.8.1.2.2.3.3.5.1.2.2.3.4.5.2.2.4.4.6.6.2.2.3.4.4.7.1.2.1.5.1.8-.1.3-.2.7-.5 1.1-.2.2-.4.5-.6.7-.2.2-.4.4-.6.6-.2.2-.4.5-.6.8-.2.3-.4.6-.4.8 0 .2.1.4.2.6.2.2.8.9 2 1.5 1.1.6 1.1.7 1.3.9.2.2.3.4.2.8-.1.4-.4 1.6-.8 2.2-.4.6-.8 1-1.5 1.3-.6.4-1.3.7-2 .9-.7.2-1.3.3-1.8.4-.5.1-1.1 0-1.5-.1-.4-.1-.9-.3-1.4-.6-.5-.3-1-.7-1.4-1.1-.3-.3-.5-.5-.7-.7-.2-.2-.3-.3-.4-.4-.1-.1-.1-.2-.1-.3 0 0 0 0 0 0s1.5 1.4 2.2 1.9c.7.5 1 .8 1.4 1 .4.2.8.3 1.2.2.4-.1.9-.3 1.4-.6.5-.3.9-.6 1.3-.9.4-.3.8-.6 1.2-.7.5-.1.9-.2 1.3-.3.4-.1.9-.1 1.3.1.4.2.8.5 1.1.8.4.3.8.6 1.2.7.4.1.8.2 1.2.1.4-.1.9-.3 1.4-.6.5-.3 1-.7 1.4-1 .4-.3.8-.6 1.1-.8.3-.2.5-.3.6-.4.1-.1.1-.1.2-.2 0 0 0 0 0 0 .4-.3.7-.6 1-.8.1.1 0 0 0 0z"/>
+          </svg>
+          <h2>加入 LINE Bot 取得提示詞</h2>
+        </div>
         <p>工作坊後持續取得各單元提示詞，輸入關鍵字即刻獲得</p>
 
         <div class="keyword-chips">
@@ -1093,10 +1108,6 @@
           <span class="keyword-chip">回憶</span>
           <span class="keyword-chip">問題</span>
         </div>
-
-        <a href="line-bot/keywords-replies.csv" class="btn btn-secondary" download>
-          📥 下載關鍵字對照表
-        </a>
       </div>
     </section>
 

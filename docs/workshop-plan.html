@@ -8,7 +8,7 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
   <style>
-    :root {
+:root {
       --bg-primary: #0d1b2a;
       --bg-secondary: #1b2838;
       --bg-card: rgba(27, 40, 56, 0.85);
@@ -19,10 +19,15 @@
       --border: rgba(255,255,255,0.08);
       --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
       --shadow: 0 8px 32px rgba(0,0,0,0.3);
+      --phase1-bg: linear-gradient(135deg, #ff6b6b 0%, #ee5a24 100%);
+      --phase2-bg: linear-gradient(135deg, #00cec9 0%, #0984e3 100%);
+      --phase3-bg: linear-gradient(135deg, #55efc4 0%, #00b894 100%);
+      --phase4-bg: linear-gradient(135deg, #fdcb6e 0%, #f39c12 100%);
+      --phase5-bg: linear-gradient(135deg, #74b9ff 0%, #0984e3 100%);
+      --phase6-bg: linear-gradient(135deg, #fd79a8 0%, #e84393 100%);
     }
-
     [data-theme="light"] {
-      --bg-primary: #fff9f0;
+      --bg-primary: #fffdf8;
       --bg-secondary: #fff5e6;
       --bg-card: rgba(255,255,255,0.9);
       --bg-card-solid: #ffffff;
@@ -81,6 +86,12 @@
     }
     .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
     .topnav-link.active { background: var(--accent-sunset); color: white; font-weight: 600; }
+    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
+    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
+    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
+    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
+    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
+    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
     .topnav-spacer { flex: 1; }
     .theme-toggle {
       width: 36px; height: 36px; border-radius: 50%;
@@ -353,7 +364,14 @@
       <a href="../index.html" class="topnav-logo"><span>✈️</span> AI 旅遊工作坊</a>
       <div class="topnav-divider"></div>
       <a href="../index.html" class="topnav-link">首頁</a>
-      <a href="#" class="topnav-link active">教案大綱</a>
+      <a href="#" class="topnav-link active">教案</a>
+      <div class="topnav-divider"></div>
+      <a href="../workshop/phases/phase1.html" class="topnav-link" data-phase="1"><span>💡</span>靈感</a>
+      <a href="../workshop/phases/phase2.html" class="topnav-link" data-phase="2"><span>📊</span>規劃</a>
+      <a href="../workshop/phases/phase3.html" class="topnav-link" data-phase="3"><span>📓</span>知識庫</a>
+      <a href="../workshop/phases/phase4.html" class="topnav-link" data-phase="4"><span>🎨</span>視覺</a>
+      <a href="../workshop/phases/phase5.html" class="topnav-link" data-phase="5"><span>🗾</span>生存</a>
+      <a href="../workshop/phases/phase6.html" class="topnav-link" data-phase="6"><span>💰</span>變現</a>
       <div class="topnav-spacer"></div>
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
     </div>
@@ -381,7 +399,7 @@
     <div class="info-grid">
       <div class="info-card">
         <div class="icon">⏱️</div>
-        <div class="value">2.5h</div>
+        <div class="value">4h</div>
         <div class="label">課程時長</div>
       </div>
       <div class="info-card">
@@ -411,7 +429,7 @@
         <tr><th style="width:120px;">項目</th><th>內容</th></tr>
         <tr><td class="time">課程名稱</td><td>AI 旅遊工作坊 — 用 Gemini 玩轉日本自由行</td></tr>
         <tr><td class="time">授課對象</td><td>美安店主、對旅遊有興趣的群友</td></tr>
-        <tr><td class="time">授課時數</td><td>2.5 小時（不含 Q&A 為 2 小時）</td></tr>
+        <tr><td class="time">授課時數</td><td>4 小時</td></tr>
         <tr><td class="time">人數上限</td><td>30 人</td></tr>
         <tr><td class="time">所需設備</td><td>投影機、Wi-Fi、參與者自備手機</td></tr>
       </table>
@@ -675,20 +693,6 @@
         <tr><td>學員年齡層較高</td><td>放慢操作節奏；助教一對一協助</td></tr>
         <tr><td>時間不夠</td><td>Phase 6 改為預錄影片；壓縮 Q&A</td></tr>
       </table>
-    </div>
-
-    <!-- 成功關鍵 -->
-    <div class="section">
-      <div class="section-header">
-        <span class="section-icon">🔑</span>
-        <span class="section-title">成功關鍵</span>
-      </div>
-      <ol class="num-list">
-        <li><strong>務必現場演示</strong>：不能只放 PPT，要真的打開 Gemini 操作</li>
-        <li><strong>高潮在 Phase 5</strong>：Gemini Live 的演示橋段是讓學員驚艷的關鍵</li>
-        <li><strong>卡通頭像是記憶點</strong>：讓學員帶走自己的卡通圖，分享意願大增</li>
-        <li><strong>LINE 群是延續</strong>：學員加入群組後持續提供價值，才能轉化為實際行動</li>
-      </ol>
     </div>
 
   </main>
