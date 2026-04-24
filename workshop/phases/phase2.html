@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 2｜深度規劃 | AI 旅遊工作坊 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #06b6d4;
+      --primary-dark: #0891b2;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gradient-1: linear-gradient(135deg, #06b6d4 0%, #0891b2 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 48px; padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .phase-badge {
+      background: var(--gradient-1);
+      padding: 8px 16px; border-radius: 12px;
+      font-weight: 700; font-size: 0.875rem;
+    }
+    .header h1 { font-size: 1.5rem; }
+    .back-link {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.875rem; margin-left: auto;
+    }
+    .back-link:hover { color: var(--primary); }
+    .progress-bar {
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      height: 8px; margin-bottom: 48px; overflow: hidden;
+    }
+    .progress-fill {
+      background: var(--gradient-1); height: 100%;
+      width: 34%; border-radius: 20px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .section-icon {
+      font-size: 2rem;
+    }
+    .section-title {
+      font-size: 1.25rem; font-weight: 600;
+    }
+    .section-subtitle {
+      font-size: 0.875rem; color: var(--text-secondary);
+    }
+
+    .prompt-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px; padding: 20px;
+      font-family: monospace; font-size: 0.875rem;
+      line-height: 1.7; white-space: pre-wrap;
+      color: var(--text-secondary);
+      margin: 16px 0;
+    }
+
+    .copy-btn {
+      background: var(--gradient-1);
+      border: none; color: white;
+      padding: 8px 16px; border-radius: 8px;
+      cursor: pointer; font-size: 0.875rem; font-weight: 500;
+      float: right;
+    }
+    .copy-btn:hover { opacity: 0.9; }
+
+    .example-box {
+      background: rgba(6, 182, 212, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px; border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .example-label {
+      font-size: 0.75rem; color: var(--primary);
+      font-weight: 600; margin-bottom: 8px;
+      text-transform: uppercase;
+    }
+    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
+
+    /* Flight Card Grid */
+    .flight-types {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .flight-type {
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 16px; padding: 20px;
+      cursor: pointer; transition: all 0.3s ease;
+    }
+    .flight-type:hover {
+      border-color: var(--primary);
+      background: rgba(6, 182, 212, 0.1);
+    }
+    .flight-type h4 { margin-bottom: 8px; font-size: 1rem; }
+    .flight-type p { font-size: 0.8rem; color: var(--text-secondary); }
+
+    .nav-buttons {
+      display: flex; justify-content: space-between;
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-btn {
+      color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem;
+    }
+    .nav-btn:hover { color: var(--primary); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.3s ease; cursor: pointer; border: none;
+      font-size: 0.95rem;
+    }
+    .btn-primary {
+      background: var(--gradient-1); color: white;
+    }
+    .btn:hover { transform: translateY(-2px); }
+    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="phase-badge">Phase 2</span>
+      <h1>📊 深度規劃</h1>
+      <a href="../index.html" class="back-link">← 返回首頁</a>
+    </header>
+
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <!-- Gemini Deep Research Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🔬</span>
+        <div>
+          <div class="section-title">Gemini Deep Research 行程規劃</div>
+          <div class="section-subtitle">AI 自動搜尋最新資訊，生成專業行程表</div>
+        </div>
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt('research-prompt')">複製 Prompt</button>
+      <div class="prompt-box" id="research-prompt">我要去 [目的地]（[國家]），幫我規劃 [天數] 天行程。
+
+【基本資訊】
+• 旅遊風格：[慢活/緊湊/適中]
+• 同行人：[獨旅/情侶/家庭/朋友]
+• 預算範圍：[金額] / 人
+• 旅遊時間：[月份]
+
+【交通偏好】
+• 打算購買：[JR Pass/IC卡/自駕]
+• 不喜歡：[紅眼班機/過多轉乘]
+
+【飲食偏好】
+• 必吃：[美食類型]
+• 不吃：[過敏/禁忌]
+• 想體驗：[米其林/路邊攤/居酒屋]
+
+【特殊需求】
+• 必去景點：[如果有]
+• 不去：[觀光客聚集處/連鎖店]
+• 需提前預約：[景點/餐廳]
+
+請幫我：
+1. 每天的詳細行程（時間、地點、交通、費用）
+2. 每日的「靈魂餐廳」推薦（當地人或日本人常去的那種）
+3. 需要提前預約的項目 + 預約連結
+4. 這次行程的「驚喜亮點」（你自己發現的小眾景點）
+5. 行程總預算表（機票/住宿/交通/餐飲/門票）</div>
+
+      <div class="example-box">
+        <div class="example-label">💡 範例輸入</div>
+        <div class="example-text">
+          「我要去日本東京，幫我規劃 5 天慢活行程。家庭旅遊 2 大 1 小，小孩 8 歲。
+           預算 50000 / 人。打算購買東京廣域周遊券。想吃拉麵、壽司，
+           不吃生魚片。想去淺草寺、富士山、鎌倉。不想太趕，每天不要超過 3 個定點。」
+        </div>
+      </div>
+    </div>
+
+    <!-- Google Flights AI Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">✈️</span>
+        <div>
+          <div class="section-title">Google Flights AI 選機票</div>
+          <div class="section-subtitle">自然語言搜尋，AI 幫你找出最佳航班組合</div>
+        </div>
+      </div>
+
+      <p style="color: var(--text-secondary); margin-bottom: 20px; line-height: 1.7;">
+        打開 <strong>flights.google.com</strong> 或直接對 Gemini 說出你的需求，AI 就會幫你分析。
+        支援以下旅遊類型：
+      </p>
+
+      <div class="flight-types">
+        <div class="flight-type">
+          <h4>👨‍👩‍👧 家庭旅遊款</h4>
+          <p>有小孩、長輩同行，優先舒適度與起降時間</p>
+        </div>
+        <div class="flight-type">
+          <h4>💑 情侶出遊款</h4>
+          <p>浪漫行程，午去午回 or 午去晚回</p>
+        </div>
+        <div class="flight-type">
+          <h4>🎒 背包客款</h4>
+          <p>省錢優先，廉航 + 紅眼班機可接受</p>
+        </div>
+        <div class="flight-type">
+          <h4>👴 銀髮族款</h4>
+          <p>不走太多路，大飛機、單程直航優先</p>
+        </div>
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt('flights-prompt')" style="margin-top: 24px;">複製 Prompt</button>
+      <div class="prompt-box" id="flights-prompt">幫我找 [月份] [目的地] 來回機票：
+
+• 出發城市：台北（TPE）
+• 人數：[幾] 人
+• 出發日期：[月份] [上/中/下旬]
+• 回程日期：[月份] [日]
+• 偏好：[直航 / 轉機 / 都可以]
+• 預算上限：每人 NT$ [金額]
+
+【家庭旅遊額外需求】
+• 有 [年齡] 歲小孩
+• 不要紅眼班機
+• 轉機時間不要超過 3 小時
+
+請幫我列出：
+1. 符合條件的前 3 名航班（CP 值排序）
+2. 最便宜的出發日期組合
+3. 建議的航空公司
+4. 和一般搜尋相比，AI 找到了什麼差異？</div>
+
+      <div class="example-box">
+        <div class="example-label">💡 實際操作方式</div>
+        <div class="example-text">
+          方式一：直接對 Gemini App 說「幫我找 12 月東京來回機票，2 大 1 小，聖誕節前後」<br>
+          方式二：去 flights.google.com，點左側「Flight Deals」，用自然語言搜尋
+        </div>
+      </div>
+    </div>
+
+    <!-- JR Pass Calculator -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🚃</span>
+        <div>
+          <div class="section-title">JR Pass 計算機</div>
+          <div class="section-subtitle">AI 幫你算划不划算</div>
+        </div>
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt('jrpass-prompt')">複製 Prompt</button>
+      <div class="prompt-box" id="jrpass-prompt">我要去 [日期]，從 [出發站] 到 [目的地站]，
+幫我比較：
+
+【選項 A】
+• 單買車票
+• 去程：[出發站] → [目的地站]
+• 回程：[目的地站] → [出發站]
+• 總金額：?
+
+【選項 B】
+• 購買 [JR Pass 名稱]（例如：JR 東京廣域周遊券）
+• 金額：NT$ [票價]
+• 可用範圍：[覆盖的主要路線]
+
+請幫我：
+1. 計算「如果買 JR Pass，能坐多少次車」才回本
+2. 這次行程的「實際使用次數」預估
+3. 哪個更划算？附上計算過程
+4. 如果買 Pass，買「連續幾日」版本最合適？</div>
+    </div>
+
+    <div class="actions" style="justify-content: center;">
+      <a href="phase1.html" class="btn btn-primary">← Phase 1：靈感發想</a>
+      <a href="phase3.html" class="btn btn-primary">Phase 3：知識庫 →</a>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="phase1.html" class="nav-btn">← Phase 1</a>
+      <a href="phase3.html" class="nav-btn">Phase 3：知識庫 →</a>
+    </nav>
+  </div>
+
+  <script>
+    function copyPrompt(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      alert('已複製到剪貼簿！');
+    }
+  </script>
+</body>
+</html>

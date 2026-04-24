@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 3｜知識庫 | AI 旅遊工作坊 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #10b981;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gradient-1: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 48px; padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .phase-badge {
+      background: var(--gradient-1);
+      padding: 8px 16px; border-radius: 12px;
+      font-weight: 700; font-size: 0.875rem;
+    }
+    .header h1 { font-size: 1.5rem; }
+    .back-link {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.875rem; margin-left: auto;
+    }
+    .progress-bar {
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      height: 8px; margin-bottom: 48px;
+    }
+    .progress-fill {
+      background: var(--gradient-1); height: 100%;
+      width: 50%; border-radius: 20px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .section-icon { font-size: 2rem; }
+    .section-title { font-size: 1.25rem; font-weight: 600; }
+    .section-subtitle { font-size: 0.875rem; color: var(--text-secondary); }
+
+    .step-list {
+      counter-reset: step;
+      list-style: none;
+      padding: 0;
+    }
+    .step-list li {
+      counter-increment: step;
+      display: flex; gap: 16px;
+      padding: 16px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.05);
+    }
+    .step-list li:last-child { border-bottom: none; }
+    .step-list li::before {
+      content: counter(step);
+      background: var(--gradient-1);
+      width: 32px; height: 32px;
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-weight: 700; font-size: 0.875rem; flex-shrink: 0;
+    }
+
+    .prompt-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px; padding: 20px;
+      font-family: monospace; font-size: 0.875rem;
+      line-height: 1.7; white-space: pre-wrap;
+      color: var(--text-secondary); margin: 16px 0;
+    }
+
+    .copy-btn {
+      background: var(--gradient-1);
+      border: none; color: white;
+      padding: 8px 16px; border-radius: 8px;
+      cursor: pointer; font-size: 0.875rem; font-weight: 500;
+      float: right;
+    }
+
+    .feature-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-top: 24px;
+    }
+    .feature-item {
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px; padding: 16px;
+      text-align: center;
+    }
+    .feature-icon { font-size: 2rem; margin-bottom: 8px; }
+    .feature-title { font-weight: 600; font-size: 0.95rem; margin-bottom: 4px; }
+    .feature-desc { font-size: 0.8rem; color: var(--text-secondary); }
+
+    .example-box {
+      background: rgba(16, 185, 129, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px; border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .example-label {
+      font-size: 0.75rem; color: var(--primary);
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
+
+    .audio-demo {
+      background: linear-gradient(135deg, rgba(16, 185, 129, 0.2), rgba(5, 150, 105, 0.2));
+      border-radius: 16px; padding: 32px;
+      text-align: center; margin: 24px 0;
+    }
+    .audio-icon { font-size: 4rem; margin-bottom: 16px; }
+    .audio-title { font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; }
+    .audio-desc { color: var(--text-secondary); margin-bottom: 16px; }
+
+    .play-btn {
+      background: var(--gradient-1);
+      border: none; color: white;
+      padding: 12px 24px; border-radius: 30px;
+      cursor: pointer; font-weight: 600;
+      display: inline-flex; align-items: center; gap: 8px;
+    }
+
+    .nav-buttons {
+      display: flex; justify-content: space-between;
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-btn {
+      color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem;
+    }
+    .nav-btn:hover { color: var(--primary); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.3s ease; border: none;
+      font-size: 0.95rem;
+    }
+    .btn-primary { background: var(--gradient-1); color: white; }
+    .btn:hover { transform: translateY(-2px); }
+    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="phase-badge">Phase 3</span>
+      <h1>📓 知識庫建立</h1>
+      <a href="../index.html" class="back-link">← 返回首頁</a>
+    </header>
+
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <!-- NotebookLM Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🧠</span>
+        <div>
+          <div class="section-title">NotebookLM — 你的專屬旅遊助理</div>
+          <div class="section-subtitle">上傳行程資料，建立會說中文的 AI 旅遊顧問</div>
+        </div>
+      </div>
+
+      <ol class="step-list">
+        <li>
+          <div>
+            <strong>前往 NotebookLM</strong><br>
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">
+              開啟 <a href="https://notebooklm.google.com" target="_blank" style="color: var(--primary);">notebooklm.google.com</a>，用 Google 帳號登入
+            </span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>建立新 Notebook</strong><br>
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">
+              點「+ New notebook」，命名為「[目的地] 旅遊攻略」
+            </span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>上傳資料</strong><br>
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">
+              把 Gemini 生成的行程表（文字或 PDF）、機票確認信、飯店預訂紀錄全部拖進去
+            </span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>等待 AI 分析</strong><br>
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">
+              NotebookLM 會自動閱讀所有資料，生成摘要與關聯
+            </span>
+          </div>
+        </li>
+        <li>
+          <div>
+            <strong>開始問答</strong><br>
+            <span style="color: var(--text-secondary); font-size: 0.9rem;">
+              直接用中文問問題，例如：「第三天午餐推薦什麼？」「從淺草到富士山的交通？」
+            </span>
+          </div>
+        </li>
+      </ol>
+
+      <div class="audio-demo">
+        <div class="audio-icon">🎧</div>
+        <div class="audio-title">Audio Overview — 行程表變 Podcast</div>
+        <div class="audio-desc">
+          NotebookLM 可以把行程表轉成雙人對話音頻<br>
+          通勤時聽，默默把行程記起來
+        </div>
+        <button class="play-btn">▶ 播放示範音頻</button>
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt()">複製 Prompt</button>
+      <div class="prompt-box">在 NotebookLM 中，你可以這樣問：
+
+「請根據我的行程表，回答以下問題：
+1. 整趟行程我最需要提前預約的是哪幾項？
+2. 如果第三天下雨，有什麼備案可以改？
+3. 每天的移動距離有多遠？需要早起嗎？
+4. 整趟行程的總花費大概是多少？」</div>
+
+      <div class="feature-grid">
+        <div class="feature-item">
+          <div class="feature-icon">📄</div>
+          <div class="feature-title">支援格式</div>
+          <div class="feature-desc">PDF、Word、Google 文件、純文字、網址</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🌐</div>
+          <div class="feature-title">語言支援</div>
+          <div class="feature-desc">中文、英文、日文、韓文等 10+ 語言</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">⏱️</div>
+          <div class="feature-title">處理速度</div>
+          <div class="feature-desc">數十頁文件幾分鐘內分析完成</div>
+        </div>
+        <div class="feature-item">
+          <div class="feature-icon">🎙️</div>
+          <div class="feature-title">Audio Overview</div>
+          <div class="feature-desc">行程表一鍵變成 Podcast 音頻</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Usage Scenarios -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">💬</span>
+        <div>
+          <div class="section-title">實際應用場景</div>
+          <div class="section-subtitle">這些情況用 NotebookLM 超級方便</div>
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">場景 1：機場 check-in 前</div>
+        <div class="example-text">
+          「我明天早上 8 點的飛機，需要 幾點到機場？
+           從我家到機場的交通需要多久？」
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">場景 2：餐廳預約失敗</div>
+        <div class="example-text">
+          「我想吃壽司，行程第三天晚餐，
+           原本計畫的店預約滿了，附近有替代方案嗎？」
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">場景 3：天氣突然變化</div>
+        <div class="example-text">
+          「明天鎌倉預報下雨，IPPUDO 鎌倉店有營業嗎？
+           建議我改去什麼室內景點？」
+        </div>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">場景 4：免稅店shopping</div>
+        <div class="example-text">
+          「我的飯店地址是 [地址]，最近的免稅店是哪家？
+           買什麼最划算？」
+        </div>
+      </div>
+    </div>
+
+    <div class="actions" style="justify-content: center;">
+      <a href="phase2.html" class="btn btn-primary">← Phase 2：深度規劃</a>
+      <a href="phase4.html" class="btn btn-primary">Phase 4：視覺生成 →</a>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="phase2.html" class="nav-btn">← Phase 2</a>
+      <a href="phase4.html" class="nav-btn">Phase 4：視覺生成 →</a>
+    </nav>
+  </div>
+
+  <script>
+    function copyPrompt() {
+      const text = document.querySelector('.prompt-box').textContent;
+      navigator.clipboard.writeText(text);
+      alert('已複製到剪貼簿！');
+    }
+  </script>
+</body>
+</html>

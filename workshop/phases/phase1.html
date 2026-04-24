@@ -1,0 +1,565 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 1｜靈感發想 | AI 旅遊工作坊 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+    }
+
+    /* Header */
+    .header {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 48px;
+      padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .phase-badge {
+      background: var(--gradient-1);
+      padding: 8px 16px;
+      border-radius: 12px;
+      font-weight: 700;
+      font-size: 0.875rem;
+    }
+
+    .header h1 {
+      font-size: 1.5rem;
+    }
+
+    .back-link {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.875rem;
+      margin-left: auto;
+    }
+
+    .back-link:hover { color: var(--primary); }
+
+    /* Progress */
+    .progress-bar {
+      background: rgba(255,255,255,0.1);
+      border-radius: 20px;
+      height: 8px;
+      margin-bottom: 48px;
+      overflow: hidden;
+    }
+
+    .progress-fill {
+      background: var(--gradient-1);
+      height: 100%;
+      width: 17%;
+      border-radius: 20px;
+      transition: width 0.5s ease;
+    }
+
+    /* Quiz Card */
+    .quiz-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .question {
+      font-size: 1.125rem;
+      font-weight: 500;
+      margin-bottom: 24px;
+    }
+
+    .question-number {
+      color: var(--primary);
+      font-weight: 700;
+      margin-right: 8px;
+    }
+
+    .options {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .option {
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+      padding: 16px;
+      background: rgba(255,255,255,0.05);
+      border: 2px solid transparent;
+      border-radius: 16px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    .option:hover {
+      background: rgba(99, 102, 241, 0.1);
+      border-color: var(--primary);
+    }
+
+    .option.selected {
+      background: rgba(99, 102, 241, 0.2);
+      border-color: var(--primary);
+    }
+
+    .option-letter {
+      background: var(--gradient-1);
+      width: 32px;
+      height: 32px;
+      border-radius: 8px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 0.875rem;
+      flex-shrink: 0;
+    }
+
+    .option-text {
+      font-size: 0.95rem;
+      line-height: 1.5;
+    }
+
+    /* Result Card */
+    .result-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 2px solid var(--primary);
+      border-radius: 24px;
+      padding: 48px;
+      text-align: center;
+      display: none;
+    }
+
+    .result-card.show { display: block; }
+
+    .result-icon {
+      font-size: 4rem;
+      margin-bottom: 24px;
+    }
+
+    .result-title {
+      font-size: 2rem;
+      font-weight: 700;
+      margin-bottom: 8px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .result-subtitle {
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+    }
+
+    .result-description {
+      text-align: left;
+      line-height: 1.8;
+      margin-bottom: 32px;
+      padding: 24px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+    }
+
+    .result-tags {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      flex-wrap: wrap;
+      margin-bottom: 32px;
+    }
+
+    .result-tag {
+      background: rgba(99, 102, 241, 0.2);
+      color: var(--primary);
+      padding: 8px 16px;
+      border-radius: 20px;
+      font-size: 0.875rem;
+    }
+
+    /* Prompt Section */
+    .prompt-section {
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+      padding: 24px;
+      margin-top: 32px;
+    }
+
+    .prompt-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .prompt-title {
+      font-weight: 600;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .copy-btn {
+      background: var(--gradient-1);
+      border: none;
+      color: white;
+      padding: 8px 16px;
+      border-radius: 8px;
+      cursor: pointer;
+      font-size: 0.875rem;
+      font-weight: 500;
+    }
+
+    .copy-btn:hover { opacity: 0.9; }
+
+    .prompt-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px;
+      padding: 16px;
+      font-family: monospace;
+      font-size: 0.875rem;
+      line-height: 1.6;
+      white-space: pre-wrap;
+      color: var(--text-secondary);
+    }
+
+    /* Actions */
+    .actions {
+      display: flex;
+      gap: 16px;
+      margin-top: 32px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+      font-size: 1rem;
+    }
+
+    .btn-primary {
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: rgba(255,255,255,0.1);
+      color: var(--text-primary);
+    }
+
+    .btn:hover {
+      transform: translateY(-2px);
+    }
+
+    /* Navigation */
+    .nav-buttons {
+      display: flex;
+      justify-content: space-between;
+      margin-top: 48px;
+      padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-btn {
+      color: var(--text-secondary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      font-size: 0.875rem;
+    }
+
+    .nav-btn:hover { color: var(--primary); }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="phase-badge">Phase 1</span>
+      <h1>💡 靈感發想</h1>
+      <a href="../index.html" class="back-link">← 返回首頁</a>
+    </header>
+
+    <div class="progress-bar">
+      <div class="progress-fill"></div>
+    </div>
+
+    <!-- Quiz Section -->
+    <div id="quiz-section">
+      <div class="quiz-card">
+        <div class="question">
+          <span class="question-number">Q1</span>
+          你最想要的旅遊體驗是哪一個？
+        </div>
+        <div class="options" data-question="1">
+          <div class="option" data-answer="A">
+            <span class="option-letter">A</span>
+            <span class="option-text">在咖啡廳待一整個下午，感受當地生活節奏</span>
+          </div>
+          <div class="option" data-answer="B">
+            <span class="option-letter">B</span>
+            <span class="option-text">一天跑 8 個景點，IG 九宮格必須填滿</span>
+          </div>
+          <div class="option" data-answer="C">
+            <span class="option-letter">C</span>
+            <span class="option-text">逛當地傳統市場，買菜回家做飯</span>
+          </div>
+          <div class="option" data-answer="D">
+            <span class="option-letter">D</span>
+            <span class="option-text">凌晨爬上山等日出，挑戰體能極限</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="question">
+          <span class="question-number">Q2</span>
+          旅程中遇到語言不通怎麼辦？
+        </div>
+        <div class="options" data-question="2">
+          <div class="option" data-answer="A">
+            <span class="option-letter">A</span>
+            <span class="option-text">立刻開啟 Google Lens 拍照翻譯，一路暢通</span>
+          </div>
+          <div class="option" data-answer="B">
+            <span class="option-letter">B</span>
+            <span class="option-text">冷靜走到附近店家比手畫腳，這就是旅遊樂趣</span>
+          </div>
+          <div class="option" data-answer="C">
+            <span class="option-letter">C</span>
+            <span class="option-text">掏出手機語音助理，讓 AI 即時口譯</span>
+          </div>
+          <div class="option" data-answer="D">
+            <span class="option-letter">D</span>
+            <span class="option-text">放棄這個體驗，改去下一個點</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="quiz-card">
+        <div class="question">
+          <span class="question-number">Q3</span>
+          行程中有一個整天，你會怎麼安排？
+        </div>
+        <div class="options" data-question="3">
+          <div class="option" data-answer="A">
+            <span class="option-letter">A</span>
+            <span class="option-text">跟著當地團，行程有人安排好</span>
+          </div>
+          <div class="option" data-answer="B">
+            <span class="option-letter">B</span>
+            <span class="option-text">睡到自然醒，走到哪吃到哪</span>
+          </div>
+          <div class="option" data-answer="C">
+            <span class="option-letter">C</span>
+            <span class="option-text">早上已經排好景點，下午留白隨機應變</span>
+          </div>
+          <div class="option" data-answer="D">
+            <span class="option-letter">D</span>
+            <span class="option-text">研究一堆攻略，制定「完美」行程表</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="actions" style="justify-content: center;">
+        <button class="btn btn-primary" id="get-result-btn">
+          🎯 取得我的旅遊人格
+        </button>
+      </div>
+    </div>
+
+    <!-- Result Section -->
+    <div class="result-card" id="result-section">
+      <div class="result-icon" id="result-icon">🌿⚖️</div>
+      <h2 class="result-title" id="result-title">慢活平衡大師</h2>
+      <p class="result-subtitle" id="result-subtitle">Slow Living Balance Master</p>
+
+      <div class="result-description" id="result-description">
+        你喜歡深度體驗，勝過跑遍景點。一天中精心安排 2-3 個定點，其餘時間留給自己探索。
+        適合前往节奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。
+      </div>
+
+      <div class="result-tags" id="result-tags">
+        <span class="result-tag">🌿 慢活者</span>
+        <span class="result-tag">⚖️ 平衡大師</span>
+        <span class="result-tag">🤖 科技旅人</span>
+      </div>
+
+      <div class="prompt-section">
+        <div class="prompt-header">
+          <span class="prompt-title">🎨 卡通頭像 Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt()">複製</button>
+        </div>
+        <div class="prompt-box" id="cartoon-prompt">
+請用這張照片生成卡通風格旅遊圖。
+
+風格：日系漫畫（Anime style）
+背景：淺草寺仲見世通
+人物：保留我的臉部特徵
+服裝：白色襯衫 + 淺色休閒褲
+配色：馬卡龍色系
+文字：「[名字] 的慢活之旅」
+附加：飄落櫻花花瓣
+比例：9:16（LINE 分享用）</div>
+      </div>
+
+      <div class="prompt-section" style="margin-top: 16px;">
+        <div class="prompt-header">
+          <span class="prompt-title">✨ Gemini 行程規劃 Prompt</span>
+          <button class="copy-btn" onclick="copyPrompt2()">複製</button>
+        </div>
+        <div class="prompt-box" id="行程-prompt">
+我要去 [目的地]，幫我規劃 [天數] 天慢活行程。
+
+旅遊風格：深度體驗、慢節奏
+交通方式：地鐵 + 步行
+必去：當地人推薦的咖啡廳、隱藏版景點
+不吃：觀光客多的連鎖店
+午餐：當地人或日本人喜歡的餐廳
+預算：每人 [金額] / 天
+
+請幫我：
+1. 每天只安排 2-3 個定點（不要排太滿）
+2. 每個定點的「深度停留」建議（至少 2 小時）
+3. 適合「慢活者」的早餐地點
+4. 建議在地的文化體驗活動</div>
+      </div>
+
+      <div class="actions">
+        <a href="phase2.html" class="btn btn-primary">
+          下一步：深度規劃 →
+        </a>
+        <button class="btn btn-secondary" onclick="retakeQuiz()">
+          重新測驗
+        </button>
+      </div>
+    </div>
+
+    <nav class="nav-buttons">
+      <span></span>
+      <a href="phase2.html" class="nav-btn">
+        Phase 2：深度規劃 →
+      </a>
+    </nav>
+  </div>
+
+  <script>
+    // Personality data
+    const personalities = {
+      'AAA': { icon: '🌿', title: '慢活沉澱者', subtitle: 'Slow Living Explorer', tags: ['🌿 慢活者', '📚 深度探索', '☕ 咖啡旅人'], desc: '你喜歡深度體驗，勝過跑遍景點。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。' },
+      'AAB': { icon: '🌿🎭', title: '悠活漫遊者', subtitle: 'Relaxed Wanderer', tags: ['🌿 慢活者', '🎭 隨遇而安', '🦋 自由靈魂'], desc: '你喜歡深度體驗，勝過跑遍景點。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。' },
+      // ... more combinations can be added
+    };
+
+    const defaultPersonality = {
+      icon: '🌿⚖️',
+      title: '慢活平衡大師',
+      subtitle: 'Slow Living Balance Master',
+      tags: ['🌿 慢活者', '⚖️ 平衡大師', '🤖 科技旅人'],
+      desc: '你喜歡深度體驗，勝過跑遍景點。一天中精心安排 2-3 個定點，其餘時間留給自己探索。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。'
+    };
+
+    let answers = {};
+
+    // Handle option selection
+    document.querySelectorAll('.option').forEach(option => {
+      option.addEventListener('click', () => {
+        const question = option.parentElement.dataset.question;
+        const answer = option.dataset.answer;
+
+        // Remove previous selection for this question
+        document.querySelectorAll(`[data-question="${question}"] .option`).forEach(opt => {
+          opt.classList.remove('selected');
+        });
+
+        // Select this option
+        option.classList.add('selected');
+        answers[question] = answer;
+      });
+    });
+
+    // Get result
+    document.getElementById('get-result-btn').addEventListener('click', () => {
+      if (Object.keys(answers).length < 3) {
+        alert('請先回答完所有問題');
+        return;
+      }
+
+      const answerKey = answers[1] + answers[2] + answers[3];
+      const personality = personalities[answerKey] || defaultPersonality;
+
+      // Update result display
+      document.getElementById('result-icon').textContent = personality.icon;
+      document.getElementById('result-title').textContent = personality.title;
+      document.getElementById('result-subtitle').textContent = personality.subtitle;
+      document.getElementById('result-description').textContent = personality.desc;
+
+      const tagsHtml = personality.tags.map(tag => `<span class="result-tag">${tag}</span>`).join('');
+      document.getElementById('result-tags').innerHTML = tagsHtml;
+
+      // Show result, hide quiz
+      document.getElementById('quiz-section').style.display = 'none';
+      document.getElementById('result-section').classList.add('show');
+    });
+
+    function copyPrompt() {
+      const text = document.getElementById('cartoon-prompt').textContent;
+      navigator.clipboard.writeText(text);
+      alert('已複製到剪貼簿！');
+    }
+
+    function copyPrompt2() {
+      const text = document.getElementById('行程-prompt').textContent;
+      navigator.clipboard.writeText(text);
+      alert('已複製到剪貼簿！');
+    }
+
+    function retakeQuiz() {
+      answers = {};
+      document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
+      document.getElementById('quiz-section').style.display = 'block';
+      document.getElementById('result-section').classList.remove('show');
+    }
+  </script>
+</body>
+</html>

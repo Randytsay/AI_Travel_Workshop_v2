@@ -1,0 +1,377 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Phase 4｜視覺生成 | AI 旅遊工作坊 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gradient-1: linear-gradient(135deg, #f59e0b 0%, #d97706 100%);
+    }
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      padding: 24px;
+    }
+    .container { max-width: 900px; margin: 0 auto; }
+    .header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 48px; padding-bottom: 24px;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+    .phase-badge {
+      background: var(--gradient-1);
+      padding: 8px 16px; border-radius: 12px;
+      font-weight: 700; font-size: 0.875rem;
+    }
+    .header h1 { font-size: 1.5rem; }
+    .back-link {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.875rem; margin-left: auto;
+    }
+    .progress-bar {
+      background: rgba(255,255,255,0.1); border-radius: 20px;
+      height: 8px; margin-bottom: 48px;
+    }
+    .progress-fill {
+      background: var(--gradient-1); height: 100%;
+      width: 67%; border-radius: 20px;
+    }
+
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      margin-bottom: 24px;
+    }
+
+    .section-header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 24px;
+    }
+    .section-icon { font-size: 2rem; }
+    .section-title { font-size: 1.25rem; font-weight: 600; }
+    .section-subtitle { font-size: 0.875rem; color: var(--text-secondary); }
+
+    .prompt-box {
+      background: rgba(0,0,0,0.3);
+      border-radius: 12px; padding: 20px;
+      font-family: monospace; font-size: 0.875rem;
+      line-height: 1.7; white-space: pre-wrap;
+      color: var(--text-secondary); margin: 16px 0;
+    }
+    .copy-btn {
+      background: var(--gradient-1);
+      border: none; color: white;
+      padding: 8px 16px; border-radius: 8px;
+      cursor: pointer; font-size: 0.875rem; font-weight: 500;
+      float: right;
+    }
+
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+      gap: 16px;
+      margin: 24px 0;
+    }
+    .style-card {
+      background: rgba(255,255,255,0.05);
+      border: 2px solid transparent;
+      border-radius: 16px; padding: 20px;
+      text-align: center; cursor: pointer;
+      transition: all 0.3s ease;
+    }
+    .style-card:hover, .style-card.selected {
+      border-color: var(--primary);
+      background: rgba(245, 158, 11, 0.1);
+    }
+    .style-icon { font-size: 2.5rem; margin-bottom: 8px; }
+    .style-name { font-weight: 600; margin-bottom: 4px; }
+    .style-desc { font-size: 0.75rem; color: var(--text-secondary); }
+
+    .example-box {
+      background: rgba(245, 158, 11, 0.1);
+      border-left: 4px solid var(--primary);
+      padding: 16px; border-radius: 0 12px 12px 0;
+      margin: 16px 0;
+    }
+    .example-label {
+      font-size: 0.75rem; color: var(--primary);
+      font-weight: 600; margin-bottom: 8px;
+    }
+    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
+
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 12px;
+      margin: 24px 0;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 3rem;
+    }
+
+    .tab-container {
+      display: flex; gap: 8px; margin-bottom: 24px;
+    }
+    .tab {
+      padding: 10px 20px;
+      background: rgba(255,255,255,0.05);
+      border: none; border-radius: 10px;
+      color: var(--text-secondary);
+      cursor: pointer; font-weight: 500;
+      transition: all 0.3s ease;
+    }
+    .tab.active {
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    .nav-buttons {
+      display: flex; justify-content: space-between;
+      margin-top: 48px; padding-top: 24px;
+      border-top: 1px solid rgba(255,255,255,0.1);
+    }
+    .nav-btn {
+      color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 8px;
+      font-size: 0.875rem;
+    }
+    .nav-btn:hover { color: var(--primary); }
+    .btn {
+      display: inline-flex; align-items: center; gap: 8px;
+      padding: 14px 28px; border-radius: 14px;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.3s ease; border: none;
+      font-size: 0.95rem;
+    }
+    .btn-primary { background: var(--gradient-1); color: white; }
+    .btn:hover { transform: translateY(-2px); }
+    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header class="header">
+      <span class="phase-badge">Phase 4</span>
+      <h1>🎨 視覺生成</h1>
+      <a href="../index.html" class="back-link">← 返回首頁</a>
+    </header>
+
+    <div class="progress-bar"><div class="progress-fill"></div></div>
+
+    <!-- Cartoon Avatar Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">😎</span>
+        <div>
+          <div class="section-title">卡通頭像生成</div>
+          <div class="section-subtitle">上傳自拍照，AI 生成你的專屬旅遊人格卡通圖</div>
+        </div>
+      </div>
+
+      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
+        打開 Gemini App，上傳你的自拍照，然後複製下方的 Prompt 貼上。
+        選擇你想要的風格：
+      </p>
+
+      <div class="style-grid">
+        <div class="style-card selected">
+          <div class="style-icon">🎌</div>
+          <div class="style-name">日系漫畫風</div>
+          <div class="style-desc">大眼睛、柔和線條</div>
+        </div>
+        <div class="style-card">
+          <div class="style-icon">🎨</div>
+          <div class="style-name">水彩手繪風</div>
+          <div class="style-desc">暈染邊緣、紙張紋理</div>
+        </div>
+        <div class="style-card">
+          <div class="style-icon">🥰</div>
+          <div class="style-name">Q版大頭貼</div>
+          <div class="style-desc">2-3 頭身、超萌比例</div>
+        </div>
+        <div class="style-card">
+          <div class="style-icon">🎬</div>
+          <div class="style-name">電影海報風</div>
+          <div class="style-desc">戲劇光影、寬銀幕</div>
+        </div>
+      </div>
+
+      <button class="copy-btn" onclick="copyPrompt('cartoon-prompt')">複製 Prompt</button>
+      <div class="prompt-box" id="cartoon-prompt">請用這張照片生成卡通風格旅遊圖。
+
+風格：日系漫畫（Anime style）
+背景：淺草寺仲見世通（紅色燈籠 + 雷門）
+人物：保留我的臉部特徵和髮型
+眼睛：漫畫風大眼，有眼神光
+服裝：白色襯衫 + 淺色休閒褲
+配色：馬卡龍色系（淺藍 + 奶油白 + 珊瑚粉）
+文字：「[你的名字] 的慢活之旅」
+附加：飄落櫻花花瓣
+比例：9:16（LINE 分享用）
+
+請嚴格遵守以上設定，不要偏離風格。</div>
+
+      <div class="example-box">
+        <div class="example-label">💡 更換風格</div>
+        <div class="example-text">
+          把第一行的「Anime style」替換成：<br>
+          • 水彩風 →「watercolor painting style」<br>
+          • Q版 →「2-3頭身超萌大頭貼風格，cute chibi style」<br>
+          • 電影風 →「cinematic poster style，21:9 aspect ratio」
+        </div>
+      </div>
+    </div>
+
+    <!-- LINE Share Image Section -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">📱</span>
+        <div>
+          <div class="section-title">LINE 分享圖生成</div>
+          <div class="section-subtitle">一鍵生成可發到 LINE 群的行程長圖</div>
+        </div>
+      </div>
+
+      <div class="tab-container">
+        <button class="tab active" onclick="switchTab('itinerary')">行程圖</button>
+        <button class="tab" onclick="switchTab('flight')">機票圖</button>
+        <button class="tab" onclick="switchTab('summary')">總結圖</button>
+      </div>
+
+      <div id="itinerary" class="tab-content active">
+        <button class="copy-btn" onclick="copyPrompt('itinerary-prompt')">複製 Prompt</button>
+        <div class="prompt-box" id="itinerary-prompt">用 9:16 豎版格式，生成一張 LINE 分享用的旅遊行程圖。
+
+設計要求：
+• 上方：風景圖（富士山 + 河口湖）
+• 中間：行程文字（Day 1 / Day 2 / Day 3...）
+• 背景：乾淨留白多，日系清新風格
+• 配色：淺藍 #E3F2FD + 白色 + 金色點綴
+• 比例：9:16（豎版，適合 LINE）
+
+行程內容：
+Day 1：成田機場 → 淺草（入住淺草微笑飯店）
+Day 2：淺草寺 → 上野阿美橫丁 → 秋葉原
+Day 3：日暮里 → 谷根千老街 → 返程
+
+附加元素：
+• 右上角：日期標籤「2026.XX.XX」
+• 左下角：小小的LINE圖示
+• 字體：手寫風字體效果</div>
+      </div>
+
+      <div id="flight" class="tab-content">
+        <button class="copy-btn" onclick="copyPrompt('flight-prompt')">複製 Prompt</button>
+        <div class="prompt-box" id="flight-prompt">用 9:16 豎版格式，生成一張機票分享圖。
+
+設計要求：
+• 背景：淡藍色 + 白雲飄飄
+• 主體：機票票根造型
+• 票根內容：
+  - 出發：TPE（台北）
+  - 到達：NRT（成田）
+  - 日期：[日期]
+  - 航空公司：[航空]
+• 配色：航空公司的品牌色 + 白色
+• 附加：小小的護照圖示裝飾
+
+風格：乾淨俐落、商務質感</div>
+      </div>
+
+      <div id="summary" class="tab-content">
+        <button class="copy-btn" onclick="copyPrompt('summary-prompt')">複製 Prompt</button>
+        <div class="prompt-box" id="summary-prompt">生成一張小紅書風格的日本 [地點] 旅遊分享圖（3:4 比例）
+
+包含：
+• 標題：「[爆款標題]」
+  例如：「東京 5 天 4 夜｜學生黨窮遊攻略」
+• 地點標籤：#東京 #旅遊 #攻略 #日本自由行
+• Emoji 裝飾元素
+• 簡短文字說明
+• 配色：莫蘭迪色系
+• 風格：文青雜誌風、小紅書用戶喜歡的風格
+
+輸出：豎版 3:4 比例，適合小紅書發文</div>
+      </div>
+    </div>
+
+    <!-- Shareable Gallery -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🖼️</span>
+        <div>
+          <div class="section-title">生成範例參考</div>
+          <div class="section-subtitle">這些風格都可以用 Prompt 生成</div>
+        </div>
+      </div>
+
+      <div class="gallery-grid">
+        <div class="gallery-item">🎌</div>
+        <div class="gallery-item">🎨</div>
+        <div class="gallery-item">🥰</div>
+        <div class="gallery-item">🎬</div>
+        <div class="gallery-item">🗾</div>
+        <div class="gallery-item">🏔️</div>
+      </div>
+
+      <p style="text-align: center; color: var(--text-secondary); font-size: 0.875rem;">
+        上方只是表情符號參考，實際輸出是高畫質圖片
+      </p>
+    </div>
+
+    <div class="actions" style="justify-content: center;">
+      <a href="phase3.html" class="btn btn-primary">← Phase 3：知識庫</a>
+      <a href="phase5.html" class="btn btn-primary">Phase 5：現場生存 →</a>
+    </div>
+
+    <nav class="nav-buttons">
+      <a href="phase3.html" class="nav-btn">← Phase 3</a>
+      <a href="phase5.html" class="nav-btn">Phase 5：現場生存 →</a>
+    </nav>
+  </div>
+
+  <script>
+    function copyPrompt(id) {
+      const text = document.getElementById(id).textContent;
+      navigator.clipboard.writeText(text);
+      alert('已複製到剪貼簿！');
+    }
+
+    function switchTab(tabId) {
+      document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
+      document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
+      document.getElementById(tabId).classList.add('active');
+      event.target.classList.add('active');
+    }
+
+    document.querySelectorAll('.style-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+      });
+    });
+  </script>
+</body>
+</html>

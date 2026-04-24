@@ -1,0 +1,500 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 旅遊工作坊 v2 | 美安店主 × 群友</title>
+  <meta name="description" content="用 Gemini 3.1 從零開始規劃日本夢幻之旅，結合 LINE Bot 互動與社群分享">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --primary: #6366f1;
+      --primary-dark: #4f46e5;
+      --secondary: #06b6d4;
+      --accent: #f59e0b;
+      --bg-dark: #0f172a;
+      --bg-card: rgba(30, 41, 59, 0.8);
+      --text-primary: #f8fafc;
+      --text-secondary: #94a3b8;
+      --gradient-1: linear-gradient(135deg, #6366f1 0%, #06b6d4 100%);
+      --gradient-2: linear-gradient(135deg, #f59e0b 0%, #ef4444 100%);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Noto Sans TC', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg-dark);
+      color: var(--text-primary);
+      min-height: 100vh;
+      overflow-x: hidden;
+    }
+
+    /* Animated background */
+    .bg-animation {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      z-index: -1;
+      overflow: hidden;
+    }
+
+    .bg-animation::before {
+      content: '';
+      position: absolute;
+      top: -50%;
+      left: -50%;
+      width: 200%;
+      height: 200%;
+      background: radial-gradient(circle at 20% 80%, rgba(99, 102, 241, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+                  radial-gradient(circle at 40% 40%, rgba(245, 158, 11, 0.1) 0%, transparent 30%);
+      animation: float 20s ease-in-out infinite;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) rotate(0deg); }
+      33% { transform: translate(30px, -30px) rotate(5deg); }
+      66% { transform: translate(-20px, 20px) rotate(-5deg); }
+    }
+
+    /* Container */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 24px;
+    }
+
+    /* Header */
+    header {
+      padding: 24px 0;
+      border-bottom: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .header-content {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-size: 1.5rem;
+      font-weight: 700;
+    }
+
+    .logo-icon {
+      width: 40px;
+      height: 40px;
+      background: var(--gradient-1);
+      border-radius: 12px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.2rem;
+    }
+
+    .version-badge {
+      background: var(--gradient-2);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      font-weight: 700;
+    }
+
+    /* Hero Section */
+    .hero {
+      padding: 80px 0;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2rem, 5vw, 3.5rem);
+      font-weight: 700;
+      margin-bottom: 16px;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero .subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 32px;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-stats {
+      display: flex;
+      justify-content: center;
+      gap: 48px;
+      margin-top: 48px;
+      flex-wrap: wrap;
+    }
+
+    .stat-item {
+      text-align: center;
+    }
+
+    .stat-value {
+      font-size: 2.5rem;
+      font-weight: 700;
+      background: var(--gradient-1);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .stat-label {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      margin-top: 4px;
+    }
+
+    /* Card Grid */
+    .card-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 24px;
+      padding: 48px 0;
+    }
+
+    .card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 32px;
+      transition: all 0.3s ease;
+    }
+
+    .card:hover {
+      transform: translateY(-4px);
+      border-color: var(--primary);
+      box-shadow: 0 20px 40px rgba(99, 102, 241, 0.2);
+    }
+
+    .card-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 1.5rem;
+      margin-bottom: 20px;
+    }
+
+    .card-icon.phase1 { background: linear-gradient(135deg, #6366f1, #8b5cf6); }
+    .card-icon.phase2 { background: linear-gradient(135deg, #06b6d4, #0891b2); }
+    .card-icon.phase3 { background: linear-gradient(135deg, #10b981, #059669); }
+    .card-icon.phase4 { background: linear-gradient(135deg, #f59e0b, #d97706); }
+    .card-icon.phase5 { background: linear-gradient(135deg, #ef4444, #dc2626); }
+    .card-icon.phase6 { background: linear-gradient(135deg, #ec4899, #db2777); }
+
+    .card h3 {
+      font-size: 1.25rem;
+      margin-bottom: 8px;
+    }
+
+    .card .tools {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 16px;
+    }
+
+    .tool-tag {
+      background: rgba(255,255,255,0.1);
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: var(--text-secondary);
+    }
+
+    /* QR Code Section */
+    .qr-section {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 24px;
+      padding: 48px;
+      margin: 48px 0;
+      text-align: center;
+    }
+
+    .qr-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 32px;
+      margin-top: 32px;
+    }
+
+    .qr-item {
+      padding: 24px;
+      background: rgba(255,255,255,0.05);
+      border-radius: 16px;
+    }
+
+    .qr-placeholder {
+      width: 120px;
+      height: 120px;
+      background: white;
+      border-radius: 12px;
+      margin: 0 auto 16px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 3rem;
+      color: var(--bg-dark);
+    }
+
+    .qr-label {
+      font-weight: 500;
+      margin-bottom: 4px;
+    }
+
+    .qr-desc {
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+    }
+
+    /* CTA Button */
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      padding: 16px 32px;
+      border-radius: 16px;
+      font-weight: 600;
+      font-size: 1rem;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      border: none;
+    }
+
+    .btn-primary {
+      background: var(--gradient-1);
+      color: white;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(99, 102, 241, 0.4);
+    }
+
+    /* Footer */
+    footer {
+      padding: 48px 0;
+      border-top: 1px solid rgba(255,255,255,0.1);
+      text-align: center;
+      color: var(--text-secondary);
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      .hero {
+        padding: 48px 0;
+      }
+
+      .hero-stats {
+        gap: 24px;
+      }
+
+      .qr-section {
+        padding: 24px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="bg-animation"></div>
+
+  <header>
+    <div class="container header-content">
+      <div class="logo">
+        <div class="logo-icon">✈️</div>
+        <span>AI 旅遊工作坊</span>
+        <span class="version-badge">v2</span>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero">
+      <div class="container">
+        <h1>用 AI 從零規劃日本夢幻之旅</h1>
+        <p class="subtitle">
+          結合 Gemini 3.1、Gemini Live、Google Flights AI 與 LINE Bot<br>
+          專為美安店主 × 群友設計的互動式 AI 教學工作坊
+        </p>
+
+        <div class="hero-stats">
+          <div class="stat-item">
+            <div class="stat-value">6</div>
+            <div class="stat-label">學習單元</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">4h</div>
+            <div class="stat-label">課程時長</div>
+          </div>
+          <div class="stat-item">
+            <div class="stat-value">7+</div>
+            <div class="stat-label">LINE 關鍵字</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="container">
+      <div class="card-grid">
+        <!-- Phase 1 -->
+        <div class="card">
+          <div class="card-icon phase1">💡</div>
+          <h3>Phase 1｜靈感發想</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            透過 MBTI 風格測驗找出你的旅遊人格，Gemini Live 語音互動即時規劃行程
+          </p>
+          <div class="tools">
+            <span class="tool-tag">Gemini 3.1</span>
+            <span class="tool-tag">Gemini Live</span>
+            <span class="tool-tag">人格測驗</span>
+          </div>
+        </div>
+
+        <!-- Phase 2 -->
+        <div class="card">
+          <div class="card-icon phase2">📊</div>
+          <h3>Phase 2｜深度規劃</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            Deep Research 生成專業行程表，Google Flights AI 幫你選擇最佳航班
+          </p>
+          <div class="tools">
+            <span class="tool-tag">Gemini Deep Research</span>
+            <span class="tool-tag">Google Flights</span>
+            <span class="tool-tag">JR Pass 計算</span>
+          </div>
+        </div>
+
+        <!-- Phase 3 -->
+        <div class="card">
+          <div class="card-icon phase3">📓</div>
+          <h3>Phase 3｜知識庫</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            NotebookLM 建立專屬旅遊助理，行程表一鍵變成 Podcast 語音導覽
+          </p>
+          <div class="tools">
+            <span class="tool-tag">NotebookLM</span>
+            <span class="tool-tag">Audio Overview</span>
+          </div>
+        </div>
+
+        <!-- Phase 4 -->
+        <div class="card">
+          <div class="card-icon phase4">🎨</div>
+          <h3>Phase 4｜視覺生成</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            Gemini nanobanana 生成卡通人格圖，一鍵製作出 LINE 分享長圖
+          </p>
+          <div class="tools">
+            <span class="tool-tag">Gemini 生圖</span>
+            <span class="tool-tag">卡通頭像</span>
+            <span class="tool-tag">LINE 分享圖</span>
+          </div>
+        </div>
+
+        <!-- Phase 5 -->
+        <div class="card">
+          <div class="card-icon phase5">🗾</div>
+          <h3>Phase 5｜現場生存</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            Google Lens 即時翻譯日文菜單，Gemini Live 語音對話解決現場溝通
+          </p>
+          <div class="tools">
+            <span class="tool-tag">Google Lens</span>
+            <span class="tool-tag">Gemini Live</span>
+            <span class="tool-tag">即時翻譯</span>
+          </div>
+        </div>
+
+        <!-- Phase 6 -->
+        <div class="card">
+          <div class="card-icon phase6">💰</div>
+          <h3>Phase 6｜商業變現</h3>
+          <p style="color: var(--text-secondary); font-size: 0.9rem; line-height: 1.6;">
+            AI 生成 Shop.com 導購文案，打造個人旅遊影響力並實際變現
+          </p>
+          <div class="tools">
+            <span class="tool-tag">Gemini 文案</span>
+            <span class="tool-tag">Shop.com</span>
+            <span class="tool-tag">導購技巧</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- LINE Bot Section -->
+    <section class="container">
+      <div class="qr-section">
+        <h2 style="font-size: 1.5rem; margin-bottom: 8px;">📱 加入 LINE Bot 取得提示詞</h2>
+        <p style="color: var(--text-secondary); margin-bottom: 24px;">
+          工作坊後持續取得各單元提示詞，輸入關鍵字即可獲得
+        </p>
+
+        <div class="qr-grid">
+          <div class="qr-item">
+            <div class="qr-placeholder">🧳</div>
+            <div class="qr-label">LINE Bot</div>
+            <div class="qr-desc">掃描加入官方帳號</div>
+          </div>
+          <div class="qr-item">
+            <div class="qr-placeholder">📋</div>
+            <div class="qr-label">關鍵字列表</div>
+            <div class="qr-desc">人格、卡通、行程、機票...</div>
+          </div>
+          <div class="qr-item">
+            <div class="qr-placeholder">📥</div>
+            <div class="qr-label">懶人包</div>
+            <div class="qr-desc">輸入「回憶」下載 PDF</div>
+          </div>
+          <div class="qr-item">
+            <div class="qr-placeholder">❓</div>
+            <div class="qr-label">真人客服</div>
+            <div class="qr-desc">輸入「問題」轉接助教</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="container" style="text-align: center; padding: 48px 0;">
+      <a href="workshop/phases/phase1.html" class="btn btn-primary">
+        🚀 開始學習 Phase 1
+      </a>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI 旅遊工作坊 v2 | 美安店主 × 群友專用</p>
+      <p style="margin-top: 8px; font-size: 0.875rem;">
+        整合 Gemini 3.1 / Gemini Live / Google Flights AI / LINE Bot
+      </p>
+    </div>
+  </footer>
+</body>
+</html>
