@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="zh-TW" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>教案大綱 | AI 旅遊工作坊 v2</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --bg-primary: #0d1b2a;
+      --bg-secondary: #1b2838;
+      --bg-card: rgba(27, 40, 56, 0.85);
+      --bg-card-solid: #1b2838;
+      --text-primary: #ffffff;
+      --text-secondary: #a8c0d6;
+      --text-muted: #6b8299;
+      --border: rgba(255,255,255,0.08);
+      --accent-sunset: linear-gradient(135deg, #ff6b6b, #f39c12, #ffd93d);
+      --shadow: 0 8px 32px rgba(0,0,0,0.3);
+    }
+
+    [data-theme="light"] {
+      --bg-primary: #fff9f0;
+      --bg-secondary: #fff5e6;
+      --bg-card: rgba(255,255,255,0.9);
+      --bg-card-solid: #ffffff;
+      --text-primary: #2d3436;
+      --text-secondary: #636e72;
+      --text-muted: #b2bec3;
+      --border: rgba(0,0,0,0.08);
+      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      font-family: 'Noto Sans TC', sans-serif;
+      background: var(--bg-primary);
+      color: var(--text-primary);
+      min-height: 100vh;
+      transition: background 0.4s, color 0.3s;
+      line-height: 1.7;
+    }
+
+    /* ── Top Nav ── */
+    .topnav {
+      position: sticky; top: 0; z-index: 100;
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+      border-bottom: 1px solid var(--border);
+      padding: 0 24px;
+    }
+    .topnav-inner {
+      max-width: 900px; margin: 0 auto;
+      display: flex; align-items: center; gap: 8px;
+      height: 56px; overflow-x: auto; scrollbar-width: none;
+    }
+    .topnav-inner::-webkit-scrollbar { display: none; }
+    .topnav-logo {
+      display: flex; align-items: center; gap: 8px;
+      font-weight: 700; font-size: 0.95rem;
+      color: var(--text-primary); text-decoration: none;
+      white-space: nowrap; flex-shrink: 0; margin-right: 8px;
+    }
+    .topnav-logo span { font-size: 1.2rem; }
+    .topnav-divider {
+      width: 1px; height: 20px;
+      background: var(--border); flex-shrink: 0; margin: 0 8px;
+    }
+    .topnav-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 500;
+      color: var(--text-secondary); text-decoration: none;
+      white-space: nowrap; flex-shrink: 0;
+      transition: all 0.2s;
+    }
+    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
+    .topnav-link.active { background: var(--accent-sunset); color: white; font-weight: 600; }
+    .topnav-spacer { flex: 1; }
+    .theme-toggle {
+      width: 36px; height: 36px; border-radius: 50%;
+      border: none; background: rgba(255,255,255,0.1);
+      color: var(--text-secondary); font-size: 1rem;
+      cursor: pointer; display: flex; align-items: center; justify-content: center;
+      flex-shrink: 0; transition: all 0.2s;
+    }
+    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
+
+    /* ── Layout ── */
+    .container { max-width: 900px; margin: 0 auto; padding: 0 24px; }
+
+    /* ── Page Header ── */
+    .page-header {
+      padding: 60px 0 40px;
+      text-align: center;
+    }
+    .page-header h1 {
+      font-size: clamp(1.6rem, 4vw, 2.4rem);
+      font-weight: 900; margin-bottom: 12px;
+    }
+    .page-header h1 .highlight {
+      background: var(--accent-sunset);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .page-header p {
+      color: var(--text-secondary); font-size: 1rem;
+    }
+
+    /* ── Info Cards ── */
+    .info-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 16px;
+      margin-bottom: 48px;
+    }
+    .info-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      padding: 20px;
+      text-align: center;
+    }
+    .info-card .icon { font-size: 1.8rem; margin-bottom: 8px; }
+    .info-card .value {
+      font-size: 1.5rem; font-weight: 900;
+      background: var(--accent-sunset);
+      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .info-card .label { font-size: 0.8rem; color: var(--text-muted); margin-top: 2px; }
+
+    /* ── Section ── */
+    .section {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 32px;
+      margin-bottom: 24px;
+      transition: background 0.4s;
+    }
+    .section-header {
+      display: flex; align-items: center; gap: 12px;
+      margin-bottom: 20px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+    .section-icon { font-size: 1.6rem; }
+    .section-title {
+      font-size: 1.2rem; font-weight: 700;
+    }
+
+    /* ── Phase Card ── */
+    .phase-block {
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      margin-bottom: 20px;
+      overflow: hidden;
+    }
+    .phase-block:last-child { margin-bottom: 0; }
+    .phase-header {
+      padding: 20px 24px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .phase-badge {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 4px 14px; border-radius: 12px;
+      font-size: 0.75rem; font-weight: 700;
+      letter-spacing: 0.05em; text-transform: uppercase;
+      flex-shrink: 0;
+    }
+    .phase-block[data-phase="1"] .phase-header { background: linear-gradient(135deg, rgba(255,107,107,0.15), rgba(238,90,36,0.1)); }
+    .phase-block[data-phase="2"] .phase-header { background: linear-gradient(135deg, rgba(0,206,201,0.15), rgba(9,132,227,0.1)); }
+    .phase-block[data-phase="3"] .phase-header { background: linear-gradient(135deg, rgba(85,239,196,0.15), rgba(0,184,148,0.1)); }
+    .phase-block[data-phase="4"] .phase-header { background: linear-gradient(135deg, rgba(253,203,110,0.15), rgba(243,156,18,0.1)); }
+    .phase-block[data-phase="5"] .phase-header { background: linear-gradient(135deg, rgba(116,185,255,0.15), rgba(9,132,227,0.1)); }
+    .phase-block[data-phase="6"] .phase-header { background: linear-gradient(135deg, rgba(253,121,168,0.15), rgba(232,67,147,0.1)); }
+
+    .phase-block[data-phase="1"] .phase-badge { background: linear-gradient(135deg, #ff6b6b, #ee5a24); color: white; }
+    .phase-block[data-phase="2"] .phase-badge { background: linear-gradient(135deg, #00cec9, #0984e3); color: white; }
+    .phase-block[data-phase="3"] .phase-badge { background: linear-gradient(135deg, #55efc4, #00b894); color: #2d3436; }
+    .phase-block[data-phase="4"] .phase-badge { background: linear-gradient(135deg, #fdcb6e, #f39c12); color: #2d3436; }
+    .phase-block[data-phase="5"] .phase-badge { background: linear-gradient(135deg, #74b9ff, #0984e3); color: white; }
+    .phase-block[data-phase="6"] .phase-badge { background: linear-gradient(135deg, #fd79a8, #e84393); color: white; }
+
+    .phase-name { font-size: 1.05rem; font-weight: 700; }
+    .phase-subtitle { font-size: 0.8rem; color: var(--text-muted); }
+
+    .phase-body { padding: 20px 24px; }
+
+    /* ── Table ── */
+    .schedule-table {
+      width: 100%; border-collapse: collapse;
+      font-size: 0.9rem;
+      margin-bottom: 16px;
+    }
+    .schedule-table th {
+      text-align: left; padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      font-weight: 600; font-size: 0.8rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .schedule-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .schedule-table tr:last-child td { border-bottom: none; }
+    .schedule-table .time {
+      color: var(--text-muted); font-size: 0.8rem;
+      white-space: nowrap;
+    }
+
+    .output-tag {
+      display: inline-flex; align-items: center; gap: 6px;
+      background: rgba(255,217,61,0.15);
+      color: #ffd93d;
+      padding: 6px 14px; border-radius: 20px;
+      font-size: 0.8rem; font-weight: 600;
+      border: 1px solid rgba(255,217,61,0.3);
+    }
+
+    .highlight-box {
+      background: rgba(255,107,107,0.12);
+      border: 1px solid rgba(255,107,107,0.3);
+      border-radius: 12px;
+      padding: 14px 18px;
+      font-size: 0.9rem;
+      color: #ff8585;
+      margin-top: 12px;
+    }
+    .highlight-box strong { font-weight: 700; }
+
+    /* ── Checklist ── */
+    .checklist {
+      list-style: none; display: flex; flex-direction: column; gap: 10px;
+    }
+    .checklist li {
+      display: flex; align-items: flex-start; gap: 10px;
+      font-size: 0.9rem;
+    }
+    .checklist li::before {
+      content: '☐';
+      font-size: 1rem;
+      flex-shrink: 0;
+      margin-top: 1px;
+    }
+    .checklist li.done::before { content: '☑'; color: #55efc4; }
+
+    /* ── Risk Table ── */
+    .risk-table {
+      width: 100%; border-collapse: collapse; font-size: 0.9rem;
+    }
+    .risk-table th {
+      text-align: left; padding: 10px 14px;
+      background: rgba(255,255,255,0.04);
+      font-weight: 600; font-size: 0.8rem;
+      color: var(--text-muted);
+      border-bottom: 1px solid var(--border);
+    }
+    .risk-table td {
+      padding: 10px 14px;
+      border-bottom: 1px solid var(--border);
+      vertical-align: top;
+    }
+    .risk-table tr:last-child td { border-bottom: none; }
+
+    /* ── Numbered List ── */
+    .num-list {
+      list-style: none;
+      counter-reset: item;
+      display: flex; flex-direction: column; gap: 12px;
+    }
+    .num-list li {
+      display: flex; align-items: flex-start; gap: 12px;
+      font-size: 0.95rem;
+    }
+    .num-list li::before {
+      counter-increment: item;
+      content: counter(item);
+      display: flex; align-items: center; justify-content: center;
+      width: 26px; height: 26px; border-radius: 50%;
+      background: var(--accent-sunset);
+      color: white; font-size: 0.75rem; font-weight: 700;
+      flex-shrink: 0;
+    }
+
+    /* ── Footer ── */
+    footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      text-align: center;
+      color: var(--text-muted);
+      font-size: 0.85rem;
+      margin-top: 48px;
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 600px) {
+      .info-grid { grid-template-columns: repeat(2, 1fr); }
+      .section { padding: 24px 20px; }
+      .phase-body { padding: 16px 20px; }
+      .schedule-table, .risk-table { font-size: 0.82rem; }
+      .schedule-table th, .risk-table th { padding: 8px 10px; }
+      .schedule-table td, .risk-table td { padding: 8px 10px; }
+    }
+  </style>
+</head>
+<body>
+  <!-- Nav -->
+  <nav class="topnav">
+    <div class="topnav-inner">
+      <a href="../index.html" class="topnav-logo"><span>✈️</span> AI 旅遊工作坊</a>
+      <div class="topnav-divider"></div>
+      <a href="../index.html" class="topnav-link">首頁</a>
+      <a href="#" class="topnav-link active">教案大綱</a>
+      <div class="topnav-spacer"></div>
+      <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
+    </div>
+  </nav>
+
+  <main class="container">
+    <!-- Page Header -->
+    <div class="page-header">
+      <h1>📋 教案大綱</h1>
+      <p>AI 旅遊工作坊 v2 — 完整課程規劃</p>
+    </div>
+
+    <!-- Info Cards -->
+    <div class="info-grid">
+      <div class="info-card">
+        <div class="icon">⏱️</div>
+        <div class="value">2.5h</div>
+        <div class="label">課程時長</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">👥</div>
+        <div class="value">30人</div>
+        <div class="label">人數上限</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">📚</div>
+        <div class="value">6 Phase</div>
+        <div class="label">學習單元</div>
+      </div>
+      <div class="info-card">
+        <div class="icon">🎯</div>
+        <div class="value">8+</div>
+        <div class="label">學員產出</div>
+      </div>
+    </div>
+
+    <!-- 基本資訊 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📌</span>
+        <span class="section-title">基本資訊</span>
+      </div>
+      <table class="schedule-table">
+        <tr><th style="width:120px;">項目</th><th>內容</th></tr>
+        <tr><td class="time">課程名稱</td><td>AI 旅遊工作坊 — 用 Gemini 玩轉日本自由行</td></tr>
+        <tr><td class="time">授課對象</td><td>美安店主、對旅遊有興趣的群友</td></tr>
+        <tr><td class="time">授課時數</td><td>2.5 小時（不含 Q&A 為 2 小時）</td></tr>
+        <tr><td class="time">人數上限</td><td>30 人</td></tr>
+        <tr><td class="time">所需設備</td><td>投影機、Wi-Fi、參與者自備手機</td></tr>
+      </table>
+    </div>
+
+    <!-- 課程目標 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🎯</span>
+        <span class="section-title">課程目標</span>
+      </div>
+      <ol class="num-list">
+        <li>讓學員了解如何使用 Gemini AI 輔助旅遊規劃</li>
+        <li>學會使用 Google Flights AI 找機票</li>
+        <li>建立 NotebookLM 個人旅遊知識庫</li>
+        <li>用 AI 生成卡通頭像和 LINE 分享圖</li>
+        <li>現場展示 Gemini Live 的翻譯能力</li>
+        <li>了解如何透過 AI 導購變現</li>
+      </ol>
+    </div>
+
+    <!-- 課前準備 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📦</span>
+        <span class="section-title">課前準備（學員）</span>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">1. 安裝 App</strong>
+        <ul class="checklist">
+          <li>Gemini App（Android / iOS）</li>
+          <li>Google Lens（通常內建在 Google App）</li>
+          <li>Google Maps</li>
+          <li>Google Flights 加入書籤</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">2. 申請帳號</strong>
+        <ul class="checklist">
+          <li>Google 帳號（用於 NotebookLM）</li>
+          <li>Shop.com 店主帳號（如要導購變現）</li>
+        </ul>
+      </div>
+
+      <div>
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">3. 預習影片（可選）</strong>
+        <ul class="checklist">
+          <li>Gemini 官方介紹影片（3 分鐘）</li>
+          <li>NotebookLM 官方介紹（2 分鐘）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Phase 1 -->
+    <div class="phase-block" data-phase="1">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 1</span>
+        <div>
+          <div class="phase-name">💡 靈感發想</div>
+          <div class="phase-subtitle">Find Your Travel Style — 20 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>開場、自我介紹</td><td>用「我是誰+我去了哪裡+我用 AI 省了多少時間」破冰</td></tr>
+          <tr><td class="time">10 分</td><td>MBTI 人格測驗</td><td>學員拿出手機，一邊做測驗一邊體驗</td></tr>
+          <tr><td class="time">5 分</td><td>卡通頭像生成</td><td>現場實作：上傳照片 + Gemini 生成卡通圖</td></tr>
+        </table>
+        <div style="margin-top:14px;">
+          <span class="output-tag">🎨 學員產出：一張自己的卡通旅遊頭像</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 2 -->
+    <div class="phase-block" data-phase="2">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 2</span>
+        <div>
+          <div class="phase-name">📊 深度規劃</div>
+          <div class="phase-subtitle">Deep Plan with AI — 25 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>Gemini Deep Research 介紹</td><td>示範：輸入一個行程 Prompt</td></tr>
+          <tr><td class="time">10 分</td><td>實際操作</td><td>學員跟著操作，用自己的目的地生成行程</td></tr>
+          <tr><td class="time">5 分</td><td>Google Flights AI</td><td>示範：自然語言搜尋機票</td></tr>
+          <tr><td class="time">5 分</td><td>JR Pass 計算</td><td>實作：用 Prompt 計算 JR Pass 划不划算</td></tr>
+        </table>
+        <div style="margin-top:14px;">
+          <span class="output-tag">📄 學員產出：一份 AI 生成的行程表</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 3 -->
+    <div class="phase-block" data-phase="3">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 3</span>
+        <div>
+          <div class="phase-name">📓 知識庫建立</div>
+          <div class="phase-subtitle">Build Your Travel Brain — 15 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>NotebookLM 介紹</td><td>影片 + 示範</td></tr>
+          <tr><td class="time">5 分</td><td>上傳資料、建立知識庫</td><td>學員把自己的機票、飯店資料上傳</td></tr>
+          <tr><td class="time">5 分</td><td>Audio Overview</td><td>行程表變 Podcast，現場播放示範</td></tr>
+        </table>
+        <div style="margin-top:14px;">
+          <span class="output-tag">🧠 學員產出：一個專屬的旅遊知識庫</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 4 -->
+    <div class="phase-block" data-phase="4">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 4</span>
+        <div>
+          <div class="phase-name">🎨 視覺生成</div>
+          <div class="phase-subtitle">Create Visual Content — 15 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>LINE 分享圖 Prompt 教學</td><td>行程圖 / 機票圖 / 總結圖</td></tr>
+          <tr><td class="time">5 分</td><td>實作：生成自己的 LINE 分享圖</td><td> </td></tr>
+          <tr><td class="time">5 分</td><td>小紅書風格 Prompt</td><td>額外加映：如要分享到小紅書</td></tr>
+        </table>
+        <div style="margin-top:14px;">
+          <span class="output-tag">🖼️ 學員產出：一張可以發 LINE 群的行程分享圖</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 5 -->
+    <div class="phase-block" data-phase="5">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 5</span>
+        <div>
+          <div class="phase-name">🗾 現場生存</div>
+          <div class="phase-subtitle">Survive on the Ground — 20 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>Google Lens 實戰</td><td>拿日文菜單當場演示</td></tr>
+          <tr><td class="time">5 分</td><td>Gemini Live 演示橋段 1</td><td>日文菜單翻譯</td></tr>
+          <tr><td class="time">5 分</td><td>Gemini Live 演示橋段 2</td><td>地鐵迷路 / 飯店入住 / 緊急翻譯</td></tr>
+          <tr><td class="time">5 分</td><td>實用 Prompt 整理</td><td>飯店 / 餐廳 / 緊急狀況</td></tr>
+        </table>
+        <div class="highlight-box">
+          ⭐ <strong>全場高潮</strong>：這是全場「哇」時刻，務必讓全場安靜觀看
+        </div>
+      </div>
+    </div>
+
+    <!-- Phase 6 -->
+    <div class="phase-block" data-phase="6">
+      <div class="phase-header">
+        <span class="phase-badge">Phase 6</span>
+        <div>
+          <div class="phase-name">💰 商業變現</div>
+          <div class="phase-subtitle">Monetize Your Influence — 15 分鐘</div>
+        </div>
+      </div>
+      <div class="phase-body">
+        <table class="schedule-table">
+          <tr><th style="width:70px;">時間</th><th>內容</th><th style="width:180px;">備註</th></tr>
+          <tr><td class="time">5 分</td><td>Shop.com 導購變現模式</td><td>說明被動收入概念</td></tr>
+          <tr><td class="time">5 分</td><td>AI 生成導購文案</td><td>示範用 Prompt 生成自然業配文</td></tr>
+          <tr><td class="time">5 分</td><td>一魚多吃策略</td><td>IG / LINE / YouTube 內容同步</td></tr>
+        </table>
+      </div>
+    </div>
+
+    <!-- Q&A -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">❓</span>
+        <span class="section-title">Q&A（10 分鐘）</span>
+      </div>
+      <ol class="num-list">
+        <li>Gemini 和 ChatGPT 哪個好用？</li>
+        <li>Gemini 會取代旅遊業者嗎？</li>
+        <li>AI 生成的行程會不會不準？</li>
+        <li>家人不會用手機怎麼辦？</li>
+      </ol>
+    </div>
+
+    <!-- 課後作業 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📝</span>
+        <span class="section-title">課後作業</span>
+      </div>
+      <ul class="checklist">
+        <li class="done"><strong>必做</strong>：用自己規劃的目的地，完成所有 6 個 Phase</li>
+        <li><strong>選做</strong>：生成卡通頭像，發到 LINE 群</li>
+        <li><strong>挑戰</strong>：用 NotebookLM 建立自己的「旅遊攻略庫」</li>
+      </ul>
+    </div>
+
+    <!-- 所需素材 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">📋</span>
+        <span class="section-title">所需素材清單</span>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">👤 學員須自備</strong>
+        <ul class="checklist">
+          <li class="done">智慧型手機（iOS / Android）</li>
+          <li class="done">Google 帳號</li>
+          <li class="done">穩定網路（建議 Wi-Fi）</li>
+        </ul>
+      </div>
+
+      <div style="margin-bottom: 20px;">
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">🏫 主辦單位準備</strong>
+        <ul class="checklist">
+          <li>投影機 + 螢幕</li>
+          <li>Wi-Fi 熱點（建議 50Mbps 以上的網路）</li>
+          <li>報到表 / 問卷連結</li>
+          <li>LINE 群 QR Code</li>
+          <li>小禮物（可選）</li>
+        </ul>
+      </div>
+
+      <div>
+        <strong style="font-size:0.9rem; color:var(--text-secondary); margin-bottom:8px; display:block;">🌐 線上素材</strong>
+        <ul class="checklist">
+          <li>這份網站的網址（Vercel 發布）</li>
+          <li>Prompt 懶人卡（可印成 QR Code 讓學員掃描）</li>
+          <li>示範用日文菜單（可印出來或放 PPT）</li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- 風險管理 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">⚠️</span>
+        <span class="section-title">風險管理</span>
+      </div>
+      <table class="risk-table">
+        <tr><th style="width:200px;">風險</th><th>解決方案</th></tr>
+        <tr><td>Wi-Fi 連線不穩定</td><td>預先下載好 Gemini App 離線模式；讓學員用自己手機網路</td></tr>
+        <tr><td>Gemini 伺服器掛掉</td><td>改用 Google 搜尋 + ChatGPT 備援</td></tr>
+        <tr><td>學員年齡層較高</td><td>放慢操作節奏；助教一對一協助</td></tr>
+        <tr><td>時間不夠</td><td>Phase 6 改為預錄影片；壓縮 Q&A</td></tr>
+      </table>
+    </div>
+
+    <!-- 成功關鍵 -->
+    <div class="section">
+      <div class="section-header">
+        <span class="section-icon">🔑</span>
+        <span class="section-title">成功關鍵</span>
+      </div>
+      <ol class="num-list">
+        <li><strong>務必現場演示</strong>：不能只放 PPT，要真的打開 Gemini 操作</li>
+        <li><strong>高潮在 Phase 5</strong>：Gemini Live 的演示橋段是讓學員驚艷的關鍵</li>
+        <li><strong>卡通頭像是記憶點</strong>：讓學員帶走自己的卡通圖，分享意願大增</li>
+        <li><strong>LINE 群是延續</strong>：學員加入群組後持續提供價值，才能轉化為實際行動</li>
+      </ol>
+    </div>
+
+  </main>
+
+  <footer>
+    <div class="container">
+      <p>AI 旅遊工作坊 v2</p>
+      <p style="margin-top:8px;">整合 Gemini 3.1 / Gemini Live / Google Flights AI / NotebookLM / LINE Bot</p>
+    </div>
+  </footer>
+
+  <script>
+    function toggleTheme() {
+      const html = document.documentElement;
+      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      html.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+    }
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+  </script>
+</body>
+</html>
