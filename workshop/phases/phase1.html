@@ -688,17 +688,7 @@
           <span class="prompt-title">🎨 卡通頭像 Prompt</span>
           <button class="copy-btn" onclick="copyPrompt()">複製</button>
         </div>
-        <div class="prompt-box" id="cartoon-prompt">
-請用這張照片生成卡通風格旅遊圖。
-
-風格：日系漫畫（Anime style）
-背景：淺草寺仲見世通
-人物：保留我的臉部特徵
-服裝：白色襯衫 + 淺色休閒褲
-配色：馬卡龍色系
-文字：「[名字] 的慢活之旅」
-附加：飄落櫻花花瓣
-比例：9:16（LINE 分享用）</div>
+        <div class="prompt-box" id="cartoon-prompt"></div>
       </div>
 
       <div class="prompt-section" style="margin-top: 16px;">
@@ -706,21 +696,7 @@
           <span class="prompt-title">✨ Gemini 行程規劃 Prompt</span>
           <button class="copy-btn" onclick="copyPrompt2()">複製</button>
         </div>
-        <div class="prompt-box" id="行程-prompt">
-我要去 [目的地]，幫我規劃 [天數] 天慢活行程。
-
-旅遊風格：深度體驗、慢節奏
-交通方式：地鐵 + 步行
-必去：當地人推薦的咖啡廳、隱藏版景點
-不吃：觀光客多的連鎖店
-午餐：當地人或日本人喜歡的餐廳
-預算：每人 [金額] / 天
-
-請幫我：
-1. 每天只安排 2-3 個定點（不要排太滿）
-2. 每個定點的「深度停留」建議（至少 2 小時）
-3. 適合「慢活者」的早餐地點
-4. 建議在地的文化體驗活動</div>
+        <div class="prompt-box" id="行程-prompt"></div>
       </div>
 
       <div class="actions">
@@ -742,81 +718,150 @@
   </div>
 
   <script>
-    // Personality data
-    const personalities = {
-      'AAA': { icon: '🌿', title: '慢活沉澱者', subtitle: 'Slow Living Explorer', tags: ['🌿 慢活者', '📚 深度探索', '☕ 咖啡旅人'], desc: '你喜歡深度體驗，勝過跑遍景點。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。' },
-      'AAB': { icon: '🌿🎭', title: '悠活漫遊者', subtitle: 'Relaxed Wanderer', tags: ['🌿 慢活者', '🎭 隨遇而安', '🦋 自由靈魂'], desc: '你喜歡深度體驗，勝過跑遍景點。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。' },
-      // ... more combinations can be added
+    // ============================================================
+    //  64 種旅遊人格完整查表
+    //  Answer Key = Q1 + Q2 + Q3 (each A/B/C/D)
+    //  架構：Base (Q1) × Modifier (Q2+Q3)
+    // ============================================================
+
+    // ── Base 定義 (Q1 決定主要人格) ──────────────────────────
+    const BASE = {
+      A: {
+        emoji: '🌿', name: '慢活旅行者', en: 'Slow Living Explorer',
+        tags: ['🌿 慢活者', '📚 深度探索', '☕ 咖啡旅人'],
+        cartoonStyle: '日系漫畫（Anime style），背景：淺草寺仲見世通，馬卡龍色系，附加：飄落櫻花花瓣'
+      },
+      B: {
+        emoji: '🏃', name: '極速旅人', en: 'Speed Demon',
+        tags: ['🏃 打卡達人', '📸 九宮格專家', '⚡ 精力旺盛'],
+        cartoonStyle: '美式潮流風格（Pop Art），背景：東京澀谷十字路口，霓虹色彩，附加：速度感線條'
+      },
+      C: {
+        emoji: '🏺', name: '文化沉澱者', en: 'Culture Diver',
+        tags: ['🏺 深度文化', '🦋 心靈探索', '🍵 茶道美學'],
+        cartoonStyle: '水墨手繪風格（Ink Wash Painting），背景：京都金閣寺，傳統配色，附加：飛翔白鶴'
+      },
+      D: {
+        emoji: '⚡', name: '冒險先驅', en: 'Adventure Seeker',
+        tags: ['⚡ 挑戰極限', '🧗 攀登者', '🌊 野外探索'],
+        cartoonStyle: '寫實冒險風格（Adventure Illustration），背景：富士山日出，大地色系，附加：雲海光環'
+      }
     };
 
-    const defaultPersonality = {
-      icon: '🌿⚖️',
-      title: '慢活平衡大師',
-      subtitle: 'Slow Living Balance Master',
-      tags: ['🌿 慢活者', '⚖️ 平衡大師', '🤖 科技旅人'],
-      desc: '你喜歡深度體驗，勝過跑遍景點。一天中精心安排 2-3 個定點，其餘時間留給自己探索。適合前往節奏悠閒的城市，用 Gemini Live 語音導覽深度了解每個定點的文化背景。'
+    // ── Modifier 定義 (Q2+Q3 決定副標/特質/Prompt) ─────────
+    const MOD = {
+      AA: { suffix: '·科技適應型',   tag: '🤖 AI 嚮導',    prompt: '必去：高科技景點、AI 互動體驗、科幻博物館',            avoid: '避開：偏鄉野外、網路死角' },
+      AB: { suffix: '·隨遇而安型',   tag: '🦋 彈性大師',   prompt: '必去：當地人常去的隱藏版景點、巷弄美食',                avoid: '避開：過度商業化的觀光區' },
+      AC: { suffix: '·從容探索型',   tag: '☕ 從容派',     prompt: '必去：質感咖啡廳、文創園區、藝術展覽',                  avoid: '避開：擁擠排隊名店' },
+      AD: { suffix: '·嚴謹慢活型',   tag: '📋 精算生活家', prompt: '必去：預約制餐廳、預訂門票的文化遺址',                 avoid: '避開：現場候補的熱門景點' },
+      BA: { suffix: '·打卡爆肝型',   tag: '📸 網美獵人',   prompt: '必去：IG 熱門打卡點、網美咖啡廳、夕陽觀景台',          avoid: '避開：安靜的寺廟或圖書館' },
+      BB: { suffix: '·狂野隨興型',   tag: '🌀 自由靈魂',   prompt: '必去：隨機發現的驚喜景點、路邊小吃',                   avoid: '避開：事先預訂的行程' },
+      BC: { suffix: '·率真漫遊型',   tag: '🌈 隨性玩咖',   prompt: '必去：當地夜市、街邊美食、路人推薦的店',               avoid: '避開：米其林預約餐廳' },
+      BD: { suffix: '·精算達人型',   tag: '💹 性價比追求者', prompt: '必去：高 CP 值景點、免費博物館、特價商品',            avoid: '避開：昂貴的網紅店' },
+      CA: { suffix: '·智能導航型',   tag: '🗺️ 智慧行者',   prompt: '必去：科技園區、AI 展覽館、智能城市應用展示',          avoid: '避開：沒有網路服務的偏遠地區' },
+      CB: { suffix: '·直覺冒險型',   tag: '🔮 第六感強',    prompt: '必去：隨心所欲探索、迷路時發現的秘密基地',             avoid: '避開：嚴格的行程表' },
+      CC: { suffix: '·創意漫遊型',   tag: '🎨 藝術靈魂',   prompt: '必去：街頭藝術、獨立書店、設計師小店',                 avoid: '避開：連鎖品牌商場' },
+      CD: { suffix: '·策展達人型',   tag: '📐 策劃高手',   prompt: '必去：預約制工作坊、導覽行程、文化深度論壇',           avoid: '避開：走馬看花的觀光團' },
+      DA: { suffix: '·跳島遊走型',   tag: '🏝️ 彈性跳島',   prompt: '必去：周邊小島一日來回、跳點行程、海上活動',           avoid: '避開：定點深度之旅' },
+      DB: { suffix: '·順流漫遊型',   tag: '🌊 順其自然',   prompt: '必去：海邊、湖邊、讓心情決定的路線',                  avoid: '避開：需要體力的登山行程' },
+      DC: { suffix: '·平衡漫遊型',   tag: '⚖️ 平衡生活家', prompt: '必去：半天行程、半天自由活動，輕鬆不趕',              avoid: '避開：太緊湊或太閒散的行程' },
+      DD: { suffix: '·精算漫遊型',   tag: '🧮 細節掌控者', prompt: '必去：預算內所有高評價景點、詳細路線規劃',             avoid: '避開：說走就走的衝動行程' }
     };
 
+    // ── 完整 64 種人格查表（自動生成） ──────────────────────
+    const PERSONALITIES = {};
+    ['A','B','C','D'].forEach(q1 => {
+      ['A','B','C','D'].forEach(q2 => {
+        ['A','B','C','D'].forEach(q3 => {
+          const key  = q1 + q2 + q3;
+          const base = BASE[q1];
+          const mod  = MOD[q2 + q3];
+          const dayPlan = q3 === 'A' ? '1-2 個定點（輕鬆不趕）'
+                        : q3 === 'B' ? '走到哪玩到哪，不排太滿'
+                        : q3 === 'C' ? '上午定點，下午留白'
+                        : '3-4 個景點串聯';
+          PERSONALITIES[key] = {
+            icon:     base.emoji,
+            title:    base.name + mod.suffix,
+            subtitle: base.en + mod.suffix,
+            tags:     [...base.tags, mod.tag],
+            desc:     `你是「${base.name}」類型的旅行者，${mod.prompt}。${mod.avoid}。這個組合讓你既能${base.tags[1]}，又具備${mod.tag}的特質。`,
+            cartoonPrompt: `請用這張照片生成卡通風格旅遊圖。風格：${base.cartoonStyle}，人物：保留我的臉部特徵，文字：「[名字] 的${base.name}之旅」，比例：9:16（LINE 分享用）`,
+            tripPrompt: `我要去 [目的地]，幫我規劃 [天數] 天行程。
+
+旅遊風格：${base.name}
+${mod.prompt}
+${mod.avoid}
+
+必去景點：當地人推薦的私房景點
+美食：不要連鎖店，要 Local 美食
+交通：以大眾運輸為主
+預算：每人 [金額] / 天
+
+請幫我：
+1. 每天 ${dayPlan} 的行程
+2. 每個定點建議停留時間
+3. 符合你風格的早餐地點
+4. 在地文化體驗活動`
+          };
+        });
+      });
+    });
+
+    // ── 互動邏輯 ─────────────────────────────────────────────
     let answers = {};
 
-    // Handle option selection
     document.querySelectorAll('.option').forEach(option => {
       option.addEventListener('click', () => {
         const question = option.parentElement.dataset.question;
-        const answer = option.dataset.answer;
-
-        // Remove previous selection for this question
+        const answer   = option.dataset.answer;
         document.querySelectorAll(`[data-question="${question}"] .option`).forEach(opt => {
           opt.classList.remove('selected');
         });
-
-        // Select this option
         option.classList.add('selected');
         answers[question] = answer;
       });
     });
 
-    // Get result
     document.getElementById('get-result-btn').addEventListener('click', () => {
       if (Object.keys(answers).length < 3) {
         alert('請先回答完所有問題');
         return;
       }
+      const key        = answers[1] + answers[2] + answers[3];
+      const personality = PERSONALITIES[key];
 
-      const answerKey = answers[1] + answers[2] + answers[3];
-      const personality = personalities[answerKey] || defaultPersonality;
-
-      // Update result display
-      document.getElementById('result-icon').textContent = personality.icon;
-      document.getElementById('result-title').textContent = personality.title;
-      document.getElementById('result-subtitle').textContent = personality.subtitle;
+      // 更新結果顯示
+      document.getElementById('result-icon').textContent    = personality.icon;
+      document.getElementById('result-title').textContent   = personality.title;
+      document.getElementById('result-subtitle').textContent= personality.subtitle;
       document.getElementById('result-description').textContent = personality.desc;
+      document.getElementById('result-tags').innerHTML      = personality.tags.map(t => `<span class="result-tag">${t}</span>`).join('');
 
-      const tagsHtml = personality.tags.map(tag => `<span class="result-tag">${tag}</span>`).join('');
-      document.getElementById('result-tags').innerHTML = tagsHtml;
+      // 動態填入 Prompt
+      document.getElementById('cartoon-prompt').textContent = personality.cartoonPrompt;
+      document.getElementById('行程-prompt').textContent   = personality.tripPrompt;
 
-      // Show result, hide quiz
-      document.getElementById('quiz-section').style.display = 'none';
+      // 切換顯示
+      document.getElementById('quiz-section').style.display   = 'none';
       document.getElementById('result-section').classList.add('show');
     });
-
-    function copyPrompt() {
-      const text = document.getElementById('cartoon-prompt').textContent;
-      navigator.clipboard.writeText(text);
-      alert('已複製到剪貼簿！');
-    }
-
-    function copyPrompt2() {
-      const text = document.getElementById('行程-prompt').textContent;
-      navigator.clipboard.writeText(text);
-      alert('已複製到剪貼簿！');
-    }
 
     function retakeQuiz() {
       answers = {};
       document.querySelectorAll('.option').forEach(opt => opt.classList.remove('selected'));
-      document.getElementById('quiz-section').style.display = 'block';
+      document.getElementById('quiz-section').style.display    = 'block';
       document.getElementById('result-section').classList.remove('show');
+    }
+
+    function copyPrompt() {
+      navigator.clipboard.writeText(document.getElementById('cartoon-prompt').textContent);
+      alert('已複製到剪貼簿！');
+    }
+
+    function copyPrompt2() {
+      navigator.clipboard.writeText(document.getElementById('行程-prompt').textContent);
+      alert('已複製到剪貼簿！');
     }
   </script>
 
