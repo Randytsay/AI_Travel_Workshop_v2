@@ -4,10 +4,10 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Phase 4｜視覺生成 | AI 旅遊工作坊</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cdefs%3E%3ClinearGradient id='g' x1='0' y1='0' x2='1' y2='1'%3E%3Cstop offset='0%25' stop-color='%23ff6b6b'/%3E%3Cstop offset='50%25' stop-color='%23f39c12'/%3E%3Cstop offset='100%25' stop-color='%23ffd93d'/%3E%3C/linearGradient%3E%3C/defs%3E%3Ccircle cx='16' cy='16' r='16' fill='%230d1b2a'/%3E%3Cpath d='M23 9l-4 4-2-2-8 8 2 2 1 1v4l-3-1-2 6 6-2-1-3h4l1 1 8-8-2-2 4-4z' fill='url(%23g)'/%3E%3C/svg%3E">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet"> <defs><linearGradient id='g' x1='0' y1='0' x2='1' y2='1'><stop offset='0' stop-color='%23ff6b6b'/><stop offset='0.5' stop-color='%23f39c12'/><stop offset='1' stop-color='%23ffd93d'/></linearGradient></defs><circle cx='16' cy='16' r='16' fill='%230d1b2a'/><text y='22' x='4' font-size='18'>✈</text></svg>">
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap" rel="stylesheet">
   <style>
     :root {
       --bg-primary: #0d1b2a;
@@ -41,223 +41,26 @@
       --text-primary: #2d3436;
       --text-secondary: #4a5568;
       --text-muted: #7a8fa6;
-      --border-subtle: rgba(0, 0, 0, 0.04);
-      --border: rgba(0, 0, 0, 0.08);
-      --border-strong: rgba(0, 0, 0, 0.16);
+      --border-subtle: rgba(0, 0, 0, 0.05);
+      --border: rgba(0, 0, 0, 0.10);
+      --border-strong: rgba(0, 0, 0, 0.18);
       --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.08);
-      --shadow-card-hover: 0 0 0 1px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
-      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.15);
-    }
-    [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.9);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --shadow: 0 8px 32px rgba(0,0,0,0.08);
+      --shadow-card-hover: 0 0 0 2px var(--accent-primary), 0 16px 40px rgba(0, 0, 0, 0.12);
+      --shadow-glow: 0 0 40px rgba(255, 107, 107, 0.12);
     }
 
     * { margin: 0; padding: 0; box-sizing: border-box; }
     body {
-      padding-top: 0;
       font-family: 'Noto Sans TC', sans-serif;
       background: var(--bg-primary);
       color: var(--text-primary);
       min-height: 100vh;
       padding: 24px;
     }
+
     .container { max-width: 900px; margin: 0 auto; }
-    .header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 48px; padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
-    }
-    .phase-badge {
-      background: var(--accent-sunset);
-      padding: 8px 16px; border-radius: 12px;
-      font-weight: 700; font-size: 0.875rem;
-    }
-    .header h1 { font-size: 1.5rem; }
-    .back-link {
-      color: var(--text-secondary); text-decoration: none;
-      font-size: 0.875rem; margin-left: auto;
-    }
-    .progress-bar {
-      background: var(--border); border-radius: 20px;
-      height: 8px; margin-bottom: 48px;
-    }
-    .progress-fill {
-      background: var(--accent-sunset); height: 100%;
-      width: 67%; border-radius: 20px;
-    }
 
-    .section-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 24px;
-      padding: 32px;
-      margin-bottom: 24px;
-    }
-
-    .section-header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 24px;
-    }
-    .section-icon { font-size: 2rem; }
-    .section-title { font-size: 1.25rem; font-weight: 600; }
-    .section-subtitle { font-size: 0.875rem; color: var(--text-secondary); }
-
-    .prompt-box {
-      background: rgba(0,0,0,0.3);
-      border-radius: 12px; padding: 20px;
-      font-family: monospace; font-size: 0.875rem;
-      line-height: 1.7; white-space: pre-wrap;
-      color: var(--text-secondary); margin: 16px 0;
-    }
-    .copy-btn {
-      background: var(--accent-sunset);
-      border: none; color: white;
-      padding: 8px 16px; border-radius: 8px;
-      cursor: pointer; font-size: 0.875rem; font-weight: 500;
-      float: right;
-    }
-
-    .style-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px;
-      margin: 24px 0;
-    }
-    .style-card {
-      background: rgba(255,255,255,0.05);
-      border: 2px solid transparent;
-      border-radius: 16px; padding: 20px;
-      text-align: center; cursor: pointer;
-      transition: all 0.3s ease;
-    }
-    .style-card:hover, .style-card.selected {
-      border-color: #ff6b6b;
-      background: rgba(245, 158, 11, 0.1);
-    }
-    .style-icon { font-size: 2.5rem; margin-bottom: 8px; }
-    .style-name { font-weight: 600; margin-bottom: 4px; }
-    .style-desc { font-size: 0.75rem; color: var(--text-secondary); }
-
-    .example-box {
-      background: rgba(245, 158, 11, 0.1);
-      border-left: 4px solid var(--primary);
-      padding: 16px; border-radius: 0 12px 12px 0;
-      margin: 16px 0;
-    }
-    .example-label {
-      font-size: 0.75rem; color: #ff6b6b;
-      font-weight: 600; margin-bottom: 8px;
-    }
-    .example-text { font-size: 0.9rem; color: var(--text-secondary); }
-
-    .gallery-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 12px;
-      margin: 24px 0;
-    }
-    .gallery-item {
-      aspect-ratio: 1;
-      background: rgba(255,255,255,0.05);
-      border-radius: 12px;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 3rem;
-    }
-
-    .tab-container {
-      display: flex; gap: 8px; margin-bottom: 24px;
-    }
-    .tab {
-      padding: 10px 20px;
-      background: rgba(255,255,255,0.05);
-      border: none; border-radius: 10px;
-      color: var(--text-secondary);
-      cursor: pointer; font-weight: 500;
-      transition: all 0.3s ease;
-    }
-    .tab.active {
-      background: var(--accent-sunset);
-      color: white;
-    }
-
-    .tab-content { display: none; }
-    .tab-content.active { display: block; }
-
-    .nav-buttons {
-      display: flex; justify-content: space-between;
-      margin-top: 48px; padding-top: 24px;
-      border-top: 1px solid var(--border);
-    }
-    .nav-btn {
-      color: var(--text-secondary); text-decoration: none;
-      display: flex; align-items: center; gap: 8px;
-      font-size: 0.875rem;
-    }
-    .nav-btn:hover { color: #ff6b6b; }
-    .btn {
-      display: inline-flex; align-items: center; gap: 8px;
-      padding: 14px 28px; border-radius: 14px;
-      font-weight: 600; text-decoration: none;
-      transition: all 0.3s ease; border: none;
-      font-size: 0.95rem;
-    }
-    .btn-primary { background: var(--accent-sunset); color: white; }
-    .btn:hover { transform: translateY(-2px); }
-    .actions { display: flex; gap: 16px; margin-top: 32px; flex-wrap: wrap; }
-
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s; margin-left: auto;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
-    
-
-    .hero-banner {
-      width: 100%;
-      height: 240px;
-      border-radius: 20px;
-      overflow: hidden;
-      position: relative;
-      margin-bottom: 32px;
-    }
-    .hero-banner img {
-      width: 100%; height: 100%;
-      object-fit: cover; display: block;
-    }
-    .hero-banner-overlay {
-      position: absolute; top: 0; left: 0; right: 0; bottom: 0;
-      background: linear-gradient(135deg, rgba(13,27,42,0.85) 0%, rgba(13,27,42,0.4) 100%);
-      display: flex; flex-direction: column;
-      justify-content: center; padding: 32px 40px;
-    }
-    [data-theme="light"] .hero-banner-overlay {
-      background: linear-gradient(135deg, rgba(255,253,248,0.88) 0%, rgba(255,253,248,0.5) 100%);
-    }
-    .hero-banner-overlay h2 {
-      font-size: 1.5rem; font-weight: 900; margin-bottom: 6px;
-      color: white;
-    }
-    [data-theme="light"] .hero-banner-overlay h2 { color: #2d3436; }
-    .hero-banner-overlay p {
-      font-size: 0.9rem; color: rgba(255,255,255,0.8);
-    }
-    [data-theme="light"] .hero-banner-overlay p { color: #4a5568; }
-    
-
-    /* Topnav — mirrors index.html */
+    /* ── Topnav ── */
     .topnav {
       position: sticky; top: 0; z-index: 100;
       background: var(--bg-card);
@@ -281,10 +84,7 @@
       white-space: nowrap; flex-shrink: 0; margin-right: 4px;
     }
     .topnav-logo span { font-size: 1.2rem; }
-    .topnav-divider {
-      width: 1px; height: 20px;
-      background: var(--border); flex-shrink: 0; margin: 0 4px;
-    }
+    .topnav-divider { width: 1px; height: 20px; background: var(--border); flex-shrink: 0; margin: 0 4px; }
     .topnav-link {
       display: flex; align-items: center; gap: 5px;
       padding: 5px 12px; border-radius: 20px;
@@ -293,16 +93,16 @@
       white-space: nowrap; flex-shrink: 0;
       transition: all 0.2s;
     }
-    .topnav-link:hover { background: rgba(255,255,255,0.1); color: var(--text-primary); }
-    .topnav-link.active,
-    .topnav-link[data-phase="1"].active { background: var(--phase1-bg); color: white; }
-    .topnav-link[data-phase="2"].active { background: var(--phase2-bg); color: white; }
-    .topnav-link[data-phase="3"].active { background: var(--phase3-bg); color: #2d3436; }
-    .topnav-link[data-phase="4"].active { background: var(--phase4-bg); color: #2d3436; }
-    .topnav-link[data-phase="5"].active { background: var(--phase5-bg); color: white; }
-    .topnav-link[data-phase="6"].active { background: var(--phase6-bg); color: white; }
+    .topnav-link:hover { background: rgba(255,255,255,0.08); color: var(--text-primary); }
+    [data-theme="light"] .topnav-link:hover { background: rgba(0,0,0,0.06); }
+    .topnav-link.active {
+      background: transparent;
+      border-bottom: 2px solid #f39c12;
+      border-radius: 0;
+      color: #f39c12;
+    }
+    .topnav-link.active:hover { background: rgba(0,0,0,0.04); }
     .topnav-spacer { flex: 1; }
-    /* also update .theme-toggle to not be inside header */
     .theme-toggle {
       width: 36px; height: 36px; border-radius: 50%;
       border: none; background: rgba(255,255,255,0.1);
@@ -314,203 +114,695 @@
     [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
     [data-theme="light"] .theme-toggle:hover { background: rgba(0,0,0,0.15); }
 
-  
-    /* ═══════════════════════════════════════
-       UNIFIED BORDER RADIUS
-    ═══════════════════════════════════════ */
-    .btn {
-      border-radius: 100px;          /* pill — primary CTA */
-      padding: 14px 28px;
-      font-weight: 600;
-      font-size: 0.95rem;
-      border: none;
-      cursor: pointer;
-      display: inline-flex;
-      align-items: center;
+    /* ── Header ── */
+    .header {
+      display: flex; align-items: center; gap: 16px;
+      margin-bottom: 16px; padding-bottom: 20px;
+      border-bottom: 1px solid var(--border);
+    }
+    .phase-badge {
+      background: var(--accent-sunset);
+      padding: 4px 14px; border-radius: 100px;
+      font-weight: 700; font-size: 0.75rem; letter-spacing: 0.05em;
+      flex-shrink: 0;
+    }
+    .header h1 { font-size: 1.4rem; }
+    .back-link {
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.875rem; margin-left: auto;
+    }
+    .progress-bar {
+      background: var(--border); border-radius: 20px;
+      height: 8px; margin-bottom: 32px;
+    }
+    .progress-fill {
+      background: var(--accent-sunset); height: 100%;
+      width: 67%; border-radius: 20px;
+    }
+
+    /* ── Cards ── */
+    .section-card {
+      background: var(--bg-card);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      padding: 28px;
+      margin-bottom: 20px;
+      transition: box-shadow 0.25s;
+    }
+    .section-card:hover {
+      box-shadow: var(--shadow-card-hover);
+    }
+    .section-header {
+      display: flex; align-items: center; gap: 14px;
+      margin-bottom: 20px;
+    }
+    .section-icon { font-size: 1.8rem; }
+    .section-title { font-size: 1.15rem; font-weight: 600; }
+    .section-subtitle { font-size: 0.8rem; color: var(--text-secondary); margin-top: 2px; }
+    .section-tag {
+      font-size: 0.65rem; font-weight: 700;
+      padding: 2px 8px; border-radius: 100px;
+      margin-left: auto; flex-shrink: 0;
+    }
+    .tag-blue { background: rgba(0,206,207,0.2); color: #00cec9; }
+    .tag-rose { background: rgba(253,121,168,0.2); color: #fd79a8; }
+    .tag-amber { background: rgba(245,158,11,0.2); color: #f39c12; }
+    .tag-green { background: rgba(85,239,196,0.2); color: #55efc4; }
+
+    /* ── Prompt Box (fixed for light mode) ── */
+    .prompt-box {
+      background: rgba(0,0,0,0.35);
+      border: 1px solid var(--border);
+      border-radius: 12px; padding: 18px;
+      font-family: 'Courier New', monospace; font-size: 0.8rem;
+      line-height: 1.7; white-space: pre-wrap;
+      color: var(--text-secondary);
+      margin: 14px 0;
+      overflow: auto;
+    }
+    [data-theme="light"] .prompt-box {
+      background: #f8f6f1;
+      border-color: rgba(0,0,0,0.12);
+      color: #374151;
+    }
+    .prompt-box textarea {
+      width: 100%; min-height: 200px;
+      background: transparent; border: none; outline: none;
+      font-family: 'Courier New', monospace; font-size: 0.8rem;
+      line-height: 1.7; color: inherit; resize: vertical;
+    }
+    [data-theme="light"] .prompt-box textarea { color: #374151; }
+
+    .copy-btn {
+      background: var(--accent-sunset);
+      border: none; color: white;
+      padding: 8px 16px; border-radius: 8px;
+      cursor: pointer; font-size: 0.8rem; font-weight: 500;
+      float: right; margin-bottom: 8px;
+    }
+    .copy-btn:hover { opacity: 0.9; transform: translateY(-1px); }
+
+    /* ── Scenario Grid ── */
+    .scenario-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
       gap: 8px;
-      text-decoration: none;
+      margin-bottom: 16px;
+    }
+    @media (max-width: 500px) { .scenario-grid { grid-template-columns: 1fr; } }
+    .scenario-btn {
+      padding: 10px;
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      background: rgba(255,255,255,0.04);
+      cursor: pointer; text-align: center;
+      transition: all 0.2s;
+      font-size: 0.8rem;
+    }
+    [data-theme="light"] .scenario-btn {
+      background: rgba(0,0,0,0.04);
+      border-color: rgba(0,0,0,0.1);
+    }
+    .scenario-btn .icon { font-size: 1.3rem; display: block; margin-bottom: 4px; }
+    .scenario-btn .title { font-weight: 600; }
+    .scenario-btn.active {
+      border-color: var(--accent-primary);
+      background: rgba(255,107,107,0.12);
+    }
+    [data-theme="light"] .scenario-btn.active {
+      background: rgba(255,107,107,0.1);
+    }
+
+    /* ── Style Grid ── */
+    .style-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+      gap: 10px;
+      margin: 16px 0;
+    }
+    .style-card {
+      background: rgba(255,255,255,0.04);
+      border: 2px solid transparent;
+      border-radius: 14px; padding: 16px 10px;
+      text-align: center; cursor: pointer;
       transition: all 0.25s ease;
     }
-    .btn-sm {
-      border-radius: 8px;            /* small / inline buttons */
-      padding: 8px 16px;
-      font-size: 0.85rem;
+    [data-theme="light"] .style-card { background: rgba(0,0,0,0.04); }
+    .style-card:hover { border-color: var(--accent-primary); transform: translateY(-2px); }
+    .style-card.selected {
+      border-color: var(--accent-primary);
+      background: rgba(255,107,107,0.10);
     }
-    .btn:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
-    }
-    .btn-primary {
-      background: var(--accent-sunset);
-      color: white;
-    }
-    .btn-secondary {
-      background: rgba(255, 255, 255, 0.1);
+    .style-icon { font-size: 2rem; margin-bottom: 6px; display: block; }
+    .style-name { font-weight: 600; font-size: 0.8rem; }
+    .style-desc { font-size: 0.65rem; color: var(--text-muted); margin-top: 3px; }
+
+    /* ── Select ── */
+    .style-select-wrap { margin: 14px 0; }
+    .style-select-wrap label { display: block; font-size: 0.78rem; color: var(--text-secondary); margin-bottom: 6px; }
+    .style-select {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: rgba(255,255,255,0.06);
       color: var(--text-primary);
+      font-family: inherit; font-size: 0.82rem;
+      cursor: pointer;
+    }
+    [data-theme="light"] .style-select {
+      background: rgba(0,0,0,0.05);
+      border-color: rgba(0,0,0,0.12);
+    }
+    .style-select:focus { outline: none; border-color: var(--accent-primary); }
+    .style-select optgroup { font-weight: 700; color: var(--text-primary); }
+    .style-select option { font-weight: 400; }
+
+    /* ── Tabs ── */
+    .tab-container { display: flex; gap: 6px; margin-bottom: 16px; flex-wrap: wrap; }
+    .tab {
+      padding: 8px 16px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border); border-radius: 10px;
+      color: var(--text-secondary);
+      cursor: pointer; font-weight: 500; font-size: 0.8rem;
+      transition: all 0.2s;
+    }
+    [data-theme="light"] .tab { background: rgba(0,0,0,0.05); }
+    .tab.active { background: var(--accent-sunset); color: white; border-color: transparent; }
+    .tab-content { display: none; }
+    .tab-content.active { display: block; }
+
+    /* ── Template Tab ── */
+    .template-tabs { display: flex; gap: 6px; margin-bottom: 16px; }
+    .template-tab {
+      flex: 1; padding: 8px;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: rgba(255,255,255,0.04); color: var(--text-secondary);
+      cursor: pointer; font-weight: 500; font-size: 0.78rem;
+      text-align: center; transition: all 0.2s;
+    }
+    [data-theme="light"] .template-tab { background: rgba(0,0,0,0.04); }
+    .template-tab.active { background: var(--accent-sunset); color: white; border-color: transparent; }
+
+    /* ── Social ── */
+    .social-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 12px; }
+    @media (max-width: 500px) { .social-grid { grid-template-columns: 1fr; } }
+    .form-group label { display: block; font-size: 0.75rem; color: var(--text-secondary); margin-bottom: 5px; }
+    .form-input, .form-select {
+      width: 100%; padding: 9px 12px;
+      border: 1px solid var(--border); border-radius: 10px;
+      background: rgba(255,255,255,0.06);
+      color: var(--text-primary); font-family: inherit; font-size: 0.82rem;
+    }
+    [data-theme="light"] .form-input,
+    [data-theme="light"] .form-select {
+      background: rgba(0,0,0,0.05); border-color: rgba(0,0,0,0.12);
+    }
+    .form-input:focus, .form-select:focus { outline: none; border-color: var(--accent-primary); }
+
+    /* ── Hashtag Box ── */
+    .hashtag-box {
+      margin-top: 12px; padding: 12px;
+      background: rgba(255,255,255,0.04);
+      border-radius: 10px; border: 1px solid var(--border);
+    }
+    [data-theme="light"] .hashtag-box { background: rgba(0,0,0,0.04); }
+    .hashtag-label { font-size: 0.75rem; font-weight: 600; color: var(--text-secondary); margin-bottom: 6px; }
+    .hashtag-text { font-size: 0.78rem; color: var(--accent-primary); cursor: pointer; line-height: 1.6; }
+
+    /* ── Challenge Banner ── */
+    .challenge-banner {
+      background: linear-gradient(135deg, #f39c12 0%, #d97706 100%);
+      border-radius: 14px; padding: 18px;
+      text-align: center; margin-bottom: 20px;
+      box-shadow: 0 4px 20px rgba(245,158,11,0.3);
+    }
+    .challenge-banner .title { font-weight: 700; font-size: 0.9rem; color: white; }
+    .challenge-banner .countdown {
+      font-size: 2rem; font-weight: 700; color: white;
+      margin: 8px 0 4px;
+    }
+    .challenge-banner .label { font-size: 0.75rem; color: rgba(255,255,255,0.85); }
+
+    /* ── Example Box ── */
+    .example-box {
+      background: rgba(245,158,11,0.08);
+      border-left: 3px solid #f39c12;
+      padding: 14px; border-radius: 0 10px 10px 0;
+      margin: 14px 0;
+    }
+    [data-theme="light"] .example-box { background: rgba(245,158,11,0.08); }
+    .example-label { font-size: 0.72rem; color: #f39c12; font-weight: 600; margin-bottom: 6px; }
+    .example-text { font-size: 0.82rem; color: var(--text-secondary); line-height: 1.6; }
+
+    /* ── Gallery ── */
+    .gallery-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+      gap: 10px; margin: 16px 0;
+    }
+    .gallery-item {
+      aspect-ratio: 1;
+      background: rgba(255,255,255,0.05);
+      border-radius: 12px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.5rem;
+    }
+    [data-theme="light"] .gallery-item { background: rgba(0,0,0,0.05); }
+
+    /* ── Buttons ── */
+    .btn {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 10px 20px; border-radius: 100px;
+      font-weight: 600; text-decoration: none;
+      transition: all 0.25s ease; border: none;
+      font-size: 0.85rem; cursor: pointer;
+    }
+    .btn-sm { border-radius: 8px; padding: 7px 14px; font-size: 0.78rem; }
+    .btn-primary { background: var(--accent-sunset); color: white; }
+    .btn-outline {
+      background: rgba(255,255,255,0.08);
+      color: var(--text-secondary);
       border: 1px solid var(--border);
     }
-    [data-theme="light"] .btn-secondary {
-      background: rgba(0, 0, 0, 0.05);
+    [data-theme="light"] .btn-outline {
+      background: rgba(0,0,0,0.05);
+    }
+    .btn:hover { transform: translateY(-2px); box-shadow: 0 6px 20px rgba(0,0,0,0.25); }
+    .actions { display: flex; gap: 12px; margin-top: 24px; flex-wrap: wrap; justify-content: center; }
+
+    /* ── Nav Buttons ── */
+    .nav-buttons {
+      display: flex; justify-content: space-between;
+      margin-top: 40px; padding-top: 20px;
+      border-top: 1px solid var(--border);
+    }
+    .nav-btn {
+      color: var(--text-secondary); text-decoration: none;
+      display: flex; align-items: center; gap: 6px;
+      font-size: 0.82rem;
+    }
+    .nav-btn:hover { color: var(--accent-primary); }
+
+    /* ── Quick Links ── */
+    .quick-links {
+      display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px;
+    }
+    .quick-link {
+      display: flex; align-items: center; gap: 6px;
+      padding: 7px 14px; border-radius: 100px;
+      background: rgba(255,255,255,0.06);
+      border: 1px solid var(--border);
+      color: var(--text-secondary); text-decoration: none;
+      font-size: 0.75rem; font-weight: 500;
+      transition: all 0.2s;
+    }
+    [data-theme="light"] .quick-link { background: rgba(0,0,0,0.05); }
+    .quick-link:hover { border-color: var(--accent-primary); color: var(--accent-primary); }
+
+    /* ── Avatar styles ── */
+    .avatar-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(130px, 1fr));
+      gap: 10px; margin: 14px 0;
     }
 
-    /* Cards */
-    .section-card,
-    .quiz-card {
-      border-radius: 20px;
-    }
-    .prompt-box {
-      border-radius: 12px;
-    }
-    /* Phase badge — pill */
-    .phase-badge {
-      border-radius: 100px;
-      padding: 4px 14px;
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.05em;
-    }
-    /* Option letter — small pill */
-    .option-letter {
-      border-radius: 8px;
-    }
-
-    .topnav-link.active {
-      background: transparent;
-      border-bottom: 2px solid var(--accent-primary);
-      border-radius: 0;
-      color: var(--accent-primary);
-    }
-    .topnav-link[data-phase="1"].active { border-bottom-color: #ff6b6b; color: #ff6b6b; }
-    .topnav-link[data-phase="2"].active { border-bottom-color: #00cec9; color: #00cec9; }
-    .topnav-link[data-phase="3"].active { border-bottom-color: #55efc4; color: #55efc4; }
-    .topnav-link[data-phase="4"].active { border-bottom-color: #f39c12; color: #f39c12; }
-    .topnav-link[data-phase="5"].active { border-bottom-color: #74b9ff; color: #74b9ff; }
-    .topnav-link[data-phase="6"].active { border-bottom-color: #fd79a8; color: #fd79a8; }
-    .topnav-link.active:hover {
-      background: rgba(255, 255, 255, 0.06);
-    }
-
-    .phase-card:hover {
-      transform: translateY(-4px) scale(1.01);
-      box-shadow: var(--shadow-card-hover);
-      border-color: transparent;
-    }
-    .section-card:hover,
-    .quiz-card:hover {
-      box-shadow: var(--shadow-card-hover);
-    }
-
+    /* ── Misc ── */
+    .divider { height: 1px; background: var(--border); margin: 20px 0; }
+    [data-theme="light"] .section-card .section-title { color: #2d3436; }
+    .clearfix::after { content: ''; display: table; clear: both; }
   </style>
 </head>
 <body>
 
-  <!-- Top Navigation Bar -->
+  <!-- Top Navigation -->
   <nav class="topnav">
     <div class="topnav-inner">
       <a href="../../index.html" class="topnav-logo">
-        <span>✈️</span>
-        <span>AI 旅遊工作坊</span>
+        <span>✈️</span><span>AI 旅遊工作坊</span>
       </a>
       <div class="topnav-divider"></div>
-      <a href="phase1.html" class="topnav-link" data-phase="1">
-        <span>💡</span><span class="link-text">靈感</span>
-      </a>
-      <a href="phase2.html" class="topnav-link" data-phase="2">
-        <span>📊</span><span class="link-text">規劃</span>
-      </a>
-      <a href="phase3.html" class="topnav-link" data-phase="3">
-        <span>📓</span><span class="link-text">知識庫</span>
-      </a>
-      <a href="phase4.html" class="topnav-link active" data-phase="4">
-        <span>🎨</span><span class="link-text">視覺</span>
-      </a>
-      <a href="phase5.html" class="topnav-link" data-phase="5">
-        <span>🗾</span><span class="link-text">生存</span>
-      </a>
-      <a href="phase6.html" class="topnav-link" data-phase="6">
-        <span>💰</span><span class="link-text">變現</span>
-      </a>
+      <a href="phase1.html" class="topnav-link" data-phase="1"><span>💡</span><span>靈感</span></a>
+      <a href="phase2.html" class="topnav-link" data-phase="2"><span>📊</span><span>規劃</span></a>
+      <a href="phase3.html" class="topnav-link" data-phase="3"><span>📓</span><span>知識庫</span></a>
+      <a href="phase4.html" class="topnav-link active" data-phase="4"><span>🎨</span><span>視覺</span></a>
+      <a href="phase5.html" class="topnav-link" data-phase="5"><span>🗾</span><span>生存</span></a>
+      <a href="phase6.html" class="topnav-link" data-phase="6"><span>💰</span><span>變現</span></a>
       <div class="topnav-spacer"></div>
       <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
     </div>
   </nav>
 
-
   <div class="container">
-    
 
+    <div class="header">
+      <span class="phase-badge">PHASE 4</span>
+      <h1>🎨 視覺生成</h1>
+      <a href="../../index.html" class="back-link">← 回首頁</a>
+    </div>
     <div class="progress-bar"><div class="progress-fill"></div></div>
 
-    <!-- Cartoon Avatar Section -->
+    <!-- Quick Links -->
+    <div class="quick-links">
+      <a href="https://www.meta.ai/" target="_blank" class="quick-link">🤖 Meta AI</a>
+      <a href="https://gemini.google.com/" target="_blank" class="quick-link">✨ Gemini</a>
+      <a href="https://notebooklm.google.com/" target="_blank" class="quick-link">📓 NotebookLM</a>
+    </div>
+
+    <!-- Challenge Banner -->
+    <div class="challenge-banner">
+      <div class="title">🏆 社群人氣王挑戰進行中！</div>
+      <div class="countdown" id="challenge-countdown">--:--</div>
+      <div class="label" id="countdown-label">等待講師開始計時</div>
+    </div>
+
+    <!-- ══════════════════════════════
+         SECTION A: NotebookLM 簡報生成
+    ══════════════════════════════ -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">📊</span>
+        <div>
+          <div class="section-title">Section A：NotebookLM 簡報生成</div>
+          <div class="section-subtitle">選擇對象與情境，生成專屬 20 頁 YAML 簡報指令</div>
+        </div>
+        <span class="section-tag tag-blue">70分鐘</span>
+      </div>
+
+      <label style="font-size:0.78rem;color:var(--text-secondary);display:block;margin-bottom:8px;">Step 1：選擇對象與情境</label>
+      <div class="scenario-grid">
+        <div class="scenario-btn active" onclick="setScenario('family')" id="btn-family">
+          <span class="icon">🏠</span><span class="title">家族親情版</span>
+        </div>
+        <div class="scenario-btn" onclick="setScenario('business')" id="btn-business">
+          <span class="icon">💼</span><span class="title">商務考察版</span>
+        </div>
+        <div class="scenario-btn" onclick="setScenario('friends')" id="btn-friends">
+          <span class="icon">🥂</span><span class="title">熱血好友版</span>
+        </div>
+        <div class="scenario-btn" onclick="setScenario('kids')" id="btn-kids">
+          <span class="icon">🎈</span><span class="title">親子探險版</span>
+        </div>
+      </div>
+
+      <div class="style-select-wrap">
+        <label>Step 2：選擇簡報視覺風格</label>
+        <select id="ppt-style-select" class="style-select" onchange="updatePptPrompt()">
+          <optgroup label="一、專業與商務邏輯">
+            <option value="Minimalist">極簡主義 (Minimalist)</option>
+            <option value="Warm Professional" selected>溫暖專業 (Warm Professional)</option>
+            <option value="Executive">執行長風格 (Executive)</option>
+            <option value="Data-Driven">數據驅動 (Data-Driven)</option>
+            <option value="Monochrome">單色調 (Monochrome)</option>
+            <option value="High Contrast">高對比 (High Contrast)</option>
+            <option value="Flat Design">扁平化設計 (Flat Design)</option>
+          </optgroup>
+          <optgroup label="二、現代科技與未來派">
+            <option value="Modern">現代風 (Modern)</option>
+            <option value="Apple Style">蘋果風 (Apple Style)</option>
+            <option value="Dark Mode">深色模式 (Dark Mode)</option>
+            <option value="Minimalist Tech">極簡科技 (Minimalist Tech)</option>
+            <option value="Cyberpunk">賽博龐克 (Cyberpunk)</option>
+            <option value="Neon Glow">霓虹發光 (Neon Glow)</option>
+          </optgroup>
+          <optgroup label="三、UI 介面與材質質感">
+            <option value="Glassmorphism">玻璃擬態 (Glassmorphism)</option>
+            <option value="Liquid Glass">液態玻璃 (Liquid Glass)</option>
+            <option value="Neumorphism">新擬物化 (Neumorphism)</option>
+            <option value="Material Design">質感設計 (Material Design)</option>
+          </optgroup>
+          <optgroup label="四、敘事與資訊視覺化">
+            <option value="Visual Story">視覺敘事 (Visual Story)</option>
+            <option value="Timeline">時間軸 (Timeline)</option>
+            <option value="Infographic">資訊圖表 (Infographic)</option>
+          </optgroup>
+          <optgroup label="五、藝術美學與次文化潮流">
+            <option value="Luxury Aesthetic">奢華美學 (Luxury Aesthetic)</option>
+            <option value="Retro Poster">復古海報 (Retro Poster)</option>
+            <option value="Neo-Brutalism">新粗獷主義 (Neo-Brutalism)</option>
+            <option value="Memphis Design">孟菲斯設計 (Memphis Design)</option>
+            <option value="Y2K Aesthetic">千禧風 (Y2K Aesthetic)</option>
+            <option value="Retro Collage">復古拼貼 (Retro Collage)</option>
+            <option value="Punk Collage">龐克拼貼 (Punk Collage)</option>
+          </optgroup>
+          <optgroup label="六、溫馨生活與插畫風格">
+            <option value="Scandinavian">北歐風 (Scandinavian)</option>
+            <option value="Retro / Vintage">復古風 (Retro / Vintage)</option>
+            <option value="Soft Pastel">粉彩柔和 (Soft Pastel)</option>
+            <option value="Watercolor">手繪水彩 (Watercolor)</option>
+            <option value="Playful">趣味風 (Playful)</option>
+            <option value="Q-Cute">Q版可愛 (Q-Cute)</option>
+            <option value="Warm Hand-drawn">溫馨手繪 (Warm Hand-drawn)</option>
+            <option value="Clay 3D">黏土風 (Clay 3D)</option>
+            <option value="Educational Comic">教育漫畫 (Educational Comic)</option>
+            <option value="Paper Cut">剪紙藝術 (Paper Cut)</option>
+          </optgroup>
+        </select>
+      </div>
+
+      <div class="prompt-box" style="min-height:280px;">
+        <button class="copy-btn" onclick="copyPrompt('ppt-prompt')">複製指令</button>
+        <textarea id="ppt-prompt" readonly></textarea>
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
+        💡 貼到 NotebookLM 的對話區，再將生成的 YAML 程式碼貼到「簡報」旁的筆【說明要建立的簡報】指令框中
+      </p>
+    </div>
+
+    <!-- ══════════════════════════════
+         SECTION A-2: Podcast 地陪指令
+    ══════════════════════════════ -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🎧</span>
+        <div>
+          <div class="section-title">Section A-2：Podcast 專屬地陪指令</div>
+          <div class="section-subtitle">透過 NotebookLM 語音摘要，生成專屬 Podcast 導覽腳本</div>
+        </div>
+        <span class="section-tag tag-blue">語音摘要</span>
+      </div>
+
+      <label style="font-size:0.78rem;color:var(--text-secondary);display:block;margin-bottom:8px;">選擇對象與情境</label>
+      <div class="scenario-grid">
+        <div class="scenario-btn active" onclick="setPodcastScenario('family')" id="podcast-btn-family">
+          <span class="icon">🏠</span><span class="title">家族親情版</span>
+        </div>
+        <div class="scenario-btn" onclick="setPodcastScenario('business')" id="podcast-btn-business">
+          <span class="icon">💼</span><span class="title">商務考察版</span>
+        </div>
+        <div class="scenario-btn" onclick="setPodcastScenario('friends')" id="podcast-btn-friends">
+          <span class="icon">🥂</span><span class="title">熱血好友版</span>
+        </div>
+        <div class="scenario-btn" onclick="setPodcastScenario('kids')" id="podcast-btn-kids">
+          <span class="icon">🎈</span><span class="title">親子探險版</span>
+        </div>
+      </div>
+
+      <div class="prompt-box" style="min-height:200px;">
+        <button class="copy-btn" onclick="copyPrompt('podcast-prompt')">複製指令</button>
+        <textarea id="podcast-prompt" readonly></textarea>
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;">
+        💡 貼到 NotebookLM「語音摘要」旁的筆【在本集中，AI 主持人應著重哪些部分？】指令框中
+      </p>
+    </div>
+
+    <!-- ══════════════════════════════
+         SECTION B: 風格化地圖生成
+    ══════════════════════════════ -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🗺️</span>
+        <div>
+          <div class="section-title">Section B：風格化地圖生成</div>
+          <div class="section-subtitle">選擇地圖風格，用 Nano Banana 或 Gemini 生成旅遊視覺地圖</div>
+        </div>
+        <span class="section-tag tag-rose">視覺地圖</span>
+      </div>
+
+      <div class="style-grid">
+        <div class="style-card" onclick="selectStyle('claymorphism')" id="style-claymorphism">
+          <span class="style-icon">🧸</span>
+          <div class="style-name">親子黏土風</div>
+          <div class="style-desc">適合親子族群</div>
+        </div>
+        <div class="style-card" onclick="selectStyle('pixel')" id="style-pixel">
+          <span class="style-icon">👾</span>
+          <div class="style-name">像素復古風</div>
+          <div class="style-desc">適合動漫/年輕族群</div>
+        </div>
+        <div class="style-card" onclick="selectStyle('ukiyo')" id="style-ukiyo">
+          <span class="style-icon">🎎</span>
+          <div class="style-name">浮世繪風</div>
+          <div class="style-desc">適合長輩/文青</div>
+        </div>
+        <div class="style-card" onclick="selectStyle('cyberpunk')" id="style-cyberpunk">
+          <span class="style-icon">🌃</span>
+          <div class="style-name">賽博龐克</div>
+          <div class="style-desc">適合都會年輕人</div>
+        </div>
+        <div class="style-card" onclick="selectStyle('minimalist')" id="style-minimalist">
+          <span class="style-icon">✏️</span>
+          <div class="style-name">極簡線條</div>
+          <div class="style-desc">適合文青/極簡控</div>
+        </div>
+        <div class="style-card selected" onclick="selectStyle('watercolor')" id="style-watercolor">
+          <span class="style-icon">🌸</span>
+          <div class="style-name">日式水彩</div>
+          <div class="style-desc">經典款・溫馨旅遊</div>
+        </div>
+      </div>
+
+      <div class="prompt-box" style="min-height:220px;">
+        <button class="copy-btn" onclick="copyPrompt('map-prompt')">複製提示詞</button>
+        <textarea id="map-prompt" readonly></textarea>
+      </div>
+      <a href="https://gemini.google.com/" target="_blank" class="btn btn-primary btn-sm" style="margin-top:12px;">
+        🚀 開啟 Gemini 生成地圖
+      </a>
+    </div>
+
+    <!-- ══════════════════════════════
+         SECTION C: 提示詞模板庫
+    ══════════════════════════════ -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🎨</span>
+        <div>
+          <div class="section-title">Section C：提示詞模板庫</div>
+          <div class="section-subtitle">一般資訊圖與布偶海報系列，複製到 Gemini 或 Nano Banana Pro 生成旅遊視覺圖</div>
+        </div>
+        <span class="section-tag tag-amber">模板庫</span>
+      </div>
+
+      <!-- Template Tab Toggle -->
+      <div class="template-tabs">
+        <button class="template-tab active" onclick="switchTemplateTab('general')" id="tab-general">📊 一般資訊圖</button>
+        <button class="template-tab" onclick="switchTemplateTab('poster')" id="tab-poster">🧸 布偶海報系列</button>
+      </div>
+
+      <!-- General Templates -->
+      <div id="section-general">
+        <div class="style-grid">
+          <div class="style-card selected" onclick="selectTemplate('multiday')" id="template-multiday">
+            <span class="style-icon">📅</span><div class="style-name">多天總覽</div><div class="style-desc">3–7 天行程</div>
+          </div>
+          <div class="style-card" onclick="selectTemplate('oneday')" id="template-oneday">
+            <span class="style-icon">🕐</span><div class="style-name">一日時間軸</div><div class="style-desc">一日遊・半日遊</div>
+          </div>
+          <div class="style-card" onclick="selectTemplate('cheatsheet')" id="template-cheatsheet">
+            <span class="style-icon">📋</span><div class="style-name">懶人包</div><div class="style-desc">景點/美食/住宿</div>
+          </div>
+          <div class="style-card" onclick="selectTemplate('poster')" id="template-poster">
+            <span class="style-icon">🖼️</span><div class="style-name">復古海報</div><div class="style-desc">掛畫・封面圖</div>
+          </div>
+          <div class="style-card" onclick="selectTemplate('routemap')" id="template-routemap">
+            <span class="style-icon">🗺️</span><div class="style-name">路線地圖</div><div class="style-desc">跨城市・交通</div>
+          </div>
+          <div class="style-card" onclick="selectTemplate('ppt')" id="template-ppt">
+            <span class="style-icon">💼</span><div class="style-name">商業簡報</div><div class="style-desc">PPT・提案用</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Poster Styles -->
+      <div id="section-poster" style="display:none;">
+        <div class="style-grid">
+          <div class="style-card selected" onclick="selectPosterStyle('fairy')" id="poster-fairy">
+            <span class="style-icon">🧸</span><div class="style-name">童話布偶繪本</div><div class="style-desc">療癒・高級手作感</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('zakka')" id="poster-zakka">
+            <span class="style-icon">☕</span><div class="style-name">日系療癒雜貨</div><div class="style-desc">手帳・雜貨感</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('luxury')" id="poster-luxury">
+            <span class="style-icon">💎</span><div class="style-name">高級精品海報</div><div class="style-desc">品牌・大氣</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('adventure')" id="poster-adventure">
+            <span class="style-icon">🗺️</span><div class="style-name">Q版冒險地圖</div><div class="style-desc">桌遊・路線圖</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('candy')" id="poster-candy">
+            <span class="style-icon">🍬</span><div class="style-name">玻璃糖果色夢幻</div><div class="style-desc">透明感・果凍</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('collage')" id="poster-collage">
+            <span class="style-icon">📰</span><div class="style-name">復古拼貼雜誌</div><div class="style-desc">貼紙・票根</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('anime')" id="poster-anime">
+            <span class="style-icon">🎬</span><div class="style-name">動畫劇場海報</div><div class="style-desc">電影感・舞台</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('notebook')" id="poster-notebook">
+            <span class="style-icon">📓</span><div class="style-name">手帳插畫排版</div><div class="style-desc">便利貼・doodle</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('oriental')" id="poster-oriental">
+            <span class="style-icon">🏮</span><div class="style-name">國風雅致可愛</div><div class="style-desc">和風・質感</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('street')" id="poster-street">
+            <span class="style-icon">🧢</span><div class="style-name">潮流街頭貼圖</div><div class="style-desc">年輕・社群</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('dream')" id="poster-dream">
+            <span class="style-icon">🌊</span><div class="style-name">夢境水彩風</div><div class="style-desc">輕柔・空氣感</div>
+          </div>
+          <div class="style-card" onclick="selectPosterStyle('popup')" id="poster-popup">
+            <span class="style-icon">📖</span><div class="style-name">兒童繪本立體場景</div><div class="style-desc">立體童書</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Template Prompt Output -->
+      <div class="prompt-box" style="min-height:320px;">
+        <button class="copy-btn" onclick="copyPrompt('template-prompt')">複製提示詞</button>
+        <textarea id="template-prompt" readonly></textarea>
+      </div>
+      <p style="font-size:0.72rem;color:var(--text-muted);margin-top:8px;text-align:center;">
+        💡 布偶系列建議搭配 Gemini 2.0 Flash Imagen 或 Nano Banana Pro
+      </p>
+    </div>
+
+    <!-- ══════════════════════════════
+         SECTION D: 卡通頭像生成
+    ══════════════════════════════ -->
     <div class="section-card">
       <div class="section-header">
         <span class="section-icon">😎</span>
         <div>
-          <div class="section-title">卡通頭像生成</div>
+          <div class="section-title">Section D：卡通頭像生成</div>
           <div class="section-subtitle">上傳自拍照，AI 生成你的專屬旅遊人格卡通圖</div>
         </div>
+        <span class="section-tag tag-green">頭像</span>
       </div>
 
-      <p style="color: var(--text-secondary); line-height: 1.7; margin-bottom: 20px;">
-        打開 Gemini App，上傳你的自拍照，然後複製下方的 Prompt 貼上。
-        選擇你想要的風格：
+      <p style="color:var(--text-secondary);line-height:1.7;margin-bottom:14px;font-size:0.85rem;">
+        打開 Gemini App，上傳你的自拍照，然後複製下方的 Prompt 貼上。選擇你想要的風格：
       </p>
 
-      <div class="style-grid">
-        <div class="style-card selected">
-          <div class="style-icon">🎌</div>
-          <div class="style-name">日系漫畫風</div>
-          <div class="style-desc">大眼睛、柔和線條</div>
+      <div class="avatar-grid">
+        <div class="style-card selected" onclick="selectAvatarStyle('clay')" id="avatar-clay">
+          <span class="style-icon">🧸</span><div class="style-name">3D 黏土人偶</div><div class="style-desc">圓潤可爱</div>
         </div>
-        <div class="style-card">
-          <div class="style-icon">🎨</div>
-          <div class="style-name">水彩手繪風</div>
-          <div class="style-desc">暈染邊緣、紙張紋理</div>
+        <div class="style-card" onclick="selectAvatarStyle('pixar')" id="avatar-pixar">
+          <span class="style-icon">🎬</span><div class="style-name">皮克斯動畫風</div><div class="style-desc">大眼電影感</div>
         </div>
-        <div class="style-card">
-          <div class="style-icon">🥰</div>
-          <div class="style-name">Q版大頭貼</div>
-          <div class="style-desc">2-3 頭身、超萌比例</div>
+        <div class="style-card" onclick="selectAvatarStyle('lego')" id="avatar-lego">
+          <span class="style-icon">🧱</span><div class="style-name">樂高積木人</div><div class="style-desc">玩具感</div>
         </div>
-        <div class="style-card">
-          <div class="style-icon">🎬</div>
-          <div class="style-name">電影海報風</div>
-          <div class="style-desc">戲劇光影、寬銀幕</div>
+        <div class="style-card" onclick="selectAvatarStyle('crochet')" id="avatar-crochet">
+          <span class="style-icon">🧶</span><div class="style-name">編織毛線娃娃</div><div class="style-desc">手工藝術感</div>
         </div>
       </div>
 
-      <button class="copy-btn" onclick="copyPrompt('cartoon-prompt')">複製 Prompt</button>
-      <div class="prompt-box" id="cartoon-prompt">請用這張照片生成卡通風格旅遊圖。
-
-風格：日系漫畫（Anime style）
-背景：淺草寺仲見世通（紅色燈籠 + 雷門）
-人物：保留我的臉部特徵和髮型
-眼睛：漫畫風大眼，有眼神光
-服裝：白色襯衫 + 淺色休閒褲
-配色：馬卡龍色系（淺藍 + 奶油白 + 珊瑚粉）
-文字：「[你的名字] 的慢活之旅」
-附加：飄落櫻花花瓣
-比例：9:16（LINE 分享用）
-
-請嚴格遵守以上設定，不要偏離風格。</div>
-
-      <div class="example-box">
-        <div class="example-label">💡 更換風格</div>
-        <div class="example-text">
-          把第一行的「Anime style」替換成：<br>
-          • 水彩風 →「watercolor painting style」<br>
-          • Q版 →「2-3頭身超萌大頭貼風格，cute chibi style」<br>
-          • 電影風 →「cinematic poster style，21:9 aspect ratio」
-        </div>
+      <div class="prompt-box" style="min-height:180px;">
+        <button class="copy-btn" onclick="copyPrompt('avatar-prompt')">複製 Prompt</button>
+        <textarea id="avatar-prompt" readonly></textarea>
       </div>
     </div>
 
-    <!-- LINE Share Image Section -->
+    <!-- ══════════════════════════════
+         SECTION E: LINE 分享圖生成
+    ══════════════════════════════ -->
     <div class="section-card">
       <div class="section-header">
         <span class="section-icon">📱</span>
         <div>
-          <div class="section-title">LINE 分享圖生成</div>
+          <div class="section-title">Section E：LINE 分享圖生成</div>
           <div class="section-subtitle">一鍵生成可發到 LINE 群的行程長圖</div>
         </div>
       </div>
@@ -522,8 +814,9 @@
       </div>
 
       <div id="itinerary" class="tab-content active">
-        <button class="copy-btn" onclick="copyPrompt('itinerary-prompt')">複製 Prompt</button>
-        <div class="prompt-box" id="itinerary-prompt">用 9:16 豎版格式，生成一張 LINE 分享用的旅遊行程圖。
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt('line-itinerary')">複製 Prompt</button>
+          <div id="line-itinerary">用 9:16 豎版格式，生成一張 LINE 分享用的旅遊行程圖。
 
 設計要求：
 • 上方：風景圖（富士山 + 河口湖）
@@ -541,11 +834,13 @@ Day 3：日暮里 → 谷根千老街 → 返程
 • 右上角：日期標籤「2026.XX.XX」
 • 左下角：小小的LINE圖示
 • 字體：手寫風字體效果</div>
+        </div>
       </div>
 
       <div id="flight" class="tab-content">
-        <button class="copy-btn" onclick="copyPrompt('flight-prompt')">複製 Prompt</button>
-        <div class="prompt-box" id="flight-prompt">用 9:16 豎版格式，生成一張機票分享圖。
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt('line-flight')">複製 Prompt</button>
+          <div id="line-flight">用 9:16 豎版格式，生成一張機票分享圖。
 
 設計要求：
 • 背景：淡藍色 + 白雲飄飄
@@ -559,11 +854,13 @@ Day 3：日暮里 → 谷根千老街 → 返程
 • 附加：小小的護照圖示裝飾
 
 風格：乾淨俐落、商務質感</div>
+        </div>
       </div>
 
       <div id="summary" class="tab-content">
-        <button class="copy-btn" onclick="copyPrompt('summary-prompt')">複製 Prompt</button>
-        <div class="prompt-box" id="summary-prompt">生成一張小紅書風格的日本 [地點] 旅遊分享圖（3:4 比例）
+        <div class="prompt-box">
+          <button class="copy-btn" onclick="copyPrompt('line-summary')">複製 Prompt</button>
+          <div id="line-summary">生成一張小紅書風格的日本 [地點] 旅遊分享圖（3:4 比例）
 
 包含：
 • 標題：「[爆款標題]」
@@ -575,35 +872,97 @@ Day 3：日暮里 → 谷根千老街 → 返程
 • 風格：文青雜誌風、小紅書用戶喜歡的風格
 
 輸出：豎版 3:4 比例，適合小紅書發文</div>
+        </div>
       </div>
     </div>
 
-    <!-- Shareable Gallery -->
+    <!-- ══════════════════════════════
+         SECTION F: 社群人氣王挑戰
+    ══════════════════════════════ -->
+    <div class="section-card">
+      <div class="section-header">
+        <span class="section-icon">🏆</span>
+        <div>
+          <div class="section-title">Section F：社群人氣王挑戰</div>
+          <div class="section-subtitle">用 AI 生成 FB/LINE 貼文，讓你輕鬆拉票！</div>
+        </div>
+        <span class="section-tag tag-amber">社群挑戰</span>
+      </div>
+
+      <div class="example-box">
+        <div class="example-label">📢 遊戲規則</div>
+        <div class="example-text">
+          1️⃣ 生成你的專屬手繪地圖<br>
+          2️⃣ 用下方工具生成社群發文<br>
+          3️⃣ 發布到 FB/IG 並開始拉票<br>
+          4️⃣ 課程結束前統計，前 3 名送獎品！<br>
+          <strong style="color:var(--accent-primary);margin-top:6px;display:inline-block;">評分公式：讚數 ×1 + 留言數 ×3 + 講師加分</strong>
+        </div>
+      </div>
+
+      <div class="social-grid">
+        <div class="form-group">
+          <label>發文平台</label>
+          <select id="social-platform" class="form-select" onchange="updateSocialPost()">
+            <option value="Facebook">Facebook</option>
+            <option value="Instagram">Instagram</option>
+            <option value="Threads">Threads</option>
+            <option value="LINE 動態">LINE 動態</option>
+          </select>
+        </div>
+        <div class="form-group">
+          <label>發文調性</label>
+          <select id="social-style" class="form-select" onchange="updateSocialPost()">
+            <option value="炫耀型">🎉 炫耀型（活潑驚嘆）</option>
+            <option value="實用分享">📝 實用分享（條列資訊）</option>
+            <option value="文青低調">🍃 文青低調（簡潔優雅）</option>
+            <option value="邀約朋友">👋 邀約朋友（互動式）</option>
+          </select>
+        </div>
+      </div>
+
+      <div class="form-group" style="margin-bottom:14px;">
+        <label>你的目的地</label>
+        <input type="text" id="social-destination" class="form-input" value="日本" onchange="updateSocialPost()">
+      </div>
+
+      <div class="prompt-box" style="min-height:160px;">
+        <button class="copy-btn" onclick="copyPrompt('social-prompt')">複製提示詞</button>
+        <textarea id="social-prompt" readonly></textarea>
+      </div>
+
+      <div class="hashtag-box">
+        <div class="hashtag-label">📌 推薦 Hashtag（可直接複製）</div>
+        <div class="hashtag-text" onclick="copyText(this.innerText)">
+          #AI旅遊規劃 #Gemini #日本自由行 #我的AI地圖 #工作坊 #旅遊規劃師
+        </div>
+      </div>
+    </div>
+
+    <!-- Gallery -->
     <div class="section-card">
       <div class="section-header">
         <span class="section-icon">🖼️</span>
         <div>
           <div class="section-title">生成範例參考</div>
-          <div class="section-subtitle">這些風格都可以用 Prompt 生成</div>
+          <div class="section-subtitle">上方所有風格都可以用 Prompt 生成</div>
         </div>
       </div>
-
       <div class="gallery-grid">
-        <div class="gallery-item">🎌</div>
-        <div class="gallery-item">🎨</div>
-        <div class="gallery-item">🥰</div>
-        <div class="gallery-item">🎬</div>
-        <div class="gallery-item">🗾</div>
-        <div class="gallery-item">🏔️</div>
+        <div class="gallery-item">🧸</div>
+        <div class="gallery-item">🎎</div>
+        <div class="gallery-item">🌃</div>
+        <div class="gallery-item">✏️</div>
+        <div class="gallery-item">🌸</div>
+        <div class="gallery-item">👾</div>
       </div>
-
-      <p style="text-align: center; color: var(--text-secondary); font-size: 0.875rem;">
-        上方只是表情符號參考，實際輸出是高畫質圖片
+      <p style="text-align:center;color:var(--text-muted);font-size:0.75rem;">
+        上方只是表情符號參考，實際輸出是高畫質插畫風格圖片
       </p>
     </div>
 
-    <div class="actions" style="justify-content: center;">
-      <a href="phase3.html" class="btn btn-primary">← Phase 3：知識庫</a>
+    <div class="actions">
+      <a href="phase3.html" class="btn btn-outline">← Phase 3：知識庫</a>
       <a href="phase5.html" class="btn btn-primary">Phase 5：現場生存 →</a>
     </div>
 
@@ -611,15 +970,50 @@ Day 3：日暮里 → 谷根千老街 → 返程
       <a href="phase3.html" class="nav-btn">← Phase 3</a>
       <a href="phase5.html" class="nav-btn">Phase 5：現場生存 →</a>
     </nav>
-  </div>
+
+  </div><!-- /container -->
 
   <script>
+    // ── Theme Toggle ──
+    function toggleTheme() {
+      const next = document.documentElement.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', next);
+      localStorage.setItem('theme', next);
+      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+    }
+    const saved = localStorage.getItem('theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', saved);
+    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    // ── Copy ──
     function copyPrompt(id) {
-      const text = document.getElementById(id).textContent;
-      navigator.clipboard.writeText(text);
-      alert('已複製到剪貼簿！');
+      let text;
+      const el = document.getElementById(id);
+      if (el.tagName === 'TEXTAREA') {
+        text = el.value;
+      } else {
+        text = el.textContent;
+      }
+      navigator.clipboard.writeText(text).then(() => {
+        alert('✅ 已複製到剪貼簿！');
+      }).catch(() => {
+        // fallback
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        document.body.appendChild(ta);
+        ta.select();
+        document.execCommand('copy');
+        document.body.removeChild(ta);
+        alert('✅ 已複製到剪貼簿！');
+      });
     }
 
+    function copyText(text) {
+      navigator.clipboard.writeText(text);
+      alert('✅ Hashtag 已複製！');
+    }
+
+    // ── Tab Switching ──
     function switchTab(tabId) {
       document.querySelectorAll('.tab-content').forEach(el => el.classList.remove('active'));
       document.querySelectorAll('.tab').forEach(el => el.classList.remove('active'));
@@ -627,25 +1021,537 @@ Day 3：日暮里 → 谷根千老街 → 返程
       event.target.classList.add('active');
     }
 
-    document.querySelectorAll('.style-card').forEach(card => {
-      card.addEventListener('click', () => {
-        document.querySelectorAll('.style-card').forEach(c => c.classList.remove('selected'));
-        card.classList.add('selected');
-      });
-    });
-  </script>
+    // ── Scenario / PPT ──
+    let currentPptScenario = 'family';
 
-  <script>
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme') === 'dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next === 'dark' ? '🌙' : '☀️';
+    function setScenario(id) {
+      document.querySelectorAll('[id^="btn-"]').forEach(b => b.classList.remove('active'));
+      document.getElementById('btn-' + id).classList.add('active');
+      currentPptScenario = id;
+      updatePptPrompt();
     }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn').textContent = saved === 'dark' ? '🌙' : '☀️';
+
+    function updatePptPrompt() {
+      const sel = document.getElementById('ppt-style-select');
+      const styleName = sel.options[sel.selectedIndex].text;
+      const styleValue = sel.value;
+
+      const scenarios = {
+        family: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
+1. 輸出格式：必須為 YAML 程式碼區塊。
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：長輩與家人。
+5. 情境設定：向家人說明這次旅遊的舒適度、安全性與溫馨亮點。
+6. 分頁結構建議：
+   - Slide 1: 封面（溫暖的家族旅行主題）
+   - Slide 2: 為什麼選擇這條路線（強調安全、節奏慢、不累人）
+   - Slide 3: 住宿亮點（重點介紹寬敞與便利性）
+   - Slide 4-12: 每日精選行程（每日一頁，強調美食、美景與少步行）
+   - Slide 13: 交通銜接說明（強調包車或免提行李的舒適感）
+   - Slide 14: 美食特輯（針對長輩口味挑選的餐廳）
+   - Slide 15: 伴手禮推薦（長輩最愛的在地特產）
+   - Slide 16: 預算概覽（開銷分析，強調價值感）
+   - Slide 17: 健康與安全保障（醫藥準備、溫差提醒）
+   - Slide 18: 準備清單（行李建議、換匯、網卡）
+   - Slide 19: 常見問題 FAQ
+   - Slide 20: 結語與 Q&A（充滿心意的邀請）`,
+
+        business: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
+1. 輸出格式：必須為 YAML 程式碼區塊。
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：公司同事或上司。
+5. 情境設定：為了考察、團體建設或商務合作，展示行程的效率、CP 值與產業連結亮點。
+6. 分頁結構建議：
+   - Slide 1: 執行摘要（Executive Summary）
+   - Slide 2: 規劃願景與關鍵指標（節省時間 vs 體驗價值）
+   - Slide 3-11: 每日路徑分析（強調地理銜接優化、推薦考察點）
+   - Slide 12: 關鍵地標與其產業意義（或團隊合影推薦點）
+   - Slide 13: 交通工具與動線管理（Logic & Efficiency）
+   - Slide 14: 科技應用（我們如何運用 AI 優化此行程）
+   - Slide 15: 成本結構分析（ROI 分析）
+   - Slide 16: 後勤支援與應變計畫（風險控管）
+   - Slide 17: 團隊建設活動建議
+   - Slide 18: 回國後的加值產出目標
+   - Slide 19: 時程總覽（Gantt Chart 風格）
+   - Slide 20: 行動呼籲與決策請求（Next Steps）`,
+
+        friends: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
+1. 輸出格式：必須為 YAML 程式碼區塊。
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：熱血好友或死黨。
+5. 情境設定：點燃大家的旅遊魂！強調必拍位、極限美食、潮流體驗與 IG 爆紅點。
+6. 分頁結構建議：
+   - Slide 1: 最終出團公告（超酷視覺風格）
+   - Slide 2: 全場最期待 3 大亮點（High Lights）
+   - Slide 3-12: 每日狂暴行程（Emphasis on activities, vibes, photo spots）
+   - Slide 13: 隱藏版深夜食堂與酒吧（Secret Slots）
+   - Slide 14: 社群素材攻略（哪些點必錄 Reels/限動）
+   - Slide 15: 敗家清單預測（Must-buy）
+   - Slide 16: 穿搭建議（每日拍照 OOTD）
+   - Slide 17: 總預算分析（窮遊 vs 豪遊）
+   - Slide 18: 行前注意事項（必帶小物）
+   - Slide 19: 分工表（誰負責什麼）
+   - Slide 20: 出發口號與群組連結`,
+
+        kids: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
+1. 輸出格式：必須為 YAML 程式碼區塊。
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：兒童與親子家庭。
+5. 情境設定：將旅遊包裝成一場「史詩冒險挑戰」，讓孩子充滿參與感。
+6. 分頁結構建議：
+   - Slide 1: 冒險地圖開啟（Adventure Awaits!）
+   - Slide 2: 我們的超能力與隊友（角色分配）
+   - Slide 3-12: 每日冒險地圖（每日一關卡，尋寶景點、任務關鍵字）
+   - Slide 13: 動物與魔法世界（行程中的主題樂園或動物驚喜）
+   - Slide 14: 補給站大解析（孩子最愛的甜點與特色餐廳）
+   - Slide 15: 收集印章與貼紙任務區
+   - Slide 16: 冒險小百科（當地的簡單常識與語言教學）
+   - Slide 17: 趣味小測驗（Travel Quiz）
+   - Slide 18: 英雄行李打包清單（兒童專屬）
+   - Slide 19: 旅行日記模板（每日記錄框）
+   - Slide 20: 冒險家宣誓與啟程`
+      };
+
+      document.getElementById('ppt-prompt').value = scenarios[currentPptScenario];
+    }
+
+    // ── Podcast ──
+    function setPodcastScenario(id) {
+      document.querySelectorAll('[id^="podcast-btn-"]').forEach(b => b.classList.remove('active'));
+      document.getElementById('podcast-btn-' + id).classList.add('active');
+
+      const prompts = {
+        family: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「家人/長輩」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A（引導者）：語氣成熟穩重，充滿耐心地解說行程中的舒適亮點與文化內涵。
+- 主持人 B（體驗者）：語氣溫暖親切，像是孝順的子女在分享有趣的小細節。
+- 內容要求：
+  * 強調行程中的「不趕時間」與「五感慢體驗」。
+  * 深入淺出地解說景點背後的歷史小故事（例如神社參拜方式）。
+  * 像是在自家客廳聊天一樣，營造出溫馨、安心的期待感。`,
+
+        business: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「商務考察/同事」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A（分析師）：理性、語速適中，強調行程中的效率、CP 值與特殊的地理佈局。
+- 主持人 B（亮點採集員）：專業且敏銳，捕捉行程中具有產業靈感或適合團隊交流的特殊景點。
+- 內容要求：
+  * 使用較多產業術語或專業詞彙。
+  * 討論行程如何幫助團隊達成目標。
+  * 整體氛圍像是專業的商務談話節目，資訊密度較高。`,
+
+        friends: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「好友/死黨」，請兩位主持人（一男一女）展現以下風格：
+- 背景：兩位主持人像是那種很有默契、愛開玩笑的好友組合。
+- 風格：幽默、高能量、充滿期待感，甚至會為了哪個行程最讚而小吵架。
+- 內容要求：
+  * 大量使用時下流行語，強調「必去、真香、哭啊、太扯了」。
+  * 著重介紹「哪裡好拍照」、「哪裡好買」、「哪裡好吃」。
+  * 營造出「我們明天就要飛了」那種極度興奮的派對氛圍。`,
+
+        kids: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「兒童/親子」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A（冒險隊長）：充滿活力、語氣像在主持兒童節目，稱呼聽眾為「小小冒險家」。
+- 主持人 B（好奇小夥伴）：語氣單純、好奇，會提出許多「十萬個為什麼」。
+- 內容要求：
+  * 將景點擬人化或奇幻化（例如：東京鐵塔是發光的守護神）。
+  * 加入許多與聽眾互動的問句：「大家知道日本的交通工具是哪一種最快嗎？」
+  * 音樂感強，充滿童心與想像力。`
+      };
+
+      document.getElementById('podcast-prompt').value = prompts[id];
+    }
+
+    // ── Map Styles ──
+    let selectedStyle = 'watercolor';
+
+    function selectStyle(style) {
+      document.querySelectorAll('[id^="style-"]').forEach(c => c.classList.remove('selected'));
+      const el = document.getElementById('style-' + style);
+      if (el) el.classList.add('selected');
+      selectedStyle = style;
+      updateMapPrompt();
+    }
+
+    function updateMapPrompt() {
+      const styles = {
+        claymorphism: '3D 等距視角、黏土擬真質感（Claymorphism）、馬卡龍色調，像微縮模型玩具。所有元素都像用黏土捏製而成，圓潤可愛。',
+        pixel: '16-bit 復古像素藝術（Pixel Art）。類似 90 年代 RPG 遊戲畫面或超級瑪利歐地圖，將景點設為關卡。色彩鮮豔明快，邊緣鋸齒狀，帶有可愛與懷舊的感覺。',
+        ukiyo: '日本傳統浮世繪風格（Ukiyo-e）。模仿葛飾北齋或歌川廣重的筆觸。使用大膽的輪廓線、平塗的色彩（普魯士藍、朱紅、赭黃）。背景加入海浪或富士山紋樣。泛黃紙張質感、靛藍與米色主調。',
+        cyberpunk: '賽博龐克（Cyberpunk）與未來主義。深色背景，搭配高對比的霓虹光（粉紅、青色、紫色）。建築物帶有科技感與發光招牌，營造東京夜景的科幻氛圍。',
+        minimalist: '現代極簡主義（Minimalist Line Art）。類似 Kinfolk 雜誌風格。大量留白，使用黑色細線條描繪輪廓，僅在重點處點綴低飽和度的莫蘭迪色系。',
+        watercolor: '溫暖、迷人、手繪水彩插畫。絕非照片寫實風格。使用柔和的輪廓線、溫潤的紋理，以及舒適的色調（粉彩、暖黃、藍色與粉色，並帶有花卉裝飾）。氛圍：營造浪漫溫馨的感覺。'
+      };
+
+      const prompt = `# 角色與目標
+你是一位專業的插畫家。請將來源的行程轉化為一幅資訊圖表地圖。
+
+# 視覺風格要求（關鍵）
+- 藝術風格：${styles[selectedStyle]}
+- 版面與動線：一條蜿蜒的路徑，從上而下。使用虛線連接事件。
+- 文字標註：使用繁體中文標註地名與時間。
+
+# 內容元素
+1. 時間：清晰的時鐘圖示。
+2. 地點/活動：具體的交通工具、建築外觀。
+3. 食物：美味的食物插畫。
+`;
+      document.getElementById('map-prompt').value = prompt;
+    }
+
+    // ── Template Library ──
+    let selectedTemplate = 'multiday';
+
+    function selectTemplate(tpl) {
+      document.querySelectorAll('[id^="template-"]').forEach(c => c.classList.remove('selected'));
+      const el = document.getElementById('template-' + tpl);
+      if (el) el.classList.add('selected');
+      selectedTemplate = tpl;
+      updateTemplatePrompt();
+    }
+
+    const promptTemplates = {
+      multiday: `請根據上面這份行程表，幫我生成一張「插畫風格」的旅遊攻略圖。
+
+構圖需求：
+- 版面比例：16:9 橫式（適合 IG / 小紅書）
+- 排版風格：travel itinerary infographic、card layout，每一天一個卡片區塊
+- 每個 Day 都要用大字標示：Day1、Day2…，搭配主要景點小插圖
+- 圖中要畫出我提到的景點、街景、美食、飯店外觀
+
+文字與圖像風格：
+- 所有標題與標註「全部使用台灣繁體中文」
+- 顏色：pastel color、warm tone
+- 插畫風格：cute illustration、watercolor style
+- 資訊清楚可讀、不擁擠，保留適當留白
+
+整體氛圍：
+- 像一本可愛又實用的「旅遊攻略 travel guide」
+- 看起來適合分享到 IG / 小紅書 的旅遊懶人包圖卡
+
+---
+
+**以下是我的詳細行程：**`,
+
+      oneday: `請根據這份一日行程，生成一張「一日遊視覺化行程圖」。
+
+構圖需求：
+- 版面比例：9:16（適合 IG 限時動態）
+- 排版方式：timeline infographic，以時間為主軸，由上到下
+- 在圖上畫出簡化版 travel map，並用路線箭頭連接各景點
+- 每個時間點搭配一個小插畫 icon（寺廟、展望台、購物街、餐廳）
+
+風格設定：
+- 文字全部使用繁體中文，時間與地名清楚易讀
+- 插畫風格：flat illustration、bright colors、minimal style
+- 整體偏 modern、簡潔，不要太多細節，以資訊清楚為主
+
+請幫我設計成「旅行資訊圖 travel infographic」風格，看起來專業又好看。
+
+---
+
+**以下是我的詳細行程：**`,
+
+      cheatsheet: `請幫我生成一張旅遊懶人包資訊圖。
+
+內容請包含四大區塊：
+1. 必去景點：列出 4–5 個代表性景點
+2. 必吃美食：列出 4–5 種代表性料理或店家類型
+3. 建議住宿區域：說明 2–3 個適合住宿的地區
+4. 交通方式：簡單介紹交通工具或票券
+
+構圖與風格：
+- 版面比例：1:1 square（適合 IG 貼文）
+- 左側放大主視覺插畫：目的地地標（天際線、著名建築）
+- 右側用 4 個卡片或方框區塊呈現文字資訊（card layout、checklist style）
+- 風格：pastel color、kawaii illustration、clean layout
+
+文字設定：
+- 全部使用繁體中文標題與內容
+- 標題字體大而清楚，內文字體略小但保持可讀
+- 每個區塊用不同顏色標題列（section header）
+
+---
+
+**以下是我的詳細行程：**`,
+
+      poster: `請幫我設計一張「旅行海報 Travel Poster」。
+
+構圖與主題：
+- 畫面中央為目的地代表場景（著名景點、地標）
+- 前景可以有旅人剪影或裝飾元素
+- 上方以大字寫城市名（全大寫）
+- 下方小字寫一行英文標語
+
+風格要求：
+- art style：retro travel poster、vintage airline poster、mid-century modern、flat vector art
+- 顏色：vintage color palette、warm tone、slightly faded
+- 線條乾淨、形狀幾何化，不要太多小細節
+
+版面與文字：
+- 版面比例：2:3（適合海報印刷）
+- 圖中英文字用全大寫、字體粗一點
+- 左下角加上繁體中文補充說明
+
+整體氛圍：
+- 像老電影宣傳海報或老航空公司旅遊海報（vintage airline poster）
+- 風格一致，適合作為掛畫 / 縮圖使用
+
+---
+
+**以下是我的目的地資訊：**`,
+
+      routemap: `請根據我的旅遊路線，生成一張地圖式旅遊攻略圖。
+
+構圖需求：
+- 版面比例：16:9
+- 中央繪製簡化地圖（illustrated map）
+- 在地圖上標示各城市位置，用圓點或地標圖示標記
+- 用曲線箭頭連接各城市，箭頭上標示交通方式與時間
+
+視覺風格：
+- 地圖風格：hand-drawn、watercolor
+- 顏色：bright colors、每個城市用不同顏色標示
+- 每個城市旁邊用小卡片列出 2–3 個主要活動或景點
+- 標註全部使用繁體中文
+
+文字與資訊：
+- 圖上方或左上角標題：旅遊路線名稱
+- 每個城市名稱清楚標示
+- 交通時間與方式標註在路線上
+
+整體氛圍：
+- 像旅遊書內頁的 route map
+- 清楚、易讀、適合簡報或社群分享
+
+---
+
+**以下是我的路線規劃：**`,
+
+      ppt: `請根據我提供的行程表，設計一張適合放在簡報裡的「視覺化行程總覽圖」。
+
+構圖與排版：
+- 比例：16:9，橫式，留白多，適合 PowerPoint / Google Slides
+- 左側用簡化版地圖（城市位置標示）
+- 右側用水平區塊，分別標題：Day 1, Day 2, Day 3...
+- 每個 Day 區塊內，只列出 2–3 個關鍵活動與地點，搭配小圖示 icon
+
+風格設定：
+- 設計風格：clean presentation、minimal design、professional infographic
+- 色彩：深藍＋金色，穩重但不老氣
+- 圖示使用簡約線條圖示（line icons），不要太可愛風
+
+文字：
+- 標題使用繁體中文，如「○○ 5 天行程總覽」
+- 英文關鍵字可以放在小標：Itinerary Overview, Highlight Activities
+- 全部文字保持易讀，不要太小，不用手寫體
+
+請讓整張圖看起來像專業旅遊顧問簡報中的行程總覽頁。
+
+---
+
+**以下是我的詳細行程：**`
+    };
+
+    function updateTemplatePrompt() {
+      document.getElementById('template-prompt').value = promptTemplates[selectedTemplate];
+    }
+
+    // ── Poster Styles ──
+    let selectedPosterStyle = 'fairy';
+
+    function switchTemplateTab(tab) {
+      if (tab === 'general') {
+        document.getElementById('section-general').style.display = '';
+        document.getElementById('section-poster').style.display = 'none';
+        document.getElementById('tab-general').classList.add('active');
+        document.getElementById('tab-poster').classList.remove('active');
+        selectTemplate('multiday');
+      } else {
+        document.getElementById('section-general').style.display = 'none';
+        document.getElementById('section-poster').style.display = '';
+        document.getElementById('tab-general').classList.remove('active');
+        document.getElementById('tab-poster').classList.add('active');
+        selectPosterStyle('fairy');
+      }
+    }
+
+    const posterStyles = {
+      fairy:     { role: '可愛布偶娃娃', material: '毛氈、絨布與刺繡線', tone: '溫暖粉彩色調（粉色、米白、蜜桃）', bg: '柔和粉彩天空、可愛雲朵與童話花園裝飾', note: '整體像高級手作立體繪本海報，圓潤溫馨、充滿童趣' },
+      zakka:     { role: '日系雜貨風布偶', material: '柔軟奶茶色絨布與和紙感布料', tone: '奶茶色系、淡米色、莫蘭迪中性色', bg: '和紙紋理、手帳票券、旅行印章與行李吊牌', note: '整體像日系生活雜貨店的療癒插畫，有溫暖的手作手帳感' },
+      luxury:    { role: '精緻布偶角色（身著高級訂製造型服裝）', material: '高級訂製感毛氈與絨布', tone: '深淺強烈對比，搭配金色或象牙白點綴', bg: '精準留白背景、戲劇性聚光燈光影', note: '整體像精品品牌旅遊廣告主視覺，大器、簡潔、有國際感' },
+      adventure: { role: 'Q版探險布偶隊（每個場景換不同造型）', material: '毛絨、縫線、鈕扣與刺繡表情', tone: '鮮明活潑的桌遊色彩（綠、棕、藍、紅）', bg: '地圖節點、任務路標、章印與路線箭頭', note: '整體像兒童冒險書封面地圖，活潑討喜' },
+      candy:     { role: '透明糖果色布偶', material: '透明感柔亮布料、粉嫩毛氈', tone: '糖果色、漸層光暈、柔焦夢幻色調', bg: '玻璃感光暈、糖果與果凍裝飾元素', note: '整體如玻璃糖果與果凍夢境世界，清透甜美' },
+      collage:   { role: '毛氈拼貼玩偶', material: '毛氈搭配撕紙、貼紙、票根與膠帶', tone: '暖色紙張質地、顆粒感復古印刷色調', bg: '手作拼貼元素：塗鴉、剪報、章印、Washi Tape', note: '整體像旅遊雜誌封面加手帳拼貼，適合收藏' },
+      anime:     { role: '動畫角色風布偶（每幕換裝換臉）', material: '絨布與刺繡，姿勢誇張有戲劇性', tone: '鮮豔動畫色彩，富有層次感與戲劇感', bg: '舞台場景：鐵道、神社、商店街、城市夜景動畫化背景', note: '整體像動畫電影宣傳主視覺，精彩吸睛' },
+      notebook:  { role: '手帳插畫貼紙風布偶', material: '布偶貼紙感呈現，仍保有毛絨縫線質感', tone: '螢光筆圈選色調搭配淡雅底色', bg: '便利貼、印章、星星圖案與可愛 doodle 裝飾', note: '整體像旅行手帳攤開的紀錄頁，適合收藏' },
+      oriental:  { role: '和風雅緻布偶（身著簡化和服或刺繡服飾）', material: '米白絨布搭配淡金色刺繡', tone: '柔和米色、淡金、淺綠與粉色', bg: '櫻花、雲紋、紙燈籠、庭園元素', note: '整體像高雅溫暖的旅遊宣傳畫，既可愛又有文化氣息' },
+      street:    { role: '潮流布偶（換上帽子、墨鏡、球鞋造型）', material: '毛絨玩具搭配潮流配件貼紙感', tone: '強烈色塊（霓虹黃、電藍、珊瑚橙）', bg: 'sticker collage 拼貼、粗線條路線標記', note: '整體年輕吸睛，動感斜切構圖，適合社群爆紅' },
+      dream:     { role: '水彩夢境布偶', material: '毛氈圓潤造型，背景水彩暈染質感', tone: '輕柔水彩色調（薰衣草、天藍、粉橙）空氣感強', bg: '水彩暈染城市線條、山景與海景', note: '整體色彩輕柔詩意，像夢裡的旅行日記，視覺舒服' },
+      popup:     { role: '立體紙雕布偶（立體紙雕加絨布玩偶混合質感）', material: '立體紙雕加絨布混合，像小型舞台模型', tone: '溫暖童書色調（奶油黃、天空藍、草地綠）', bg: '立體舞台模型場景：地標、花朵、雲朵與夜景燈光', note: '整體像翻開立體童書，溫暖親切非常討喜' }
+    };
+
+    function selectPosterStyle(styleId) {
+      document.querySelectorAll('[id^="poster-"]').forEach(c => c.classList.remove('selected'));
+      const el = document.getElementById('poster-' + styleId);
+      if (el) el.classList.add('selected');
+      selectedPosterStyle = styleId;
+      updatePosterPrompt();
+    }
+
+    function updatePosterPrompt() {
+      const s = posterStyles[selectedPosterStyle];
+      const prompt = `請生成一張「（依你的行程內容設計標題）」的大型橫式 16:9 海報。
+
+主角為${s.role}，每個景點搭配不同的姿勢與造型變化。
+
+以可愛布偶呈現，布偶出現在每個景點旁，用可愛的姿勢互動。
+
+用${s.material}等材質將所有場景物件重新詮釋為觸感舒適的填充玩具造型。賦予他們舒適的毛氈或絨布質感，簡化造型，並用精緻的刺繡點綴。使用${s.tone}，搭配柔和的陰影和細緻的縫線，就像手工製作的填充玩具。整體風格為柔和色彩、圓潤可愛絨毛玩具造型，每個景點特色建築皆療癒可愛、圓滾滾，背景加入可愛的${s.bg}。
+
+${s.note}
+
+▍請務必遵守：
+- 全圖區分為（依行程天數）個不規則區塊（Day1、Day2…DayN）
+- 排列順序：Day1 → Day2 → Day3 → … → DayN，不可跳日、反向或分叉
+- 所有標示皆使用中文
+- 布偶需在每個場景以可愛的方式互動（拍照、逛街、吃美食、搭車…）
+
+以下為行程
+`;
+      document.getElementById('template-prompt').value = prompt;
+    }
+
+    // ── Avatar ──
+    let selectedAvatarStyle = 'clay';
+
+    function selectAvatarStyle(styleId) {
+      document.querySelectorAll('[id^="avatar-"]').forEach(c => c.classList.remove('selected'));
+      const el = document.getElementById('avatar-' + styleId);
+      if (el) el.classList.add('selected');
+      selectedAvatarStyle = styleId;
+      updateAvatarPrompt();
+    }
+
+    const avatarTemplates = {
+      clay: `請根據這張照片中我的長相、髮型、眼鏡和服裝特徵，將我轉化為一個可愛的「3D 黏土人偶 (Claymorphism Style)」。
+
+視覺需求：
+- 圓潤的 3D 造型，表面有細微的黏土手捏質感與啞光表面
+- 必須保留照片中我的髮型樣式、黑框眼鏡、服裝顏色等辨識特徵
+- 人偶呈現開朗、友善的笑容，姿勢活潑
+- 使用單色柔和背景
+- 專業的 3D 渲染，帶有溫暖的球型照明和柔和陰影`,
+
+      pixar: `請參考這張照片中的我的外型與穿著，為我設計一個「皮克斯 3D 動畫電影風格」的作品主角分身。
+
+視覺需求：
+- 大而閃亮的眼睛，生動的表情，細緻的皮膚與服裝材質紋理
+- 忠實還原照片中的：髮色、髮型、特徵眼鏡、以及照片中的主要服裝元素
+- 背景要是稍微模糊的城市街景（夢幻感）
+- 高質感的電影照明技術，營造出溫馨、冒險且充滿生命力的氛圍`,
+
+      lego: `請把這張照片中的我，設計成一個「樂高積木人 (LEGO Minifigures)」的 3D 角色。
+
+視覺需求：
+- 標準的樂高積木人造型，具有經典的光滑塑料質感
+- 髮型、服飾與眼鏡要盡可能與照片中的我相似，像是一個官方推出的個人樂高套組
+- 底部有一個樂高圓形底盤
+- 整體燈光效果像是在展示陳列架上的精緻玩具，色彩鮮艷飽和`,
+
+      crochet: `請根據照片中我的視覺特徵，幫我設計一個「手工編織毛線娃娃 (Amigurumi Crochet Style)」的 3D 虛擬替身。
+
+視覺需求：
+- 身體由明顯的毛線編織勾勒而成，帶有蓬鬆柔軟的棉線與毛絨質感
+- 保留我原本的髮型輪廓與眼鏡特色，並用毛線感呈現
+- 眼睛使用黑色縫線鈕扣或是小黑珠代替，表情溫潤療癒
+- 溫馨的中性色系背景，光線柔和，看起來像是一件精緻的手工藝術品`
+    };
+
+    function updateAvatarPrompt() {
+      document.getElementById('avatar-prompt').value = avatarTemplates[selectedAvatarStyle];
+    }
+
+    // ── Social Post ──
+    function updateSocialPost() {
+      const platform = document.getElementById('social-platform').value;
+      const style = document.getElementById('social-style').value;
+      const destination = document.getElementById('social-destination').value;
+
+      const styleText = {
+        '炫耀型': '活潑有趣、充滿驚嘆號和 emoji',
+        '實用分享': '實用資訊為主、條列式呈現',
+        '文青低調': '文藝氣息、簡潔優雅、少用驚嘆號',
+        '邀約朋友': '輕鬆邀約、互動式問句'
+      };
+
+      const prompt = `請幫我寫一篇 ${platform} 貼文，內容要包含：
+1. 我正在學用 AI 規劃${destination}旅遊
+2. 這是我用 Gemini 生成的手繪地圖（超有質感！）
+3. 這個工作坊真的很好玩
+4. 邀請朋友來按讚支持我
+
+風格：${styleText[style]}
+請加上 5 個相關 emoji 和以下 hashtag：
+#AI旅遊規劃 #Gemini #日本自由行 #我的AI地圖 #工作坊`;
+
+      document.getElementById('social-prompt').value = prompt;
+    }
+
+    // ── Countdown ──
+    let countdownInterval = null;
+
+    function startCountdown() {
+      updateCountdownDisplay();
+      countdownInterval = setInterval(updateCountdownDisplay, 1000);
+    }
+
+    function updateCountdownDisplay() {
+      const deadline = parseInt(localStorage.getItem('workshop_countdown_deadline'));
+      const countdownEl = document.getElementById('challenge-countdown');
+      const labelEl = document.getElementById('countdown-label');
+
+      if (!deadline) {
+        countdownEl.textContent = '--:--';
+        labelEl.textContent = '等待講師開始計時';
+        countdownEl.style.color = '';
+        return;
+      }
+
+      const now = Date.now();
+      const diff = deadline - now;
+
+      if (diff <= 0) {
+        countdownEl.textContent = '00:00';
+        labelEl.textContent = '⏰ 時間到！';
+        countdownEl.style.color = '#dc2626';
+        return;
+      }
+
+      const minutes = Math.floor(diff / 60000);
+      const seconds = Math.floor((diff % 60000) / 1000);
+      countdownEl.textContent = `${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+      labelEl.textContent = '距離統計截止';
+      countdownEl.style.color = diff < 60000 ? '#dc2626' : '';
+    }
+
+    // Listen for storage events (cross-tab)
+    window.addEventListener('storage', (e) => {
+      if (e.key === 'workshop_countdown_deadline') {
+        updateCountdownDisplay();
+      }
+    });
+
+    // ── Init ──
+    document.addEventListener('DOMContentLoaded', () => {
+      updatePptPrompt();
+      setPodcastScenario('family');
+      selectStyle('watercolor');
+      selectTemplate('multiday');
+      selectPosterStyle('fairy');
+      selectAvatarStyle('clay');
+      updateSocialPost();
+      startCountdown();
+    });
   </script>
 </body>
 </html>
