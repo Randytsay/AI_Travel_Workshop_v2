@@ -1,9 +1,17 @@
 <!DOCTYPE html>
 <html lang="zh-TW" data-theme="dark">
-<head>
+\1
+<script>
+(function(){
+  var s=localStorage.getItem('theme');
+  if(s)document.documentElement.setAttribute('data-theme',s);
+})();
+</script>
+
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AI 旅遊工作坊 | 玩轉日本夢幻之旅</title>
+  \1
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><text y=".9em" font-size="90">✈️</text></svg>" type="image/svg+xml">
   <meta name="description" content="用 Gemini 3.1 從零開始規劃日本夢幻之旅，結合 LINE Bot 互動與社群分享">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
