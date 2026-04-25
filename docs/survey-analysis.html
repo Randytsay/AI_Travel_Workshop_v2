@@ -8,803 +8,509 @@
   <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.0/dist/chart.umd.min.js"></script>
   <style>
     :root {
-      --bg-primary: #0d1b2a;
-      --bg-secondary: #1b2838;
-      --bg-card: rgba(27,40,56,0.85);
-      --bg-card-solid: #1b2838;
-      --text-primary: #ffffff;
-      --text-secondary: #a8c0d6;
-      --text-muted: #6b8299;
-      --border: rgba(255,255,255,0.08);
-      --border-strong: rgba(255,255,255,0.18);
-      --accent-sunset: linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d);
-      --accent-coral: #ff6b6b;
-      --accent-orange: #f39c12;
-      --accent-yellow: #ffd93d;
-      --accent-mint: #55efc4;
-      --accent-sky: #74b9ff;
-      --accent-pink: #fd79a8;
-      --accent-purple: #a29bfe;
+      --bg-primary: #0d1b2a; --bg-secondary: #1b2838; --bg-card: rgba(27,40,56,0.85);
+      --bg-card-solid: #1b2838; --text-primary: #ffffff; --text-secondary: #a8c0d6;
+      --text-muted: #6b8299; --border: rgba(255,255,255,0.08); --border-strong: rgba(255,255,255,0.18);
+      --accent-coral: #ff6b6b; --accent-orange: #f39c12; --accent-yellow: #ffd93d;
+      --accent-mint: #55efc4; --accent-sky: #74b9ff; --accent-pink: #fd79a8; --accent-purple: #a29bfe;
       --shadow-card: 0 8px 32px rgba(0,0,0,0.3);
     }
     [data-theme="light"] {
-      --bg-primary: #fffdf8;
-      --bg-secondary: #fff5e6;
-      --bg-card: rgba(255,255,255,0.92);
-      --bg-card-solid: #ffffff;
-      --text-primary: #2d3436;
-      --text-secondary: #4a5568;
-      --text-muted: #7a8fa6;
-      --border: rgba(0,0,0,0.08);
-      --border-strong: rgba(0,0,0,0.16);
+      --bg-primary: #fffdf8; --bg-secondary: #fff5e6; --bg-card: rgba(255,255,255,0.92);
+      --bg-card-solid: #ffffff; --text-primary: #2d3436; --text-secondary: #4a5568;
+      --text-muted: #7a8fa6; --border: rgba(0,0,0,0.08); --border-strong: rgba(0,0,0,0.16);
       --shadow-card: 0 8px 32px rgba(0,0,0,0.08);
     }
     * { margin: 0; padding: 0; box-sizing: border-box; }
-    body {
-      font-family: 'Noto Sans TC', sans-serif;
-      background: var(--bg-primary);
-      color: var(--text-primary);
-      min-height: 100vh;
-      padding: 24px;
-    }
+    body { font-family: 'Noto Sans TC', sans-serif; background: var(--bg-primary); color: var(--text-primary); min-height: 100vh; padding: 24px; }
     .container { max-width: 1200px; margin: 0 auto; }
 
     /* Header */
-    .header {
-      display: flex; align-items: center; gap: 16px;
-      margin-bottom: 32px; padding-bottom: 24px;
-      border-bottom: 1px solid var(--border);
+    .header { display:flex; align-items:center; gap:16px; margin-bottom:32px; padding-bottom:24px; border-bottom: 1px solid var(--border); flex-wrap: wrap; }
+    .header-badge { background: linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); padding:6px 14px; border-radius:100px; font-size:0.75rem; font-weight:700; white-space:nowrap; }
+    .header h1 { font-size:1.4rem; font-weight:700; }
+    .header-sub { margin-left:auto; display:flex; align-items:center; gap:12px; flex-wrap:wrap; }
+    .header .subtitle { color:var(--text-secondary); font-size:0.8rem; }
+    .theme-btn {
+      width:36px; height:36px; border-radius:50%; border:none; background:rgba(255,255,255,0.1);
+      color:var(--text-secondary); font-size:1rem; cursor:pointer;
+      display:flex; align-items:center; justify-content:center; transition:all 0.2s; flex-shrink:0;
     }
-    .header-badge {
-      background: var(--accent-sunset);
-      padding: 6px 14px; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 700;
-    }
-    .header h1 { font-size: 1.5rem; font-weight: 700; }
-    .header .subtitle { color: var(--text-secondary); font-size: 0.875rem; margin-left: auto; }
-    .theme-toggle {
-      width: 36px; height: 36px; border-radius: 50%;
-      border: none; background: rgba(255,255,255,0.1);
-      color: var(--text-secondary); font-size: 1rem;
-      cursor: pointer; display: flex; align-items: center; justify-content: center;
-      flex-shrink: 0; transition: all 0.2s;
-    }
-    .theme-toggle:hover { background: rgba(255,255,255,0.2); transform: scale(1.1); }
-    [data-theme="light"] .theme-toggle { background: rgba(0,0,0,0.08); color: #2d3436; }
+    .theme-btn:hover { background:rgba(255,255,255,0.2); transform:scale(1.1); }
+    [data-theme="light"] .theme-btn { background:rgba(0,0,0,0.08); color:#2d3436; }
 
-    /* Live badge */
-    .live-badge {
-      display: inline-flex; align-items: center; gap: 6px;
-      background: rgba(85,239,196,0.15);
-      border: 1px solid rgba(85,239,196,0.3);
-      color: #55efc4; padding: 4px 12px; border-radius: 100px;
-      font-size: 0.75rem; font-weight: 600;
-    }
-    .live-dot {
-      width: 6px; height: 6px; border-radius: 50%;
-      background: #55efc4; animation: pulse 2s infinite;
-    }
-    @keyframes pulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(1.3); }
-    }
-
-    /* KPI Cards */
-    .kpi-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 16px; margin-bottom: 32px;
-    }
+    /* KPI */
+    .kpi-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(160px,1fr)); gap:16px; margin-bottom:36px; }
     .kpi-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 24px 20px;
-      text-align: center;
-      transition: all 0.3s;
+      background:var(--bg-card); backdrop-filter:blur(20px); border:1px solid var(--border);
+      border-radius:20px; padding:22px 16px; text-align:center; transition:all 0.3s;
     }
-    .kpi-card:hover { box-shadow: var(--shadow-card); transform: translateY(-2px); }
-    .kpi-icon { font-size: 2rem; margin-bottom: 8px; }
+    .kpi-card:hover { box-shadow:var(--shadow-card); transform:translateY(-2px); }
+    .kpi-icon { font-size:2rem; margin-bottom:8px; }
     .kpi-value {
-      font-size: 2.5rem; font-weight: 900;
-      background: var(--accent-sunset);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text; line-height: 1;
+      font-size:2.4rem; font-weight:900; line-height:1;
+      background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d);
+      -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;
     }
-    .kpi-label { color: var(--text-secondary); font-size: 0.85rem; margin-top: 6px; }
-    .kpi-sub { color: var(--text-muted); font-size: 0.75rem; margin-top: 4px; }
+    .kpi-label { color:var(--text-secondary); font-size:0.82rem; margin-top:6px; }
+    .kpi-sub { color:var(--text-muted); font-size:0.72rem; margin-top:4px; }
 
     /* Section */
-    .section-title {
-      font-size: 1.25rem; font-weight: 700; margin-bottom: 20px;
-      display: flex; align-items: center; gap: 10px;
-    }
-    .section-title::before {
-      content: ''; width: 4px; height: 24px;
-      background: var(--accent-sunset); border-radius: 2px;
-    }
-    .section { margin-bottom: 48px; }
-
-    /* Chart grid */
-    .chart-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(340px, 1fr));
-      gap: 20px;
-    }
-    .chart-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 20px; padding: 24px;
-    }
-    .chart-title {
-      font-size: 0.95rem; font-weight: 600;
-      color: var(--text-secondary); margin-bottom: 16px;
-      display: flex; align-items: center; gap: 8px;
-    }
-    .chart-wrap { position: relative; height: 260px; }
-    .chart-wrap.tall { height: 320px; }
-    .chart-wrap.wide { height: 220px; }
-
-    /* Products / Courses bars */
-    .bar-list { display: flex; flex-direction: column; gap: 12px; }
-    .bar-item { display: flex; align-items: center; gap: 12px; }
-    .bar-label { font-size: 0.85rem; min-width: 100px; color: var(--text-secondary); text-align: right; }
-    .bar-track {
-      flex: 1; height: 24px; background: rgba(255,255,255,0.06);
-      border-radius: 12px; overflow: hidden; position: relative;
-    }
-    [data-theme="light"] .bar-track { background: rgba(0,0,0,0.06); }
-    .bar-fill {
-      height: 100%; border-radius: 12px;
-      display: flex; align-items: center; padding-left: 10px;
-      font-size: 0.75rem; font-weight: 700; color: white;
-      transition: width 1s ease;
-    }
-    .bar-value {
-      font-size: 0.85rem; font-weight: 700;
-      color: var(--text-primary); min-width: 28px;
-    }
-
-    /* Individual Table */
-    .table-wrap {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 20px; overflow: hidden;
-      overflow-x: auto;
-    }
-    table { width: 100%; border-collapse: collapse; min-width: 900px; }
-    th {
-      background: rgba(255,255,255,0.04);
-      padding: 14px 16px; text-align: left;
-      font-size: 0.8rem; font-weight: 700;
-      color: var(--text-secondary); white-space: nowrap;
-      border-bottom: 1px solid var(--border);
-    }
-    [data-theme="light"] th { background: rgba(0,0,0,0.03); }
-    td {
-      padding: 12px 16px; font-size: 0.85rem;
-      border-bottom: 1px solid var(--border-subtle, rgba(255,255,255,0.03));
-      color: var(--text-primary); vertical-align: top;
-    }
-    tr:last-child td { border-bottom: none; }
-    tr:hover td { background: rgba(255,255,255,0.03); }
-    [data-theme="light"] tr:hover td { background: rgba(0,0,0,0.02); }
-    .badge {
-      display: inline-block; padding: 3px 10px;
-      border-radius: 100px; font-size: 0.75rem; font-weight: 600;
-    }
-    .badge-green { background: rgba(85,239,196,0.15); color: #55efc4; }
-    .badge-yellow { background: rgba(255,217,61,0.15); color: #ffd93d; }
-    .badge-orange { background: rgba(243,156,18,0.15); color: #f39c12; }
-    .badge-sky { background: rgba(116,185,255,0.15); color: #74b9ff; }
-    .badge-pink { background: rgba(253,121,168,0.15); color: #fd79a8; }
-    .name-cell { font-weight: 700; }
-    .ref-cell { color: var(--text-muted); font-size: 0.8rem; }
-    .tag-small {
-      display: inline-block; margin: 2px 2px;
-      padding: 2px 8px; border-radius: 6px;
-      background: rgba(255,107,107,0.12);
-      border: 1px solid rgba(255,107,107,0.2);
-      font-size: 0.7rem; color: #ff6b6b;
-    }
-    .comment-cell { max-width: 300px; }
-    .comment-cell p { margin: 2px 0; }
-    .comment-label { color: var(--text-muted); font-size: 0.7rem; }
-    .no-comment { color: var(--text-muted); font-style: italic; }
-
-    /* Referral network */
-    .referral-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-      gap: 12px;
-    }
-    .ref-card {
-      background: var(--bg-card);
-      backdrop-filter: blur(20px);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 16px;
-      text-align: center;
-      transition: all 0.3s;
-    }
-    .ref-card:hover { box-shadow: var(--shadow-card); }
-    .ref-avatar {
-      width: 48px; height: 48px; border-radius: 50%;
-      background: var(--accent-sunset);
-      display: flex; align-items: center; justify-content: center;
-      font-size: 1.4rem; margin: 0 auto 8px;
-    }
-    .ref-name { font-weight: 700; font-size: 0.9rem; }
-    .ref-count {
-      font-size: 0.8rem; color: var(--text-secondary); margin-top: 4px;
-    }
-    .ref-count span {
-      font-size: 1.5rem; font-weight: 900;
-      background: var(--accent-sunset);
-      -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-    .ref-tag {
-      display: inline-block; margin-top: 6px;
-      padding: 2px 8px; border-radius: 6px;
-      background: rgba(85,239,196,0.12);
-      border: 1px solid rgba(85,239,196,0.2);
-      font-size: 0.7rem; color: #55efc4;
-    }
+    .section { margin-bottom:48px; }
+    .section-title { font-size:1.2rem; font-weight:700; margin-bottom:20px; display:flex; align-items:center; gap:10px; }
+    .section-title::before { content:''; width:4px; height:24px; background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); border-radius:2px; }
 
     /* Positive rate bars */
-    .positive-bar {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px; margin-bottom: 12px;
-    }
-    .positive-header {
-      display: flex; justify-content: space-between; align-items: center;
-      margin-bottom: 10px;
-    }
-    .positive-label { font-size: 0.9rem; font-weight: 600; }
-    .positive-pct { font-size: 1.2rem; font-weight: 900; }
-    .positive-track {
-      height: 12px; background: rgba(255,255,255,0.06);
-      border-radius: 6px; overflow: hidden;
-    }
-    [data-theme="light"] .positive-track { background: rgba(0,0,0,0.06); }
-    .positive-fill {
-      height: 100%; border-radius: 6px;
-      background: var(--accent-sunset);
-      transition: width 1.5s ease;
-    }
+    .positive-bar { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px 20px; margin-bottom:12px; }
+    .positive-header { display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; }
+    .positive-label { font-size:0.88rem; font-weight:600; }
+    .positive-pct { font-size:1.1rem; font-weight:900; background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .positive-track { height:10px; background:rgba(255,255,255,0.06); border-radius:6px; overflow:hidden; }
+    [data-theme="light"] .positive-track { background:rgba(0,0,0,0.06); }
+    .positive-fill { height:100%; border-radius:6px; background:linear-gradient(90deg,#ff6b6b,#f39c12,#ffd93d); transition:width 1.5s ease; }
 
-    /* Highlight cards */
-    .highlight-grid {
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 16px;
-    }
-    .highlight-card {
-      background: var(--bg-card);
-      border: 1px solid var(--border);
-      border-radius: 16px; padding: 20px;
-    }
-    .highlight-title { font-size: 0.8rem; font-weight: 700; color: var(--text-muted); margin-bottom: 12px; text-transform: uppercase; letter-spacing: 0.05em; }
-    .highlight-text { font-size: 0.9rem; line-height: 1.7; color: var(--text-secondary); }
-    .highlight-text::before { content: '「'; color: var(--accent-coral); font-size: 1.2rem; }
-    .highlight-text::after { content: '」'; color: var(--accent-coral); font-size: 1.2rem; }
+    /* Charts grid */
+    .chart-grid { display:grid; grid-template-columns:repeat(auto-fit, minmax(320px,1fr)); gap:20px; }
+    .chart-card { background:var(--bg-card); backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:20px; padding:22px; }
+    .chart-title { font-size:0.88rem; font-weight:600; color:var(--text-secondary); margin-bottom:16px; display:flex; align-items:center; gap:8px; }
+    .chart-wrap { position:relative; height:240px; }
+    .chart-wrap.tall { height:300px; }
 
-    /* Loading */
-    #loading-overlay {
-      position: fixed; inset: 0; z-index: 999;
-      background: var(--bg-primary);
-      display: flex; flex-direction: column;
-      align-items: center; justify-content: center; gap: 16px;
-    }
-    .loading-spinner {
-      width: 48px; height: 48px;
-      border: 4px solid rgba(255,107,107,0.2);
-      border-top-color: #ff6b6b;
-      border-radius: 50%; animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-    .loading-text { color: var(--text-secondary); font-size: 0.9rem; }
+    /* Bar lists */
+    .bar-list { display:flex; flex-direction:column; gap:10px; }
+    .bar-item { display:flex; align-items:center; gap:10px; }
+    .bar-label { font-size:0.82rem; min-width:90px; color:var(--text-secondary); text-align:right; white-space:nowrap; overflow:hidden; text-overflow:ellipsis; }
+    .bar-track { flex:1; height:22px; background:rgba(255,255,255,0.05); border-radius:11px; overflow:hidden; }
+    [data-theme="light"] .bar-track { background:rgba(0,0,0,0.05); }
+    .bar-fill { height:100%; border-radius:11px; display:flex; align-items:center; padding-left:10px; font-size:0.72rem; font-weight:700; color:white; transition:width 1s ease; white-space:nowrap; }
+    .bar-value { font-size:0.82rem; font-weight:700; color:var(--text-primary); min-width:24px; text-align:right; }
 
-    /* Error */
-    .error-msg {
-      background: rgba(255,107,107,0.1);
-      border: 1px solid rgba(255,107,107,0.3);
-      border-radius: 16px; padding: 24px;
-      color: #ff6b6b; text-align: center;
-    }
-    [data-theme="light"] .error-msg { background: rgba(255,107,107,0.05); }
+    /* Tables */
+    .table-wrap { background:var(--bg-card); backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:20px; overflow:hidden; overflow-x:auto; }
+    table { width:100%; border-collapse:collapse; min-width:900px; }
+    th { background:rgba(255,255,255,0.04); padding:13px 14px; text-align:left; font-size:0.78rem; font-weight:700; color:var(--text-secondary); white-space:nowrap; border-bottom:1px solid var(--border); }
+    [data-theme="light"] th { background:rgba(0,0,0,0.03); }
+    td { padding:11px 14px; font-size:0.82rem; border-bottom:1px solid rgba(255,255,255,0.03); color:var(--text-primary); vertical-align:top; }
+    tr:last-child td { border-bottom:none; }
+    tr:hover td { background:rgba(255,255,255,0.03); }
+    [data-theme="light"] tr:hover td { background:rgba(0,0,0,0.02); }
+    .badge { display:inline-block; padding:3px 9px; border-radius:100px; font-size:0.72rem; font-weight:600; }
+    .badge-green { background:rgba(85,239,196,0.15); color:#55efc4; }
+    .badge-yellow { background:rgba(255,217,61,0.15); color:#ffd93d; }
+    .badge-orange { background:rgba(243,156,18,0.15); color:#f39c12; }
+    .badge-sky { background:rgba(116,185,255,0.15); color:#74b9ff; }
+    .badge-newfriend { background:rgba(253,121,168,0.18); color:#fd79a8; border:1px solid rgba(253,121,168,0.3); }
+    .badge-partner { background:rgba(85,239,196,0.12); color:#55efc4; border:1px solid rgba(85,239,196,0.25); }
+    .name-cell { font-weight:700; }
+    .ref-cell { color:var(--text-muted); font-size:0.78rem; }
+    .tag-small { display:inline-block; margin:2px; padding:2px 7px; border-radius:6px; background:rgba(255,107,107,0.1); border:1px solid rgba(255,107,107,0.2); font-size:0.7rem; color:#ff6b6b; }
+    .no-comment { color:var(--text-muted); font-style:italic; }
 
-    /* Last updated */
-    .last-updated { color: var(--text-muted); font-size: 0.75rem; text-align: center; margin-top: 8px; }
+    /* Two-column table layout */
+    .table-split { display:grid; grid-template-columns:1fr 1fr; gap:20px; }
+    @media(max-width:900px) { .table-split { grid-template-columns:1fr; } }
 
-    /* Responsive */
-    @media (max-width: 600px) {
-      .chart-grid { grid-template-columns: 1fr; }
-      .kpi-grid { grid-template-columns: repeat(2, 1fr); }
+    /* Referral cards */
+    .ref-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(150px,1fr)); gap:12px; }
+    .ref-card { background:var(--bg-card); backdrop-filter:blur(20px); border:1px solid var(--border); border-radius:16px; padding:16px; text-align:center; transition:all 0.3s; }
+    .ref-card:hover { box-shadow:var(--shadow-card); }
+    .ref-avatar { width:48px; height:48px; border-radius:50%; background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); display:flex; align-items:center; justify-content:center; font-size:1.3rem; margin:0 auto 8px; }
+    .ref-name { font-weight:700; font-size:0.88rem; }
+    .ref-count { font-size:0.78rem; color:var(--text-secondary); margin-top:4px; }
+    .ref-count span { font-size:1.5rem; font-weight:900; background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text; }
+    .ref-tag { display:inline-block; margin-top:6px; padding:2px 8px; border-radius:6px; background:rgba(85,239,196,0.1); border:1px solid rgba(85,239,196,0.2); font-size:0.7rem; color:#55efc4; }
+
+    /* Highlights */
+    .highlight-grid { display:grid; grid-template-columns:repeat(auto-fill, minmax(260px,1fr)); gap:16px; }
+    .highlight-card { background:var(--bg-card); border:1px solid var(--border); border-radius:16px; padding:18px; }
+    .highlight-title { font-size:0.75rem; font-weight:700; color:var(--text-muted); margin-bottom:10px; text-transform:uppercase; letter-spacing:0.05em; }
+    .highlight-text { font-size:0.88rem; line-height:1.7; color:var(--text-secondary); }
+    .highlight-text::before { content:'「'; color:var(--accent-coral); font-size:1.1rem; }
+    .highlight-text::after { content:'」'; color:var(--accent-coral); font-size:1.1rem; }
+
+    /* Filter tabs */
+    .filter-tabs { display:flex; gap:8px; margin-bottom:20px; flex-wrap:wrap; }
+    .filter-tab { padding:7px 16px; border-radius:100px; border:1px solid var(--border); background:transparent; color:var(--text-secondary); font-size:0.82rem; font-weight:600; cursor:pointer; transition:all 0.2s; font-family:inherit; }
+    .filter-tab:hover { border-color:var(--border-strong); color:var(--text-primary); }
+    .filter-tab.active { background:linear-gradient(135deg,#ff6b6b,#f39c12,#ffd93d); color:#fff; border-color:transparent; }
+
+    /* Update info */
+    .update-info { color:var(--text-muted); font-size:0.75rem; text-align:center; margin-top:12px; }
+
+    @media(max-width:600px) {
+      .chart-grid { grid-template-columns:1fr; }
+      .kpi-grid { grid-template-columns:repeat(2,1fr); }
     }
   </style>
 </head>
 <body>
-  <div id="loading-overlay">
-    <div class="loading-spinner"></div>
-    <div class="loading-text">正在從 Google 試算表載入問卷資料…</div>
-  </div>
+<div class="container">
 
-  <div class="container" id="main-content" style="display:none;">
-    <!-- Header -->
-    <div class="header">
-      <span class="header-badge">📊 數據分析</span>
-      <h1>美安工作坊｜問卷調查分析</h1>
-      <div class="live-badge">
-        <div class="live-dot"></div>
-        LIVE 資料來源
-      </div>
-      <div style="margin-left:auto; display:flex; align-items:center; gap:12px;">
-        <span class="subtitle" id="last-updated"></span>
-        <button class="theme-toggle" onclick="toggleTheme()" id="themeBtn">🌙</button>
-      </div>
-    </div>
-
-    <!-- KPI Grid -->
-    <div class="kpi-grid" id="kpi-grid"></div>
-
-    <!-- Section 1: Satisfaction Summary -->
-    <div class="section">
-      <div class="section-title">滿意度總覽</div>
-      <div class="positive-bar">
-        <div class="positive-header">
-          <span class="positive-label">🌟 產品感受正向率</span>
-          <span class="positive-pct" id="q1-pct"></span>
-        </div>
-        <div class="positive-track"><div class="positive-fill" id="q1-bar" style="width:0%"></div></div>
-      </div>
-      <div class="positive-bar">
-        <div class="positive-header">
-          <span class="positive-label">📚 課程理解正向率</span>
-          <span class="positive-pct" id="q2-pct"></span>
-        </div>
-        <div class="positive-track"><div class="positive-fill" id="q2-bar" style="width:0%"></div></div>
-      </div>
-      <div class="positive-bar">
-        <div class="positive-header">
-          <span class="positive-label">🎓 教學方式正向率</span>
-          <span class="positive-pct" id="q3-pct"></span>
-        </div>
-        <div class="positive-track"><div class="positive-fill" id="q3-bar" style="width:0%"></div></div>
-      </div>
-      <div class="positive-bar">
-        <div class="positive-header">
-          <span class="positive-label">✋ 實作體驗正向率</span>
-          <span class="positive-pct" id="q4-pct"></span>
-        </div>
-        <div class="positive-track"><div class="positive-fill" id="q4-bar" style="width:0%"></div></div>
-      </div>
-      <div class="positive-bar">
-        <div class="positive-header">
-          <span class="positive-label">🔄 願意再次參加</span>
-          <span class="positive-pct" id="q7b-pct"></span>
-        </div>
-        <div class="positive-track"><div class="positive-fill" id="q7b-bar" style="width:0%"></div></div>
-      </div>
-    </div>
-
-    <!-- Section 2: Charts -->
-    <div class="section">
-      <div class="section-title">各項問題分析圖表</div>
-      <div class="chart-grid">
-        <div class="chart-card">
-          <div class="chart-title">🌟 Q1｜產品感受</div>
-          <div class="chart-wrap"><canvas id="chart-q1"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">📚 Q2｜課程理解程度</div>
-          <div class="chart-wrap"><canvas id="chart-q2"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">🎓 Q3｜教學方式清晰度</div>
-          <div class="chart-wrap"><canvas id="chart-q3"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">✋ Q4｜實作體驗滿意度</div>
-          <div class="chart-wrap"><canvas id="chart-q4"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">🔄 Q7b｜是否願意再次參加</div>
-          <div class="chart-wrap"><canvas id="chart-q7b"></canvas></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">💼 Q8｜事業機會興趣</div>
-          <div class="chart-wrap"><canvas id="chart-q8"></canvas></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 3: Multi-select bars -->
-    <div class="section">
-      <div class="section-title">多選題分析｜產品・肌膚問題・課程興趣</div>
-      <div class="chart-grid">
-        <div class="chart-card">
-          <div class="chart-title">🛍️ Q5｜最感興趣的產品 TOP</div>
-          <div class="bar-list" id="bar-q5"></div>
-        </div>
-        <div class="chart-card">
-          <div class="chart-title">😣 Q6｜想改善的肌膚問題 TOP</div>
-          <div class="bar-list" id="bar-q6"></div>
-        </div>
-        <div class="chart-card" style="grid-column: 1/-1;">
-          <div class="chart-title">📖 Q7｜想參加的課程 TOP</div>
-          <div class="bar-list" id="bar-q7" style="display:grid; grid-template-columns: repeat(auto-fill, minmax(260px, 1fr)); gap:10px;"></div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Section 4: Referral Network -->
-    <div class="section">
-      <div class="section-title">👥 帶人來訪網絡</div>
-      <div class="referral-grid" id="referral-grid"></div>
-    </div>
-
-    <!-- Section 5: Individual Responses -->
-    <div class="section">
-      <div class="section-title">📋 個別回應明細</div>
-      <div class="table-wrap">
-        <table id="response-table">
-          <thead></thead>
-          <tbody></tbody>
-        </table>
-      </div>
-    </div>
-
-    <!-- Section 6: Comments Highlights -->
-    <div class="section">
-      <div class="section-title">💬 精彩回饋摘錄</div>
-      <div class="highlight-grid" id="highlight-grid"></div>
+  <!-- Header -->
+  <div class="header">
+    <span class="header-badge">📊 數據分析</span>
+    <h1>美安工作坊｜問卷調查分析</h1>
+    <div class="header-sub">
+      <span class="subtitle" id="last-updated"></span>
+      <button class="theme-btn" onclick="toggleTheme()" id="themeBtn">🌙</button>
     </div>
   </div>
 
-  <script>
-    // ── Config ──────────────────────────────────────────────
-    const CSV_URL = 'https://docs.google.com/spreadsheets/d/1stogFIgyCDjC_50nQk1hxVb67XIW_sZI3NTWnapEP6I/export?format=csv&gid=0';
-    const ACCENT_COLORS = ['#ff6b6b','#f39c12','#ffd93d','#55efc4','#74b9ff','#fd79a8','#a29bfe','#00cec9'];
-    const PRODUCT_COLORS = {
-      '火山泥面膜':'#ff6b6b','NAD青春霜':'#f39c12','保濕露':'#ffd93d',
-      '潔膚乳':'#55efc4','小黑卸妝棉':'#74b9ff',
-      '其他：防曬':'#fd79a8','其他：化妝水':'#a29bfe'
-    };
-    const COURSE_COLORS = {
-      '進階肌膚保養':'#ff6b6b','AI工具應用':'#f39c12','彩妝技巧':'#ffd93d',
-      '健康養生講座':'#55efc4','其他':'#74b9ff'
-    };
+  <!-- KPI Grid -->
+  <div class="kpi-grid" id="kpi-grid"></div>
 
-    // ── PapaParse via CDN ───────────────────────────────────
-    function loadPapaParse() {
-      return new Promise((resolve, reject) => {
-        if (window.Papa) { resolve(); return; }
-        const s = document.createElement('script');
-        s.src = 'https://cdn.jsdelivr.net/npm/papaparse@5.4.1/papaparse.min.js';
-        s.onload = resolve; s.onerror = reject;
-        document.head.appendChild(s);
-      });
+  <!-- Filter Tabs (for individual table) -->
+  <div class="section">
+    <div class="section-title">📋 個別回應明細</div>
+    <div class="filter-tabs" id="filter-tabs">
+      <button class="filter-tab active" data-filter="all">全部 (16人)</button>
+      <button class="filter-tab" data-filter="new">🌸 新朋友 (7人)</button>
+      <button class="filter-tab" data-filter="partner">🤝 夥伴 (9人)</button>
+    </div>
+    <div class="table-wrap">
+      <table id="response-table">
+        <thead></thead>
+        <tbody></tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- Satisfaction bars -->
+  <div class="section">
+    <div class="section-title">🌟 滿意度總覽</div>
+    <div id="positive-bars"></div>
+  </div>
+
+  <!-- Charts -->
+  <div class="section">
+    <div class="section-title">📈 各項問題圖表分析</div>
+    <div class="chart-grid">
+      <div class="chart-card"><div class="chart-title">🌟 Q1｜產品感受</div><div class="chart-wrap"><canvas id="c-q1"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">📚 Q2｜課程理解</div><div class="chart-wrap"><canvas id="c-q2"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">🎓 Q3｜教學方式</div><div class="chart-wrap"><canvas id="c-q3"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">✋ Q4｜實作體驗</div><div class="chart-wrap"><canvas id="c-q4"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">🔄 Q7b｜是否再參加</div><div class="chart-wrap"><canvas id="c-q7b"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">💼 Q8｜事業機會興趣</div><div class="chart-wrap"><canvas id="c-q8"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- Multi-select bars -->
+  <div class="section">
+    <div class="section-title">🛍️ 多選題分析｜產品・肌膚問題・課程</div>
+    <div class="chart-grid">
+      <div class="chart-card"><div class="chart-title">🧴 Q5｜最感興趣產品 TOP</div><div class="bar-list" id="bar-q5"></div></div>
+      <div class="chart-card"><div class="chart-title">😣 Q6｜想改善的肌膚問題 TOP</div><div class="bar-list" id="bar-q6"></div></div>
+      <div class="chart-card" style="grid-column:1/-1;"><div class="chart-title">📖 Q7｜想參加的課程</div><div class="bar-list" id="bar-q7" style="display:grid; grid-template-columns:repeat(auto-fill, minmax(240px,1fr)); gap:10px;"></div></div>
+    </div>
+  </div>
+
+  <!-- New friends vs Partners comparison -->
+  <div class="section">
+    <div class="section-title">🌸 新朋友 vs 🤝 夥伴｜分群對比</div>
+    <div class="chart-grid">
+      <div class="chart-card"><div class="chart-title">🌟 產品感受｜新朋友 vs 夥伴</div><div class="chart-wrap tall"><canvas id="c-split-q1"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">🔄 再參加意願｜新朋友 vs 夥伴</div><div class="chart-wrap tall"><canvas id="c-split-q7b"></canvas></div></div>
+      <div class="chart-card"><div class="chart-title">💼 事業興趣｜新朋友 vs 夥伴</div><div class="chart-wrap tall"><canvas id="c-split-q8"></canvas></div></div>
+    </div>
+  </div>
+
+  <!-- Referral network -->
+  <div class="section">
+    <div class="section-title">👥 引路人網絡</div>
+    <div class="ref-grid" id="ref-grid"></div>
+  </div>
+
+  <!-- Comments -->
+  <div class="section">
+    <div class="section-title">💬 精彩回饋摘錄</div>
+    <div class="highlight-grid" id="highlight-grid"></div>
+  </div>
+
+  <div class="update-info" id="update-info"></div>
+</div>
+
+<script>
+// ══════════════════════════════════════════════════════════════
+//  內嵌問卷資料（直接從 Google Sheets CSV 取得）
+//  更新方式：修改下方 SURVEY_DATA 陣列，或執行 scripts/update-survey.js
+// ══════════════════════════════════════════════════════════════
+const SURVEY_DATA = [
+  {"時間戳記":"2026/4/25 下午3:57:31","姓名":"卉羚","帶您來的朋友":"卉羚","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露","Q6想改善問題":"暗沉","Q7感興趣課程":"進階肌膚保養、彩妝技巧、AI工具應用、健康養生講座","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:57:41","姓名":"柏均","帶您來的朋友":"碧桃","Q1產品感受":"還不錯，想再試試","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜","Q6想改善問題":"出油不穩","Q7感興趣課程":"進階肌膚保養","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午3:57:55","姓名":"糖果","帶您來的朋友":"糖果","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜、NAD青春霜","Q6想改善問題":"粉刺痘痘","Q7感興趣課程":"進階肌膚保養、AI工具應用","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"實作分享，超有意思","Q10留言":"場地可以再適當調整一下，脫鞋子不太好😅","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:58:13","姓名":"高幸憶","帶您來的朋友":"白繐綺","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、潔膚乳、火山泥面膜、NAD青春霜","Q6想改善問題":"暗沉","Q7感興趣課程":"進階肌膚保養、AI工具應用","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:58:18","姓名":"鍾淑惠","帶您來的朋友":"Candy","Q1產品感受":"還不錯，想再試試","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜","Q6想改善問題":"敏感泛紅","Q7感興趣課程":"AI工具應用","Q7b再次參加":"視主題與價格而定","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午3:58:28","姓名":"虞秀紅","帶您來的朋友":"未來的貴人","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"其他：防曬","Q6想改善問題":"其他：去斑","Q7感興趣課程":"彩妝技巧、健康養生講座","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"很溫暖的氣氛","Q10留言":"多多舉辦","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:58:38","姓名":"蘇琬玲","帶您來的朋友":"董華正","Q1產品感受":"還不錯，想再試試","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、火山泥面膜、NAD青春霜","Q6想改善問題":"乾燥缺水、敏感泛紅","Q7感興趣課程":"AI工具應用","Q7b再次參加":"視主題與價格而定","Q8事業機會":"目前暫不考慮","Q9印象深刻":"","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午3:58:44","姓名":"曹婷玉","帶您來的朋友":"曹婷玉","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、潔膚乳、火山泥面膜、NAD青春霜、小黑卸妝棉","Q6想改善問題":"出油不穩、暗沉","Q7感興趣課程":"進階肌膚保養、彩妝技巧、AI工具應用、健康養生講座","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:58:47","姓名":"廖櫻庭","帶您來的朋友":"黃小圓","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜、NAD青春霜","Q6想改善問題":"乾燥缺水、出油不穩、粉刺痘痘、暗沉、敏感泛紅","Q7感興趣課程":"進階肌膚保養、彩妝技巧","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"實作火山泥","Q10留言":"超讚","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:59:07","姓名":"睿禎","帶您來的朋友":"娜坦莉","Q1產品感受":"還不錯，想再試試","Q2課程理解":"有幫助，有新的認識","Q3教學方式":"還不錯","Q4實作體驗":"有幫助","Q5感興趣產品":"其他：化妝水","Q6想改善問題":"暗沉","Q7感興趣課程":"其他","Q7b再次參加":"視主題與價格而定","Q8事業機會":"目前暫不考慮","Q9印象深刻":"卸妝的重要性","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午3:59:18","姓名":"喵","帶您來的朋友":"喵喵","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、火山泥面膜、NAD青春霜","Q6想改善問題":"出油不穩","Q7感興趣課程":"進階肌膚保養","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"","Q10留言":"","新朋友":""},
+  {"時間戳記":"2026/4/25 下午3:59:34","姓名":"劉來好","帶您來的朋友":"葉柔君","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、潔膚乳、火山泥面膜、NAD青春霜","Q6想改善問題":"出油不穩、粉刺痘痘、暗沉","Q7感興趣課程":"彩妝技巧","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"目前暫不考慮","Q9印象深刻":"火山泥","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午3:59:37","姓名":"Terry","帶您來的朋友":"廖紋君","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜","Q6想改善問題":"暗沉、其他：拉提","Q7感興趣課程":"進階肌膚保養、彩妝技巧、AI工具應用、健康養生講座","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"火山泥體驗、生活開銷可以賺錢回來的部份","Q10留言":"很好玩","新朋友":""},
+  {"時間戳記":"2026/4/25 下午4:00:06","姓名":"佩庭","帶您來的朋友":"白繐綺","Q1產品感受":"還不錯，想再試試","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"火山泥面膜、小黑卸妝棉","Q6想改善問題":"乾燥缺水、出油不穩、粉刺痘痘、敏感泛紅","Q7感興趣課程":"進階肌膚保養、彩妝技巧","Q7b再次參加":"視主題與價格而定","Q8事業機會":"有點好奇，可以多聽聽","Q9印象深刻":"","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午4:03:15","姓名":"黃淑美","帶您來的朋友":"白繐綺","Q1產品感受":"還不錯，想再試試","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、火山泥面膜、NAD青春霜","Q6想改善問題":"出油不穩、敏感泛紅","Q7感興趣課程":"進階肌膚保養、健康養生講座","Q7b再次參加":"視主題與價格而定","Q8事業機會":"有點好奇，可以多聽聽","Q9印象深刻":"講師分享的內容很棒","Q10留言":"","新朋友":"v"},
+  {"時間戳記":"2026/4/25 下午5:00:39","姓名":"董華正","帶您來的朋友":"董老師","Q1產品感受":"超喜歡，想買！","Q2課程理解":"非常了解，收穫很多！","Q3教學方式":"非常清楚好懂","Q4實作體驗":"非常有感！","Q5感興趣產品":"保濕露、潔膚乳、火山泥面膜、NAD青春霜、小黑卸妝棉、其他：平泰秀","Q6想改善問題":"敏感泛紅","Q7感興趣課程":"進階肌膚保養","Q7b再次參加":"願意，覺得很值得","Q8事業機會":"很有興趣，想進一步了解","Q9印象深刻":"主持人很專業","Q10留言":"電腦手很帥","新朋友":""}
+];
+
+// ══════════════════════════════════════════════════════════════
+//  Helpers
+// ══════════════════════════════════════════════════════════════
+const ACCENT = ['#ff6b6b','#f39c12','#ffd93d','#55efc4','#74b9ff','#fd79a8','#a29bfe','#00cec9','#e17055','#fab1a0'];
+const P_COLORS = {'火山泥面膜':'#ff6b6b','NAD青春霜':'#f39c12','保濕露':'#ffd93d','潔膚乳':'#55efc4','小黑卸妝棉':'#74b9ff','其他：防曬':'#fd79a8','其他：化妝水':'#a29bfe'};
+const C_COLORS = {'進階肌膚保養':'#ff6b6b','AI工具應用':'#f39c12','彩妝技巧':'#ffd93d','健康養生講座':'#55efc4','其他':'#74b9ff'};
+
+function isNew(r) { return (r['新朋友']||'').trim() === 'v'; }
+function isPartner(r) { return !isNew(r); }
+
+function cntField(rows, key) {
+  const c = {}; rows.forEach(r => { const v=(r[key]||'').trim(); if(v) c[v]=(c[v]||0)+1; });
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]);
+}
+function cntMulti(rows, key) {
+  const c = {}; rows.forEach(r => (r[key]||'').split('、').forEach(s=>{ const v=s.trim(); if(v) c[v]=(c[v]||0)+1; }));
+  return Object.entries(c).sort((a,b)=>b[1]-a[1]);
+}
+function posRate(rows, key, kw) {
+  const t=rows.length, p=rows.filter(r=>(r[key]||'').includes(kw)).length;
+  return {p, t, pct: Math.round(p/t*100)};
+}
+function badge(val, posKws, negKws) {
+  if (posKws.some(k=>(val||'').includes(k))) return 'badge-green';
+  if (negKws.some(k=>(val||'').includes(k))) return 'badge-orange';
+  return 'badge-yellow';
+}
+function tagsHtml(str) {
+  if(!(str||'').trim()) return '<span class="no-comment">—</span>';
+  return (str||'').split('、').map(s=>`<span class="tag-small">${s.trim()}</span>`).join('');
+}
+
+// Chart.js defaults
+function applyChartDefaults() {
+  const tc = getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim() || '#a8c0d6';
+  Chart.defaults.color = tc;
+  Chart.defaults.plugins.legend.labels.usePointStyle = true;
+  Chart.defaults.plugins.legend.labels.padding = 14;
+  Chart.defaults.plugins.legend.labels.font = { size: 12 };
+}
+function donut(id, data, colors) {
+  const ctx = document.getElementById(id).getContext('2d');
+  new Chart(ctx, {
+    type: 'doughnut',
+    data: { labels: data.map(d=>d[0]), datasets:[{ data: data.map(d=>d[1]), backgroundColor: colors.slice(0,data.length), borderWidth:0, hoverOffset:8 }] },
+    options: { responsive:true, maintainAspectRatio:false, cutout:'62%', plugins:{ legend:{ position:'bottom' }, tooltip:{ callbacks:{ label:ctx=>` ${ctx.label}: ${ctx.parsed}人 (${Math.round(ctx.parsed/ctx.dataset.data.reduce((a,b)=>a+b,0)*100)}%)` } } } }
+  });
+}
+function barList(id, data, colorMap, maxVal) {
+  const el = document.getElementById(id);
+  const max = maxVal || Math.max(...data.map(d=>d[1]),1);
+  el.innerHTML = data.slice(0,7).map(([label,count]) => {
+    const pct = Math.round(count/max*100);
+    const color = colorMap?.[label] || ACCENT[data.indexOf(data.find(d=>d[0]===label))] || ACCENT[0];
+    return `<div class="bar-item"><div class="bar-label" title="${label}">${label}</div><div class="bar-track"><div class="bar-fill" style="width:${pct}%;background:${color}">${count}</div></div><div class="bar-value">${count}</div></div>`;
+  }).join('');
+}
+
+// ══════════════════════════════════════════════════════════════
+//  KPI
+// ══════════════════════════════════════════════════════════════
+function renderKPI() {
+  const all = SURVEY_DATA, nf = all.filter(isNew), pt = all.filter(isPartner);
+  const q1p = posRate(all,'Q1產品感受','超喜歡');
+  const q2p = posRate(all,'Q2課程理解','非常了解');
+  const q7bp = posRate(all,'Q7b再次參加','願意');
+  const q8p = posRate(all,'Q8事業機會','很有興趣');
+  const refC = {}; all.forEach(r=>{ const ref=(r['帶您來的朋友']||'').trim(); if(ref && ref!==r['姓名']) refC[ref]=(refC[ref]||0)+1; });
+  const topRef = Object.entries(refC).sort((a,b)=>b[1]-a[1])[0]||['—',0];
+  const topRef2 = Object.entries(refC).sort((a,b)=>b[1]-a[1])[1]||['—',0];
+
+  document.getElementById('kpi-grid').innerHTML = `
+    <div class="kpi-card"><div class="kpi-icon">👥</div><div class="kpi-value">${all.length}</div><div class="kpi-label">總填答人</div></div>
+    <div class="kpi-card"><div class="kpi-icon">🌸</div><div class="kpi-value">${nf.length}</div><div class="kpi-label">新朋友</div><div class="kpi-sub">${nf.map(r=>r['姓名']).join('、')}</div></div>
+    <div class="kpi-card"><div class="kpi-icon">🤝</div><div class="kpi-value">${pt.length}</div><div class="kpi-label">夥伴</div></div>
+    <div class="kpi-card"><div class="kpi-icon">🌟</div><div class="kpi-value">${q1p.pct}%</div><div class="kpi-label">產品正向率</div><div class="kpi-sub">${q1p.p}/${q1p.t}人</div></div>
+    <div class="kpi-card"><div class="kpi-icon">📚</div><div class="kpi-value">${q2p.pct}%</div><div class="kpi-label">課程理解度高</div><div class="kpi-sub">${q2p.p}/${q2p.t}人</div></div>
+    <div class="kpi-card"><div class="kpi-icon">🔄</div><div class="kpi-value">${q7bp.pct}%</div><div class="kpi-label">願意再參加</div><div class="kpi-sub">${q7bp.p}/${q7bp.t}人</div></div>
+    <div class="kpi-card"><div class="kpi-icon">💼</div><div class="kpi-value">${q8p.pct}%</div><div class="kpi-label">對事業有興趣</div><div class="kpi-sub">${q8p.p}/${q8p.t}人</div></div>
+    <div class="kpi-card"><div class="kpi-icon">🎯</div><div class="kpi-value">${topRef[0]}</div><div class="kpi-label">最佳引路人</div><div class="kpi-sub">帶了 ${topRef[1]} 位</div></div>`;
+}
+
+// ══════════════════════════════════════════════════════════════
+//  Positive bars
+// ══════════════════════════════════════════════════════════════
+function renderPositiveBars() {
+  const all = SURVEY_DATA;
+  const items = [
+    ['q1','🌟 產品感受正向率', posRate(all,'Q1產品感受','超喜歡')],
+    ['q2','📚 課程理解正向率', posRate(all,'Q2課程理解','非常了解')],
+    ['q3','🎓 教學方式正向率', posRate(all,'Q3教學方式','非常清楚')],
+    ['q4','✋ 實作體驗正向率', posRate(all,'Q4實作體驗','非常有感')],
+    ['q7b','🔄 願意再次參加', posRate(all,'Q7b再次參加','願意')],
+  ];
+  document.getElementById('positive-bars').innerHTML = items.map(([id, label, {p,t,pct}])=>
+    `<div class="positive-bar">
+      <div class="positive-header">
+        <span class="positive-label">${label}</span>
+        <span class="positive-pct">${pct}% <span style="font-size:0.8rem;font-weight:400;color:var(--text-muted)">(${p}/${t})</span></span>
+      </div>
+      <div class="positive-track"><div class="positive-fill" id="bar-${id}" style="width:0%"></div></div>
+    </div>`
+  ).join('');
+  setTimeout(()=>items.forEach(([id,,{pct}])=>{ const el=document.getElementById('bar-'+id); if(el) el.style.width=pct+'%'; }), 200);
+}
+
+// ══════════════════════════════════════════════════════════════
+//  Charts
+// ══════════════════════════════════════════════════════════════
+function renderCharts() {
+  const all = SURVEY_DATA, nf = all.filter(isNew), pt = all.filter(isPartner);
+  donut('c-q1', cntField(all,'Q1產品感受'), ['#55efc4','#ffd93d']);
+  donut('c-q2', cntField(all,'Q2課程理解'), ['#55efc4','#74b9ff']);
+  donut('c-q3', cntField(all,'Q3教學方式'), ['#55efc4','#74b9ff']);
+  donut('c-q4', cntField(all,'Q4實作體驗'), ['#55efc4','#74b9ff']);
+  donut('c-q7b', cntField(all,'Q7b再次參加'), ['#55efc4','#ffd93d','#fd79a8']);
+  donut('c-q8', cntField(all,'Q8事業機會'), ['#55efc4','#ffd93d','#fd79a8']);
+
+  barList('bar-q5', cntMulti(all,'Q5感興趣產品'), P_COLORS);
+  barList('bar-q6', cntMulti(all,'Q6想改善問題'), null);
+  barList('bar-q7', cntMulti(all,'Q7感興趣課程'), C_COLORS);
+
+  // Split charts: new friends vs partners
+  splitGroupedBar('c-split-q1', 'Q1產品感受', ['超喜歡，想買！','還不錯，想再試試'], nf, pt);
+  splitGroupedBar('c-split-q7b', 'Q7b再次參加', ['願意，覺得很值得','視主題與價格而定'], nf, pt);
+  splitGroupedBar('c-split-q8', 'Q8事業機會', ['很有興趣，想進一步了解','目前暫不考慮','有點好奇，可以多聽聽'], nf, pt);
+}
+
+function splitGroupedBar(id, key, options, nf, pt) {
+  const ctx = document.getElementById(id).getContext('2d');
+  new Chart(ctx, {
+    type: 'bar',
+    data: {
+      labels: options,
+      datasets: [
+        { label: `🌸 新朋友 (${nf.length}人)`, data: options.map(o=>nf.filter(r=>(r[key]||'').includes(o)).length), backgroundColor:'#fd79a8', borderRadius:8, borderSkipped:false },
+        { label: `🤝 夥伴 (${pt.length}人)`, data: options.map(o=>pt.filter(r=>(r[key]||'').includes(o)).length), backgroundColor:'#55efc4', borderRadius:8, borderSkipped:false }
+      ]
+    },
+    options: {
+      responsive: true, maintainAspectRatio: false,
+      scales: { x:{grid:{display:false}}, y:{beginAtZero:true,ticks:{stepSize:1}} },
+      plugins: { legend:{ position:'bottom' } }
     }
+  });
+}
 
-    // ── Fetch & Parse CSV ───────────────────────────────────
-    async function fetchData() {
-      const resp = await fetch(CSV_URL + '&t=' + Date.now(), { cache: 'no-store' });
-      if (!resp.ok) throw new Error(`HTTP ${resp.status}`);
-      const text = await resp.text();
-      return new Promise((resolve, reject) => {
-        Papa.parse(text, {
-          header: true, skipEmptyLines: true, encoding: 'UTF-8',
-          complete: r => resolve(r.data), error: reject
-        });
-      });
+// ══════════════════════════════════════════════════════════════
+//  Referral
+// ══════════════════════════════════════════════════════════════
+function renderReferrals() {
+  const refC = {}, refNames = {};
+  SURVEY_DATA.forEach(r => {
+    const ref=(r['帶您來的朋友']||'').trim(), name=(r['姓名']||'').trim();
+    if(ref && ref!==name) {
+      refC[ref] = (refC[ref]||0)+1;
+      if(!refNames[ref]) refNames[ref]=[];
+      refNames[ref].push(name);
     }
+  });
+  const sorted = Object.entries(refC).sort((a,b)=>b[1]-a[1]);
+  const emojis = ['🌟','🔥','💫','⭐','🌈','✨','🎯','👑','🌸','🎉'];
+  document.getElementById('ref-grid').innerHTML = sorted.length ? sorted.map(([ref,count],i)=>
+    `<div class="ref-card">
+      <div class="ref-avatar">${emojis[i%emojis.length]}</div>
+      <div class="ref-name">${ref}</div>
+      <div class="ref-count"><span>${count}</span> 位</div>
+      ${(refNames[ref]||[]).filter(n=>n!==ref).length ? `<div class="ref-tag">帶來：${refNames[ref].join('、')}</div>` : ''}
+    </div>`
+  ).join('') : '<p style="color:var(--text-muted)">尚無引路人資料</p>';
+}
 
-    // ── Helpers ────────────────────────────────────────────
-    function countField(rows, key) {
-      const c = {};
-      rows.forEach(r => {
-        const v = (r[key] || '').trim();
-        if (v) c[v] = (c[v] || 0) + 1;
-      });
-      return Object.entries(c).sort((a,b) => b[1]-a[1]);
-    }
+// ══════════════════════════════════════════════════════════════
+//  Table
+// ══════════════════════════════════════════════════════════════
+let currentFilter = 'all';
+function renderTable(filter) {
+  currentFilter = filter;
+  const rows = filter==='new' ? SURVEY_DATA.filter(isNew) : filter==='partner' ? SURVEY_DATA.filter(isPartner) : SURVEY_DATA;
+  const ths = ['姓名','身份','引路人','Q1產品','Q2理解','Q3教學','Q4實作','Q5產品興趣','Q6肌膚問題','Q7課程','Q7b再參加','Q8事業'];
+  document.querySelector('#response-table thead').innerHTML = '<tr>'+ths.map(t=>`<th>${t}</th>`).join('')+'</tr>';
+  document.querySelector('#response-table tbody').innerHTML = rows.map(r=>{
+    const isNF = isNew(r);
+    const personType = isNF ? '🌸新朋友' : '🤝夥伴';
+    const typeBadge = isNF ? 'badge-newfriend' : 'badge-partner';
+    const q1b = badge(r['Q1產品感受'],['超喜歡'],['還不錯']);
+    const q2b = badge(r['Q2課程理解'],['非常了解'],['有幫助']);
+    const q3b = badge(r['Q3教學方式'],['非常清楚'],['還不錯']);
+    const q4b = badge(r['Q4實作體驗'],['非常有感'],['有幫助']);
+    const q7bb = badge(r['Q7b再次參加'],['願意'],['視主題','暫不考慮','好奇']);
+    const q8b = badge(r['Q8事業機會'],['很有興趣'],['好奇'],['暫不考慮']);
+    return `<tr>
+      <td class="name-cell">${r['姓名']||'—'}</td>
+      <td><span class="badge ${typeBadge}">${personType}</span></td>
+      <td class="ref-cell">${r['帶您來的朋友']||'—'}</td>
+      <td><span class="badge ${q1b}">${r['Q1產品感受']||'—'}</span></td>
+      <td><span class="badge ${q2b}">${r['Q2課程理解']||'—'}</span></td>
+      <td><span class="badge ${q3b}">${r['Q3教學方式']||'—'}</span></td>
+      <td><span class="badge ${q4b}">${r['Q4實作體驗']||'—'}</span></td>
+      <td>${tagsHtml(r['Q5感興趣產品'])}</td>
+      <td>${tagsHtml(r['Q6想改善問題'])}</td>
+      <td>${tagsHtml(r['Q7感興趣課程'])}</td>
+      <td><span class="badge ${q7bb}">${r['Q7b再次參加']||'—'}</span></td>
+      <td><span class="badge ${q8b}">${r['Q8事業機會']||'—'}</span></td>
+    </tr>`;
+  }).join('');
+}
 
-    function countMultiSelect(rows, key) {
-      const c = {};
-      rows.forEach(r => {
-        (r[key] || '').split('、').forEach(s => {
-          const v = s.trim();
-          if (v) c[v] = (c[v] || 0) + 1;
-        });
-      });
-      return Object.entries(c).sort((a,b) => b[1]-a[1]);
-    }
+// ══════════════════════════════════════════════════════════════
+//  Highlights
+// ══════════════════════════════════════════════════════════════
+function renderHighlights() {
+  const withComments = SURVEY_DATA.filter(r=>(r['Q9印象深刻']||'').trim() || (r['Q10留言']||'').trim());
+  document.getElementById('highlight-grid').innerHTML = withComments.map(r=>{
+    const text = (r['Q9印象深刻']||'').trim() || (r['Q10留言']||'').trim();
+    const isNF = isNew(r);
+    return `<div class="highlight-card">
+      <div class="highlight-title">${isNF?'🌸':'🤝'} ${r['姓名']} 的回饋${(r['Q9印象深刻']||'').trim() ? '｜印象最深' : ''}</div>
+      <div class="highlight-text">${text}</div>
+    </div>`;
+  }).join('') || '<p style="color:var(--text-muted)">尚無留言</p>';
+}
 
-    function positiveRate(rows, key, positiveKws) {
-      const total = rows.length;
-      const pos = rows.filter(r => positiveKws.some(k => (r[key]||'').includes(k))).length;
-      return { count: pos, total, pct: Math.round(pos/total*100) };
-    }
+// ══════════════════════════════════════════════════════════════
+//  Theme
+// ══════════════════════════════════════════════════════════════
+function toggleTheme() {
+  const next = document.documentElement.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
+  document.documentElement.setAttribute('data-theme', next);
+  localStorage.setItem('theme', next);
+  document.getElementById('themeBtn').textContent = next==='dark'?'🌙':'☀️';
+  location.reload();
+}
+const savedTheme = localStorage.getItem('theme') || 'dark';
+document.documentElement.setAttribute('data-theme', savedTheme);
+document.getElementById('themeBtn') && (document.getElementById('themeBtn').textContent = savedTheme==='dark'?'🌙':'☀️');
 
-    function badgeClass(val, thresholds) {
-      if (val >= thresholds[0]) return 'badge-green';
-      if (val >= thresholds[1]) return 'badge-yellow';
-      return 'badge-orange';
-    }
+// ══════════════════════════════════════════════════════════════
+//  Init
+// ══════════════════════════════════════════════════════════════
+applyChartDefaults();
+renderKPI();
+renderPositiveBars();
+renderCharts();
+renderReferrals();
+renderTable('all');
+renderHighlights();
+document.getElementById('last-updated').textContent = '📅 更新：2026/04/25（共16人）';
+document.getElementById('update-info').textContent = '💡 如欲更新資料，請修改 HTML 檔案中的 SURVEY_DATA 陣列內容，或執行 scripts/update-survey.py';
 
-    // ── Render KPI ─────────────────────────────────────────
-    function renderKPI(rows) {
-      const q1p = positiveRate(rows,'Q1產品感受',['超喜歡']);
-      const q2p = positiveRate(rows,'Q2課程理解',['非常了解']);
-      const q3p = positiveRate(rows,'Q3教學方式',['非常清楚']);
-      const q4p = positiveRate(rows,'Q4實作體驗',['非常有感']);
-      const q7bp = positiveRate(rows,'Q7b再次參加',['願意']);
-
-      // Referrals
-      const refCount = {};
-      rows.forEach(r => {
-        const ref = (r['帶您來的朋友']||'').trim();
-        if (ref && ref !== r['姓名']) {
-          refCount[ref] = (refCount[ref]||0) + 1;
-        }
-      });
-      const topRef = Object.entries(refCount).sort((a,b)=>b[1]-a[1])[0] || ['—',0];
-
-      const html = `
-        <div class="kpi-card">
-          <div class="kpi-icon">👥</div>
-          <div class="kpi-value">${rows.length}</div>
-          <div class="kpi-label">總填答人數</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">🌟</div>
-          <div class="kpi-value">${q1p.pct}%</div>
-          <div class="kpi-label">產品正向感受</div>
-          <div class="kpi-sub">${q1p.count}/${q1p.total} 人</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">📚</div>
-          <div class="kpi-value">${q2p.pct}%</div>
-          <div class="kpi-label">課程理解度高</div>
-          <div class="kpi-sub">${q2p.count}/${q2p.total} 人</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">🔄</div>
-          <div class="kpi-value">${q7bp.pct}%</div>
-          <div class="kpi-label">願意再參加</div>
-          <div class="kpi-sub">${q7bp.count}/${q7bp.total} 人</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">💼</div>
-          <div class="kpi-value">${positiveRate(rows,'Q8事業機會',['很有興趣']).pct}%</div>
-          <div class="kpi-label">對事業感興趣</div>
-          <div class="kpi-sub">${positiveRate(rows,'Q8事業機會',['很有興趣']).count}/${rows.length} 人</div>
-        </div>
-        <div class="kpi-card">
-          <div class="kpi-icon">🎯</div>
-          <div class="kpi-value">${topRef[0]}</div>
-          <div class="kpi-label">最佳引路人</div>
-          <div class="kpi-sub">帶了 ${topRef[1]} 位朋友</div>
-        </div>`;
-      document.getElementById('kpi-grid').innerHTML = html;
-
-      // Positive bars
-      const bars = [
-        ['q1',q1p,'Q1產品感受'],['q2',q2p,'Q2課程理解'],
-        ['q3',q3p,'Q3教學方式'],['q4',q4p,'Q4實作體驗'],
-        ['q7b',q7bp,'Q7b再次參加']
-      ];
-      bars.forEach(([id,p]) => {
-        const el = document.getElementById(id+'-pct');
-        const bar = document.getElementById(id+'-bar');
-        if (el) el.textContent = `${p.pct}%`;
-        if (bar) {
-          setTimeout(() => bar.style.width = p.pct + '%', 300);
-        }
-      });
-    }
-
-    // ── Render Donut Charts ─────────────────────────────────
-    function renderDonut(canvasId, data, colors) {
-      const ctx = document.getElementById(canvasId).getContext('2d');
-      new Chart(ctx, {
-        type: 'doughnut',
-        data: {
-          labels: data.map(d=>d[0]),
-          datasets: [{
-            data: data.map(d=>d[1]),
-            backgroundColor: colors,
-            borderWidth: 0,
-            hoverOffset: 8
-          }]
-        },
-        options: {
-          responsive: true, maintainAspectRatio: false,
-          cutout: '65%',
-          plugins: {
-            legend: {
-              position: 'bottom',
-              labels: { color: getComputedStyle(document.documentElement).getPropertyValue('--text-secondary').trim() || '#a8c0d6', font: { size: 12 }, padding: 12, usePointStyle: true, pointStyleWidth: 10 }
-            },
-            tooltip: {
-              callbacks: {
-                label: ctx => ` ${ctx.label}: ${ctx.parsed} 人 (${Math.round(ctx.parsed/ctx.dataset.data.reduce((a,b)=>a+b,0)*100)}%)`
-              }
-            }
-          }
-        }
-      });
-    }
-
-    // ── Render Bar List ────────────────────────────────────
-    function renderBarList(elId, data, colorMap, maxVal) {
-      const el = document.getElementById(elId);
-      const max = maxVal || Math.max(...data.map(d=>d[1]));
-      el.innerHTML = data.slice(0, 7).map(([label, count]) => {
-        const pct = Math.round(count/max*100);
-        const color = colorMap?.[label] || ACCENT_COLORS[data.indexOf([label,count]) % ACCENT_COLORS.length];
-        return `<div class="bar-item">
-          <div class="bar-label">${label}</div>
-          <div class="bar-track">
-            <div class="bar-fill" style="width:${pct}%;background:${color}">${count}</div>
-          </div>
-          <div class="bar-value">${count}</div>
-        </div>`;
-      }).join('');
-    }
-
-    // ── Render Referral Grid ───────────────────────────────
-    function renderReferrals(rows) {
-      const refCount = {};
-      const refNames = {};
-      rows.forEach(r => {
-        const name = (r['姓名']||'').trim();
-        const ref = (r['帶您來的朋友']||'').trim();
-        if (ref) {
-          refCount[ref] = (refCount[ref]||0) + 1;
-          if (!refNames[ref]) refNames[ref] = [];
-        }
-        if (ref && ref !== name) {
-          if (!refNames[ref]) refNames[ref] = [];
-          refNames[ref].push(name);
-        }
-      });
-
-      const sorted = Object.entries(refCount).sort((a,b)=>b[1]-a[1]);
-      const emojis = ['🌟','🔥','💫','⭐','🌈','✨','🎯','👑'];
-
-      const html = sorted.map(([ref, count], i) => {
-        const friends = (refNames[ref]||[]).filter(n=>n!==ref);
-        return `<div class="ref-card">
-          <div class="ref-avatar">${emojis[i%emojis.length]}</div>
-          <div class="ref-name">${ref}</div>
-          <div class="ref-count"><span>${count}</span> 位</div>
-          ${friends.length ? `<div class="ref-tag">帶來：${friends.join('、')}</div>` : ''}
-        </div>`;
-      }).join('');
-      document.getElementById('referral-grid').innerHTML = html || '<p style="color:var(--text-muted)">暫無帶人來訪的資料</p>';
-    }
-
-    // ── Render Individual Table ────────────────────────────
-    function renderTable(rows) {
-      const ths = ['姓名','引路人','Q1產品','Q2理解','Q3教學','Q4實作','Q5感興趣產品','Q6肌膚問題','Q7課程興趣','Q7b再參加','Q8事業'];
-      const thead = document.querySelector('#response-table thead');
-      thead.innerHTML = '<tr>' + ths.map(t=>`<th>${t}</th>`).join('') + '</tr>';
-
-      const tb = document.querySelector('#response-table tbody');
-      tb.innerHTML = rows.map(r => {
-        const q1 = r['Q1產品感受']||'';
-        const q2 = r['Q2課程理解']||'';
-        const q3 = r['Q3教學方式']||'';
-        const q4 = r['Q4實作體驗']||'';
-        const q7b = r['Q7b再次參加']||'';
-        const q8 = r['Q8事業機會']||'';
-
-        const q1b = q1.includes('超喜歡') ? 'badge-green' : 'badge-yellow';
-        const q2b = q2.includes('非常了解') ? 'badge-green' : 'badge-yellow';
-        const q3b = q3.includes('非常清楚') ? 'badge-green' : 'badge-yellow';
-        const q4b = q4.includes('非常有感') ? 'badge-green' : 'badge-yellow';
-        const q7bb = q7b.includes('願意') ? 'badge-green' : q7b.includes('視') ? 'badge-yellow' : 'badge-orange';
-        const q8b = q8.includes('很有興趣') ? 'badge-green' : q8.includes('好奇') ? 'badge-yellow' : 'badge-orange';
-
-        const makeTags = (str) => {
-          if (!str.trim()) return '<span class="no-comment">—</span>';
-          return (str||'').split('、').map(s=>`<span class="tag-small">${s.trim()}</span>`).join('');
-        };
-
-        return `<tr>
-          <td class="name-cell">${r['姓名']||'—'}</td>
-          <td class="ref-cell">${r['帶您來的朋友']||'—'}</td>
-          <td><span class="badge ${q1b}">${q1||'—'}</span></td>
-          <td><span class="badge ${q2b}">${q2||'—'}</span></td>
-          <td><span class="badge ${q3b}">${q3||'—'}</span></td>
-          <td><span class="badge ${q4b}">${q4||'—'}</span></td>
-          <td>${makeTags(r['Q5感興趣產品'])}</td>
-          <td>${makeTags(r['Q6想改善問題'])}</td>
-          <td>${makeTags(r['Q7感興趣課程'])}</td>
-          <td><span class="badge ${q7bb}">${q7b||'—'}</span></td>
-          <td><span class="badge ${q8b}">${q8||'—'}</span></td>
-        </tr>`;
-      }).join('');
-    }
-
-    // ── Render Highlights ──────────────────────────────────
-    function renderHighlights(rows) {
-      const q9s = rows.filter(r=>(r['Q9印象深刻']||'').trim() || (r['Q10留言']||'').trim());
-      const html = q9s.slice(0, 8).map(r => {
-        const text = (r['Q9印象深刻']||'').trim() || (r['Q10留言']||'').trim() || '—';
-        return `<div class="highlight-card">
-          <div class="highlight-title">💬 ${r['姓名']} 的回饋</div>
-          <div class="highlight-text">${text}</div>
-        </div>`;
-      }).join('');
-      document.getElementById('highlight-grid').innerHTML = html || '<p style="color:var(--text-muted)">尚無留言</p>';
-    }
-
-    // ── Main ───────────────────────────────────────────────
-    async function init() {
-      try {
-        await loadPapaParse();
-        const rows = await fetchData();
-        document.getElementById('loading-overlay').style.display = 'none';
-        document.getElementById('main-content').style.display = 'block';
-
-        // KPI
-        renderKPI(rows);
-
-        // Donut charts
-        renderDonut('chart-q1', countField(rows,'Q1產品感受'), ['#55efc4','#ffd93d']);
-        renderDonut('chart-q2', countField(rows,'Q2課程理解'), ['#55efc4','#74b9ff']);
-        renderDonut('chart-q3', countField(rows,'Q3教學方式'), ['#55efc4','#74b9ff']);
-        renderDonut('chart-q4', countField(rows,'Q4實作體驗'), ['#55efc4','#74b9ff']);
-        renderDonut('chart-q7b', countField(rows,'Q7b再次參加'), ['#55efc4','#ffd93d','#fd79a8']);
-        renderDonut('chart-q8', countField(rows,'Q8事業機會'), ['#55efc4','#ffd93d','#fd79a8']);
-
-        // Bar charts
-        const q5 = countMultiSelect(rows,'Q5感興趣產品');
-        const q6 = countMultiSelect(rows,'Q6想改善問題');
-        const q7 = countMultiSelect(rows,'Q7感興趣課程');
-        renderBarList('bar-q5', q5, PRODUCT_COLORS);
-        renderBarList('bar-q6', q6);
-        renderBarList('bar-q7', q7, COURSE_COLORS);
-
-        // Referrals
-        renderReferrals(rows);
-
-        // Table
-        renderTable(rows);
-
-        // Highlights
-        renderHighlights(rows);
-
-        // Last updated
-        document.getElementById('last-updated').textContent =
-          `更新時間：${new Date().toLocaleString('zh-TW')}`;
-      } catch(e) {
-        document.getElementById('loading-overlay').innerHTML =
-          `<div class="error-msg">載入失敗：${e.message}<br><br>請確認 Google 試算表已設為「知道連結的人可檢視」</div>`;
-      }
-    }
-
-    // Theme toggle
-    function toggleTheme() {
-      const html = document.documentElement;
-      const next = html.getAttribute('data-theme')==='dark' ? 'light' : 'dark';
-      html.setAttribute('data-theme', next);
-      localStorage.setItem('theme', next);
-      document.getElementById('themeBtn').textContent = next==='dark'?'🌙':'☀️';
-      // Reload charts to update legend colors
-      setTimeout(() => location.reload(), 100);
-    }
-    const saved = localStorage.getItem('theme') || 'dark';
-    document.documentElement.setAttribute('data-theme', saved);
-    document.getElementById('themeBtn') && (document.getElementById('themeBtn').textContent = saved==='dark'?'🌙':'☀️');
-
-    init();
-  </script>
+// Filter tabs
+document.querySelectorAll('.filter-tab').forEach(tab=>{
+  tab.addEventListener('click',()=>{
+    document.querySelectorAll('.filter-tab').forEach(t=>t.classList.remove('active'));
+    tab.classList.add('active');
+    renderTable(tab.dataset.filter);
+  });
+});
+</script>
 </body>
 </html>
