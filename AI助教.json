@@ -1,0 +1,1755 @@
+{
+  "name": "AI助教",
+  "nodes": [
+    {
+      "parameters": {
+        "httpMethod": "POST",
+        "path": "line-webhook",
+        "options": {}
+      },
+      "id": "ab7b1090-4aab-4b4d-a1b1-9e97cdd24ac2",
+      "name": "LINE Webhook v4",
+      "type": "n8n-nodes-base.webhook",
+      "typeVersion": 1,
+      "position": [
+        -1152,
+        336
+      ],
+      "webhookId": "aa74c011-9a0f-4a3e-bdb8-d48762d88feb"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst d = $input.first().json;\nlet route = d.route || 'text'; // 保留解析事件已經算好的 route\nconst flexPayloads = {\"發送第1題\": [{\"type\": \"flex\", \"altText\": \"旅遊人格測驗 - 第 1 題\", \"contents\": {\"type\": \"bubble\", \"size\": \"mega\", \"header\": {\"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": \"#1e88e5\", \"paddingAll\": \"15px\", \"contents\": [{\"type\": \"box\", \"layout\": \"horizontal\", \"contents\": [{\"type\": \"text\", \"text\": \"🧭 旅遊人格測驗\", \"weight\": \"bold\", \"color\": \"#ffffff\", \"size\": \"sm\", \"flex\": 1}, {\"type\": \"text\", \"text\": \"●○○\", \"color\": \"#ffffff\", \"size\": \"sm\", \"align\": \"end\"}]}]}, \"body\": {\"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"20px\", \"contents\": [{\"type\": \"text\", \"text\": \"【第 1 題，共 3 題】\\n✈️ 你最嚮往哪種旅行基調？\", \"wrap\": true, \"weight\": \"bold\", \"size\": \"lg\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"請點選最符合你的選項：\", \"size\": \"sm\", \"color\": \"#94a3b8\", \"margin\": \"md\"}, {\"type\": \"separator\", \"margin\": \"lg\"}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🌿 悠閒慢活\", \"data\": \"q=0&a=A\", \"displayText\": \"🌿 悠閒慢活\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🌿 悠閒慢活\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"不趕行程，在咖啡廳坐一下午也無所謂\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🏃 有效率打卡\", \"data\": \"q=0&a=B\", \"displayText\": \"🏃 有效率打卡\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🏃 有效率打卡\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"精準掌握時間，要把必去景點都集滿\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🏺 深度文化\", \"data\": \"q=0&a=C\", \"displayText\": \"🏺 深度文化\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🏺 深度文化\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"走進歷史巷弄，聽當地的故事\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"⚡ 極限挑戰\", \"data\": \"q=0&a=D\", \"displayText\": \"⚡ 極限挑戰\"}, \"contents\": [{\"type\": \"text\", \"text\": \"⚡ 極限挑戰\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"上山下海，體驗平時不敢做的事\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}]}}}], \"發送第2題\": [{\"type\": \"flex\", \"altText\": \"旅遊人格測驗 - 第 2 題\", \"contents\": {\"type\": \"bubble\", \"size\": \"mega\", \"header\": {\"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": \"#fb8c00\", \"paddingAll\": \"15px\", \"contents\": [{\"type\": \"box\", \"layout\": \"horizontal\", \"contents\": [{\"type\": \"text\", \"text\": \"🧭 旅遊人格測驗\", \"weight\": \"bold\", \"color\": \"#ffffff\", \"size\": \"sm\", \"flex\": 1}, {\"type\": \"text\", \"text\": \"●●○\", \"color\": \"#ffffff\", \"size\": \"sm\", \"align\": \"end\"}]}]}, \"body\": {\"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"20px\", \"contents\": [{\"type\": \"text\", \"text\": \"【第 2 題，共 3 題】\\n😅 店家沒開、行程突發狀況，你通常怎麼做？\", \"wrap\": true, \"weight\": \"bold\", \"size\": \"lg\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"請點選最符合你的選項：\", \"size\": \"sm\", \"color\": \"#94a3b8\", \"margin\": \"md\"}, {\"type\": \"separator\", \"margin\": \"lg\"}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"📱 立刻搜尋替代方案\", \"data\": \"q=1&a=A\", \"displayText\": \"📱 立刻搜尋替代方案\"}, \"contents\": [{\"type\": \"text\", \"text\": \"📱 立刻搜尋替代方案\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"打開 AI 或地圖找周邊最高評分的地方\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🦋 隨便逛逛看看\", \"data\": \"q=1&a=B\", \"displayText\": \"🦋 隨便逛逛看看\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🦋 隨便逛逛看看\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"附近走走說不定反而有驚喜\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"☕ 先找咖啡廳坐下\", \"data\": \"q=1&a=C\", \"displayText\": \"☕ 先找咖啡廳坐下\"}, \"contents\": [{\"type\": \"text\", \"text\": \"☕ 先找咖啡廳坐下\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"沉澱一下，再慢慢想下一步去哪\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"📋 執行備用計畫\", \"data\": \"q=1&a=D\", \"displayText\": \"📋 執行備用計畫\"}, \"contents\": [{\"type\": \"text\", \"text\": \"📋 執行備用計畫\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"早就準備好 Plan B，直接切換\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}]}}}], \"發送第3題\": [{\"type\": \"flex\", \"altText\": \"旅遊人格測驗 - 第 3 題\", \"contents\": {\"type\": \"bubble\", \"size\": \"mega\", \"header\": {\"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": \"#8e24aa\", \"paddingAll\": \"15px\", \"contents\": [{\"type\": \"box\", \"layout\": \"horizontal\", \"contents\": [{\"type\": \"text\", \"text\": \"🧭 旅遊人格測驗\", \"weight\": \"bold\", \"color\": \"#ffffff\", \"size\": \"sm\", \"flex\": 1}, {\"type\": \"text\", \"text\": \"●●●\", \"color\": \"#ffffff\", \"size\": \"sm\", \"align\": \"end\"}]}]}, \"body\": {\"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"20px\", \"contents\": [{\"type\": \"text\", \"text\": \"【第 3 題，共 3 題】\\n🗓️ 你喜歡怎樣安排一天的行程密集度？\", \"wrap\": true, \"weight\": \"bold\", \"size\": \"lg\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"請點選最符合你的選項：\", \"size\": \"sm\", \"color\": \"#94a3b8\", \"margin\": \"md\"}, {\"type\": \"separator\", \"margin\": \"lg\"}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🌅 佛系節奏\", \"data\": \"q=2&a=A\", \"displayText\": \"🌅 佛系節奏\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🌅 佛系節奏\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"一天 1-2 個大點就好，其他隨緣\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"🚀 特種兵模式\", \"data\": \"q=2&a=B\", \"displayText\": \"🚀 特種兵模式\"}, \"contents\": [{\"type\": \"text\", \"text\": \"🚀 特種兵模式\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"從早到晚行程填滿滿，體力不是問題\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"⚖️ 半糖主義\", \"data\": \"q=2&a=C\", \"displayText\": \"⚖️ 半糖主義\"}, \"contents\": [{\"type\": \"text\", \"text\": \"⚖️ 半糖主義\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"早上跑行程，下午留白放空\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}, {\"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"xs\", \"paddingAll\": \"12px\", \"backgroundColor\": \"#f8fafc\", \"cornerRadius\": \"md\", \"margin\": \"sm\", \"action\": {\"type\": \"postback\", \"label\": \"📐 精準串聯\", \"data\": \"q=2&a=D\", \"displayText\": \"📐 精準串聯\"}, \"contents\": [{\"type\": \"text\", \"text\": \"📐 精準串聯\", \"weight\": \"bold\", \"size\": \"md\", \"color\": \"#1e293b\"}, {\"type\": \"text\", \"text\": \"依交通動線安排 3-4 個必去地點\", \"size\": \"sm\", \"color\": \"#64748b\", \"wrap\": true}]}]}}}]};\nreturn [{ json: { ...d, flexPayloads } }];\n"
+      },
+      "id": "af053652-7758-42e0-a840-f2167aef0cab",
+      "name": "分類訊息",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -704,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.route }}",
+              "value2": "start"
+            }
+          ]
+        }
+      },
+      "id": "7eba4981-94b6-4e2e-b819-e4986588a073",
+      "name": "是否開始測驗",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        240
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.route }}",
+              "value2": "answer"
+            }
+          ]
+        }
+      },
+      "id": "632a7aed-9705-4c97-b5fb-2b1614c7f439",
+      "name": "是否答題",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "boolean": [
+            {
+              "value1": "={{ ['image', 'video', 'audio', 'file'].includes($json.messageType) || $json.route === 'media' }}",
+              "value2": true
+            }
+          ]
+        }
+      },
+      "id": "e8715ed1-e97d-498f-98a2-beed0be1dd36",
+      "name": "是否媒體",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        -480,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668771438,
+          "mode": "list",
+          "cachedResultName": "user_states",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk/edit#gid=668771438"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "step": "0",
+            "updatedAt": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "userId"
+          ],
+          "schema": [
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_0",
+              "displayName": "answer_0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_1",
+              "displayName": "answer_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_2",
+              "displayName": "answer_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updatedAt",
+              "displayName": "updatedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "49585801-5b1d-4a95-ad07-a3289b2fd184",
+      "name": "初始化狀態",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -256,
+        240
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{  { \"replyToken\": $('LINE Webhook v4').item.json.body.events[0].replyToken, \"messages\": $('')} }}",
+        "options": {}
+      },
+      "id": "f1b2c77a-739f-45e6-a4c2-53079517d723",
+      "name": "發送第1題",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -48,
+        240
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "user_states",
+          "mode": "name"
+        },
+        "filtersUI": {
+          "values": [
+            {
+              "lookupColumn": "userId",
+              "lookupValue": "={{ $('分類訊息').first().json.userId }}"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "b5bd60cf-5333-4726-b92b-eccd4d64d2be",
+      "name": "讀取答題狀態",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        -256,
+        432
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\ntry {\n  const classify = $('解析事件').first().json; // 直接從解析事件拿最準\n  const state = ($input.first() && $input.first().json) ? $input.first().json : {};\n\n  const userId = classify.userId;\n  const replyToken = classify.replyToken;\n  const currentAnswer = classify.postbackAnswer || classify.text || '';\n  \n  // 強制轉型，確保比較不會出錯\n  let qNum = -1;\n  if (classify.postbackQuestion !== null && classify.postbackQuestion !== undefined) {\n    qNum = parseInt(classify.postbackQuestion);\n  }\n  \n  let step = qNum !== -1 ? qNum : parseInt(state.step || '0');\n  let action = 'unknown';\n  \n  if (step === 0) action = 'to_step1';\n  else if (step === 1) action = 'to_step2';\n  else if (step === 2) action = 'to_result';\n\n  return [{\n    json: {\n      userId, replyToken, currentAnswer, step, action,\n      answer_0: step === 0 ? currentAnswer : (state.answer_0 || ''),\n      answer_1: step === 1 ? currentAnswer : (state.answer_1 || ''),\n      answer_2: step === 2 ? currentAnswer : (state.answer_2 || '')\n    }\n  }];\n} catch (e) {\n  return [{ json: { error: e.message, action: 'error' } }];\n}\n"
+      },
+      "id": "59a6c4c3-b7a8-446a-8559-1185e9a5f165",
+      "name": "整理答題資料",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('整理答題資料').first().json.action }}",
+              "value2": "to_step1"
+            }
+          ]
+        }
+      },
+      "id": "5225c81e-c323-44e1-9d84-f03e7eb541c8",
+      "name": "step=0?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        176,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668771438,
+          "mode": "list",
+          "cachedResultName": "user_states",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk/edit#gid=668771438"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "step": "1",
+            "answer_0": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "updatedAt": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "userId"
+          ],
+          "schema": [
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_0",
+              "displayName": "answer_0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_1",
+              "displayName": "answer_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_2",
+              "displayName": "answer_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updatedAt",
+              "displayName": "updatedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "f8749223-6f49-4186-bcfd-45fe61f20b16",
+      "name": "儲存答案0→step1",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        400,
+        320
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/push",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"to\": $('解析事件').first().json.userId, \"messages\": $('分類訊息').first().json.flexPayloads['發送第2題'] } }}",
+        "options": {}
+      },
+      "id": "dcc5e845-3d80-48a7-85ea-2fd671006ef1",
+      "name": "發送第2題",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        624,
+        352
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('整理答題資料').first().json.action }}",
+              "value2": "to_step2"
+            }
+          ]
+        }
+      },
+      "id": "f54a4efe-b2f2-4ed6-98f3-c742fbb03ff3",
+      "name": "step=1?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        176,
+        560
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668771438,
+          "mode": "list",
+          "cachedResultName": "user_states",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk/edit#gid=668771438"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "step": "2",
+            "answer_1": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "updatedAt": "={{ new Date().toISOString() }}"
+          },
+          "matchingColumns": [
+            "userId"
+          ],
+          "schema": [
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_0",
+              "displayName": "answer_0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_1",
+              "displayName": "answer_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_2",
+              "displayName": "answer_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updatedAt",
+              "displayName": "updatedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "09b6933c-8ed6-4619-b5da-aa5d4c032c57",
+      "name": "儲存答案1→step2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        400,
+        512
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/push",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"to\": $('解析事件').first().json.userId, \"messages\": $('分類訊息').first().json.flexPayloads['發送第3題'] } }}",
+        "options": {}
+      },
+      "id": "8d100901-80f3-4eea-9be4-ae7161f853cf",
+      "name": "發送第3題",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        624,
+        512
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const d = $items('整理答題資料')[0].json;\nconst displayName = $input.first().json.displayName || '新朋友';\n\nconst a1 = d.answer_0 || 'A';\nconst a2 = d.answer_1 || 'A';\nconst a3 = d.answer_2 || 'A';\n\nconst BASE = {\n  A: { emoji: '🌿', name: '慢活旅行者', cartoonStyle: '可愛皮克斯 3D 渲染風格 (Pixar style 3D render)，場景：淺草寺馬卡龍色系，溫暖柔和光影，精緻質感，豐富細節', personality: '你是一個懂得在忙碌世界中尋找寧靜的人。對你而言，旅行不是為了抵達目的地，而是享受過程中的每一刻呼吸。你喜歡在陌生的城市尋找一家有質感的咖啡廳，坐下來觀察路人，或是讀一本想看很久的書。你對細節有著敏銳的觀察力，牆角的青苔或午後的陽光都能讓你感動。這種「慢」並非懶散，而是一種對生命品質的堅持，讓你在旅途中獲得真正的療癒與能量。你更傾向於深入感受一個地方的靈魂，而非僅僅在著名標誌前打卡。' },\n  B: { emoji: '🏃', name: '極速旅人', cartoonStyle: '可愛潮流 3D 渲染風格，場景：澀谷霓虹夜景，繽紛色彩，精緻細節，高品質光影，賽博龐克可愛化', personality: '你是效率與行動力的化身，時間對你來說是最珍貴的資源。你熱愛達成目標的成就感，看到行程表上的景點一個個被勾選，會讓你感到無比滿足。你的精力旺盛，總能在最短的時間內體驗最精采的活動。你擅長利用各種科技工具來優化路徑，不喜歡任何形式的拖延或浪費。朋友都非常依賴你的策劃與執行能力，因為跟著你走，絕對能玩得最充實、最精彩，在有限的假期間創造出最大化的回憶價值。' },\n  C: { emoji: '🏺', name: '文化沉澱者', cartoonStyle: '精緻手繪插畫風格 (Exquisite Hand-drawn Illustration)，場景：京都金閣寺，優雅溫潤色彩，富有層次感，高品質質感，文藝氣息', personality: '你擁有一顆充滿同理心與好奇心的靈魂，旅行對你來說是一場與土地的靈魂對話。你並不滿足於走馬看花的觀光，而是渴望深入了解當地的歷史、傳統與生活方式。你喜歡逛當地的傳統市場，與小販聊天，或是參與在地的節慶活動。你相信每座城市都有自己的心跳與脈絡，而你的使命就是去傾聽並理解它。你帶回家的不只是照片，更是滿滿的感動與深刻的哲學思考，這種深度的連結讓你的視野變得更寬廣。' },\n  D: { emoji: '⚡', name: '冒險先驅', cartoonStyle: '可愛冒險 3D 風格，場景：富士山日出雲海，精緻戶外裝備細節，壯麗柔和光影，電影級畫面質感', personality: '「挑戰」是你的生命密碼，你拒絕平庸與安逸的生活方式。旅行是你探索世界邊界的一種途徑，越是未知的領域越能激發你的鬥志與生命力。你熱愛體能上的挑戰，無論是攀登陡峭的高山還是潛入神秘的深海，都能讓你感受到生命的真實跳動與脈搏。你不怕困難，反而視挑戰為成長的養分。你有一種天生的領導氣質與勇氣，總能鼓勵身邊的人踏出舒適圈，去發現那個更強大的自己。' }\n};\nconst MOD = {\n  AA: { suffix: '·科技適應型', modPersonality: '再加上你對科技的高度敏感度，你是那種會用 AI 把旅程優化到極致的人。手機是你最強的數位旅伴，比起傳統地圖，你更信任數據與即時資訊。你懂得如何利用數位工具避開人群、尋找最高評分的店家，這種智能化的旅行方式，讓你的每一步都走得精準且優雅。' },\n  AB: { suffix: '·隨遇而安型', modPersonality: '突發狀況對你來說從來不是困擾，反而是驚喜冒險的開端。你擁有一種神奇的心理韌性，總能在計畫外的轉彎處，找到最動人的風景。你不拘泥於刻板的行程，這種靈活的生命態度，讓你的旅行充滿了詩意與未知的喜悅。' },\n  AC: { suffix: '·從容探索型', modPersonality: '遇到環境的變化，你總是保持著不慌不忙的優雅。你會先找一間安靜的咖啡廳坐下來，讓思緒在香氣中沉澱，等內心平靜後再決定下一步。這份難得的從容感，讓你的旅行永遠比別人多了一份深度與美學品味，這也是你獨特的魅力所在。' },\n  AD: { suffix: '·嚴謹慢活型', modPersonality: '你的行囊裡永遠備有 Plan B 甚至 Plan C，因為你相信充分的準備是享受自由的前提。這份嚴謹與細心，讓你的旅程幾乎不會出現令人尷尬的差錯。朋友們都說跟你一起出遊是最放心的，因為你總是能把細節掌控得恰到好处，讓慢活也能過得很精緻。' },\n  BA: { suffix: '·打卡爆肝型', modPersonality: '你的社交媒體限時動態，永遠是朋友圈裡最令人羨慕的焦點。你擅長捕捉最完美的角度，並利用最新科技提升打卡效率。對你來說，分享美的事物是一種生活態度，你那敏銳的視覺直覺，讓每張照片都像是精心設計的藝術品。' },\n  BB: { suffix: '·狂野隨興型', modPersonality: '你是旅行界真正的自由靈魂，對你來說「沒有計畫」就是最好的計畫。你熱愛那種臨時起意、說走就走的快感。在陌生的十字路口隨性轉個彎，往往就能開啟一段意想不到的精彩故事。這種狂野的生命力，讓你每次旅行都像是一場未知的慶典。' },\n  BC: { suffix: '·率真漫遊型', modPersonality: '你不需要冷冰冰的星星指南，路邊阿伯熱情推薦的小攤位才是你的真愛。你擁有一份純粹的率真，總能用最直接的方式與在地人連結。這種接地氣的旅行風格，讓你總能品嚐到最有溫度、最道地的生活滋味，這也是最讓你感到充實的時刻。' },\n  BD: { suffix: '·精算達人型', modPersonality: '你擁有一雙能瞬間看穿「價值」的利眼。在同樣的預算下，你總能策劃出比別人精彩三倍的體驗，這不僅是省錢，更是一種聰明生活的智慧。你懂得把資源花在刀口上，這種精算的能力讓你的每趟旅程都顯得無比聰明且充滿成就感。' },\n  CA: { suffix: '·智能導航型', modPersonality: '你完美地結合了文化探索與現代科技。在古蹟前你會用 AI 查閱歷史，在博物館裡你會利用數位導覽深入理解背景。這種「虛實整合」的旅行方式，讓你的每次參觀都具備了極高的含金量，也讓文化沉澱變得更有效率且現代化。' },\n  CB: { suffix: '·直覺冒險型', modPersonality: '你的直覺就是你最好的導航儀。你敢於跟著感覺走，不被繁雜的旅遊手冊所限制。往往在最意想不到的偏僻小巷，你就能發現最有故事的文化寶藏或私人秘境。這種靠著「第六感」引導的冒險，讓你的文化之旅充滿了命運般的奇遇。' },\n  CC: { suffix: '·創意漫遊型', modPersonality: '你的眼睛自帶藝術濾鏡，世界在你眼中是一幅流動的畫作。街頭色彩繽紛的塗鴉、獨立書店特有的紙張氣味、設計師小店裡充滿溫度的手作，都是你旅行中最珍貴的收藏。這種對美的執著與創意，讓你的文化探索充滿了靈性。' },\n  CD: { suffix: '·策展達人型', modPersonality: '你把每次旅行都視為一場精心策劃的個人展覽。預約制的深度講座、限量的職人工作坊，都是你行程表上的首選。你拒絕走馬看花，追求的是真正的文化沉浸與學術深度，這讓你的旅行經歷在質地上顯得格外厚實且迷人。' },\n  DA: { suffix: '·跳島遊走型', modPersonality: '你旺盛的冒險精神搭配精準的科技規劃，讓你在最短時間內能完成最多的挑戰。你的旅行地圖上總是佈滿了待開發的標記，這種高效的「跳點」模式，讓你在每次出遊中都能大幅拓寬生命的邊界，體驗多樣化的冒險樂趣。' },\n  DB: { suffix: '·荒野達人型', modPersonality: '越是艱困的環境，越能磨練出你堅韌的意志。你享受那種與大自然搏鬥的原始快感，無論是露宿荒野還是穿越叢林，都能讓你感到前所未有的自由。你那無畏的勇氣與卓越的野外生存技能，讓你成為冒險隊伍中不可獲缺的靈魂人物。' },\n  DC: { suffix: '·熱血直覺型', modPersonality: '你是旅行中的一把火，走到哪裡都能燃起熱情。你不需要太多的思考，直覺會告訴你哪裡有最棒的挑戰。你那爆棚的行動力，讓你的冒險旅程永遠充滿了快節奏的驚喜與純粹的熱血，這種活在當下的生命力，極具感染力。' },\n  DD: { suffix: '·極限規劃型', modPersonality: '你把冒險視為一種修煉，每一分風險都在你的精密計算之中。你熱愛挑戰極限，但絕不盲目衝動。你對每個細節的極致追求，讓你即使在最危險的環境下，也能保持冷靜並帶领大家安全突圍，這就是你作為極限規劃者的強大實力。' }\n};\nconst base = BASE[a1] || BASE['A'];\nconst modKey = a2 + a3;\nconst mod = MOD[modKey] || MOD['AA'];\nconst fullName = base.name + mod.suffix;\nconst fullDesc = base.personality + '\\n\\n' + mod.modPersonality;\nconst promptText = '🎨 您的專屬生圖指令：\\n\\n請參考這張照片，生成一張【可愛討喜且極具電影級質感】的 3D 卡通旅遊海報。\\n\\n🌟 視覺風格：' + base.cartoonStyle + '。請使用 Pixar 3D 渲染技術，呈現極致柔和的電影級光影、溫潤材質與 8K 高清細節，整體氛圍要溫馨且高級。\\n👤 人物設定：請精確保留「附圖中的臉部特徵」，將其轉化為表情生動、比例可愛的討喜 3D 角色。\\n✍️ 畫面文字：在合適位置加入精緻藝術字：「' + displayName + ' 的' + base.name + '之旅」\\n🏷️ 隱藏彩蛋：請在畫面某個角落，以「旅行貼紙」、「城市街牌」或「復古印章」的形式，自然融入文字「AI 旅遊工作坊」，風格要像圖的一部分，完全不像廣告。\\n比例：1:1';\n\n\n\n\n\n\n\nconst resultPayload = [\n  {\n    \"type\": \"flex\",\n    \"altText\": \"您的旅行人格分析結果\",\n    \"contents\": {\n      \"type\": \"bubble\",\n      \"header\": { \"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": \"#3b82f6\", \"paddingAll\": \"15px\", \"contents\": [{ \"type\": \"text\", \"text\": \"✨ 旅行人格分析報告\", \"color\": \"#ffffff\", \"weight\": \"bold\", \"size\": \"md\" }] },\n      \"body\": {\n        \"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"20px\", \"spacing\": \"md\",\n        \"contents\": [\n          { \"type\": \"text\", \"text\": fullName, \"weight\": \"bold\", \"size\": \"xl\", \"color\": \"#1e293b\" },\n          { \"type\": \"separator\" },\n          { \"type\": \"text\", \"text\": fullDesc, \"wrap\": true, \"size\": \"md\", \"color\": \"#4b5563\", \"lineSpacing\": \"6px\" }\n        ]\n      }\n    }\n  },\n  {\n    \"type\": \"flex\",\n    \"altText\": \"您的專屬生圖指令\",\n    \"contents\": {\n      \"type\": \"bubble\",\n      \"header\": { \"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": \"#8b5cf6\", \"paddingAll\": \"15px\", \"contents\": [{ \"type\": \"text\", \"text\": \"🎨 AI 專屬生圖指令\", \"color\": \"#ffffff\", \"weight\": \"bold\", \"size\": \"md\" }] },\n      \"body\": {\n        \"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"20px\", \"contents\": [\n          { \"type\": \"text\", \"text\": \"您可以複製下方指令，貼給 AI 繪圖工具：\", \"size\": \"md\", \"color\": \"#6d28d9\", \"wrap\": true },\n          { \"type\": \"text\", \"text\": promptText, \"wrap\": true, \"style\": \"italic\", \"size\": \"md\", \"color\": \"#4b5563\", \"margin\": \"md\" }\n        ]\n      },\n      \"footer\": {\n        \"type\": \"box\", \"layout\": \"horizontal\", \"paddingAll\": \"15px\", \"spacing\": \"md\",\n        \"contents\": [\n          { \"type\": \"button\", \"style\": \"primary\", \"color\": \"#8b5cf6\", \"height\": \"sm\", \"flex\": 1, \"action\": { \"type\": \"clipboard\", \"label\": \"複製指令\", \"clipboardText\": promptText } },\n          { \"type\": \"button\", \"style\": \"primary\", \"color\": \"#10b981\", \"height\": \"sm\", \"flex\": 1, \"action\": { \"type\": \"uri\", \"label\": \"去 ChatGPT\", \"uri\": \"https://chatgpt.com/\" } }\n        ]\n      }\n    }\n  }\n];\n\n\n\n\n\nreturn [{ json: { ...d, displayName, fullName, fullDesc, promptText, resultPayload } }];\n"
+      },
+      "id": "1b2f97ff-9bbc-48f1-8a2e-13466456cbe7",
+      "name": "計算人格結果",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        400,
+        640
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "quiz_results",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "時間戳記": "={{ new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei'}) }}",
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "人格類型": "={{ $json.fullName }}",
+            "Q1答案": "={{ $json.answer_0 }}",
+            "Q2答案": "={{ $json.answer_1 }}",
+            "Q3答案": "={{ $json.answer_2 }}",
+            "完整回答JSON": "={{ JSON.stringify($json) }}",
+            "displayName": "={{ $json.displayName }}"
+          },
+          "matchingColumns": [],
+          "schema": [
+            {
+              "id": "時間戳記",
+              "displayName": "時間戳記",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "人格類型",
+              "displayName": "人格類型",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Q1答案",
+              "displayName": "Q1答案",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Q2答案",
+              "displayName": "Q2答案",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "Q3答案",
+              "displayName": "Q3答案",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "完整回答JSON",
+              "displayName": "完整回答JSON",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "89be8826-8455-4a60-a635-bfc872ce98ef",
+      "name": "寫入quiz_results",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        624,
+        640
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/push",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"to\": $('解析事件').first().json.userId, \"messages\": $('計算人格結果').first().json.resultPayload } }}",
+        "options": {}
+      },
+      "id": "951438ce-a476-43b4-8a61-d483ea77ed86",
+      "name": "發送測驗結果",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        832,
+        640
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668771438,
+          "mode": "list",
+          "cachedResultName": "user_states",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk/edit#gid=668771438"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "step": "0",
+            "answer_0": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "answer_1": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "answer_2": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "updatedAt": "={{ new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei'}) }}"
+          },
+          "matchingColumns": [
+            "userId"
+          ],
+          "schema": [
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_0",
+              "displayName": "answer_0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_1",
+              "displayName": "answer_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "answer_2",
+              "displayName": "answer_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "updatedAt",
+              "displayName": "updatedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "2bc569fe-44af-4854-869c-9fe83a823f9c",
+      "name": "清除user_states",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1056,
+        640
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://api-data.line.me/v2/bot/message/' + $('解析事件').first().json.messageId + '/content' }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {
+          "response": {
+            "response": {
+              "responseFormat": "file"
+            }
+          }
+        }
+      },
+      "id": "7ff62f24-2c77-4eb1-b650-13477beef4d1",
+      "name": "下載媒體",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -256,
+        640
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "name": "={{ $('格式化輸出').first().json.fileName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "={{ $('檢查資料夾').first().json.id || $('建立資料夾').first().json.id }}"
+        },
+        "options": {}
+      },
+      "id": "c2f4f820-75e6-4371-b64a-5f3739012d54",
+      "name": "上傳Drive",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        -48,
+        640
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "7YmZGLVJVyeqzT1t",
+          "name": "Google Drive OAuth Randy"
+        }
+      },
+      "onError": "continueRegular"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $('整理答題資料').first().json.action }}",
+              "value2": "to_result"
+            }
+          ]
+        }
+      },
+      "id": "bcbfe725-1773-48d8-84bd-c8a06ede7cf7",
+      "name": "step=2?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        176,
+        432
+      ]
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "appendOrUpdate",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": 668771438,
+          "mode": "list",
+          "cachedResultName": "user_states",
+          "cachedResultUrl": "https://docs.google.com/spreadsheets/d/1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk/edit#gid=668771438"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "step": "3",
+            "answer_2": "={{ $('整理答題資料').first().json.currentAnswer }}",
+            "updatedAt": "={{ new Date().toLocaleString('zh-TW', {timeZone: 'Asia/Taipei'}) }}"
+          },
+          "matchingColumns": [
+            "userId"
+          ],
+          "schema": [
+            {
+              "id": "userId",
+              "displayName": "userId",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true,
+              "removed": false
+            },
+            {
+              "id": "step",
+              "displayName": "step",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_0",
+              "displayName": "answer_0",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_1",
+              "displayName": "answer_1",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "answer_2",
+              "displayName": "answer_2",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            },
+            {
+              "id": "updatedAt",
+              "displayName": "updatedAt",
+              "required": false,
+              "defaultMatch": false,
+              "display": true,
+              "type": "string",
+              "canBeUsedToMatch": true
+            }
+          ],
+          "attemptToConvertTypes": false,
+          "convertFieldsToString": false
+        },
+        "options": {}
+      },
+      "id": "eae2fd74-648e-4424-ad8a-6800a7498cb5",
+      "name": "儲存答案2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        400,
+        432
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "search"
+      },
+      "id": "ad6fc539-5ae8-49ec-8eb5-5b2d0285221a",
+      "name": "檢查資料夾",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 2,
+      "position": [
+        400,
+        832
+      ],
+      "alwaysOutputData": true,
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "7YmZGLVJVyeqzT1t",
+          "name": "Google Drive OAuth Randy"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "resource": "folder",
+        "name": "={{ $('格式化輸出').first().json.displayName }}",
+        "driveId": {
+          "__rl": true,
+          "mode": "list",
+          "value": "My Drive",
+          "cachedResultName": "My Drive"
+        },
+        "folderId": {
+          "__rl": true,
+          "mode": "id",
+          "value": "1y4t-yYFeVxnYsX1EPylqp0-hnMfQqHFS"
+        },
+        "options": {}
+      },
+      "id": "6a8da323-ffdb-4ec8-ada9-f44497bb7f79",
+      "name": "建立資料夾",
+      "type": "n8n-nodes-base.googleDrive",
+      "typeVersion": 3,
+      "position": [
+        640,
+        768
+      ],
+      "credentials": {
+        "googleDriveOAuth2Api": {
+          "id": "7YmZGLVJVyeqzT1t",
+          "name": "Google Drive OAuth Randy"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "string": [
+            {
+              "value1": "={{ $json.id || '' }}",
+              "operation": "isNotEmpty"
+            }
+          ]
+        }
+      },
+      "id": "a5977563-92cd-4be1-b0a1-036137f61577",
+      "name": "資料夾存在?",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 1,
+      "position": [
+        656,
+        896
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ 'https://api.line.me/v2/bot/profile/' + $('分類訊息').first().json.userId }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "4918a9e6-6ac0-4232-b8a2-ebd6c2c44a67",
+      "name": "拿測驗DisplayName",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        208,
+        640
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/chat/loading/start",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{ { \"chatId\": $('解析事件').first().json.userId, \"loadingSeconds\": 5 } }}",
+        "options": {}
+      },
+      "id": "273d558a-952f-4bdd-855d-7f058e722604",
+      "name": "答題動畫",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        400,
+        176
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      },
+      "continueOnFail": true
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "operation": "append",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "file_uploads",
+          "mode": "name"
+        },
+        "columns": {
+          "mappingMode": "defineBelow",
+          "value": {
+            "時間戳記": "={{ $now.toISOString().replace('T', ' ').substring(0, 19) }}",
+            "displayName": "={{ $('格式化輸出').first().json.displayName }}",
+            "userId": "={{ $('解析事件').first().json.userId }}",
+            "檔案名稱": "={{ $('格式化輸出').first().json.fileName }}",
+            "檔案類型": "={{ $('解析事件').first().json.messageType }}",
+            "檔案大小(bytes)": 0,
+            "LINE messageId": "={{ $('解析事件').first().json.messageId }}",
+            "備註": "={{ 'https://drive.google.com/file/d/' + $json.id + '/view' }}"
+          }
+        },
+        "options": {}
+      },
+      "id": "f30b6255-8056-4afb-8b1c-741df1514f01",
+      "name": "更新上傳紀錄",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        1504,
+        640
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "authentication": "serviceAccount",
+        "documentId": {
+          "__rl": true,
+          "value": "1VpOf-RtTBiNJK89ebwVaz7okRkn6Fkj0aIwp0ZDXkUk",
+          "mode": "id"
+        },
+        "sheetName": {
+          "__rl": true,
+          "value": "prompt_triggers",
+          "mode": "name"
+        },
+        "options": {}
+      },
+      "id": "dfb23386-0add-4b32-a65c-a25d10655de7",
+      "name": "搜尋關鍵字V2",
+      "type": "n8n-nodes-base.googleSheets",
+      "typeVersion": 4,
+      "position": [
+        0,
+        0
+      ],
+      "credentials": {
+        "googleApi": {
+          "id": "4Lhii34sG7umnSI0",
+          "name": "Google Service Account account"
+        }
+      },
+      "onError": "continueRegular"
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst text = $('解析事件').first().json.text ? String($('解析事件').first().json.text).trim().toLowerCase() : '';\nconst userId = $('解析事件').first().json.userId || '';\nconst rows = $input.all().map(i => i.json);\nif (rows.length === 0) return [];\n\nconst colors = ['#f43f5e', '#ec4899', '#d946ef', '#a855f7', '#8b5cf6', '#6366f1', '#3b82f6', '#0ea5e9', '#06b6d4', '#14b8a6', '#10b981', '#22c55e', '#84cc16', '#eab308', '#f59e0b', '#f97316', '#ef4444'];\n\nconst find = (r, p) => r[Object.keys(r).find(k => k.includes(p))];\nconst match = rows.find(r => {\n  const rTrigger = String(find(r, '觸發詞') || '').trim().toLowerCase();\n  const rActive = String(find(r, '是否啟用') || '').toUpperCase();\n  return rTrigger === text && (rActive === 'TRUE' || rActive === '1' || rActive === '');\n});\n\nif (match) {\n  const type = String(find(match, '回傳類型') || '').toLowerCase();\n  const isUrl = type.includes('url');\n  const name = find(match, '情境名稱') || '訊息';\n  const color = colors[name.length % colors.length]; // 根據標題長度隨機選色\n  const content = find(match, '內容') || '';\n  const imageUrl = find(match, '圖片網址') || '';\n  const btnLabel = (find(match, '按鈕文字') || '').trim();\n  const useExternal = String(find(match, '外部瀏覽器') || '').toUpperCase() === 'TRUE';\n\n  const flexBody = {\n    \"type\": \"bubble\",\n    \"header\": {\n      \"type\": \"box\", \"layout\": \"vertical\", \"backgroundColor\": color,\n      \"paddingTop\": \"15px\", \"paddingBottom\": \"15px\",\n      \"contents\": [{ \"type\": \"text\", \"text\": name, \"color\": \"#ffffff\", \"weight\": \"bold\", \"size\": \"lg\" }]\n    },\n    \"body\": {\n      \"type\": \"box\", \"layout\": \"vertical\", \"spacing\": \"sm\", \"paddingAll\": \"20px\",\n      \"contents\": [\n        { \"type\": \"text\", \"text\": find(match, '說明文字') || '', \"wrap\": true, \"color\": color, \"size\": \"lg\", \"weight\": \"bold\" },\n        { \"type\": \"text\", \"text\": content, \"wrap\": true, \"size\": \"md\", \"color\": \"#475569\" }\n      ]\n    }\n  };\n\n  if (btnLabel) {\n    flexBody.footer = {\n      \"type\": \"box\", \"layout\": \"vertical\", \"paddingAll\": \"12px\",\n      \"contents\": [{\n        \"type\": \"button\", \"style\": \"primary\", \"color\": color, \"height\": \"sm\",\n        \"action\": isUrl \n          ? { \"type\": \"uri\", \"label\": btnLabel, \"uri\": content + (useExternal ? (content.includes('?') ? '&' : '?') + 'openExternalBrowser=1' : '') }\n          : { \"type\": \"clipboard\", \"label\": btnLabel, \"clipboardText\": content }\n      }]\n    };\n  }\n\n  if (imageUrl) {\n    flexBody.hero = { \"type\": \"image\", \"url\": imageUrl, \"size\": \"full\", \"aspectRatio\": \"20:13\", \"aspectMode\": \"cover\", \"action\": { \"type\": \"uri\", \"uri\": imageUrl } };\n  }\n\n  return [{ json: { userId, replyPayload: { to: userId, messages: [{ type: \"flex\", altText: \"自動回覆\", contents: flexBody }] } } }];\n}\nreturn [];\n"
+      },
+      "id": "edb9dbbe-520f-4007-9866-7d605255c1f1",
+      "name": "是否有關鍵字V2",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        208,
+        0
+      ]
+    },
+    {
+      "parameters": {
+        "method": "POST",
+        "url": "https://api.line.me/v2/bot/message/reply",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "sendHeaders": true,
+        "headerParameters": {
+          "parameters": [
+            {
+              "name": "Content-Type",
+              "value": "application/json"
+            }
+          ]
+        },
+        "sendBody": true,
+        "specifyBody": "json",
+        "jsonBody": "={{  JSON.stringify({ replyToken: $('LINE Webhook v4').item.json.body.events[0].replyToken, messages: $json.replyPayload.messages })}}",
+        "options": {}
+      },
+      "id": "d0875993-513f-43c6-b356-8e4fc39fc20f",
+      "name": "發送關鍵字回覆V2",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4.1,
+      "position": [
+        400,
+        0
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "\nconst body = $input.first().json.body || {};\nconst events = body.events || [];\nif (events.length === 0) return [];\nconst ev = events[0];\nconst source = ev.source || {};\nconst replyToken = ev.replyToken || null;\nconst userId = source.userId || null;\nconst sourceType = source.type || null;\nconst groupId = source.groupId || null;\nconst roomId = source.roomId || null;\nconst messageType = ev.message ? ev.message.type : null;\nconst messageId = ev.message ? ev.message.id : null;\nconst text = ev.message && ev.message.type === 'text' ? ev.message.text : '';\n\nlet postbackQuestion = null;\nlet postbackAnswer = null;\nif (ev.type === 'postback' && ev.postback && ev.postback.data) {\n  ev.postback.data.split('&').forEach(p => {\n    const [k, v] = p.split('=');\n    const key = decodeURIComponent(k || '');\n    const val = decodeURIComponent(v || '');\n    if (key === 'q') postbackQuestion = val;\n    if (key === 'a') postbackAnswer = val;\n  });\n}\n\nlet route = 'text';\nif (ev.type === 'postback') {\n  route = 'answer';\n} else if (['image', 'video', 'audio', 'file'].includes(messageType)) {\n  route = 'media';\n} else if (text === '人格' || text === '開始測驗') {\n  route = 'start';\n}\n\nreturn [{\n  json: {\n    eventType: ev.type,\n    sourceType,\n    groupId,\n    roomId,\n    messageType,\n    messageId,\n    text: text || '',\n    replyToken,\n    userId,\n    postbackQuestion,\n    postbackAnswer,\n    route,\n  }\n}];\n"
+      },
+      "id": "82df7a52-773a-48a2-bb95-f8040f6ea14f",
+      "name": "解析事件",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -928,
+        336
+      ]
+    },
+    {
+      "parameters": {
+        "url": "={{ $('解析事件').first().json.sourceType === 'group' && $('解析事件').first().json.groupId ? 'https://api.line.me/v2/bot/group/' + $('解析事件').first().json.groupId + '/member/' + $('解析事件').first().json.userId : ($('解析事件').first().json.sourceType === 'room' && $('解析事件').first().json.roomId ? 'https://api.line.me/v2/bot/room/' + $('解析事件').first().json.roomId + '/member/' + $('解析事件').first().json.userId : 'https://api.line.me/v2/bot/profile/' + $('解析事件').first().json.userId) }}",
+        "authentication": "predefinedCredentialType",
+        "nodeCredentialType": "lineMessagingApi",
+        "options": {}
+      },
+      "id": "d5a6996e-d781-4f9e-ac48-e2ccd599aa6a",
+      "name": "抓取顯示名稱",
+      "type": "n8n-nodes-base.httpRequest",
+      "typeVersion": 4,
+      "position": [
+        -256,
+        640
+      ],
+      "credentials": {
+        "lineMessagingApi": {
+          "id": "zH8FV5yV3ggq76WB",
+          "name": "Line Messaging account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "jsCode": "const ev = $('解析事件').first().json;\nconst profile = $input.first().json;\nconst displayName = profile.displayName || ev.userId || 'unknown';\nconst messageType = ev.messageType || '';\nconst messageId = ev.messageId || '';\n\nconst extMap = { 'image': 'jpg', 'video': 'mp4', 'audio': 'm4a', 'file': 'bin' };\nconst ext = extMap[messageType] || 'bin';\nconst now = new Date();\nconst ts = now.getFullYear()\n    + String(now.getMonth()+1).padStart(2,'0')\n    + String(now.getDate()).padStart(2,'0') + '_'\n    + String(now.getHours()).padStart(2,'0')\n    + String(now.getMinutes()).padStart(2,'0')\n    + String(now.getSeconds()).padStart(2,'0');\n\nreturn [{\n  json: {\n    ...ev,\n    displayName: displayName,\n    ext: ext,\n    fileName: ts + '_' + messageType + '_' + messageId + '.' + ext\n  }\n}];"
+      },
+      "id": "66e40068-8cac-4cad-836b-9f1de15cf910",
+      "name": "格式化輸出",
+      "type": "n8n-nodes-base.code",
+      "typeVersion": 2,
+      "position": [
+        -48,
+        640
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "解析事件": {
+      "main": [
+        [
+          {
+            "node": "分類訊息",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "分類訊息": {
+      "main": [
+        [
+          {
+            "node": "是否開始測驗",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "是否答題",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "搜尋關鍵字V2",
+            "type": "main",
+            "index": 0
+          },
+          {
+            "node": "是否媒體",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "是否開始測驗": {
+      "main": [
+        [
+          {
+            "node": "初始化狀態",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "初始化狀態": {
+      "main": [
+        [
+          {
+            "node": "發送第1題",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "是否答題": {
+      "main": [
+        [
+          {
+            "node": "讀取答題狀態",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "讀取答題狀態": {
+      "main": [
+        [
+          {
+            "node": "整理答題資料",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "整理答題資料": {
+      "main": [
+        [
+          {
+            "node": "答題動畫",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "step=0?": {
+      "main": [
+        [
+          {
+            "node": "儲存答案0→step1",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "step=1?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "儲存答案0→step1": {
+      "main": [
+        [
+          {
+            "node": "發送第2題",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "step=1?": {
+      "main": [
+        [
+          {
+            "node": "儲存答案1→step2",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "step=2?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "儲存答案1→step2": {
+      "main": [
+        [
+          {
+            "node": "發送第3題",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "計算人格結果": {
+      "main": [
+        [
+          {
+            "node": "寫入quiz_results",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "寫入quiz_results": {
+      "main": [
+        [
+          {
+            "node": "發送測驗結果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "發送測驗結果": {
+      "main": [
+        [
+          {
+            "node": "清除user_states",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "是否媒體": {
+      "main": [
+        [
+          {
+            "node": "抓取顯示名稱",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "下載媒體": {
+      "main": [
+        [
+          {
+            "node": "上傳Drive",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "上傳Drive": {
+      "main": [
+        [
+          {
+            "node": "更新上傳紀錄",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "step=2?": {
+      "main": [
+        [
+          {
+            "node": "儲存答案2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "儲存答案2": {
+      "main": [
+        [
+          {
+            "node": "拿測驗DisplayName",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "檢查資料夾": {
+      "main": [
+        [
+          {
+            "node": "資料夾存在?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "建立資料夾": {
+      "main": [
+        [
+          {
+            "node": "下載媒體",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "資料夾存在?": {
+      "main": [
+        [
+          {
+            "node": "下載媒體",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "建立資料夾",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "拿測驗DisplayName": {
+      "main": [
+        [
+          {
+            "node": "計算人格結果",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "搜尋關鍵字V2": {
+      "main": [
+        [
+          {
+            "node": "是否有關鍵字V2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "是否有關鍵字V2": {
+      "main": [
+        [
+          {
+            "node": "發送關鍵字回覆V2",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "答題動畫": {
+      "main": [
+        [
+          {
+            "node": "step=0?",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "抓取顯示名稱": {
+      "main": [
+        [
+          {
+            "node": "格式化輸出",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "格式化輸出": {
+      "main": [
+        [
+          {
+            "node": "檢查資料夾",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "LINE Webhook v4": {
+      "main": [
+        [
+          {
+            "node": "解析事件",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate"
+  },
+  "versionId": "8867c40a-138c-40c0-89d2-e9580093b88a",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "60e48f17850b2047718c3341ce7964a9086cad54c6148d0d22f197b88c946e41"
+  },
+  "id": "mMXCDuiy3FCi7aYh",
+  "tags": []
+}

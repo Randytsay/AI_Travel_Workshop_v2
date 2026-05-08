@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
@@ -38,7 +38,7 @@
             <a href="phase5.html" class="quick-nav-link active">5️⃣ 生存</a>
             <a href="phase6.html" class="quick-nav-link">6️⃣ 變現</a>
             <a href="../survey.html" class="quick-nav-link">📝 問卷</a>
-            <a href="../leaderboard.html" class="quick-nav-link">🏆 成績榜</a>
+
         </div>
     </div>
 
@@ -50,57 +50,57 @@
                 <strong>🎯 本階段目標：</strong>解決語言不通、點餐恐懼、購物決策與突發狀況。學會在旅途中善用 AI 助理！
             </div>
 
-            <!-- Quick Links -->
-            <div class="quick-links mb-6">
-                <a href="https://aistudio.google.com/live" target="_blank" class="quick-link">
-                    <img src="../image/logo-aistudio.png" alt="AI Studio" style="height: 20px; width: auto;">
-                    AI Studio (Live)
-                </a>
-                <a href="https://gemini.google.com/" target="_blank" class="quick-link">
-                    <img src="../image/logo-gemini.png" alt="Gemini" style="height: 20px; width: auto;">
-                    Gemini
-                </a>
-                <a href="https://lens.google.com/" target="_blank" class="quick-link">
-                    📷 Google Lens
-                </a>
-            </div>
 
-            <!-- Section A: Gemini Live -->
+
+            <!-- Section A: Voice Assistants -->
             <div class="card mb-6">
                 <div class="card-header card-header-blue">
-                    <h3>🎙️ Section A：Gemini Live 即時口譯</h3>
-                    <p class="text-xs text-stone-500 mt-1">遇到外國人不敢開口？開啟即時雙向對話！</p>
+                    <h3>🎙️ Section A：手機 AI 語音助理即時口譯</h3>
+                    <p class="text-xs text-stone-500 mt-1">遇到外國人不敢開口？拿出手機開啟雙向語音對話！</p>
                 </div>
                 <div class="card-body">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Instructions -->
-                        <div>
-                            <h4 class="font-bold mb-4">操作方式</h4>
-                            <ol
-                                style="list-style: decimal; margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;">
-                                <li>開啟 Google AI Studio，看到 Talk to Gemini live</li>
-                                <li>點擊麥克風 (Start recording) 進入 Live 對話模式</li>
-                                <li>說出下方的口譯指令</li>
-                                <li>把手機放在中間，開始對話！</li>
-                            </ol>
-                            <a href="https://aistudio.google.com/live" target="_blank"
-                                class="btn btn-blue btn-full mt-4">
-                                🚀 開啟 AI Studio
-                            </a>
-                        </div>
-
-                        <!-- Prompt Cards -->
-                        <div>
-                            <div class="tool-card mb-4">
-                                <div class="tool-title mb-2">🗣️ 啟動口譯模式</div>
-                                <div class="tool-prompt" id="live-prompt-1">
-                                    請當我的中日文口譯員，我說中文你翻譯成日文，對方說日文你翻譯成中文。</div>
-                                <button onclick="copyText(document.getElementById('live-prompt-1').innerText)"
-                                    class="btn btn-blue btn-sm btn-full mt-2">複製</button>
-                            </div>
-                        </div>
+                    <!-- Prompt Definition -->
+                    <div class="tool-card mb-6" style="border-left: 4px solid var(--color-blue-500);">
+                        <div class="tool-title mb-2">🗣️ 必備口譯指令（先記下這句）</div>
+                        <div class="tool-prompt" id="live-prompt-1" style="font-size: 1.1rem; padding: 1rem; text-align: center;">
+                            「請當我的中日文口譯員，我說中文你翻譯成日文，對方說日文你翻譯成中文。」</div>
+                        <button onclick="copyText(document.getElementById('live-prompt-1').innerText)"
+                            class="btn btn-blue btn-sm btn-full mt-2">📋 複製指令 (可先複製備用，或直接用語音唸出)</button>
                     </div>
 
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+                        <!-- Gemini Live -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <img src="../image/logo-gemini.png" alt="Gemini" style="height: 24px;">
+                                <h4 class="font-bold text-lg text-indigo-900">Gemini Live (語音模式)</h4>
+                            </div>
+                            <img src="../image/gemini_live_mobile.png" alt="Gemini Live Interface" class="mx-auto rounded-lg shadow-md mb-4" style="max-height: 350px; width: auto; object-fit: contain; display: block;">
+                            <h5 class="font-bold mb-2">操作步驟：</h5>
+                            <ol style="list-style: decimal; margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;" class="text-sm">
+                                <li>下載並開啟手機上的 <strong>Google Gemini</strong> App。</li>
+                                <li>點擊畫面右下角的 <strong>「波浪圖示 (Live 鍵)」</strong> 進入即時語音對話。</li>
+                                <li>對著手機說出上面的口譯指令。</li>
+                                <li>將手機放在你和對方中間，開始自由對話！</li>
+                            </ol>
+                        </div>
+
+                        <!-- ChatGPT Voice Mode -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-4">
+                                <span style="font-size: 1.5rem;">🤖</span>
+                                <h4 class="font-bold text-lg text-indigo-900">ChatGPT (進階語音模式)</h4>
+                            </div>
+                            <img src="../image/chatgpt_voice_mobile.png" alt="ChatGPT Voice Interface" class="mx-auto rounded-lg shadow-md mb-4" style="max-height: 350px; width: auto; object-fit: contain; display: block;">
+                            <h5 class="font-bold mb-2">操作步驟：</h5>
+                            <ol style="list-style: decimal; margin-left: 1.5rem; display: flex; flex-direction: column; gap: 0.5rem;" class="text-sm">
+                                <li>下載並開啟手機上的 <strong>ChatGPT</strong> App。</li>
+                                <li>點擊對話框旁邊的 <strong>「耳機圖示 (或語音圖示)」</strong> 進入進階語音模式。</li>
+                                <li>對著手機說出上面的口譯指令。</li>
+                                <li>將手機放在中間，AI 會自動辨識雙方語言並居中翻譯！</li>
+                            </ol>
+                        </div>
+                    </div>
                 </div>
             </div>
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
@@ -98,6 +98,36 @@
             font-size: 0.875rem;
             font-weight: 700;
         }
+
+        .style-select {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid var(--color-stone-200);
+            border-radius: var(--radius-lg);
+            font-size: 0.9rem;
+            background: white;
+            cursor: pointer;
+            transition: border-color 0.2s;
+            font-family: inherit;
+        }
+
+        .style-select:focus {
+            outline: none;
+            border-color: var(--color-primary);
+            box-shadow: 0 0 0 3px var(--color-primary-light);
+        }
+
+        .style-select optgroup {
+            font-weight: 700;
+            font-size: 0.85rem;
+            color: var(--color-stone-800);
+            padding: 0.25rem 0;
+        }
+
+        .style-select option {
+            font-weight: 400;
+            padding: 0.25rem 0.5rem;
+        }
     </style>
 </head>
 
@@ -107,7 +137,7 @@
         <div class="container navbar-content">
             <div class="navbar-brand">
                 <span style="font-size: 1.5rem;">🎨</span>
-                <h1>階段四：視覺地圖 + 社群</h1>
+                <h1>階段四：視覺化產出</h1>
                 <span class="badge" style="background: var(--color-accent); color: white;">70分鐘 | ⭐ 課程高潮</span>
             </div>
             <div class="navbar-links">
@@ -134,54 +164,14 @@
     <!-- Main Content -->
     <main class="container" style="padding-top: 2rem; padding-bottom: 6rem;">
         <div class="fade-in">
-            <!-- Social Challenge Banner -->
-            <div class="countdown mb-6">
-                <div class="font-bold">🏆 社群人氣王挑戰進行中！</div>
-                <div class="time mt-2" id="challenge-countdown">--:--</div>
-                <div class="text-xs" id="countdown-label">等待講師開始計時</div>
 
-                <!-- 講師控制區 (密碼驗證後顯示) -->
-                <div id="instructor-controls"
-                    style="display: none; margin-top: 1rem; padding: 1rem; background: rgba(255,255,255,0.95); border-radius: 0.5rem; border: 1px solid #ddd;">
-                    <div style="font-size: 0.875rem; font-weight: 700; margin-bottom: 0.5rem; color: #44403c;">🎛️ 講師控制
-                    </div>
-                    <div
-                        style="display: flex; gap: 0.5rem; align-items: center; justify-content: center; flex-wrap: wrap;">
-                        <input type="number" id="countdown-minutes" value="30" min="1" max="120"
-                            style="width: 60px; padding: 0.5rem; border-radius: 0.5rem; border: 1px solid #ccc; text-align: center;">
-                        <span style="font-size: 0.875rem; color: #44403c;">分鐘</span>
-                        <button onclick="toggleCountdown()" id="toggle-btn" class="btn btn-primary btn-sm">▶️
-                            開始</button>
-                        <button onclick="resetCountdown()" class="btn btn-outline btn-sm">🔄 重置</button>
-                    </div>
-                </div>
-            </div>
 
-            <div class="quick-links mb-6">
-                <a href="https://gemini.google.com/" target="_blank" class="quick-link">
-                    <img src="../image/logo-gemini.png" alt="Gemini" style="height: 20px; width: auto;">
-                    Gemini
-                </a>
-                <a href="https://notebooklm.google.com/" target="_blank" class="quick-link">
-                    <img src="../image/logo-notebooklm.png" alt="NotebookLM" style="height: 20px; width: auto;">
-                    NotebookLM
-                </a>
-                <a href="https://grok.com/imagine" target="_blank" class="quick-link">
-                    <img src="../image/logo-grok.png" alt="Grok" style="height: 20px; width: auto;">
-                    Grok (讓圖動起來)
-                </a>
-                <a href="https://aistudio.google.com/live" target="_blank" class="quick-link">
-                    <img src="../image/logo-aistudio.png" alt="AI Studio" style="height: 20px; width: auto;">
-                    AI Studio (Live)
-                </a>
-
-            </div>
 
             <!-- Section A: Smart Prompts for NotebookLM (Podcast) -->
             <div class="card mb-6">
                 <div class="card-header card-header-blue">
-                    <h3>🎧 Section A：NotebookLM Podcast 導覽生成</h3>
-                    <p class="text-xs text-stone-500 mt-1">透過 NotebookLM 的「自訂指令」功能，生成專屬於你的 Podcast 導覽</p>
+                    <h3>📊 Section A：NotebookLM 簡報生成</h3>
+                    <p class="text-xs text-stone-500 mt-1">透過 NotebookLM 的「自訂指令」功能，生成專屬於你的 20 頁簡報大綱</p>
                 </div>
                 <div class="card-body">
                     <div class="mb-6">
@@ -205,41 +195,77 @@
                             </div>
                         </div>
 
-                        <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                            <!-- Presentation Prompt -->
-                            <div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span style="font-size: 1.25rem;">📊</span>
-                                    <h4 class="font-bold">16 頁 YAML 簡報指令</h4>
-                                </div>
-                                <div class="prompt-box">
-                                    <textarea id="ppt-prompt" class="form-textarea"
-                                        style="min-height: 250px; font-size: 0.8rem; font-family: monospace;"
-                                        readonly></textarea>
-                                </div>
-                                <button onclick="copyToClipboard('ppt-prompt')" class="btn btn-primary btn-full mt-3">📋
-                                    複製簡報指令</button>
-                                <p class="text-xs text-stone-500 mt-2">貼到 NotebookLM 的對話區，再將生成的 YAML程式碼貼到「簡報」旁的筆
-                                    【說明要建立的簡報】指令框中</p>
-                            </div>
+                        <!-- Step 2: 選擇簡報視覺風格 -->
+                        <label class="form-label mt-4">Step 2：選擇簡報視覺風格</label>
+                        <select id="ppt-style-select" class="style-select mb-4" onchange="updatePptPrompt()">
+                            <optgroup label="一、專業與商務邏輯">
+                                <option value="Minimalist">極簡主義 (Minimalist)</option>
+                                <option value="Warm Professional" selected>溫暖專業 (Warm Professional)</option>
+                                <option value="Executive">執行長風格 (Executive)</option>
+                                <option value="Data-Driven">數據驅動 (Data-Driven)</option>
+                                <option value="Monochrome">單色調 (Monochrome)</option>
+                                <option value="High Contrast">高對比 (High Contrast)</option>
+                                <option value="Flat Design">扁平化設計 (Flat Design)</option>
+                            </optgroup>
+                            <optgroup label="二、現代科技與未來派">
+                                <option value="Modern">現代風 (Modern)</option>
+                                <option value="Apple Style">蘋果風 (Apple Style)</option>
+                                <option value="Dark Mode">深色模式 (Dark Mode)</option>
+                                <option value="Minimalist Tech">極簡科技 (Minimalist Tech)</option>
+                                <option value="Cyberpunk">賽博龐克 (Cyberpunk)</option>
+                                <option value="Neon Glow">霓虹發光 (Neon Glow)</option>
+                            </optgroup>
+                            <optgroup label="三、UI 介面與材質質感">
+                                <option value="Glassmorphism">玻璃擬態 (Glassmorphism)</option>
+                                <option value="Liquid Glass">液態玻璃 (Liquid Glass)</option>
+                                <option value="Neumorphism">新擬物化 (Neumorphism)</option>
+                                <option value="Material Design">質感設計 (Material Design)</option>
+                            </optgroup>
+                            <optgroup label="四、敘事與資訊視覺化">
+                                <option value="Visual Story">視覺敘事 (Visual Story)</option>
+                                <option value="Timeline">時間軸 (Timeline)</option>
+                                <option value="Infographic">資訊圖表 (Infographic)</option>
+                            </optgroup>
+                            <optgroup label="五、藝術美學與次文化潮流">
+                                <option value="Luxury Aesthetic">奢華美學 (Luxury Aesthetic)</option>
+                                <option value="Retro Poster">復古海報 (Retro Poster)</option>
+                                <option value="Neo-Brutalism">新粗獷主義 (Neo-Brutalism)</option>
+                                <option value="Memphis Design">孟菲斯設計 (Memphis Design)</option>
+                                <option value="Y2K Aesthetic">千禧風 (Y2K Aesthetic)</option>
+                                <option value="Retro Collage">復古拼貼 (Retro Collage)</option>
+                                <option value="Punk Collage">龐克拼貼 (Punk Collage)</option>
+                            </optgroup>
+                            <optgroup label="六、溫馨生活與插畫風格">
+                                <option value="Scandinavian">北歐風 (Scandinavian)</option>
+                                <option value="Retro / Vintage">復古風 (Retro / Vintage)</option>
+                                <option value="Soft Pastel">粉彩柔和 (Soft Pastel)</option>
+                                <option value="Watercolor">手繪水彩 (Watercolor)</option>
+                                <option value="Playful">趣味風 (Playful)</option>
+                                <option value="Q-Cute">Q版可愛 (Q-Cute)</option>
+                                <option value="Warm Hand-drawn">溫馨手繪 (Warm Hand-drawn)</option>
+                                <option value="Clay 3D">黏土風 (Clay 3D)</option>
+                                <option value="Educational Comic">教育漫畫 (Educational Comic)</option>
+                                <option value="Paper Cut">剪紙藝術 (Paper Cut)</option>
+                            </optgroup>
+                        </select>
 
-                            <!-- Podcast Prompt -->
-                            <div>
-                                <div class="flex items-center gap-2 mb-3">
-                                    <span style="font-size: 1.25rem;">🎧</span>
-                                    <h4 class="font-bold">Podcast 專屬地陪指令</h4>
-                                </div>
-                                <div class="prompt-box">
-                                    <textarea id="podcast-prompt" class="form-textarea"
-                                        style="min-height: 250px; font-size: 0.8rem; font-family: monospace;"
-                                        readonly></textarea>
-                                </div>
-                                <button onclick="copyToClipboard('podcast-prompt')"
-                                    class="btn btn-outline btn-full mt-3">📋 複製 Podcast 指令</button>
-                                <p class="text-xs text-stone-500 mt-2">貼到 NotebookLM 「語音摘要」旁的筆 【在本集中，AI 主持人應著重哪些部分？】
-                                    指令框中
-                                </p>
+                        <!-- Presentation Prompt -->
+                        <div>
+                            <div class="flex items-center gap-2 mb-3">
+                                <span style="font-size: 1.25rem;">📊</span>
+                                <h4 class="font-bold">20 頁 YAML 簡報指令</h4>
                             </div>
+                            <div class="prompt-box">
+                                <textarea id="ppt-prompt" class="form-textarea"
+                                    style="min-height: 300px; font-size: 0.8rem; font-family: monospace;"
+                                    readonly></textarea>
+                            </div>
+                            <div class="flex flex-wrap justify-center gap-4 mt-3">
+                                <button onclick="copyToClipboard('ppt-prompt')" class="btn btn-primary">📋 複製簡報指令</button>
+                                <a href="https://notebooklm.google.com/" target="_blank" class="btn" style="background-color: #2c2c2c; border-color: #2c2c2c; color: white !important;">🚀 去 NotebookLM 生成</a>
+                            </div>
+                            <p class="text-xs text-stone-500 mt-2 text-center">貼到 NotebookLM 的對話區，再將生成的 YAML 程式碼貼到「簡報」旁的筆
+                                【說明要建立的簡報】指令框中</p>
                         </div>
                     </div>
                 </div>
@@ -301,202 +327,145 @@
                 </div>
             </div>
 
-            <!-- Prompt Template Library -->
+
+
+            <!-- Section C: Prompt Template Library -->
             <div class="card mb-6">
                 <div class="card-header card-header-amber">
-                    <h3>🎨 提示詞模板庫</h3>
-                    <p class="text-xs mt-1">選擇適合的模板，複製到 Nano Banana Pro 生成旅遊視覺圖</p>
+                    <h3>🎨 Section C：提示詞模板庫</h3>
+                    <p class="text-xs mt-1">選擇適合的模板，複製到 Gemini / Nano Banana Pro 生成旅遊視覺圖</p>
                 </div>
                 <div class="card-body">
-                    <!-- Template Selector Grid -->
-                    <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
-                        <div class="style-card selected" onclick="selectTemplate('multiday')" id="template-multiday">
-                            <span class="emoji">📅</span>
-                            <div class="name">多天總覽</div>
-                            <div class="target">3–7 天行程・IG/小紅書</div>
-                        </div>
-                        <div class="style-card" onclick="selectTemplate('oneday')" id="template-oneday">
-                            <span class="emoji">🕐</span>
-                            <div class="name">一日時間軸</div>
-                            <div class="target">一日遊・半日遊</div>
-                        </div>
-                        <div class="style-card" onclick="selectTemplate('cheatsheet')" id="template-cheatsheet">
-                            <span class="emoji">📋</span>
-                            <div class="name">懶人包</div>
-                            <div class="target">景點/美食/住宿/交通</div>
-                        </div>
-                        <div class="style-card" onclick="selectTemplate('poster')" id="template-poster">
-                            <span class="emoji">🖼️</span>
-                            <div class="name">復古海報</div>
-                            <div class="target">掛畫・封面圖</div>
-                        </div>
-                        <div class="style-card" onclick="selectTemplate('routemap')" id="template-routemap">
-                            <span class="emoji">🗺️</span>
-                            <div class="name">路線地圖</div>
-                            <div class="target">跨城市・交通規劃</div>
-                        </div>
-                        <div class="style-card" onclick="selectTemplate('ppt')" id="template-ppt">
-                            <span class="emoji">💼</span>
-                            <div class="name">商業簡報</div>
-                            <div class="target">PPT・提案用</div>
+                    <!-- Sub-tab: 一般模板 vs 布偶海報 -->
+                    <div style="display:flex;gap:0.5rem;margin-bottom:1.25rem;">
+                        <button onclick="switchTemplateTab('general')" id="tab-general" class="btn btn-primary btn-sm"
+                            style="flex:1;">📊 一般資訊圖</button>
+                        <button onclick="switchTemplateTab('poster')" id="tab-poster-tab" class="btn btn-outline btn-sm"
+                            style="flex:1;">🧸 布偶海報系列</button>
+                    </div>
+
+                    <!-- 一般模板區 -->
+                    <div id="section-general">
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-4 mb-6">
+                            <div class="style-card selected" onclick="selectTemplate('multiday')"
+                                id="template-multiday">
+                                <span class="emoji">📅</span>
+                                <div class="name">多天總覽</div>
+                                <div class="target">3–7 天行程・IG/小紅書</div>
+                            </div>
+                            <div class="style-card" onclick="selectTemplate('oneday')" id="template-oneday">
+                                <span class="emoji">🕐</span>
+                                <div class="name">一日時間軸</div>
+                                <div class="target">一日遊・半日遊</div>
+                            </div>
+                            <div class="style-card" onclick="selectTemplate('cheatsheet')" id="template-cheatsheet">
+                                <span class="emoji">📋</span>
+                                <div class="name">懶人包</div>
+                                <div class="target">景點/美食/住宿/交通</div>
+                            </div>
+                            <div class="style-card" onclick="selectTemplate('poster')" id="template-poster">
+                                <span class="emoji">🖼️</span>
+                                <div class="name">復古海報</div>
+                                <div class="target">掛畫・封面圖</div>
+                            </div>
+                            <div class="style-card" onclick="selectTemplate('routemap')" id="template-routemap">
+                                <span class="emoji">🗺️</span>
+                                <div class="name">路線地圖</div>
+                                <div class="target">跨城市・交通規劃</div>
+                            </div>
+                            <div class="style-card" onclick="selectTemplate('ppt')" id="template-ppt">
+                                <span class="emoji">💼</span>
+                                <div class="name">商業簡報</div>
+                                <div class="target">PPT・提案用</div>
+                            </div>
                         </div>
                     </div>
 
-                    <!-- Template Prompt Display -->
+                    <!-- 布偶海報系列區 -->
+                    <div id="section-poster-tab" style="display:none;">
+                        <p class="text-xs text-stone-500 mb-3">💡 選擇風格後複製提示詞，貼到 Gemini（建議 2.0 Flash Imagen）或 Nano Banana
+                            Pro，再附上你的行程即可生圖。</p>
+                        <div class="grid grid-cols-2 md:grid-cols-3 gap-3 mb-4">
+                            <div class="style-card selected" onclick="selectPosterStyle('fairy')" id="poster-fairy">
+                                <span class="emoji">🧸</span>
+                                <div class="name">童話布偶繪本</div>
+                                <div class="target">療癒・高級手作感</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('zakka')" id="poster-zakka">
+                                <span class="emoji">☕</span>
+                                <div class="name">日系療癒雜貨</div>
+                                <div class="target">手帳・票券・雜貨感</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('luxury')" id="poster-luxury">
+                                <span class="emoji">💎</span>
+                                <div class="name">高級精品海報</div>
+                                <div class="target">品牌・大氣・光影</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('adventure')" id="poster-adventure">
+                                <span class="emoji">🗺️</span>
+                                <div class="name">Q版冒險地圖</div>
+                                <div class="target">桌遊・任務・路線圖</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('candy')" id="poster-candy">
+                                <span class="emoji">🍬</span>
+                                <div class="name">玻璃糖果色夢幻</div>
+                                <div class="target">透明感・果凍・夢境</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('collage')" id="poster-collage">
+                                <span class="emoji">📰</span>
+                                <div class="name">復古拼貼雜誌</div>
+                                <div class="target">貼紙・票根・手作</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('anime')" id="poster-anime">
+                                <span class="emoji">🎬</span>
+                                <div class="name">動畫劇場海報</div>
+                                <div class="target">電影感・舞台・戲劇</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('notebook')" id="poster-notebook">
+                                <span class="emoji">📓</span>
+                                <div class="name">手帳插畫排版</div>
+                                <div class="target">便利貼・doodle・日記</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('oriental')" id="poster-oriental">
+                                <span class="emoji">🏮</span>
+                                <div class="name">國風雅致可愛</div>
+                                <div class="target">和風・刺繡・質感</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('street')" id="poster-street">
+                                <span class="emoji">🧢</span>
+                                <div class="name">潮流街頭貼圖</div>
+                                <div class="target">年輕・吸睛・社群</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('dream')" id="poster-dream">
+                                <span class="emoji">🌊</span>
+                                <div class="name">夢境水彩風</div>
+                                <div class="target">輕柔・空氣感・詩意</div>
+                            </div>
+                            <div class="style-card" onclick="selectPosterStyle('popup')" id="poster-popup">
+                                <span class="emoji">📖</span>
+                                <div class="name">兒童繪本立體場景</div>
+                                <div class="target">立體童書・舞台模型</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Template Prompt Display (shared) -->
                     <div class="prompt-box">
                         <textarea id="template-prompt" class="form-textarea"
                             style="min-height: 450px; font-family: monospace;" readonly></textarea>
                     </div>
-                    <button onclick="copyToClipboard('template-prompt')" class="btn btn-accent btn-full mt-4">
-                        📋 複製提示詞
-                    </button>
-                    <p class="text-xs text-stone-500 mt-2 text-center">💡 複製後貼到 Gemini Nano Banana Pro，並在最後加上你的行程內容</p>
-                </div>
-            </div>
-
-            <!-- Section C: Grok Animation -->
-            <div class="card mb-6">
-                <div class="card-header card-header-emerald">
-                    <h3>🎬 Section C：靜態圖轉動畫 (Grok)</h3>
-                </div>
-                <div class="card-body">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
-                        <!-- Steps -->
-                        <div>
-                            <h4 class="font-bold mb-4">操作步驟</h4>
-                            <div style="display: flex; flex-direction: column; gap: 1rem;">
-                                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--color-stone-800); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">1</span>
-                                    <div>
-                                        <div class="font-bold">開啟 Grok</div>
-                                        <p class="text-sm text-stone-500">前往 grok.com</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--color-stone-800); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">2</span>
-                                    <div>
-                                        <div class="font-bold">上傳你的手繪地圖</div>
-                                        <p class="text-sm text-stone-500">將 Gemini 生成的圖片上傳</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--color-stone-800); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">3</span>
-                                    <div>
-                                        <div class="font-bold">選擇動畫效果</div>
-                                        <p class="text-sm text-stone-500">使用下方的動畫提示詞</p>
-                                    </div>
-                                </div>
-                                <div style="display: flex; gap: 1rem; align-items: flex-start;">
-                                    <span
-                                        style="background: var(--color-success); color: white; width: 2rem; height: 2rem; border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">4</span>
-                                    <div>
-                                        <div class="font-bold">下載並分享</div>
-                                        <p class="text-sm text-stone-500">下載影片發到社群</p>
-                                    </div>
-                                </div>
-                            </div>
-                            <a href="https://grok.com/imagine" target="_blank" class="btn btn-secondary btn-full mt-4">
-                                🚀 開啟 Grok
-                            </a>
-                        </div>
-
-                        <!-- Animation Effects -->
-                        <div>
-                            <h4 class="font-bold mb-4">選擇動畫效果</h4>
-                            <div class="grid grid-cols-2 gap-2">
-                                <button onclick="selectAnimation('sakura')" class="btn btn-outline" id="anim-sakura">🌸
-                                    櫻花飄落</button>
-                                <button onclick="selectAnimation('clouds')" class="btn btn-outline" id="anim-clouds">☁️
-                                    雲朵移動</button>
-                                <button onclick="selectAnimation('train')" class="btn btn-outline" id="anim-train">🚃
-                                    電車駛過</button>
-                                <button onclick="selectAnimation('walking')" class="btn btn-outline"
-                                    id="anim-walking">🚶 人物走動</button>
-                                <button onclick="selectAnimation('lights')" class="btn btn-outline" id="anim-lights">✨
-                                    燈光閃爍</button>
-                            </div>
-
-                            <div class="prompt-box mt-4">
-                                <span class="prompt-label">動畫提示詞</span>
-                                <textarea id="animation-prompt" class="form-textarea"
-                                    style="min-height: 100px; font-family: monospace;" readonly></textarea>
-                            </div>
-                            <button onclick="copyToClipboard('animation-prompt')" class="btn btn-outline btn-full mt-2">
-                                📋 複製
-                            </button>
-                        </div>
+                    <div class="flex flex-wrap justify-center gap-4 mt-4">
+                        <button onclick="copyToClipboard('template-prompt')" class="btn btn-accent">
+                            📋 複製提示詞
+                        </button>
+                        <a href="https://chatgpt.com/" target="_blank" class="btn" style="background-color: #10a37f; border-color: #10a37f; color: white !important;">去 ChatGPT 生成</a>
+                        <a href="https://gemini.google.com/" target="_blank" class="btn" style="background-color: #2563eb; border-color: #2563eb; color: white !important;">去 Gemini 生成</a>
                     </div>
                 </div>
             </div>
 
-            <!-- Section D: Social Post Generator -->
-            <div class="card mb-6">
-                <div class="card-header card-header-amber">
-                    <h3>🏆 Section D：社群人氣王挑戰</h3>
-                    <p class="text-xs mt-1">用 AI 生成 FB 貼文，讓你輕鬆拉票！</p>
-                </div>
-                <div class="card-body">
-                    <!-- Challenge Rules -->
-                    <div class="alert alert-info mb-4">
-                        <strong>📢 遊戲規則：</strong>
-                        <ol style="margin-left: 1.5rem; margin-top: 0.5rem;">
-                            <li>生成你的專屬手繪地圖</li>
-                            <li>用下方工具生成 FB 貼文</li>
-                            <li>發布到 FB/IG 並開始拉票</li>
-                            <li>課程結束前統計，前 3 名送獎品！</li>
-                        </ol>
-                        <div class="mt-2 text-sm"><strong>評分公式：</strong>讚數 ×1 + 留言數 ×3 + 講師加分</div>
-                    </div>
 
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
-                        <div class="form-group">
-                            <label class="form-label">發文平台</label>
-                            <select id="social-platform" class="form-select" onchange="updateSocialPost()">
-                                <option value="Facebook">Facebook</option>
-                                <option value="Instagram">Instagram</option>
-                                <option value="Threads">Threads</option>
-                                <option value="LINE 動態">LINE 動態</option>
-                            </select>
-                        </div>
-                        <div class="form-group">
-                            <label class="form-label">發文調性</label>
-                            <select id="social-style" class="form-select" onchange="updateSocialPost()">
-                                <option value="炫耀型">🎉 炫耀型 (活潑驚嘆)</option>
-                                <option value="實用分享">📝 實用分享 (條列資訊)</option>
-                                <option value="文青低調">🍃 文青低調 (簡潔優雅)</option>
-                                <option value="邀約朋友">👋 邀約朋友 (互動式)</option>
-                            </select>
-                        </div>
-                    </div>
 
-                    <div class="form-group">
-                        <label class="form-label">你的目的地</label>
-                        <input type="text" id="social-destination" class="form-input" value="日本"
-                            onchange="updateSocialPost()">
-                    </div>
-
-                    <div class="prompt-box">
-                        <span class="prompt-label">FB 發文 AI 提示詞</span>
-                        <textarea id="social-prompt" class="form-textarea"
-                            style="min-height: 180px; font-family: monospace;" readonly></textarea>
-                    </div>
-                    <button onclick="copyToClipboard('social-prompt')" class="btn btn-accent btn-full mt-4">
-                        📋 複製提示詞，用 AI 生成貼文
-                    </button>
-
-                    <!-- Hashtags -->
-                    <div class="mt-4 p-4" style="background: var(--color-stone-50); border-radius: var(--radius-lg);">
-                        <div class="font-bold text-sm mb-2">📌 推薦 Hashtag (可直接複製)</div>
-                        <div id="hashtags" class="text-sm text-primary" style="cursor: pointer;"
-                            onclick="copyText(this.innerText)">
-                            #AI旅遊規劃 #Gemini #日本自由行 #我的AI地圖 #工作坊 #旅遊規劃師
-                        </div>
-                    </div>
-                </div>
-            </div>
         </div>
     </main>
 
@@ -504,130 +473,112 @@
     <script src="../js/common.js"></script>
     <script>
         let selectedStyle = 'watercolor';
-        let selectedAnimation = '';
 
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             WorkshopState.setCurrentPhase(4);
             updateMapPrompt();
-            updateSocialPost();
-            setScenario('family'); // Initialize Smart Prompts
+            setScenario('family'); // Initialize PPT Smart Prompts
             startCountdown();
         });
 
         // ===== Smart Prompts Logic =====
+        let currentPptScenario = 'family';
+
         function setScenario(id) {
-            document.querySelectorAll('.scenario-btn').forEach(btn => btn.classList.remove('active'));
+            document.querySelectorAll('#btn-family, #btn-business, #btn-friends, #btn-kids').forEach(btn => btn.classList.remove('active'));
             document.getElementById('btn-' + id).classList.add('active');
+            currentPptScenario = id;
+            updatePptPrompt();
+        }
 
+        function updatePptPrompt() {
+            const styleSelect = document.getElementById('ppt-style-select');
+            const styleName = styleSelect.options[styleSelect.selectedIndex].text;
+            const styleValue = styleSelect.value;
             const pptPromptEl = document.getElementById('ppt-prompt');
-            const podcastPromptEl = document.getElementById('podcast-prompt');
 
-            const scenarios = {
-                family: {
-                    ppt: `請讀取我提供的行程資料，並撰寫一份 16 頁的簡報大綱。要求如下：
+            const pptScenarios = {
+                family: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
 1. 輸出格式：必須為 YAML 程式碼區塊。
-2. 頁數限制：嚴格執行 16 頁。
-3. 目標觀眾：長輩與家人。
-4. 情境設定：向家人說明這次旅遊的舒適度、安全性與溫馨亮點。
-5. 分頁結構建議：
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：長輩與家人。
+5. 情境設定：向家人說明這次旅遊的舒適度、安全性與溫馨亮點。
+6. 分頁結構建議：
    - Slide 1: 封面 (溫暖的家族旅行主題)
    - Slide 2: 為什麼選擇這條路線 (強調安全、節奏慢、不累人)
    - Slide 3: 住宿亮點 (重點介紹寬敞與便利性)
-   - Slide 4-10: 每日精選行程 (每日一頁，強調美食、美景與少步行)
-   - Slide 11: 交通銜接說明 (強調包車或免提行李的舒適感)
-   - Slide 12: 美食特輯 (針對長輩口味挑選的餐廳)
-   - Slide 13: 預算概覽 (開銷分析，強調價值感)
-   - Slide 14: 健康與安全保障 (醫藥準備、溫差提醒)
-   - Slide 15: 準備清單 (行李建議、換匯、網卡)
-   - Slide 16: 結語與 Q&A (充滿心意的邀請)`,
-                    podcast: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「家人/長輩」，請兩位主持人（一男一女）展現以下風格：
-- 主持人 A (引導者): 語氣成熟穩重，充滿耐心地解說行程中的舒適亮點與文化內涵。
-- 主持人 B (體驗者): 語氣溫暖親切，像是孝順的子女在分享有趣的小細節。
-- 內容要求：
-  * 強調行程中的「不趕時間」與「五感慢體驗」。
-  * 深入淺出地解說景點背後的歷史小故事（例如神社參拜方式）。
-  * 像是在自家客廳聊天一樣，營造出溫馨、安心的期待感。`
-                },
-                business: {
-                    ppt: `請讀取我提供的行程資料，並撰寫一份 16 頁的簡報大綱。要求如下：
+   - Slide 4-12: 每日精選行程 (每日一頁，強調美食、美景與少步行)
+   - Slide 13: 交通銜接說明 (強調包車或免提行李的舒適感)
+   - Slide 14: 美食特輯 (針對長輩口味挑選的餐廳)
+   - Slide 15: 伴手禮推薦 (長輩最愛的在地特產)
+   - Slide 16: 預算概覽 (開銷分析，強調價值感)
+   - Slide 17: 健康與安全保障 (醫藥準備、溫差提醒)
+   - Slide 18: 準備清單 (行李建議、換匯、網卡)
+   - Slide 19: 常見問題 FAQ
+   - Slide 20: 結語與 Q&A (充滿心意的邀請)`,
+                business: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
 1. 輸出格式：必須為 YAML 程式碼區塊。
-2. 頁數限制：嚴格執行 16 頁。
-3. 目標觀眾：公司同事或上司。
-4. 情境設定：為了考察、團體建設或商務合作，展示行程的效率、CP 值與產業連結亮點。
-5. 分頁結構建議：
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：公司同事或上司。
+5. 情境設定：為了考察、團體建設或商務合作，展示行程的效率、CP 值與產業連結亮點。
+6. 分頁結構建議：
    - Slide 1: 執行摘要 (Executive Summary)
    - Slide 2: 規劃願景與關鍵指標 (節省時間 vs 體驗價值)
-   - Slide 3-9: 每日路徑分析 (強調地理銜接優化、推薦考察點)
-   - Slide 10: 關鍵地標與其產業意義 (或團隊合影推薦點)
-   - Slide 11: 交通工具與動線管理 (Logic & Efficiency)
-   - Slide 12: 科技應用 (我們如何運用 AI 優化此行程)
-   - Slide 13: 成本結構分析 (ROI 分析)
-   - Slide 14: 後勤支援與應變計畫 (風險控管)
-   - Slide 15: 回國後的加值產出目標
-   - Slide 16: 行動呼籲與決策請求 (Next Steps)`,
-                    podcast: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「商務考察/同事」，請兩位主持人（一男一女）展現以下風格：
-- 主持人 A (分析師): 理性、語速適中，強調行程中的效率、CP 值與特殊的地理佈局。
-- 主持人 B (亮點採集員): 專業且敏銳，捕捉行程中具有產業靈感或適合團隊交流的特殊景點。
-- 內容要求：
-  * 使用較多產業術語或專業詞彙。
-  * 討論行程如何幫助團隊達成目標。
-  * 整體氛圍像是專業的商務談話節目，資訊密度較高。`
-                },
-                friends: {
-                    ppt: `請讀取我提供的行程資料，並撰寫一份 16 頁的簡報大綱。要求如下：
+   - Slide 3-11: 每日路徑分析 (強調地理銜接優化、推薦考察點)
+   - Slide 12: 關鍵地標與其產業意義 (或團隊合影推薦點)
+   - Slide 13: 交通工具與動線管理 (Logic & Efficiency)
+   - Slide 14: 科技應用 (我們如何運用 AI 優化此行程)
+   - Slide 15: 成本結構分析 (ROI 分析)
+   - Slide 16: 後勤支援與應變計畫 (風險控管)
+   - Slide 17: 團隊建設活動建議
+   - Slide 18: 回國後的加值產出目標
+   - Slide 19: 時程總覽 (Gantt Chart 風格)
+   - Slide 20: 行動呼籲與決策請求 (Next Steps)`,
+                friends: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
 1. 輸出格式：必須為 YAML 程式碼區塊。
-2. 頁數限制：嚴格執行 16 頁。
-3. 目標觀眾：熱血好友或死黨。
-4. 情境設定：點燃大家的旅遊魂！強調必拍位、極限美食、潮流體驗與 IG 爆紅點。
-5. 分頁結構建議：
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：熱血好友或死黨。
+5. 情境設定：點燃大家的旅遊魂！強調必拍位、極限美食、潮流體驗與 IG 爆紅點。
+6. 分頁結構建議：
    - Slide 1: 最終出團公告 (超酷視覺風格)
    - Slide 2: 全場最期待 3 大亮點 (High Lights)
-   - Slide 3-10: 每日狂暴行程 (Emphasis on activities, vibes, photo spots)
-   - Slide 11: 隱藏版深夜食堂與酒吧 (Secret Slots)
-   - Slide 12: 社群素材攻略 (哪些點必錄 Reels/限動)
-   - Slide 13: 敗家清單預測 (Must-buy)
-   - Slide 14: 總預算分析 (窮遊 vs 豪遊)
-   - Slide 15: 行前注意事項 (穿搭建議、必帶小物)
-   - Slide 16: 出發口號與群組連結`,
-                    podcast: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「好友/死黨」，請兩位主持人（一男一女）展現以下風格：
-- 背景：兩位主持人像是那種很有默契、愛開玩笑的好友組合。
-- 風格：幽默、高能量、充滿期待感，甚至會為了哪個行程最讚而小吵架。
-- 內容要求：
-  * 大量使用時下流行語，強調「必去、真香、哭啊、太扯了」。
-  * 著重介紹「哪裡好拍照」、「哪裡好買」、「哪裡好吃」。
-  * 營造出「我們明天就要飛了」那種極度興奮的派對氛圍。`
-                },
-                kids: {
-                    ppt: `請讀取我提供的行程資料，並撰寫一份 16 頁的簡報大綱。要求如下：
+   - Slide 3-12: 每日狂暴行程 (Emphasis on activities, vibes, photo spots)
+   - Slide 13: 隱藏版深夜食堂與酒吧 (Secret Slots)
+   - Slide 14: 社群素材攻略 (哪些點必錄 Reels/限動)
+   - Slide 15: 敗家清單預測 (Must-buy)
+   - Slide 16: 穿搭建議 (每日拍照 OOTD)
+   - Slide 17: 總預算分析 (窮遊 vs 豪遊)
+   - Slide 18: 行前注意事項 (必帶小物)
+   - Slide 19: 分工表 (誰負責什麼)
+   - Slide 20: 出發口號與群組連結`,
+                kids: `請讀取我提供的行程資料，並撰寫一份 20 頁的簡報大綱。要求如下：
 1. 輸出格式：必須為 YAML 程式碼區塊。
-2. 頁數限制：嚴格執行 16 頁。
-3. 目標觀眾：兒童與親子家庭。
-4. 情境設定：將旅遊包裝成一場「史詩冒險挑戰」，讓孩子充滿參與感。
-5. 分頁結構建議：
+2. 頁數限制：嚴格執行 20 頁。
+3. 視覺風格：${styleName}。
+4. 目標觀眾：兒童與親子家庭。
+5. 情境設定：將旅遊包裝成一場「史詩冒險挑戰」，讓孩子充滿參與感。
+6. 分頁結構建議：
    - Slide 1: 冒險地圖開啟 (Adventure Awaits!)
    - Slide 2: 我們的超能力與隊友 (角色分配)
-   - Slide 3-10: 每日冒險地圖 (每日一關卡，尋寶景點、任務關鍵字)
-   - Slide 11: 動物與魔法世界 (行程中的主題樂園或動物驚喜)
-   - Slide 12: 補給站大解析 (孩子最愛的甜點與特色餐廳)
-   - Slide 13: 收集印章與貼紙任務區
-   - Slide 14: 冒險小百科 (當地的簡單常識與語言教學)
-   - Slide 15: 英雄行李打包清單 (兒童專屬)
-   - Slide 16: 冒險家宣誓與啟程`,
-                    podcast: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「兒童/親子」，請兩位主持人（一男一女）展現以下風格：
-- 主持人 A (冒險隊長): 充滿活力、語氣像在主持兒童節目，稱呼聽眾為「小小冒險家」。
-- 主持人 B (好奇小夥伴): 語氣單純、好奇，會提出許多「十萬個為什麼」。
-- 內容要求：
-  * 將景點擬人化或奇幻化（例如：東京鐵塔是發光的守護神）。
-  * 加入許多與聽眾互動的問句：「大家知道日本的交通工具是哪一種最快嗎？」
-  * 音樂感強，充滿童心與想像力。`
-                }
+   - Slide 3-12: 每日冒險地圖 (每日一關卡，尋寶景點、任務關鍵字)
+   - Slide 13: 動物與魔法世界 (行程中的主題樂園或動物驚喜)
+   - Slide 14: 補給站大解析 (孩子最愛的甜點與特色餐廳)
+   - Slide 15: 收集印章與貼紙任務區
+   - Slide 16: 冒險小百科 (當地的簡單常識與語言教學)
+   - Slide 17: 趣味小測驗 (Travel Quiz)
+   - Slide 18: 英雄行李打包清單 (兒童專屬)
+   - Slide 19: 旅行日記模板 (每日記錄框)
+   - Slide 20: 冒險家宣誓與啟程`
             };
 
-            const data = scenarios[id];
-            pptPromptEl.value = data.ppt;
-            podcastPromptEl.value = data.podcast;
+            pptPromptEl.value = pptScenarios[currentPptScenario];
         }
+
+
 
         function selectStyle(style) {
             // Remove previous selection
@@ -786,14 +737,79 @@
         };
 
         function selectTemplate(templateId) {
-            // Remove previous selection
             document.querySelectorAll('#template-multiday, #template-oneday, #template-cheatsheet, #template-poster, #template-routemap, #template-ppt').forEach(card => {
                 card.classList.remove('selected');
             });
-            // Add new selection
             document.getElementById('template-' + templateId).classList.add('selected');
             selectedTemplate = templateId;
             document.getElementById('template-prompt').value = promptTemplates[templateId];
+        }
+
+        // ===== 布偶海報系列 =====
+        let selectedPosterStyle = 'fairy';
+
+        function switchTemplateTab(tab) {
+            if (tab === 'general') {
+                document.getElementById('section-general').style.display = '';
+                document.getElementById('section-poster-tab').style.display = 'none';
+                document.getElementById('tab-general').className = 'btn btn-primary btn-sm';
+                document.getElementById('tab-poster-tab').className = 'btn btn-outline btn-sm';
+                selectTemplate('multiday');
+            } else {
+                document.getElementById('section-general').style.display = 'none';
+                document.getElementById('section-poster-tab').style.display = '';
+                document.getElementById('tab-general').className = 'btn btn-outline btn-sm';
+                document.getElementById('tab-poster-tab').className = 'btn btn-primary btn-sm';
+                selectPosterStyle('fairy');
+            }
+        }
+
+        // 統一生圖提示詞模板，依選擇的風格填入對應變數
+        const posterStyles = {
+            fairy: { role: '可愛布偶娃娃', material: '毛氈、絨布與刺繡線', tone: '溫暖粉彩色調（粉色、米白、蜜桃）', bg: '柔和粉彩天空、可愛雲朵與童話花園裝飾', note: '整體像高級手作立體繪本海報，圓潤溫馨、充滿童趣' },
+            zakka: { role: '日系雜貨風布偶', material: '柔軟奶茶色絨布與和紙感布料', tone: '奶茶色系、淡米色、莫蘭迪中性色', bg: '和紙紋理、手帳票券、旅行印章與行李吊牌', note: '整體像日系生活雜貨店的療癒插畫，有溫暖的手作手帳感' },
+            luxury: { role: '精緻布偶角色（身著高級訂製造型服裝）', material: '高級訂製感毛氈與絨布', tone: '深淺強烈對比，搭配金色或象牙白點綴', bg: '精準留白背景、戲劇性聚光燈光影', note: '整體像精品品牌旅遊廣告主視覺，大器、簡潔、有國際感' },
+            adventure: { role: 'Q版探險布偶隊（每個場景換不同造型）', material: '毛絨、縫線、鈕扣與刺繡表情', tone: '鮮明活潑的桌遊色彩（綠、棕、藍、紅）', bg: '地圖節點、任務路標、章印與路線箭頭', note: '整體像兒童冒險書封面地圖，活潑討喜' },
+            candy: { role: '透明糖果色布偶', material: '透明感柔亮布料、粉嫩毛氈', tone: '糖果色、漸層光暈、柔焦夢幻色調', bg: '玻璃感光暈、糖果與果凍裝飾元素', note: '整體如玻璃糖果與果凍夢境世界，清透甜美' },
+            collage: { role: '毛氈拼貼玩偶', material: '毛氈搭配撕紙、貼紙、票根與膠帶', tone: '暖色紙張質地、顆粒感復古印刷色調', bg: '手作拼貼元素：塗鴉、剪報、章印、Washi Tape', note: '整體像旅遊雜誌封面加手帳拼貼，適合收藏' },
+            anime: { role: '動畫角色風布偶（每幕換裝換臉）', material: '絨布與刺繡，姿勢誇張有戲劇性', tone: '鮮豔動畫色彩，富有層次感與戲劇感', bg: '舞台場景：鐵道、神社、商店街、城市夜景動畫化背景', note: '整體像動畫電影宣傳主視覺，精彩吸睛' },
+            notebook: { role: '手帳插畫貼紙風布偶', material: '布偶貼紙感呈現，仍保有毛絨縫線質感', tone: '螢光筆圈選色調搭配淡雅底色', bg: '便利貼、印章、星星圖案與可愛 doodle 裝飾', note: '整體像旅行手帳攤開的紀錄頁，適合收藏' },
+            oriental: { role: '和風雅緻布偶（身著簡化和服或刺繡服飾）', material: '米白絨布搭配淡金色刺繡', tone: '柔和米色、淡金、淺綠與粉色', bg: '櫻花、雲紋、紙燈籠、庭園元素', note: '整體像高雅溫暖的旅遊宣傳畫，既可愛又有文化氣息' },
+            street: { role: '潮流布偶（換上帽子、墨鏡、球鞋造型）', material: '毛絨玩具搭配潮流配件貼紙感', tone: '強烈色塊（霓虹黃、電藍、珊瑚橙）', bg: 'sticker collage 拼貼、粗線條路線標記', note: '整體年輕吸睛，動感斜切構圖，適合社群爆紅' },
+            dream: { role: '水彩夢境布偶', material: '毛氈圓潤造型，背景水彩暈染質感', tone: '輕柔水彩色調（薰衣草、天藍、粉橙）空氣感強', bg: '水彩暈染城市線條、山景與海景', note: '整體色彩輕柔詩意，像夢裡的旅行日記，視覺舒服' },
+            popup: { role: '立體紙雕布偶（立體紙雕加絨布玩偶混合質感）', material: '立體紙雕加絨布混合，像小型舞台模型', tone: '溫暖童書色調（奶油黃、天空藍、草地綠）', bg: '立體舞台模型場景：地標、花朵、雲朵與夜景燈光', note: '整體像翻開立體童書，溫暖親切非常討喜' }
+        };
+
+        function generatePosterPrompt(styleId) {
+            const s = posterStyles[styleId];
+            return `請生成一張「（依你的行程內容設計標題）」的大型橫式 16:9 海報。
+
+主角為${s.role}，每個景點搭配不同的姿勢與造型變化。
+
+以可愛布偶呈現，布偶出現在每個景點旁，用可愛的姿勢互動。
+
+用${s.material}等材質將所有場景物件重新詮釋為觸感舒適的填充玩具造型。賦予他們舒適的毛氈或絨布質感，簡化造型，並用精緻的刺繡點綴。使用${s.tone}，搭配柔和的陰影和細緻的縫線，就像手工製作的填充玩具。整體風格為柔和色彩、圓潤可愛絨毛玩具造型，每個景點特色建築皆療癒可愛、圓滾滾，背景加入可愛的${s.bg}。
+
+${s.note}
+
+▍請務必遵守：
+- 全圖區分為（依行程天數）個不規則區塊（Day1、Day2…DayN）
+- 排列順序：Day1 → Day2 → Day3 → … → DayN，不可跳日、反向或分叉
+- 所有標示皆使用中文
+- 布偶需在每個場景以可愛的方式互動（拍照、逛街、吃美食、搭車…）
+
+以下為行程
+`;
+        }
+
+
+
+        function selectPosterStyle(styleId) {
+            selectedPosterStyle = styleId;
+            document.querySelectorAll('[id^="poster-"]').forEach(c => c.classList.remove('selected'));
+            const el = document.getElementById('poster-' + styleId);
+            if (el) el.classList.add('selected');
+            document.getElementById('template-prompt').value = generatePosterPrompt(styleId);
         }
 
         // Initialize template on page load
@@ -843,58 +859,48 @@
             document.getElementById('map-prompt').value = prompt;
         }
 
-        function updateSocialPost() {
-            const platform = document.getElementById('social-platform').value;
-            const style = document.getElementById('social-style').value;
-            const destination = document.getElementById('social-destination').value;
+        // ===== AI 虛擬替身生成 =====
+        const avatarTemplates = {
+            clay: `請根據這張照片中我的長相、髮型、眼鏡和服裝特徵，將我轉化為一個可愛的「3D 黏土人偶 (Claymorphism Style)」。
 
-            const styleText = {
-                '炫耀型': '活潑有趣、充滿驚嘆號和 emoji',
-                '實用分享': '實用資訊為主、條列式呈現',
-                '文青低調': '文藝氣息、簡潔優雅、少用驚嘆號',
-                '邀約朋友': '輕鬆邀約、互動式問句'
-            };
+視覺需求：
+- 圓潤的 3D 造型，表面有細微的黏土手捏質感與啞光表面
+- 必須保留照片中我的髮型樣式、黑框眼鏡、服裝顏色等辨識特徵
+- 人偶呈現開朗、友善的笑容，姿勢活潑
+- 使用單色柔和背景
+- 專業的 3D 渲染，帶有溫暖的球型照明和柔和陰影`,
 
-            const prompt = `請幫我寫一篇 ${platform} 貼文，內容要包含：
-1. 我正在學用 AI 規劃${destination}旅遊
-2. 這是我用 Gemini 生成的手繪地圖（超有質感！）
-3. 這個工作坊真的很好玩
-4. 邀請朋友來按讚支持我
+            pixar: `請參考這張照片中的我的外型與穿著，為我設計一個「皮克斯 3D 動畫電影風格」的作品主角分身。
 
-風格：${styleText[style]}
-請加上 5 個相關 emoji 和以下 hashtag：
-#AI旅遊規劃 #Gemini #日本自由行 #我的AI地圖 #工作坊`;
+視覺需求：
+- 大而閃亮的眼睛，生動的表情，細緻的皮膚與服裝材質紋理
+- 忠實還原照片中的：髮色、髮型、特徵眼鏡、以及照片中的主要服裝元素
+- 背景要是稍微模糊的城市街景（夢幻感）
+- 高質感的電影照明技術，營造出溫馨、冒險且充滿生命力的氛圍`,
 
-            document.getElementById('social-prompt').value = prompt;
+            lego: `請把這張照片中的我，設計成一個「樂高積木人 (LEGO Minifigures)」的 3D 角色。
+
+視覺需求：
+- 標準的樂高積木人造型，具有經典的光滑塑料質感
+- 髮型、服飾與眼鏡要盡可能與照片中的我相似，像是一個官方推出的個人樂高套組
+- 底部有一個樂高圓形底盤
+- 整體燈光效果像是在展示陳列架上的精緻玩具，色彩鮮艷飽和`,
+
+            crochet: `請根據照片中我的視覺特徵，幫我設計一個「手工編織毛線娃娃 (Amigurumi Crochet Style)」的 3D 虛擬替身。
+
+視覺需求：
+- 身體由明顯的毛線編織勾勒而成，帶有蓬鬆柔軟的棉線與毛絨質感
+- 保留我原本的髮型輪廓與眼鏡特色，並用毛線感呈現
+- 眼睛使用黑色縫線鈕扣或是小黑珠代替，表情溫潤療癒
+- 溫馨的中性色系背景，光線柔和，看起來像是一件精緻的手工藝術品`
+        };
+
+        function selectAvatarStyle(styleId) {
+            document.querySelectorAll('[id^="avatar-"]').forEach(c => c.classList.remove('selected'));
+            document.getElementById('avatar-' + styleId).classList.add('selected');
+            document.getElementById('avatar-prompt').value = avatarTemplates[styleId];
         }
 
-        function selectAnimation(effect) {
-            const effects = {
-                sakura: { name: '櫻花飄落', prompt: '櫻花花瓣緩緩從上方飄落，隨風輕輕擺動。' },
-                clouds: { name: '雲朵移動', prompt: '天空中的雲朵緩緩向右飄移。' },
-                train: { name: '電車駛過', prompt: '一輛電車從畫面左側駛向右側，帶有動態效果。' },
-                walking: { name: '人物走動', prompt: '地圖上的小人物沿著路線行走。' },
-                lights: { name: '燈光閃爍', prompt: '夜景中的霓虹燈有微微閃爍的動態效果。' }
-            };
-
-            // Update button styles
-            document.querySelectorAll('[id^="anim-"]').forEach(btn => {
-                btn.classList.remove('btn-primary');
-                btn.classList.add('btn-outline');
-            });
-            document.getElementById('anim-' + effect).classList.remove('btn-outline');
-            document.getElementById('anim-' + effect).classList.add('btn-primary');
-
-            const e = effects[effect];
-            const prompt = `請將這張靜態圖片轉換為動畫。
-
-動畫效果：${e.prompt}
-
-保持原圖的藝術風格不變。`;
-
-            document.getElementById('animation-prompt').value = prompt;
-            selectedAnimation = effect;
-        }
 
         // ===== 倒數計時功能 (跨裝置同步) =====
         let countdownInterval = null;
@@ -1040,6 +1046,13 @@
 
             updateCountdownDisplay();
         }
+
+        // Initialize page on load
+        document.addEventListener('DOMContentLoaded', function () {
+            if (typeof selectTemplate === 'function') selectTemplate('multiday');
+            if (typeof selectAvatarStyle === 'function') selectAvatarStyle('clay');
+            if (typeof startCountdown === 'function') startCountdown();
+        });
     </script>
 </body>
 

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
@@ -203,7 +203,7 @@
             <a href="pages/phase5.html" class="quick-nav-link">5️⃣ 生存</a>
             <a href="pages/phase6.html" class="quick-nav-link">6️⃣ 變現</a>
             <a href="survey.html" class="quick-nav-link active">📝 問卷</a>
-            <a href="leaderboard.html" class="quick-nav-link">🏆 成績榜</a>
+
         </div>
     </div>
 
@@ -284,10 +284,10 @@
                                     <label class="form-label">4. 今天哪個部分讓您覺得最驚艷 (Wow Moment)？</label>
                                     <select id="wow-moment" class="form-select">
                                         <option value="">請選擇</option>
-                                        <option value="AI 一鍵生成詳細行程 (Gemini)">AI 一鍵生成詳細行程 (Gemini)</option>
-                                        <option value="手繪風格視覺地圖">手繪風格視覺地圖</option>
-                                        <option value="Grok 動態動畫效果">Grok 動態動畫效果</option>
-                                        <option value="AI 即時翻譯/導航技巧">AI 即時翻譯/導航技巧</option>
+                                        <option value="AI生成可愛的個人頭像">AI生成可愛的個人頭像</option>
+                                        <option value="AI 一鍵生成詳細行程">AI 一鍵生成詳細行程</option>
+                                        <option value="手繪風格視覺地圖及簡報">手繪風格視覺地圖及簡報</option>
+                                        <option value="AI podcast語音導覽">AI podcast語音導覽</option>
                                         <option value="消費轉收入概念">消費轉收入概念</option>
                                     </select>
                                 </div>
@@ -392,11 +392,7 @@
                                 </div>
                             </div>
 
-                            <!-- 共用：社群人氣王讚數 -->
-                            <div class="form-group">
-                                <label class="form-label">您的社群人氣王貼文讚數 (選填)</label>
-                                <input type="number" id="likes" class="form-input" placeholder="FB/IG 讚數">
-                            </div>
+
 
                             <button type="submit" class="btn btn-primary btn-lg btn-full mt-6" id="submit-btn">
                                 📤 提交問卷
@@ -414,24 +410,7 @@
                         <h2 class="font-bold mb-4">感謝您的回饋！</h2>
                         <p class="text-stone-600 mb-6">您的問卷已成功提交。</p>
 
-                        <div
-                            style="background: var(--color-stone-50); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem;">
-                            <div class="font-bold mb-2">📚 領取講義</div>
-                            <p class="text-sm text-stone-600 mb-4">點擊下方按鈕閱讀圖文並茂的完整講義</p>
-                            <a href="https://www.canva.com/design/DAHAqaz4yzw/jk7nwL5pWOBwbQP5rTVs2g/view?utm_content=DAHAqaz4yzw&utm_campaign=designshare&utm_medium=link2&utm_source=uniquelinks&utlId=ha536bf916a"
-                                target="_blank" class="btn btn-primary btn-lg btn-full" id="download-link">
-                                📚 查看完整圖文講義
-                            </a>
-                        </div>
 
-                        <div
-                            style="background: var(--color-accent-light); padding: 1.5rem; border-radius: var(--radius-lg); margin-bottom: 1.5rem;">
-                            <div class="font-bold mb-2">🎰 抽獎資格</div>
-                            <p class="text-sm text-stone-600 mb-4">您已獲得終極大抽獎的參加資格！</p>
-                            <a href="leaderboard.html" class="btn btn-accent btn-lg btn-full">
-                                🏆 查看排名與成績 (手動更新)
-                            </a>
-                        </div>
 
                         <a href="index.html" class="btn btn-outline btn-full mt-6">
                             🏠 回到首頁
@@ -550,7 +529,7 @@
                 nextSuggestion: currentRole === 'member' ? document.getElementById('next-suggestion').value : '',
 
                 // 4. 最後共用欄位
-                likes: Number(document.getElementById('likes').value) || 0
+                likes: 0
             };
 
             // Submit to Google Sheets

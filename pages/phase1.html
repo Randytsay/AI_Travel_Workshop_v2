@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
@@ -38,7 +38,7 @@
             <a href="phase5.html" class="quick-nav-link">5️⃣ 生存</a>
             <a href="phase6.html" class="quick-nav-link">6️⃣ 變現</a>
             <a href="../survey.html" class="quick-nav-link">📝 問卷</a>
-            <a href="../leaderboard.html" class="quick-nav-link">🏆 成績榜</a>
+
         </div>
     </div>
 
@@ -50,120 +50,173 @@
                 <strong>🎯 本階段目標：</strong>從模糊的想法變成具體的「主題式」旅遊雛形，擺脫大眾景點，挖掘特色主題，生成第一份旅遊行程初稿。
             </div>
 
-            <!-- Advanced Tips: AI Gem -->
-            <div class="card mt-6">
-                <div class="card-header card-header-blue">
-                    <h3>🤖 互動式 AI 規劃助手</h3>
+
+            <!-- Step 1: AI Interface Intro -->
+            <div class="card mt-6 mb-6">
+                <div class="card-header" style="background: linear-gradient(to right, #0ea5e9, #3b82f6); color: white;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">📱</span>
+                        <h3 style="margin:0; color:white;">Step 1: 認識你的 AI 助手</h3>
+                    </div>
                 </div>
                 <div class="card-body">
-                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                        <div class="tool-card">
-                            <div class="flex items-center mb-2">
-                                <span class="tool-icon">👤</span>
-                                <span class="tool-title">第一步：建立 AI 角色與我的設定</span>
-                            </div>
-                            <p class="tool-desc">透過引導式問題，協助您建立專屬的「AI 角色設定」與「個人喜好設定」，讓 AI 更精準地為您服務。</p>
-                            <a href="https://gemini.google.com/gem/1EsUvBKZDD05jZ9y5J_S3Zrez76ZKRtHQ?usp=sharing"
-                                target="_blank" class="btn btn-blue btn-full mt-4">
-                                🚀 開啟 AI 設定助手 (Gem)
-                            </a>
+                    <p class="mb-4 text-stone-700">在開始規劃前，讓我們先來熟悉一下 AI 的操作介面。其實非常簡單，就像在用 LINE 聊天一樣！</p>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-center">
+                        <div>
+                            <img src="../image/ai_interface_intro.png" alt="AI 操作介面" style="width: 100%; border-radius: 8px; box-shadow: 0 4px 12px rgba(0,0,0,0.1);">
                         </div>
-                        <div class="tool-card">
-                            <div class="flex items-center mb-2">
-                                <span class="tool-icon">💎</span>
-                                <span class="tool-title">第二步：專屬 AI 旅遊顧問</span>
-                            </div>
-                            <p class="tool-desc">根據你的喜好進行多輪對話規劃，提供最具參考價值的行程建議。本階段結束前需產出初步行程。</p>
-                            <a href="https://gemini.google.com/gem/1nAtjf12eFrcj0yhNsaw9zHl1I9C8Okjm?usp=sharing"
-                                target="_blank" class="btn btn-blue btn-full mt-4">
-                                🚀 開始行程規劃 (Gem)
-                            </a>
+                        <div>
+                            <ul class="step-list" style="list-style: none; padding-left: 0;">
+                                <li style="margin-bottom: 1rem;"><strong>💬 對話框 (Input)</strong>：畫面最下方就是你對 AI 說話的地方，我們稱為「提示詞 (Prompt)」。</li>
+                                <li style="margin-bottom: 1rem;"><strong>📜 歷史紀錄 (History)</strong>：通常在左側欄，AI 會幫你記住之前的對話，隨時可以回來找。</li>
+                                <li style="margin-bottom: 1rem;"><strong>🔄 重新生成 (Regenerate)</strong>：如果 AI 回答得不滿意，可以點擊重新生成的按鈕，它會再想一個新答案。</li>
+                            </ul>
                         </div>
                     </div>
                 </div>
             </div>
+        <!-- AI First Experience Card -->
+        <section class="mt-12 mb-12">
+            <div class="card border-2 border-indigo-100">
+                <div class="card-header" style="background: linear-gradient(to right, #4f46e5, #7c3aed); color: white;">
+                    <div style="display: flex; align-items: center; gap: 0.5rem;">
+                        <span style="font-size: 1.5rem;">🌟</span>
+                        <h3 style="margin:0; color:white;">Step 2: 破冰初體驗：專屬旅遊人格測驗 (生圖)</h3>
+                    </div>
+                </div>
+                <div class="card-body bg-indigo-50/30" style="background-color: rgba(238, 242, 255, 0.3);">
+                    <p class="text-sm text-stone-600 mb-4">完成下方簡單的測驗，我們將為您生成專屬的 AI 生圖提示詞，讓您可以到 ChatGPT 畫出自己的旅遊角色！</p>
+                    
+                    <form id="quiz-form">
+                        <div class="form-group mb-4">
+                            <label class="form-label font-bold text-indigo-900" style="color: #312e81;">你的名字 / 暱稱 <span class="text-red-500">(必填)</span></label>
+                            <input type="text" id="quiz-name" name="quiz-name" required class="form-input" placeholder="例如：Randy" style="max-width: 300px;">
+                        </div>
 
-            <!-- Ultimate Prompt Card -->
+                        <!-- Q1 -->
+                        <div class="form-group mb-8">
+                            <label class="form-label font-bold text-indigo-900" style="color: #312e81;">1. ✈️ 你最嚮往哪種旅行基調？</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q1" value="A" required class="mr-2"> <strong style="color: #1e293b;">🌿 悠閒慢活</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">不趕行程，在咖啡廳坐一下午也無所謂</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q1" value="B" required class="mr-2"> <strong style="color: #1e293b;">🏃 有效率打卡</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">精準掌握時間，要把必去景點都集滿</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q1" value="C" required class="mr-2"> <strong style="color: #1e293b;">🏺 深度文化</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">走進歷史巷弄，聽當地的故事</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q1" value="D" required class="mr-2"> <strong style="color: #1e293b;">⚡ 極限挑戰</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">上山下海，體驗平時不敢做的事</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q2 -->
+                        <div class="form-group mb-8">
+                            <label class="form-label font-bold text-indigo-900" style="color: #312e81;">2. 😅 店家沒開、行程突發狀況，你通常怎麼做？</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q2" value="A" required class="mr-2"> <strong style="color: #1e293b;">📱 立刻搜尋替代方案</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">打開 AI 或地圖找周邊最高評分的地方</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q2" value="B" required class="mr-2"> <strong style="color: #1e293b;">🦋 隨便逛逛看看</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">附近走走說不定反而有驚喜</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q2" value="C" required class="mr-2"> <strong style="color: #1e293b;">☕ 先找咖啡廳坐下</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">沉澱一下，再慢慢想下一步去哪</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q2" value="D" required class="mr-2"> <strong style="color: #1e293b;">📋 執行備用計畫</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">早就準備好 Plan B，直接切換</span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <!-- Q3 -->
+                        <div class="form-group mb-8">
+                            <label class="form-label font-bold text-indigo-900" style="color: #312e81;">3. 🗓️ 你喜歡怎樣安排一天的行程密集度？</label>
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-2 mt-2">
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q3" value="A" required class="mr-2"> <strong style="color: #1e293b;">🌅 佛系節奏</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">一天 1-2 個大點就好，其他隨緣</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q3" value="B" required class="mr-2"> <strong style="color: #1e293b;">🚀 特種兵模式</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">從早到晚行程填滿滿，體力不是問題</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q3" value="C" required class="mr-2"> <strong style="color: #1e293b;">⚖️ 半糖主義</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">早上跑行程，下午留白放空</span>
+                                </label>
+                                <label class="checkbox-item" style="margin:0; padding:12px; background:white; border:1px solid #e2e8f0; border-radius:8px; cursor:pointer;">
+                                    <input type="radio" name="q3" value="D" required class="mr-2"> <strong style="color: #1e293b;">📐 精準串聯</strong><br>
+                                    <span class="text-xs text-stone-500 ml-6" style="margin-left: 24px; display: inline-block;">依交通動線安排 3-4 個必去地點</span>
+                                </label>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Quiz Result (Hidden by default) -->
+                    <div id="quiz-result" class="mt-6" style="display: none;">
+                        <div style="background: white; border: 2px solid #8b5cf6; border-radius: 12px; padding: 1.5rem;">
+                            <h4 class="text-center mb-2" style="color: #6d28d9; font-size: 1.25rem; font-weight: bold;">✨ 您的旅行人格分析報告</h4>
+                            <div class="text-center font-bold text-2xl mb-4" id="result-fullname" style="color: #1e293b;"></div>
+                            <p id="result-desc" class="text-sm text-stone-600 mb-6 leading-relaxed p-4 rounded-lg" style="background: #fafaf9; white-space: pre-wrap;"></p>
+                            
+                            <h5 class="font-bold mb-2" style="color: #312e81;">🎨 專屬生圖指令</h5>
+                            <p class="text-xs text-stone-500 mb-2">您可以複製下方指令，貼給 AI 繪圖工具：</p>
+                            <textarea id="result-prompt" class="form-textarea w-full mb-4" style="min-height: 150px; font-size: 0.8rem; background: #f8fafc; border: 1px solid #e2e8f0; padding: 12px; border-radius: 8px; width: 100%; box-sizing: border-box;" readonly></textarea>
+                            
+                            <div class="grid grid-cols-1 md:grid-cols-3 gap-4 md:gap-6 mt-4">
+                                <button type="button" onclick="copyToClipboard('result-prompt')" class="btn btn-outline flex items-center justify-center" style="border-color: #8b5cf6; color: #8b5cf6; background: white;">📋 複製指令</button>
+                                <a href="https://chatgpt.com/" target="_blank" class="btn text-center flex items-center justify-center" style="background-color: #10a37f; border-color: #10a37f; color: white !important;">去 ChatGPT 生成個性化頭像</a>
+                                <a href="https://gemini.google.com/" target="_blank" class="btn text-center flex items-center justify-center" style="background-color: #2563eb; border-color: #2563eb; color: white !important;">去 Gemini 生成個性化頭像</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+            <hr style="margin: 3rem 0; border-color: #e2e8f0;">
+            <!-- Advanced Tips: AI Planners -->
             <div class="card mt-6">
-                <div class="card-header card-header-emerald">
-                    <h3>📜 Gem 完整指令內容</h3>
+                <div class="card-header card-header-blue">
+                    <h3>🤖 Step 3: 選擇你的 AI 領航員，開始規劃！</h3>
                 </div>
                 <div class="card-body">
-                    <details class="prompt-details">
-                        <summary class="btn btn-outline btn-full" style="justify-content: space-between;">
-                            <span>🔍 點擊展開：完整對話引導指令 (可複製至一般 Gemini 視窗)</span>
-                            <span class="details-icon">▼</span>
-                        </summary>
-                        <div class="mt-4">
-                            <div class="prompt-box">
-                                <span class="prompt-label">完整指令內容</span>
-                                <textarea id="ultimate-prompt" class="form-textarea"
-                                    style="min-height: 450px; font-size: 0.8rem; line-height: 1.6;" readonly>你是一位「專業且貼心的 AI 旅遊規劃師」，目標是透過對話，一步步引導使用者完成最適合他們的旅程規劃。
-
-## 核心互動原則（最高指令）
-1. **禁止身家調查：** 在蒐集資訊階段，每次回覆最多只能問 1~2 個問題。絕對不要一次列出三個以上的問題。
-2. **口語友善：** 使用簡單、溫暖、繁體中文的口語，像朋友般聊天。
-3. **動態適應：** 如果使用者在回答中已經主動提供資訊，就不要重複詢問，直接跳到下一個未知點。
-4. **主動權：** 每次回覆結尾，都要明確引導「下一步做什麼」。
-5. **工具支援：** 當需要查詢航班或詳細地點時，請適時調用 Google Flights 或 Google Maps 擴充功能提供真實資訊。
-
-## 執行流程（採多輪對話模式）
-
-### 第一階段：黃金需求圈（分次詢問）
-1. **基本盤：** 目的地、日期/季節、天數、同行成員（長輩/小孩/情侶/獨旅）。
-2. **關鍵細節（必問）：**
-   - 飲食習慣：是否有素食、過敏或特殊禁忌？
-   - 行動力：是否有推車、輪椅，或長輩無法久走？
-   - 交通偏好：大眾運輸、自駕或包車？
-3. **預算與風格：** 預算範圍、旅遊節奏（慢活/充實）。
-
-*收集完畢後，請用列表整理並詢問：「以上資訊正確嗎？有沒有需要補充的？」*
-
-### 第二階段：架構確認
-1. **航班建議：** 若未定機票，調用 Google Flights 提供建議。
-2. **每日主題：** 規劃「每日大主題」並請使用者確認滿意度。
-
-### 第三階段：細節填充
-- **動線邏輯：** 同區集中。
-- **飲食推薦：** 根據飲食習慣（特別是素食）推薦 2-3 個具體選擇。
-- **輸出格式：** 09:00–10:00：[景點] (亮點) | 10:00–10:30：[交通] (方式)
-
-### 第四階段：總結與輸出
-1. **Markdown 表格總表：** 欄位包含日期、城市、主題、景點、早午晚餐、住宿。下方附上 3 個亮點與 1 個小提醒。
-2. **費用結構預估**。
-3. **貼心檢查清單：** 簽證、網卡、無障礙設施提醒等。
-4. **深度規劃提示詞：** 整合以上討論的資訊，提供一版 七步結構化框架 讓使用者可以複製文字進到下一階段深度研究
-''''
-請依以下架構幫我規劃一個詳細的旅遊行程。
-
-## 七步結構化框架
-
-1. **主題/目的地**：[填入前面討論結果]
-2. **時間**：[填入前面討論結果]
-3. **人數與成員**：[填入前面討論結果]
-4. **住宿偏好**：[填入前面討論結果]
-5. **交通需求**：[填入前面討論結果]
-6. **預算上限**：[填入前面討論結果]
-7. **輸出格式**：表格 + 地圖標記建議
-
-## 請包含以下內容
-- 每日詳細行程（含詳細時間表、交通方式、預估費用）
-- 餐廳推薦（請確認目前仍在營業）
-- 交通票券購買建議
-- 住宿地點建議（含價格範圍）
-- 總預算估算表
-- 備註提醒（天氣建議、特殊活動、是否需預約、推薦拍照地點等）
-''''
-
-## 限制與邊界
-- 價格僅提供區間範圍。
-- 修改條件時請重新執行第一階段。</textarea>
-                            </div>
-                            <button onclick="copyToClipboard('ultimate-prompt')" class="btn btn-success btn-full mt-4">
-                                📋 複製完整對話指令
-                            </button>
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                        <!-- ChatGPT Planner -->
+                        <div class="tool-card text-center">
+                            <h4 class="font-bold text-lg mb-2 text-indigo-900">第一種：ChatGPT 旅遊規劃師</h4>
+                            <a href="https://chatgpt.com/g/g-69fe1ad574d081918dd240d5d47fceb0-ailu-you-gui-hua-shi-bang-ni-zheng-li-zi-you-xing-xu-qiu" target="_blank" class="block mb-4 hover:opacity-80 transition-opacity" style="display: block;">
+                                <img src="../image/ChatGPTbot.png" alt="ChatGPT 旅遊規劃師" class="mx-auto rounded-lg shadow-sm" style="max-height: 150px; object-fit: contain; margin: 0 auto;">
+                            </a>
+                            <p class="text-sm text-stone-600 mb-4">GPTs 將一步一步引導你完成旅遊行程</p>
+                            <a href="https://chatgpt.com/g/g-69fe1ad574d081918dd240d5d47fceb0-ailu-you-gui-hua-shi-bang-ni-zheng-li-zi-you-xing-xu-qiu"
+                                target="_blank" class="btn btn-full" style="background-color: #10a37f; border-color: #10a37f; color: white;">
+                                🚀 開啟 ChatGPT 旅遊規劃師
+                            </a>
                         </div>
-                    </details>
+                        <!-- Gemini Planner -->
+                        <div class="tool-card text-center">
+                            <h4 class="font-bold text-lg mb-2 text-indigo-900">第二種：Gemini 旅遊規劃師</h4>
+                            <a href="https://gemini.google.com/gem/1tBw-WprmTYo9C-j9-nV0SqiEtWWbg1iI?usp=sharing" target="_blank" class="block mb-4 hover:opacity-80 transition-opacity" style="display: block;">
+                                <img src="../image/Gemini.png" alt="Gemini 旅遊規劃師" class="mx-auto rounded-lg shadow-sm" style="max-height: 150px; object-fit: contain; margin: 0 auto;">
+                            </a>
+                            <p class="text-sm text-stone-600 mb-4">Gemini 將一步一步引導你完成旅遊行程</p>
+                            <a href="https://gemini.google.com/gem/1tBw-WprmTYo9C-j9-nV0SqiEtWWbg1iI?usp=sharing"
+                                target="_blank" class="btn btn-full" style="background-color: #2563eb; border-color: #2563eb; color: white;">
+                                🚀 開啟 Gemini 旅遊規劃師
+                            </a>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -176,6 +229,66 @@
         document.addEventListener('DOMContentLoaded', () => {
             WorkshopState.setCurrentPhase(1);
         });
+
+        // Quiz Auto-Evaluation Logic
+        const quizForm = document.getElementById('quiz-form');
+        if (quizForm) {
+            quizForm.addEventListener('change', evaluateQuiz);
+            quizForm.addEventListener('input', evaluateQuiz);
+        }
+
+        function evaluateQuiz() {
+            const formData = new FormData(quizForm);
+            const a1 = formData.get('q1');
+            const a2 = formData.get('q2');
+            const a3 = formData.get('q3');
+            const nameInput = document.getElementById('quiz-name').value.trim();
+            
+            // Only evaluate when all fields are filled
+            if (!a1 || !a2 || !a3 || !nameInput) return;
+            
+            const BASE = {
+                A: { emoji: '🌿', name: '慢活旅行者', cartoonStyle: '可愛皮克斯 3D 渲染風格 (Pixar style 3D render)，場景：淺草寺馬卡龍色系，溫暖柔和光影，精緻質感，豐富細節', personality: '你是一個懂得在忙碌世界中尋找寧靜的人。對你而言，旅行不是為了抵達目的地，而是享受過程中的每一刻呼吸。你喜歡在陌生的城市尋找一家有質感的咖啡廳，坐下來觀察路人，或是讀一本想看很久的書。你對細節有著敏銳的觀察力，牆角的青苔或午後的陽光都能讓你感動。這種「慢」並非懶散，而是一種對生命品質的堅持，讓你在旅途中獲得真正的療癒與能量。你更傾向於深入感受一個地方的靈魂，而非僅僅在著名標誌前打卡。' },
+                B: { emoji: '🏃', name: '極速旅人', cartoonStyle: '可愛潮流 3D 渲染風格，場景：澀谷霓虹夜景，繽紛色彩，精緻細節，高品質光影，賽博龐克可愛化', personality: '你是效率與行動力的化身，時間對你來說是最珍貴的資源。你熱愛達成目標的成就感，看到行程表上的景點一個個被勾選，會讓你感到無比滿足。你的精力旺盛，總能在最短的時間內體驗最精采的活動。你擅長利用各種科技工具來優化路徑，不喜歡任何形式的拖延或浪費。朋友都非常依賴你的策劃與執行能力，因為跟著你走，絕對能玩得最充實、最精彩，在有限的假期間創造出最大化的回憶價值。' },
+                C: { emoji: '🏺', name: '文化沉澱者', cartoonStyle: '精緻手繪插畫風格 (Exquisite Hand-drawn Illustration)，場景：京都金閣寺，優雅溫潤色彩，富有層次感，高品質質感，文藝氣息', personality: '你擁有一顆充滿同理心與好奇心的靈魂，旅行對你來說是一場與土地的靈魂對話。你並不滿足於走馬看花的觀光，而是渴望深入了解當地的歷史、傳統與生活方式。你喜歡逛當地的傳統市場，與小販聊天，或是參與在地的節慶活動。你相信每座城市都有自己的心跳與脈絡，而你的使命就是去傾聽並理解它。你帶回家的不只是照片，更是滿滿的感動與深刻的哲學思考，這種深度的連結讓你的視野變得更寬廣。' },
+                D: { emoji: '⚡', name: '冒險先驅', cartoonStyle: '可愛冒險 3D 風格，場景：富士山日出雲海，精緻戶外裝備細節，壯麗柔和光影，電影級畫面質感', personality: '「挑戰」是你的生命密碼，你拒絕平庸與安逸的生活方式。旅行是你探索世界邊界的一種途徑，越是未知的領域越能激發你的鬥志與生命力。你熱愛體能上的挑戰，無論是攀登陡峭的高山還是潛入神秘的深海，都能讓你感受到生命的真實跳動與脈搏。你不怕困難，反而視挑戰為成長的養分。你有一種天生的領導氣質與勇氣，總能鼓勵身邊的人踏出舒適圈，去發現那個更強大的自己。' }
+            };
+            const MOD = {
+                AA: { suffix: '·科技適應型', modPersonality: '再加上你對科技的高度敏感度，你是那種會用 AI 把旅程優化到極致的人。手機是你最強的數位旅伴，比起傳統地圖，你更信任數據與即時資訊。你懂得如何利用數位工具避開人群、尋找最高評分的店家，這種智能化的旅行方式，讓你的每一步都走得精準且優雅。' },
+                AB: { suffix: '·隨遇而安型', modPersonality: '突發狀況對你來說從來不是困擾，反而是驚喜冒險的開端。你擁有一種神奇的心理韌性，總能在計畫外的轉彎處，找到最動人的風景。你不拘泥於刻板的行程，這種靈活的生命態度，讓你的旅行充滿了詩意與未知的喜悅。' },
+                AC: { suffix: '·從容探索型', modPersonality: '遇到環境的變化，你總是保持著不慌不忙的優雅。你會先找一間安靜的咖啡廳坐下來，讓思緒在香氣中沉澱，等內心平靜後再決定下一步。這份難得的從容感，讓你的旅行永遠比別人多了一份深度與美學品味，這也是你獨特的魅力所在。' },
+                AD: { suffix: '·嚴謹慢活型', modPersonality: '你的行囊裡永遠備有 Plan B 甚至 Plan C，因為你相信充分的準備是享受自由的前提。這份嚴謹與細心，讓你的旅程幾乎不會出現令人尷尬的差錯。朋友們都說跟你一起出遊是最放心的，因為你總是能把細節掌控得恰到好处，讓慢活也能過得很精緻。' },
+                BA: { suffix: '·打卡爆肝型', modPersonality: '你的社交媒體限時動態，永遠是朋友圈裡最令人羨慕的焦點。你擅長捕捉最完美的角度，並利用最新科技提升打卡效率。對你來說，分享美的事物是一種生活態度，你那敏銳的視覺直覺，讓每張照片都像是精心設計的藝術品。' },
+                BB: { suffix: '·狂野隨興型', modPersonality: '你是旅行界真正的自由靈魂，對你來說「沒有計畫」就是最好的計畫。你熱愛那種臨時起意、說走就走的快感。在陌生的十字路口隨性轉個彎，往往就能開啟一段意想不到的精彩故事。這種狂野的生命力，讓你每次旅行都像是一場未知的慶典。' },
+                BC: { suffix: '·率真漫遊型', modPersonality: '你不需要冷冰冰的星星指南，路邊阿伯熱情推薦的小攤位才是你的真愛。你擁有一份純粹的率真，總能用最直接的方式與在地人連結。這種接地氣的旅行風格，讓你總能品嚐到最有溫度、最道地的生活滋味，這也是最讓你感到充實的時刻。' },
+                BD: { suffix: '·精算達人型', modPersonality: '你擁有一雙能瞬間看穿「價值」的利眼。在同樣的預算下，你總能策劃出比別人精彩三倍的體驗，這不僅是省錢，更是一種聰明生活的智慧。你懂得把資源花在刀口上，這種精算的能力讓你的每趟旅程都顯得無比聰明且充滿成就感。' },
+                CA: { suffix: '·智能導航型', modPersonality: '你完美地結合了文化探索與現代科技。在古蹟前你會用 AI 查閱歷史，在博物館裡你會利用數位導覽深入理解背景。這種「虛實整合」的旅行方式，讓你的每次參觀都具備了極高的含金量，也讓文化沉澱變得更有效率且現代化。' },
+                CB: { suffix: '·直覺冒險型', modPersonality: '你的直覺就是你最好的導航儀。你敢於跟著感覺走，不被繁雜的旅遊手冊所限制。往往在最意想不到的偏僻小巷，你就能發現最有故事的文化寶藏或私人秘境。這種靠著「第六感」引導的冒險，讓你的文化之旅充滿了命運般的奇遇。' },
+                CC: { suffix: '·創意漫遊型', modPersonality: '你的眼睛自帶藝術濾鏡，世界在你眼中是一幅流動的畫作。街頭色彩繽紛的塗鴉、獨立書店特有的紙張氣味、設計師小店裡充滿溫度的手作，都是你旅行中最珍貴的收藏。這種對美的執著與創意，讓你的文化探索充滿了靈性。' },
+                CD: { suffix: '·策展達人型', modPersonality: '你把每次旅行都視為一場精心策劃的個人展覽。預約制的深度講座、限量的職人工作坊，都是你行程表上的首選。你拒絕走馬看花，追求的是真正的文化沉浸與學術深度，這讓你的旅行經歷在質地上顯得格外厚實且迷人。' },
+                DA: { suffix: '·跳島遊走型', modPersonality: '你旺盛的冒險精神搭配精準的科技規劃，讓你在最短時間內能完成最多的挑戰。你的旅行地圖上總是佈滿了待開發的標記，這種高效的「跳點」模式，讓你在每次出遊中都能大幅拓寬生命的邊界，體驗多樣化的冒險樂趣。' },
+                DB: { suffix: '·荒野達人型', modPersonality: '越是艱困的環境，越能磨練出你堅韌的意志。你享受那種與大自然搏鬥的原始快感，無論是露宿荒野還是穿越叢林，都能讓你感到前所未有的自由。你那無畏的勇氣與卓越的野外生存技能，讓你成為冒險隊伍中不可獲缺的靈魂人物。' },
+                DC: { suffix: '·熱血直覺型', modPersonality: '你是旅行中的一把火，走到哪裡都能燃起熱情。你不需要太多的思考，直覺會告訴你哪裡有最棒的挑戰。你那爆棚的行動力，讓你的冒險旅程永遠充滿了快節奏的驚喜與純粹的熱血，這種活在當下的生命力，極具感染力。' },
+                DD: { suffix: '·極限規劃型', modPersonality: '你把冒險視為一種修煉，每一分風險都在你的精密計算之中。你熱愛挑戰極限，但絕不盲目衝動。你對每個細節的極致追求，讓你即使在最危險的環境下，也能保持冷靜並帶领大家安全突圍，這就是你作為極限規劃者的強大實力。' }
+            };
+            
+            const base = BASE[a1] || BASE['A'];
+            const modKey = a2 + a3;
+            const mod = MOD[modKey] || MOD['AA'];
+            const fullName = base.name + mod.suffix;
+            const fullDesc = base.personality + '\n\n' + mod.modPersonality;
+            const promptText = '🎨 您的專屬生圖指令：\n\n請參考這張照片，生成一張【可愛討喜且極具電影級質感】的 3D 卡通旅遊海報。\n\n🌟 視覺風格：' + base.cartoonStyle + '。請使用 Pixar 3D 渲染技術，呈現極致柔和的電影級光影、溫潤材質與 8K 高清細節，整體氛圍要溫馨且高級。\n👤 人物設定：請精確保留「附圖中的臉部特徵」，將其轉化為表情生動、比例可愛的討喜 3D 角色。\n✍️ 畫面文字：在合適位置加入精緻藝術字：「' + nameInput + ' 的' + base.name + '之旅」\n🏷️ 隱藏彩蛋：請在畫面某個角落，以「旅行貼紙」、「城市街牌」或「復古印章」的形式，自然融入文字「AI 旅遊工作坊」，風格要像圖的一部分，完全不像廣告。\n比例：1:1';
+            
+            document.getElementById('result-fullname').textContent = base.emoji + ' ' + fullName;
+            document.getElementById('result-desc').innerText = fullDesc;
+            document.getElementById('result-prompt').value = promptText;
+            
+            const resultDiv = document.getElementById('quiz-result');
+            if (resultDiv.style.display === 'none') {
+                resultDiv.style.display = 'block';
+                resultDiv.scrollIntoView({ behavior: 'smooth', block: 'center' });
+            }
+        }
     </script>
 </body>
 

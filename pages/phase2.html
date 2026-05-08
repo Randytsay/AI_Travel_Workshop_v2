@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-TW">
 
 <head>
@@ -38,7 +38,7 @@
             <a href="phase5.html" class="quick-nav-link">5️⃣ 生存</a>
             <a href="phase6.html" class="quick-nav-link">6️⃣ 變現</a>
             <a href="../survey.html" class="quick-nav-link">📝 問卷</a>
-            <a href="../leaderboard.html" class="quick-nav-link">🏆 成績榜</a>
+
         </div>
     </div>
 
@@ -47,63 +47,60 @@
         <div class="fade-in">
             <!-- Introduction -->
             <div class="alert alert-info mb-6">
-                <strong>🎯 本階段目標：</strong>利用 Gemini Deep Research
-                的強大聯網搜尋與推理能力，產出包含細節（景點開放時間、真實交通班次、餐廳評價）的完整研究報告，並將其匯出為可編輯的 Google 文件。
+                <strong>🎯 本階段目標：</strong>將你在第一階段收集到的三份關鍵資料，匯入 NotebookLM 中進行深度研究，產出最符合你需求的專屬旅遊行程，甚至能一鍵轉為 Podcast 廣播！
             </div>
 
             <!-- Workflow Container -->
             <div class="workflow-container">
 
-                <!-- Step 1: Deep Research -->
+                <!-- Step 1: Notebook & Source -->
                 <div class="card mb-8">
                     <div class="card-header flex items-center gap-3">
                         <div class="step-num">1</div>
-                        <h3>啟動 Gemini Deep Research</h3>
+                        <h3>建立專屬筆記本與「最高指導原則」</h3>
                     </div>
                     <div class="card-body">
                         <div class="step-grid">
                             <div class="step-text">
-                                <p class="mb-4 text-stone-700">準備好你在第一階段產出的「七步框架指令」了嗎？現在我們要讓 Gemini
-                                    進入最強的思考模式。</p>
+                                <p class="mb-4 text-stone-700">我們要把第一階段產出的「需求總表」當作後續所有 AI 規劃的依據，避免它幫你亂排行程！</p>
                                 <ul class="step-list">
-                                    <li>前往 <a href="https://gemini.google.com/" target="_blank"
-                                            class="text-blue-600 hover:underline">Gemini 官方網站</a></li>
-                                    <li>點擊輸入框左側的「<strong>工具</strong>」按鈕</li>
-                                    <li>選擇「<strong>Deep Research</strong>」功能</li>
-                                    <li>貼上你的指令，看著它開始翻遍網路資料！</li>
+                                    <li>前往 <a href="https://notebooklm.google.com/" target="_blank"
+                                            class="text-blue-600 hover:underline">NotebookLM</a>，點擊建立<strong>「新的筆記本 (New Notebook)」</strong></li>
+                                    <li>新增一個來源，選擇「<strong>貼上文字 (Paste text)</strong>」</li>
+                                    <li>將你在 Phase 1 產生的 <strong>【1. NotebookLM 旅客需求總表】</strong> 完整貼上。</li>
+                                    <li>這樣 NotebookLM 就會牢牢記住你的所有偏好與限制！</li>
                                 </ul>
-                                <a href="https://gemini.google.com/" target="_blank"
+                                <a href="https://notebooklm.google.com/" target="_blank"
                                     class="btn btn-blue inline-flex items-center gap-2 mt-4">
-                                    🚀 前往 Gemini 實戰
+                                    🚀 前往 NotebookLM
                                 </a>
                             </div>
                             <div class="step-img">
-                                <img src="../image/Snipaste_01.png" alt="Gemini Deep Research 開關位置">
+                                <img src="../image/notebooklm_step1.png" alt="NotebookLM 加入來源" style="width: 100%; height: auto; border-radius: 8px;">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 2: Verification -->
+                <!-- Step 2: Deep Research -->
                 <div class="card mb-8">
                     <div class="card-header flex items-center gap-3 card-header-amber">
                         <div class="step-num">2</div>
-                        <h3>解析研究報告與推理過程</h3>
+                        <h3>啟動 NotebookLM Deep Research</h3>
                     </div>
                     <div class="card-body">
                         <div class="step-grid step-grid-reverse">
                             <div class="step-img">
-                                <img src="../image/Snipaste_02.png" alt="Gemini 研究推理展開區塊">
+                                <img src="../image/notebooklm_step2.png" alt="NotebookLM Deep Research" style="width: 100%; height: auto; border-radius: 8px;">
                             </div>
                             <div class="step-text">
-                                <p class="mb-4 text-stone-700">Deep Research 會依照你的計劃進行研究，並列出完整的推理過程。</p>
+                                <p class="mb-4 text-stone-700">NotebookLM 不只能讀你的資料，現在還能主動上網幫你查證最新資訊！</p>
                                 <div class="check-box">
-                                    <h4 class="font-bold mb-2 text-stone-800">檢查重點：</h4>
+                                    <h4 class="font-bold mb-2 text-stone-800">操作重點：</h4>
                                     <ul class="text-sm space-y-1 text-stone-600">
-                                        <li>✅ 點擊「開始研究」啟動深度研究</li>
-                                        <li>✅ 觀察研究計畫是否符合你的需求</li>
-                                        <li>✅ 確認它正在調研多個網站來源</li>
-                                        <li>✅ 等待研究完成（約 3-5 分鐘）</li>
+                                        <li>✅ 在 NotebookLM 介面中找到並啟動 <strong>Deep Research</strong> (深度研究) 功能。</li>
+                                        <li>✅ 將 Phase 1 產出的 <strong>【2. NotebookLM Deep Research prompt】</strong> 貼入輸入框。</li>
+                                        <li>✅ NotebookLM 會自動上網查證營業時間、班次與價格，並產出研究報告。</li>
                                     </ul>
                                 </div>
                             </div>
@@ -111,47 +108,84 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Export to Docs -->
+                <!-- Step 3: Final Itinerary -->
                 <div class="card mb-8">
                     <div class="card-header flex items-center gap-3 card-header-emerald">
                         <div class="step-num">3</div>
-                        <h3>匯出至 Google 文件</h3>
+                        <h3>匯入來源與產出最終行程</h3>
                     </div>
                     <div class="card-body">
                         <div class="step-grid">
                             <div class="step-text">
-                                <p class="mb-4 text-stone-700">研究報告完成後，將它匯出為 Google 文件，方便後續編輯與分享。</p>
+                                <p class="mb-4 text-stone-700">研究報告完成後，我們要把這些熱騰騰的資訊餵給 AI，讓它幫我們排出行李箱都能無腦跟的最終行程表。</p>
                                 <ul class="step-list">
-                                    <li>在報告右上角點擊「<strong>分享及匯出</strong>」下拉選單</li>
-                                    <li>選擇「<strong>匯出到 Google 文件</strong>」</li>
-                                    <li>系統會自動建立文件並開啟 Google Docs</li>
+                                    <li>將剛剛 Deep Research 產出的<strong>研究報告與重要來源網址</strong>，匯入成為新的 Source。</li>
+                                    <li>在下方對話框貼上 <strong>【3. 匯入來源後追問 prompt】</strong>。</li>
+                                    <li>NotebookLM 會綜合「你的需求」與「最新研究」，輸出最終行程表！</li>
+                                    <li>可以點擊對話框右上角的圖釘，將它儲存為筆記 (Note) 以免遺失。</li>
                                 </ul>
                             </div>
                             <div class="step-img">
-                                <img src="../image/Snipaste_03.png" alt="Gemini 匯出至 Google 文件按鈕">
+                                <img src="../image/notebooklm_step3.png" alt="NotebookLM 最終行程產出" style="width: 100%; height: auto; border-radius: 8px;">
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Step 4: Web Experience -->
+                <!-- Step 4: Podcast Generation -->
                 <div class="card mb-8">
                     <div class="card-header flex items-center gap-3 card-header-primary-light">
                         <div class="step-num">4</div>
-                        <h3>體驗網頁生成</h3>
+                        <h3>轉換為專屬 Podcast 導覽</h3>
                     </div>
                     <div class="card-body">
                         <div class="step-grid step-grid-reverse">
                             <div class="step-img">
-                                <img src="../image/Snipaste_04.png" alt="Canvas 建立網頁">
+                                <img src="../image/notebooklm_step4.png" alt="NotebookLM Audio Overview" style="width: 100%; height: auto; border-radius: 8px;">
                             </div>
                             <div class="step-text">
-                                <p class="mb-4 text-stone-700">利用 Canvas 的「建立」功能，體驗將報告一鍵轉為網頁的魔法！</p>
+                                <p class="mb-4 text-stone-700">行程排好了，不如讓 AI 把它變成廣播節目，在出發前就可以先聽聽看有什麼好玩的！</p>
                                 <ul class="step-list">
-                                    <li>在 Canvas 介面右上角點擊「<strong>建立</strong>」按鈕</li>
-                                    <li>選擇「<strong>網頁</strong>」</li>
-                                    <li>Gemini 會自動將你的行程報告轉為精美的互動式網頁</li>
+                                    <li>點擊畫面右上角的 <strong>「Audio Overview (語音摘要)」</strong> 面板。</li>
+                                    <li>你可以直接點擊「Generate」，或是<strong>貼上進階指令</strong>，讓 Podcast 更符合你的出遊情境！</li>
                                 </ul>
+                            </div>
+                        </div>
+
+                        <!-- 進階指令區塊 -->
+                        <div class="mt-6 pt-6 border-t border-stone-200">
+                            <h4 class="font-bold mb-3 text-stone-800">🎧 進階玩法：專屬地陪指令</h4>
+                            <p class="text-sm text-stone-600 mb-4">將下方指令貼到 NotebookLM 「語音摘要」旁的筆 【在本集中，AI 主持人應著重哪些部分？】指令框中再生成。</p>
+                            
+                            <div class="mb-4">
+                                <div class="scenario-grid">
+                                    <div class="scenario-btn active" onclick="setPodcastScenario('family')"
+                                        id="podcast-btn-family">
+                                        <span class="icon">🏠</span>
+                                        <span class="title">家族親情版</span>
+                                    </div>
+                                    <div class="scenario-btn" onclick="setPodcastScenario('business')"
+                                        id="podcast-btn-business">
+                                        <span class="icon">💼</span>
+                                        <span class="title">商務考察版</span>
+                                    </div>
+                                    <div class="scenario-btn" onclick="setPodcastScenario('friends')" id="podcast-btn-friends">
+                                        <span class="icon">🥂</span>
+                                        <span class="title">熱血好友版</span>
+                                    </div>
+                                    <div class="scenario-btn" onclick="setPodcastScenario('kids')" id="podcast-btn-kids">
+                                        <span class="icon">🎈</span>
+                                        <span class="title">親子探險版</span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="prompt-box">
+                                <textarea id="podcast-prompt" class="form-textarea"
+                                    style="min-height: 250px; font-size: 0.8rem; font-family: monospace;" readonly></textarea>
+                            </div>
+                            <div class="flex flex-wrap justify-center gap-4 mt-3">
+                                <button onclick="copyToClipboard('podcast-prompt')" class="btn btn-primary">📋 複製 Podcast 指令</button>
+                                <a href="https://notebooklm.google.com/" target="_blank" class="btn" style="background-color: #2c2c2c; border-color: #2c2c2c; color: white !important;">🚀 去 NotebookLM 生成</a>
                             </div>
                         </div>
                     </div>
@@ -255,6 +289,39 @@
                 order: -1;
             }
         }
+        .scenario-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .scenario-btn {
+            padding: 0.75rem;
+            border: 1px solid var(--color-stone-200);
+            border-radius: var(--radius-lg);
+            background: white;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .scenario-btn.active {
+            border-color: var(--color-primary);
+            background: var(--color-primary-light);
+            box-shadow: 0 0 0 2px var(--color-primary-light);
+        }
+
+        .scenario-btn .icon {
+            font-size: 1.25rem;
+            margin-bottom: 0.25rem;
+            display: block;
+        }
+
+        .scenario-btn .title {
+            font-size: 0.875rem;
+            font-weight: 700;
+        }
     </style>
 
     <script src="../js/common.js"></script>
@@ -262,7 +329,49 @@
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             WorkshopState.setCurrentPhase(2);
+            setPodcastScenario('family');
         });
+
+        // ===== Podcast 獨立邏輯 =====
+        function setPodcastScenario(id) {
+            document.querySelectorAll('#podcast-btn-family, #podcast-btn-business, #podcast-btn-friends, #podcast-btn-kids').forEach(btn => btn.classList.remove('active'));
+            document.getElementById('podcast-btn-' + id).classList.add('active');
+
+            const podcastPromptEl = document.getElementById('podcast-prompt');
+
+            const podcastScenarios = {
+                family: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「家人/長輩」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A (引導者): 語氣成熟穩重，充滿耐心地解說行程中的舒適亮點與文化內涵。
+- 主持人 B (體驗者): 語氣溫暖親切，像是孝順的子女在分享有趣的小細節。
+- 內容要求：
+  * 強調行程中的「不趕時間」與「五感慢體驗」。
+  * 深入淺出地解說景點背後的歷史小故事（例如神社參拜方式）。
+  * 像是在自家客廳聊天一樣，營造出溫馨、安心的期待感。`,
+                business: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「商務考察/同事」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A (分析師): 理性、語速適中，強調行程中的效率、CP 值與特殊的地理佈局。
+- 主持人 B (亮點採集員): 專業且敏銳，捕捉行程中具有產業靈感或適合團隊交流的特殊景點。
+- 內容要求：
+  * 使用較多產業術語或專業詞彙。
+  * 討論行程如何幫助團隊達成目標。
+  * 整體氛圍像是專業的商務談話節目，資訊密度較高。`,
+                friends: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「好友/死黨」，請兩位主持人（一男一女）展現以下風格：
+- 背景：兩位主持人像是那種很有默契、愛開玩笑的好友組合。
+- 風格：幽默、高能量、充滿期待感，甚至會為了哪個行程最讚而小吵架。
+- 內容要求：
+  * 大量使用時下流行語，強調「必去、真香、哭啊、太扯了」。
+  * 著重介紹「哪裡好拍照」、「哪裡好買」、「哪裡好吃」。
+  * 營造出「我們明天就要飛了」那種極度興奮的派對氛圍。`,
+                kids: `請根據我的行程資料，撰寫一段 Podcast 導覽腳本。針對目標觀眾「兒童/親子」，請兩位主持人（一男一女）展現以下風格：
+- 主持人 A (冒險隊長): 充滿活力、語氣像在主持兒童節目，稱呼聽眾為「小小冒險家」。
+- 主持人 B (好奇小夥伴): 語氣單純、好奇，會提出許多「十萬個為什麼」。
+- 內容要求：
+  * 將景點擬人化或奇幻化（例如：東京鐵塔是發光的守護神）。
+  * 加入許多與聽眾互動的問句：「大家知道日本的交通工具是哪一種最快嗎？」
+  * 音樂感強，充滿童心與想像力。`
+            };
+
+            podcastPromptEl.value = podcastScenarios[id];
+        }
     </script>
 </body>
 
