@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>">
+    <title>探索你的旅遊人格 | AI 旅遊規劃師工作坊</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@300;400;500;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <style>
+        :root {
+            --quiz-bg: #f8fafc;
+            --option-hover: #f1f5f9;
+            --option-active: #c41e3a;
+        }
+
+        .personality-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 2rem 1rem;
+        }
+
+        .quiz-card {
+            background: white;
+            border-radius: 24px;
+            padding: 2.5rem;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.05);
+            border: 1px solid #e2e8f0;
+            transition: all 0.3s ease;
+        }
+
+        .quiz-step {
+            display: none;
+        }
+
+        .quiz-step.active {
+            display: block;
+            animation: fadeIn 0.5s ease;
+        }
+
+        .question-num {
+            color: var(--option-active);
+            font-weight: 700;
+            font-size: 0.875rem;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 0.5rem;
+            display: block;
+        }
+
+        .question-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #1e293b;
+        }
+
+        .options-grid {
+            display: grid;
+            grid-template-cols: 1fr;
+            gap: 1rem;
+        }
+
+        .option-btn {
+            background: white;
+            border: 2px solid #e2e8f0;
+            border-radius: 16px;
+            padding: 1.25rem;
+            text-align: left;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .option-btn:hover {
+            border-color: #cbd5e1;
+            background: var(--option-hover);
+            transform: translateY(-2px);
+        }
+
+        .option-btn.selected {
+            border-color: var(--option-active);
+            background: #fff5f5;
+            box-shadow: 0 4px 12px rgba(196, 30, 58, 0.1);
+        }
+
+        .option-icon {
+            font-size: 1.5rem;
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #f1f5f9;
+            border-radius: 12px;
+        }
+
+        .option-btn.selected .option-icon {
+            background: var(--option-active);
+            color: white;
+        }
+
+        /* Result Section */
+        .result-section {
+            display: none;
+            animation: slideUp 0.6s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .result-section.show {
+            display: block;
+        }
+
+        .personality-badge {
+            background: linear-gradient(135deg, #c41e3a 0%, #9b1c31 100%);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 9999px;
+            font-weight: 700;
+            display: inline-block;
+            margin-bottom: 1rem;
+        }
+
+        .result-card {
+            background: white;
+            border-radius: 32px;
+            overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
+        }
+
+        .result-header {
+            background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
+            color: white;
+            padding: 3rem 2rem;
+            text-align: center;
+            position: relative;
+        }
+
+        .result-header::after {
+            content: '';
+            position: absolute;
+            bottom: -20px;
+            left: 0;
+            right: 0;
+            height: 40px;
+            background: white;
+            border-radius: 50% 50% 0 0;
+        }
+
+        .personality-icon {
+            font-size: 5rem;
+            margin-bottom: 1rem;
+            display: block;
+        }
+
+        .result-tags {
+            display: flex;
+            justify-content: center;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .result-tag {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            padding: 0.25rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.75rem;
+        }
+
+        .result-body {
+            padding: 3rem 2rem 2rem;
+        }
+
+        .prompt-box {
+            background: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-top: 1.5rem;
+            position: relative;
+        }
+
+        .prompt-label {
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+            display: block;
+            text-transform: uppercase;
+        }
+
+        .prompt-content {
+            font-size: 0.875rem;
+            color: #334155;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(10px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="container navbar-content">
+            <div class="navbar-brand">
+                <span style="font-size: 1.5rem;">🧭</span>
+                <h1>旅遊人格測驗</h1>
+            </div>
+            <div class="navbar-links">
+                <a href="index.html" class="btn btn-outline btn-sm">回首頁</a>
+            </div>
+        </div>
+    </nav>
+
+    <main class="personality-container">
+        <!-- Quiz Section -->
+        <div id="quiz-section">
+            <div class="quiz-card">
+                <!-- Step 1 -->
+                <div class="quiz-step active" id="step-1">
+                    <span class="question-num">Question 01</span>
+                    <h2 class="question-title">你最嚮往哪種旅行基調？</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(1, 'A')">
+                            <span class="option-icon">🌿</span>
+                            <div>
+                                <strong>悠閒慢活</strong>
+                                <p class="text-xs text-stone-500">不趕行程，在咖啡廳坐一下午</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(1, 'B')">
+                            <span class="option-icon">🏃</span>
+                            <div>
+                                <strong>有效率打卡</strong>
+                                <p class="text-xs text-stone-500">精準掌握時間，要把必去景點都集滿</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(1, 'C')">
+                            <span class="option-icon">🏺</span>
+                            <div>
+                                <strong>深度文化</strong>
+                                <p class="text-xs text-stone-500">走進歷史巷弄，聽當地的故事</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(1, 'D')">
+                            <span class="option-icon">⚡</span>
+                            <div>
+                                <strong>極限挑戰</strong>
+                                <p class="text-xs text-stone-500">上山下海，體驗平時不敢做的事</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 2 -->
+                <div class="quiz-step" id="step-2">
+                    <span class="question-num">Question 02</span>
+                    <h2 class="question-title">當行程出現突發狀況時（如店家沒開），你通常？</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(2, 'A')">
+                            <span class="option-icon">📱</span>
+                            <div>
+                                <strong>科技輔助型</strong>
+                                <p class="text-xs text-stone-500">立刻打開 AI 或地圖搜尋周邊最高評分替代方案</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'B')">
+                            <span class="option-icon">🦋</span>
+                            <div>
+                                <strong>隨遇而安型</strong>
+                                <p class="text-xs text-stone-500">沒關係，附近隨便逛逛說不定有驚喜</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'C')">
+                            <span class="option-icon">☕</span>
+                            <div>
+                                <strong>優雅從容型</strong>
+                                <p class="text-xs text-stone-500">既然沒開，就先找間咖啡廳重新思考人生（或下一站）</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(2, 'D')">
+                            <span class="option-icon">📋</span>
+                            <div>
+                                <strong>嚴謹備案型</strong>
+                                <p class="text-xs text-stone-500">拿出筆記本，執行原先就準備好的 Plan B</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Step 3 -->
+                <div class="quiz-step" id="step-3">
+                    <span class="question-num">Question 03</span>
+                    <h2 class="question-title">你如何規劃一天的行程密集度？</h2>
+                    <div class="options-grid">
+                        <button class="option-btn" onclick="selectOption(3, 'A')">
+                            <span class="option-icon">🌅</span>
+                            <div>
+                                <strong>佛系節奏</strong>
+                                <p class="text-xs text-stone-500">一天 1-2 個大點，其他隨緣</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(3, 'B')">
+                            <span class="option-icon">🚀</span>
+                            <div>
+                                <strong>特種兵模式</strong>
+                                <p class="text-xs text-stone-500">從早到晚填滿滿，體力不是問題</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(3, 'C')">
+                            <span class="option-icon">⚖️</span>
+                            <div>
+                                <strong>半糖主義</strong>
+                                <p class="text-xs text-stone-500">早上跑行程，下午留白放空</p>
+                            </div>
+                        </button>
+                        <button class="option-btn" onclick="selectOption(3, 'D')">
+                            <span class="option-icon">📐</span>
+                            <div>
+                                <strong>精準串聯</strong>
+                                <p class="text-xs text-stone-500">依據交通動線，安排 3-4 個必去地點</p>
+                            </div>
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Result Section -->
+        <div id="result-section" class="result-section">
+            <div class="result-card">
+                <div class="result-header">
+                    <span class="personality-icon" id="res-icon">🌿</span>
+                    <span class="personality-badge">測驗結果</span>
+                    <h2 id="res-title">慢活旅行者·科技適應型</h2>
+                    <p class="text-sm opacity-70" id="res-subtitle">Slow Living Explorer · Tech-Savvy</p>
+                    <div class="result-tags" id="res-tags">
+                        <!-- Tags injected by JS -->
+                    </div>
+                </div>
+                <div class="result-body">
+                    <div style="margin-bottom: 2rem;">
+                        <h3 class="font-bold mb-2">人格特質</h3>
+                        <p class="text-stone-600 text-sm leading-relaxed" id="res-desc">
+                            描述內容...
+                        </p>
+                    </div>
+
+                    <div class="prompt-box">
+                        <span class="prompt-label">Step 1: 生成你的 AI 旅遊頭像</span>
+                        <p class="text-xs text-stone-500 mb-3">請在 ChatGPT 上傳你的照片，並輸入以下指令：</p>
+                        <div class="prompt-content" id="res-cartoon-prompt">
+                            指令內容...
+                        </div>
+                        <button class="btn btn-primary btn-sm btn-full" onclick="copyText('res-cartoon-prompt')">
+                            📋 複製生圖指令
+                        </button>
+                    </div>
+
+                    <div class="prompt-box">
+                        <span class="prompt-label">Step 2: 讓 AI 為你規劃專屬行程</span>
+                        <p class="text-xs text-stone-500 mb-3">請在 Gemini 中輸入以下指令：</p>
+                        <div class="prompt-content" id="res-trip-prompt">
+                            指令內容...
+                        </div>
+                        <button class="btn btn-secondary btn-sm btn-full" onclick="copyText('res-trip-prompt')">
+                            📋 複製行程指令
+                        </button>
+                    </div>
+
+                    <div class="mt-8 flex gap-3">
+                        <button class="btn btn-outline btn-full" onclick="location.reload()">重新測驗</button>
+                        <a href="pages/phase1.html" class="btn btn-primary btn-full">開始規劃之旅</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script>
+        const BASE = {
+            A: {
+                emoji: '🌿', name: '慢活旅行者', en: 'Slow Living Explorer',
+                tags: ['🌿 慢活者', '📚 深度探索', '☕ 咖啡旅人'],
+                cartoonStyle: '日系漫畫（Anime style），背景：淺草寺仲見世通，馬卡龍色系，附加：飄落櫻花花瓣'
+            },
+            B: {
+                emoji: '🏃', name: '極速旅人', en: 'Speed Demon',
+                tags: ['🏃 打卡達人', '📸 九宮格專家', '⚡ 精力旺盛'],
+                cartoonStyle: '美式潮流風格（Pop Art），背景：東京澀谷十字路口，霓虹色彩，附加：速度感線條'
+            },
+            C: {
+                emoji: '🏺', name: '文化沉澱者', en: 'Culture Diver',
+                tags: ['🏺 深度文化', '🦋 心靈探索', '🍵 茶道美學'],
+                cartoonStyle: '水墨手繪風格（Ink Wash Painting），背景：京都金閣寺，傳統配色，附加：飛翔白鶴'
+            },
+            D: {
+                emoji: '⚡', name: '冒險先驅', en: 'Adventure Seeker',
+                tags: ['⚡ 挑戰極限', '🧗 攀登者', '🌊 野外探索'],
+                cartoonStyle: '寫實冒險風格（Adventure Illustration），背景：富士山日出，大地色系，附加：雲海光環'
+            }
+        };
+
+        const MOD = {
+            AA: { suffix: '·科技適應型', tag: '🤖 AI 嚮導', prompt: '必去：高科技景點、AI 互動體驗、科幻博物館', avoid: '避開：偏鄉野外、網路死角' },
+            AB: { suffix: '·隨遇而安型', tag: '🦋 彈性大師', prompt: '必去：當地人常去的隱藏版景點、巷弄美食', avoid: '避開：過度商業化的觀光區' },
+            AC: { suffix: '·從容探索型', tag: '☕ 從容派', prompt: '必去：質感咖啡廳、文創園區、藝術展覽', avoid: '避開：擁擠排隊名店' },
+            AD: { suffix: '·嚴謹慢活型', tag: '📋 精算生活家', prompt: '必去：預約制餐廳、預訂門票的文化遺址', avoid: '避開：現場候補的熱門景點' },
+            BA: { suffix: '·打卡爆肝型', tag: '📸 網美獵人', prompt: '必去：IG 熱門打卡點、網美咖啡廳、夕陽觀景台', avoid: '避開：安靜的寺廟或圖書館' },
+            BB: { suffix: '·狂野隨興型', tag: '🌀 自由靈魂', prompt: '必去：隨機發現的驚喜景點、路邊小吃', avoid: '避開：事先預訂的行程' },
+            BC: { suffix: '·率真漫遊型', tag: '🌈 隨性玩咖', prompt: '必去：當地夜市、街邊美食、路人推薦的店', avoid: '避開：米其林預約餐廳' },
+            BD: { suffix: '·精算達人型', tag: '💹 性價比追求者', prompt: '必去：高 CP 值景點、免費博物館、特價商品', avoid: '避開：昂貴的網紅店' },
+            CA: { suffix: '·智能導航型', tag: '🗺️ 智慧行者', prompt: '必去：科技園區、AI 展覽館、智能城市應用展示', avoid: '避開：沒有網路服務的偏遠地區' },
+            CB: { suffix: '·直覺冒險型', tag: '🔮 第六感強', prompt: '必去：隨心所欲探索、迷路時發現的秘密基地', avoid: '避開：嚴格的行程表' },
+            CC: { suffix: '·創意漫遊型', tag: '🎨 藝術靈魂', prompt: '必去：街頭藝術、獨立書店、設計師小店', avoid: '避開：連鎖品牌商場' },
+            CD: { suffix: '·策展達人型', tag: '📐 策劃高手', prompt: '必去：預約制工作坊、導覽行程、文化深度論壇', avoid: '避開：走馬看花的觀光團' },
+            DA: { suffix: '·跳島遊走型', tag: '🏝️ 彈性跳島', prompt: '必去：周邊小島一日來回、跳點行程、海上活動', avoid: '避開：定點深度之旅' },
+            DB: { suffix: '·順流漫遊型', tag: '🌊 順其自然', prompt: '必去：海邊、湖邊、讓心情決定的路線', avoid: '避開：需要體力的登山行程' },
+            DC: { suffix: '·平衡漫遊型', tag: '⚖️ 平衡生活家', prompt: '必去：半天行程、半天自由活動，輕鬆不趕', avoid: '避開：太緊湊或太閒散的行程' },
+            DD: { suffix: '·精算漫遊型', tag: '🧮 細節掌控者', prompt: '必去：預算內所有高評價景點、詳細路線規劃', avoid: '避開：說走就走的衝動行程' }
+        };
+
+        let answers = {};
+
+        function selectOption(step, value) {
+            answers[step] = value;
+            
+            // UI feedback
+            const options = document.querySelectorAll(`#step-${step} .option-btn`);
+            options.forEach(opt => opt.classList.remove('selected'));
+            event.currentTarget.classList.add('selected');
+
+            setTimeout(() => {
+                if (step < 3) {
+                    document.getElementById(`step-${step}`).classList.remove('active');
+                    document.getElementById(`step-${step + 1}`).classList.add('active');
+                } else {
+                    calculateResult();
+                }
+            }, 300);
+        }
+
+        function calculateResult() {
+            const key = answers[1] + answers[2] + answers[3];
+            // Since we only have 4 options for each question in this simplified 64-personality model:
+            // Q1: Base (A,B,C,D)
+            // Q2+Q3: Mod (AA, AB, AC, AD, BA, BB... DD)
+            
+            const base = BASE[answers[1]];
+            const modKey = answers[2] + answers[3];
+            const mod = MOD[modKey];
+
+            const dayPlan = answers[3] === 'A' ? '1-2 個定點（輕鬆不趕）'
+                        : answers[3] === 'B' ? '走到哪玩到哪，不排太滿'
+                        : answers[3] === 'C' ? '上午定點，下午留白'
+                        : '3-4 個景點串聯';
+
+            // Update UI
+            document.getElementById('quiz-section').style.display = 'none';
+            document.getElementById('res-icon').textContent = base.emoji;
+            document.getElementById('res-title').textContent = base.name + mod.suffix;
+            document.getElementById('res-subtitle').textContent = base.en + mod.suffix;
+            document.getElementById('res-tags').innerHTML = [...base.tags, mod.tag].map(t => `<span class="result-tag">${t}</span>`).join('');
+            document.getElementById('res-desc').textContent = `你是「${base.name}」類型的旅行者，${mod.prompt}。${mod.avoid}。這個組合讓你既能${base.tags[1]}，又具備${mod.tag}的特質。`;
+            
+            document.getElementById('res-cartoon-prompt').textContent = `請用這張照片生成卡通風格旅遊圖。風格：${base.cartoonStyle}，人物：保留我的臉部特徵，文字：「[名字] 的${base.name}之旅」，比例：9:16（LINE 分享用）`;
+            
+            document.getElementById('res-trip-prompt').textContent = `我要去 [目的地]，幫我規劃 [天數] 天行程。
+旅遊風格：${base.name}
+${mod.prompt}
+${mod.avoid}
+必去景點：當地人推薦的私房景點
+美食：不要連鎖店，要 Local 美食
+交通：以大眾運輸為主
+預算：每人 [金額] / 天
+請幫我：
+1. 每天 ${dayPlan} 的行程
+2. 每個定點建議停留時間
+3. 符合你風格的早餐地點
+4. 在地文化體驗活動`;
+
+            document.getElementById('result-section').classList.add('show');
+            
+            // Save to local storage for other pages
+            localStorage.setItem('userPersonality', base.name + mod.suffix);
+        }
+
+        function copyText(id) {
+            const text = document.getElementById(id).textContent;
+            navigator.clipboard.writeText(text).then(() => {
+                alert('已複製到剪貼簿！');
+            });
+        }
+    </script>
+</body>
+
+</html>

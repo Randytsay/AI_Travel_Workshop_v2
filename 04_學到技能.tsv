@@ -1,0 +1,13 @@
+技能名	提示詞模板	工具	產出	適用Phase	備註
+AI行程生成	「我要去[地點][天數]天，帶[同行者]，興趣是[興趣]，預算是[預算]，請排行程，附上交通和建議」	Gemini (Deep Research)	完整行程表含交通	Phase 1	可加「不要太多走路」
+JR Pass計算	「請幫我計算從[出發地]到[目的地]的交通費用，並比較購買[JR Pass名稱]是否划算」	Gemini	省錢建議	Phase 2	
+餐廳驗證	「請幫我查詢[餐廳名]在Tabelog的分數，並說明3.5分以上代表什麼」	Gemini + Tabelog	分數+推薦理由	Phase 3	日本專用
+NotebookLM知識庫	（直接匯入行程PDF/文字）→ 問：「帶[同行者]去[地點]要注意什麼？」	NotebookLM (2026)	旅遊私人助理	Phase 3	2026版已整合Gemini
+Audio Overview	（行程資料匯入後）→ 點 Audio Overview → 選擇「雙人對話」	NotebookLM	AI Podcast導覽	Phase 4	每段5分鐘
+Gemini生圖	「[風格：浮世繪/像素/黏土/油畫]，請畫[地點]的插畫地圖，要包含[元素]」	Gemini (nanobanana)	旅遊美圖	Phase 4	內建6種風格咒語
+小紅書文案	「用小紅書風格，寫一篇關於[地點]的旅遊推薦，要有以下元素：[元素]，最後附上實用資訊」	Gemini	社群發文	Phase 4	
+即時翻譯	「請翻譯這份菜單，並標註【必點】【過敏原】【注意事項】」	Google AI Studio Live	對話式翻譯	Phase 5	語音即時
+比價偵探	「這個商品在Amazon JP賣多少？我在[地點]看到售價[價格]」	Gemini	價格分析	Phase 5	省錢必學
+緊急求助卡	「我遺失了[護照/錢包/行李]，請用日文幫我寫一段求助信，說明[情況]」	Google AI Studio Live	日文求助信	Phase 5	紅色按鈕功能
+AI簡報生成	「請將這份行程資料，製作一份[數]頁的旅遊提案簡報，每頁要有標題、重點條列、視覺建議」	NotebookLM + Gemini	旅遊提案簡報	Phase 4	說服旅伴
+Shop.com導購	（複製景點/商品連結）→ 貼入Shop.com搜尋 → 分享推廣連結賺回饋	Shop.com	消費變收入	Phase 6	

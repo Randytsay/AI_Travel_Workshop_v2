@@ -45,7 +45,21 @@
     <!-- Main Content -->
     <main class="container" style="padding-top: 2rem; padding-bottom: 6rem;">
         <div class="fade-in">
-            <!-- Introduction -->
+                <!-- Step 0: Personality Check -->
+                <div class="card mb-6" style="border-left: 4px solid var(--color-accent);">
+                    <div class="card-body">
+                        <div style="display: flex; align-items: flex-start; gap: 1rem;">
+                            <div style="font-size: 2rem;">🧭</div>
+                            <div>
+                                <h4 class="font-bold">Step 0: 探索你的旅遊人格</h4>
+                                <p class="text-sm text-stone-600 mb-3">在開始規劃前，建議先完成人格測驗，獲取專屬的 AI 生圖與行程指令。</p>
+                                <a href="../personality.html" class="btn btn-accent btn-sm">前往測驗</a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 1: Role Playing -->
             <div class="alert alert-info mb-6">
                 <strong>🎯 本階段目標：</strong>從模糊的想法變成具體的「主題式」旅遊雛形，擺脫大眾景點，挖掘特色主題，生成第一份旅遊行程初稿。
             </div>
@@ -225,9 +239,29 @@
 
     <script src="../js/common.js"></script>
     <script>
+        // ===== AI 虛擬替身生成邏輯 =====
+        const avatarTemplates = {
+            clay: `請根據這張照片中我的長相、髮型、眼鏡和服裝特徵，將我轉化為一個可愛的「3D 黏土人偶 (Claymorphism Style)」。圓潤造型，細微黏土質感。`,
+            pixar: `請參考這張照片中的我的外型與穿著，為我設計一個「皮克斯 3D 動畫電影風格」的作品主角分身。大眼睛、生動表情、精緻材質。`,
+            shinkai: `請參考這張照片中我的外貌與氣質，將我轉化為「新海誠動畫電影風格」的角色。視覺特徵：標誌性的耀眼光影、湛藍飽滿的天空背景、極致細膩的環境反射，整體色彩清新且充滿透明感。`,
+            ghibli: `請將我照片中的形象轉化為「吉卜力/宮崎駿手繪動畫風格」。視覺特徵：溫暖的賽璐璐手繪質感、柔和的線條、帶有懷舊感的自然色彩，像是在宮崎駿電影中會出現的溫馨角色。`,
+            manga: `請根據我的照片特徵，將我設計成「日系經典黑白漫畫風格」。視覺特徵：強烈的手繪線條感、細緻的網點背景、富有張力的分身動作，像是一部熱血漫畫的主角。`,
+            cyberpunk: `請參考這張照片，將我變身為「賽博龐克 (Cyberpunk) 霓虹未來風」的角色。視覺特徵：高對比的紫青霓虹光影、臉部微弱的科技發光線條、未來主義的裝備與繁華夜城背景。`,
+            candy: `請將我轉化為「夢幻玻璃糖果風 (Candy Glass Style)」。視覺特徵：角色呈現半透明的果凍色澤、帶有剔透的漸層光輝與磨砂玻璃質感，整體視覺非常甜美且夢幻。`,
+            crochet: `請根據照片特徵，為我設計一個「手工編織毛線娃娃 (Amigurumi Crochet)」的分身。視覺特徵：明顯的毛線勾勒紋理、蓬鬆柔軟的棉絨質感、黑色鈕扣眼睛，極具療癒手作感。`
+        };
+
+        function selectAvatarStyle(styleId) {
+            document.querySelectorAll('[id^="avatar-"]').forEach(c => c.classList.remove('selected'));
+            const el = document.getElementById('avatar-' + styleId);
+            if (el) el.classList.add('selected');
+            document.getElementById('avatar-prompt').value = avatarTemplates[styleId];
+        }
+
         // Initialize
         document.addEventListener('DOMContentLoaded', () => {
             WorkshopState.setCurrentPhase(1);
+            selectAvatarStyle('clay');
         });
 
         // Quiz Auto-Evaluation Logic

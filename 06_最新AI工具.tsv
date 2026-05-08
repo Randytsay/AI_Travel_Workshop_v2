@@ -1,0 +1,16 @@
+工具名	公司	發布時間	功能	用在課程哪裡	亮點說明	官網
+NotebookLM (2026版)	Google	2026年4月	行程/筆記→Podcast+動畫+簡報	Phase 3/4	最新重大更新：同一工具整合Gemini，音頻Overview可選動畫模式	https://notebooklm.google.com
+Gemini 2.0 Native Audio	Google	2026年	Q&A→即時語音翻譯對話	Phase 5	說中文AI即時翻譯成日文語音，未來可即時視訊	https://aistudio.google.com
+Gemini (nanobanana生圖)	Google	2026年	文字→指定風格旅遊美圖	Phase 4	支援浮世繪/像素/黏土/油畫等風格，nanobanana模型	https://gemini.google.com
+Google Flow	Google	2026年	上傳圖片→生成10-20秒短影片（VO3.1）	Phase 4（延伸）	可用於生成旅遊短片，聲音+畫面同步	https://flow.google
+Google Anti-Gravity IDE	Google	2026年	自然語言→全端網站/應用程式建置	延伸素材	本地端運行，支援Gemini/Claude模型	https://antigravity.google
+NotebookLM 動畫影片	Google	2026年4月	行程→AI生成動畫短片	Phase 4（核心）	最新的「Animated Video」功能，90秒生成	https://notebooklm.google.com
+Google NotebookLM+Gemini整合	Google	2026年4月	同一介面使用NotebookLM知識庫+Gemini回答	Phase 3（核心）	之前是兩個工具，現在完全整合成一個	https://notebooklm.google.com
+Claude Covec (排程Agent)	Anthropic	2026年	MacBook本地AI助理，可設定每日排程任務	延伸素材	每日自動執行程式，如每日爬蟲Twitter熱門內容生成腳本	https://claude.ai
+Pomelli AI	Google	2026年	貼網址→自動抓品牌素材→生成Facebook/IG影片廣告	延伸素材（商業變現）	行銷團隊替代工具，贴連結後一鍵生成多種尺寸廣告素材	https://pomelli.ai
+Bird's Eye App	第三方	2026年	根據YouTube觀看歷史推薦相關學習主題	延伸素材	將看過的內容變成視覺化地圖，發現跨領域連結	https://birdseye.app
+Waymo	Alphabet	2025年已規模化	自動駕駛乘車服務	延伸素材（趨勢分享）	每週45萬趟乘次，美國5城市運行	https://waymo.com
+Apollo Go	百度	2025年	自動駕駛乘車服務（中國）	延伸素材（趨勢分享）	年增175%，已達1100萬趟完全自動駕駛	https://apollo.go
+DeepSeek-R1	DeepSeek	2025年2月	開源推理模型，追平美國頂級模型	延伸素材（中國模型崛起）	中國模型首次短暫追平美國，差距縮小至2.7%	https://deepseek.com
+Gemini Deep Think	Google	2026年	IMO奧數金牌模型	延伸素材（能力展示）	博士級科學題超越人類，數學達金牌	https://deepmind.google
+SWE-bench	評測基準	每年更新	軟體工程基準	延伸素材（能力展示）	2025年從60%→接近100%，AI工程能力超越人類	https://swebench.com

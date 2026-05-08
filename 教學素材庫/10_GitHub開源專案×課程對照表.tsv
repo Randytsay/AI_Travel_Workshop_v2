@@ -1,0 +1,15 @@
+專案名	GitHub連結	功能描述	課程哪裡用得到	適合誰	備註
+NotebookLM	notebooklm.google.com	行程PDF→AI Podcast+動畫短片	Phase 3/4	所有學員	已有教學內容
+Gemini (Google)	gemini.google.com	文字→行程表/生圖/翻譯	全流程核心工具	所有學員	免費版就很好用
+Google AI Studio	aistudio.google.com	即時語音翻譯+Live對話	Phase 5 核心	進階學員	支援Gemini 2.0 Native Audio
+kuse.ai	github.com/kuse-ai/kuse	YouTube影片→AI行程規劃	Phase 1 靈感發想	視覺型學習者	把別人的旅遊影片變行程
+TripStar AI	github.com/tripstar-ai	開源旅遊Agent排程系統	延伸學習素材	對Agent有興趣的學員	可整合進未來課程
+Perplexity AI	perplexity.ai	AI驅動搜尋引擎（可取代Google）	Phase 2 資料驗證	需要驗證資訊的學員	即時資訊整合
+ChatGO	github.com/chatgo-ai	LINE Bot×GPT旅遊助手	延伸素材（LINE用戶）	LINE重度用戶	在LINE裡規劃行程
+Bing Chat	bing.com/chat	微軟AI搜尋+生圖	Phase 1/4 備援工具	有微軟帳號的學員	免費生圖質量高
+Cursor AI	github.com/getcursor/cursor	AI程式碼編輯器（VSCode fork）	延伸應用（對工程師）	對coding有興趣的學員	可客製化自己的AI工具
+Dify	dify.ai	開源AI Agent/Workflow建置平台	延伸應用（工作自動化）	想自建AI流程的學員	可建立自己的旅遊Agent
+n8n	n8n.io	開源工作流程自動化	延伸應用（排程任務）	想把AI串接到LINE/Email的學員	對代理商/業務很有用
+piped	github.com/TeamPiped/piped	開源YouTube前端（無廣告）	Phase 1 參考素材	想抓YouTube資料的學員	可用來抓旅遊影片
+Notion AI	notion.so	筆記×AI整合	Phase 3 延伸：結合NotebookLM做雙重知識庫	已用Notion的學員	Notion+NotebookLM
+Google Lens	Google App內建	相機即時翻譯+商品比價	Phase 5 實用工具	手機用戶	已內建在Google App

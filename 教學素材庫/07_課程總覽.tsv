@@ -1,0 +1,23 @@
+天次	時段	Phase編號	Phase名稱（舊）	Phase名稱（新）	時間（分鐘）	核心工具	主要產出	笑點數	Wow環節數	學到技能數
+Day 1	下午	Phase 1	靈感發想	【Day 1】你有 AI 旅伴了！	30	Gemini	行程草稿	3	2	2
+Day 1	下午	Phase 2	深度規劃	【Day 1】說句話，行程排好了	40	Gemini (Deep Research)	含交通的完整行程表	2	1	2
+Day 1	下午	Phase 3	NotebookLM知識庫	【Day 2】行程表會說話、會唱歌	20	NotebookLM (2026)	私人旅遊知識庫	1	2	2
+Day 2	下午	Phase 4	視覺地圖+社群	【Day 2】一鍵生成「爆款」IG小紅書	70	NotebookLM Audio+Gemini生圖	AI Podcast+旅遊美圖+社群文案	3	3	3
+Day 2	下午	Phase 5	現場生存	【Day 3】在日本說中文就能通	20	Google AI Studio Live	即時翻譯+比價+緊急卡	2	2	3
+Day 2	下午	Phase 6	商業變現	【Day 3】順便賺一趟機票錢	20	Shop.com	導購連結+消費回饋	1	1	1
+Day 3	下午	整合	三天整合	【Day 3】三天所學全部串起來	60	全部工具	完整旅遊提案	2	1	全部
+Day 3	下午	競賽	成果競賽	分組旅遊提案比賽	50	全部工具	旅遊公司提案簡報	2	1	整合應用
+Day 3	下午	結尾	散場	大合照+問卷+散場	20	-	合照+問卷回饋	2	0	0
+												
+合計		6+整合	-	-	330分鐘（5.5小時，建議壓縮至4小時）		-	18	13	13
+												
+每日壓縮建議（4小時）																			
+Day 1	13:00-13:30	Phase 1	靈感發想	【Day 1】你有 AI 旅伴了！	30	Gemini	行程草稿	3	2	2
+Day 1	13:30-14:10	Phase 2	深度規劃	【Day 1】說句話，行程排好了	40	Gemini (Deep Research)	含交通的完整行程表	2	1	2
+Day 1	14:10-14:30	Phase 3	NotebookLM	【Day 1】行程表會說話、會唱歌	20	NotebookLM (2026)	私人旅遊知識庫	1	1	1
+Day 1	14:30-14:40	中場休息	-	休息10分鐘	-	-	-	-	-
+Day 1	14:40-15:30	Phase 4	視覺+社群	【Day 1】一鍵生成「爆款」IG	50	NotebookLM Audio+Gemini生圖	AI Podcast+旅遊美圖	2	2	2
+Day 1	15:30-15:50	Phase 5	現場生存	【Day 1】說中文就能通	20	Google AI Studio Live	即時翻譯+比價	1	1	2
+Day 1	15:50-16:10	Phase 6	商業變現	【Day 1】順便賺一趟機票錢	20	Shop.com	導購連結	1	1	1
+Day 1	16:10-17:00	結尾	成果發表+散場	每人3分鐘Showcase	50	-	行程提案+合照	2	1	整合
+合計			-	-	240分鐘（4小時）		12	9	10
