@@ -9,6 +9,10 @@ const lightbox = document.querySelector("#lightbox");
 const lightboxImage = document.querySelector("#lightboxImage");
 const lightboxName = document.querySelector("#lightboxName");
 const lightboxMeta = document.querySelector("#lightboxMeta");
+const lightboxCount = document.querySelector("#lightboxCount");
+const prevButton = document.querySelector(".lightbox-nav.prev");
+const nextButton = document.querySelector(".lightbox-nav.next");
+let currentPhotoIndex = 0;
 
 document.querySelector("#totalPhotos").textContent = data.totalPhotos;
 document.querySelector("#totalPeople").textContent = data.totalPeople;
@@ -108,11 +112,24 @@ function renderPhotos() {
 }
 
 function openLightbox(photo) {
+  currentPhotoIndex = Math.max(0, data.photos.findIndex((item) => item.localUrl === photo.localUrl && item.fileName === photo.fileName));
+  renderLightbox();
+  if (typeof lightbox.showModal === "function" && !lightbox.open) lightbox.showModal();
+}
+
+function renderLightbox() {
+  const photo = data.photos[currentPhotoIndex];
+  if (!photo) return;
   lightboxImage.src = imageSrc(photo);
   lightboxImage.alt = `${photo.displayName} 的成果照片`;
   lightboxName.textContent = photo.displayName;
   lightboxMeta.textContent = photo.fileName;
-  if (typeof lightbox.showModal === "function") lightbox.showModal();
+  lightboxCount.textContent = `${currentPhotoIndex + 1} / ${data.photos.length}`;
+}
+
+function showPhoto(offset) {
+  currentPhotoIndex = (currentPhotoIndex + offset + data.photos.length) % data.photos.length;
+  renderLightbox();
 }
 
 tabs.forEach((tab) => {
@@ -131,8 +148,16 @@ searchInput.addEventListener("input", () => {
 });
 
 document.querySelector(".close").addEventListener("click", () => lightbox.close());
+prevButton.addEventListener("click", () => showPhoto(-1));
+nextButton.addEventListener("click", () => showPhoto(1));
 lightbox.addEventListener("click", (event) => {
   if (event.target === lightbox) lightbox.close();
+});
+document.addEventListener("keydown", (event) => {
+  if (!lightbox.open) return;
+  if (event.key === "ArrowLeft") showPhoto(-1);
+  if (event.key === "ArrowRight") showPhoto(1);
+  if (event.key === "Escape") lightbox.close();
 });
 
 renderHero();
