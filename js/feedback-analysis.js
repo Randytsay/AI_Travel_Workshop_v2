@@ -2,6 +2,13 @@
 const data = window.FEEDBACK_ANALYSIS_DATA;
 const $ = (sel) => document.querySelector(sel);
 const fmt = (v, suffix = '') => v === null || v === undefined ? '—' : `${v}${suffix}`;
+const escapeHtml = (value) => String(value ?? '').replace(/[&<>"']/g, (char) => ({
+  '&': '&amp;',
+  '<': '&lt;',
+  '>': '&gt;',
+  '"': '&quot;',
+  "'": '&#039;',
+}[char]));
 
 function initials(name) {
   const clean = String(name || '').trim();
@@ -87,20 +94,42 @@ function renderFollowup() {
     return `<article class="followup-card"><div class="followup-card-head"><div><span>邀請人</span><h3>${inviter}</h3></div><strong>${rows.length} 位</strong></div><div class="followup-card-metrics"><span>評估 ${warmCount}</span><span>推薦均分 ${avgRecommend ? avgRecommend.toFixed(1) : '—'}</span></div><ul>${people}</ul></article>`;
   }).join('');
 }
-function chart(title, rows, wide=false) {
+function topicList(text) {
+  return String(text || '').split(/[,，、]/).map(x => x.trim()).filter(Boolean);
+}
+function namesForChart(chartKey, label) {
+  const allNew = newFriends();
+  const partners = data.records.filter(r => r.identity === '夥伴');
+  const lookup = {
+    satisfaction: () => allNew.filter(r => String(r.newFriend.satisfaction) === String(label)),
+    newAbsorption: () => allNew.filter(r => String(r.newFriend.absorption) === String(label)),
+    recommend: () => allNew.filter(r => String(r.newFriend.recommend) === String(label)),
+    partnerFlow: () => partners.filter(r => String(r.partner.flow) === String(label)),
+    wow: () => allNew.filter(r => r.newFriend.wow === label),
+    aiInterest: () => allNew.filter(r => topicList(r.newFriend.aiInterest).includes(label)),
+    shopInterest: () => allNew.filter(r => r.newFriend.shopInterest === label),
+    invites: () => allNew.filter(r => (r.inviter || '未填邀請人') === label),
+  };
+  return (lookup[chartKey]?.() || []).map(r => r.name);
+}
+function chart(title, rows, chartKey, wide=false) {
   const max = Math.max(...rows.map(r => r.value), 1);
-  return `<article class="chart-card ${wide ? 'wide' : ''}"><h3>${title}</h3>${rows.map(r => `<div class="bar-row"><div class="bar-label">${r.label}</div><div class="bar-track"><div class="bar-fill" style="width:${Math.max(5, r.value / max * 100)}%"></div></div><strong>${r.value}</strong></div>`).join('')}</article>`;
+  return `<article class="chart-card ${wide ? 'wide' : ''}"><h3>${title}</h3><p class="chart-hint">滑過或點一下長條，可查看填寫這一項的人名。</p>${rows.map(r => {
+    const names = namesForChart(chartKey, r.label);
+    const nameText = names.join('、') || '沒有可對應名單';
+    return `<details class="bar-row" title="${escapeHtml(nameText)}"><summary><span class="bar-label">${escapeHtml(r.label)}</span><span class="bar-track"><span class="bar-fill" style="width:${Math.max(5, r.value / max * 100)}%"></span></span><strong>${r.value}</strong></summary><div class="bar-people"><b>填寫名單</b><div>${names.map(name => `<span>${escapeHtml(name)}</span>`).join('') || '<span>沒有可對應名單</span>'}</div></div></details>`;
+  }).join('')}</article>`;
 }
 function renderCharts() {
   $('#chart-grid').innerHTML = [
-    chart('新朋友整體滿意度', data.charts.satisfaction),
-    chart('新朋友吸收程度', data.charts.newAbsorption),
-    chart('推薦意願', data.charts.recommend),
-    chart('夥伴流程順暢度', data.charts.partnerFlow),
-    chart('最有感 Wow Moment', data.charts.wow, true),
-    chart('想延伸學習的 AI 主題', data.charts.aiInterest, true),
-    chart('Shop / 店主興趣溫度', data.charts.shopInterest, true),
-    chart('邀請來源分布', data.charts.invites, true),
+    chart('新朋友整體滿意度', data.charts.satisfaction, 'satisfaction'),
+    chart('新朋友吸收程度', data.charts.newAbsorption, 'newAbsorption'),
+    chart('推薦意願', data.charts.recommend, 'recommend'),
+    chart('夥伴流程順暢度', data.charts.partnerFlow, 'partnerFlow'),
+    chart('最有感 Wow Moment', data.charts.wow, 'wow', true),
+    chart('想延伸學習的 AI 主題', data.charts.aiInterest, 'aiInterest', true),
+    chart('Shop / 店主興趣溫度', data.charts.shopInterest, 'shopInterest', true),
+    chart('邀請來源分布', data.charts.invites, 'invites', true),
   ].join('');
 }
 function voiceText(record) {
