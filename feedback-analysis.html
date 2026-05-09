@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AI 旅遊規劃師工作坊｜課後問卷成果分析</title>
+  <meta name="description" content="AI 旅遊規劃師工作坊課後問卷成果、學員回饋、夥伴觀察與講師改善方向。">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/feedback-analysis.css">
+</head>
+<body class="feedback-page">
+  <nav class="navbar">
+    <div class="container navbar-content">
+      <div class="navbar-brand"><span class="brand-mark">AI</span><h1>課後成果分析</h1><span class="badge">2026.05.09</span></div>
+      <div class="navbar-links"><a href="index.html" class="btn btn-secondary">回課程首頁</a></div>
+    </div>
+  </nav>
+  <div class="quick-nav"><div class="container quick-nav-links">
+    <a href="#overview" class="quick-nav-link active">總覽</a>
+    <a href="#charts" class="quick-nav-link">圖表</a>
+    <a href="#voices" class="quick-nav-link">逐人回饋</a>
+    <a href="#improve" class="quick-nav-link">改善方向</a>
+  </div></div>
+  <header class="feedback-hero">
+    <div class="hero-copy">
+      <p class="eyebrow">AI 旅遊規劃師工作坊課後問卷</p>
+      <h2>把想像變成作品，讓成效被看見。</h2>
+      <p id="hero-subtitle">正在整理問卷資料...</p>
+      <div class="hero-actions"><a href="#voices" class="btn btn-primary">查看每位夥伴與新朋友回饋</a><a href="#improve" class="btn btn-secondary">講師改善重點</a></div>
+    </div>
+    <div class="hero-mosaic" id="hero-mosaic" aria-label="學員作品頭像牆"></div>
+  </header>
+  <main class="container feedback-main">
+    <section id="overview" class="section-band">
+      <div class="section-heading"><p class="eyebrow">Overview</p><h2>活動成效總覽</h2><p>以有效問卷回覆統計，排除空白列與明顯測試列。</p></div>
+      <div class="metric-grid" id="metric-grid"></div>
+      <div class="insight-grid" id="insight-grid"></div>
+    </section>
+    <section id="charts" class="section-band">
+      <div class="section-heading"><p class="eyebrow">Evidence</p><h2>用圖表看見現場反應</h2><p>把滿意度、吸收程度、推薦意願、Wow Moment 與 AI 興趣拆開來看。</p></div>
+      <div class="chart-grid" id="chart-grid"></div>
+    </section>
+    <section id="voices" class="section-band">
+      <div class="section-heading"><p class="eyebrow">Voices</p><h2>每一位的真實回饋</h2><p>新朋友與夥伴分開呈現，頭像以本機同步的學員分享資料夾自動配對。</p></div>
+      <div class="voice-toolbar"><button class="filter-btn active" data-filter="all">全部</button><button class="filter-btn" data-filter="新朋友">新朋友</button><button class="filter-btn" data-filter="夥伴">夥伴</button><input id="voice-search" type="search" placeholder="搜尋姓名、邀請人、意見"></div>
+      <div class="voice-grid" id="voice-grid"></div>
+    </section>
+    <section id="improve" class="section-band improvement-band">
+      <div class="section-heading"><p class="eyebrow">Next</p><h2>客觀分析與下次優化方向</h2><p>保留讓學員有成就感的設計，同時把操作阻力移出主課程節奏。</p></div>
+      <div class="action-columns"><div><h3>已驗證的亮點</h3><ul id="wins"></ul></div><div><h3>需要修補的風險</h3><ul id="risks"></ul></div><div><h3>建議下一步</h3><ul id="actions"></ul></div></div>
+    </section>
+  </main>
+  <script src="data/feedback-analysis-data.js"></script>
+  <script src="js/feedback-analysis.js"></script>
+</body>
+</html>
