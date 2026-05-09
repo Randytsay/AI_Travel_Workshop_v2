@@ -12,7 +12,7 @@ function avatarHtml(record) {
   return `<div class="avatar" aria-label="${record.name} 頭像占位">${initials(record.name)}</div>`;
 }
 function renderHero() {
-  $('#hero-subtitle').textContent = `有效回覆 ${data.summary.validRows} 份，其中新朋友 ${data.summary.newFriends} 位、夥伴 ${data.summary.partners} 位；已自動配對 ${data.summary.avatarMatched} 位頭像。`;
+  $('#hero-subtitle').textContent = `有效回覆 ${data.summary.validRows} 份，其中新朋友 ${data.summary.newFriends} 位、夥伴 ${data.summary.partners} 位；可直接看見邀請成效、續課興趣與後續追蹤名單。`;
   const withAvatars = data.records.filter(r => r.avatar).slice(0, 24);
   $('#hero-mosaic').innerHTML = withAvatars.map(r => `<div class="mosaic-item"><img src="${r.avatar}" alt="${r.name}"></div>`).join('');
 }
@@ -23,12 +23,69 @@ function renderMetrics() {
     ['整體滿意度', data.summary.avgSatisfaction, '/ 5 平均分'],
     ['推薦滿分率', data.summary.highRecommendRate + '%', '新朋友給 5 分比例'],
     ['吸收程度', data.summary.avgNewAbsorption, '/ 5 新朋友平均'],
-    ['Shop 暖名單', data.summary.shopWarmLeadRate + '%', '想了解或先聽制度'],
+    ['評估名單', data.summary.shopWarmLeadRate + '%', '想了解或先聽制度'],
     ['夥伴流程分', data.summary.avgPartnerFlow, '/ 5 平均分'],
-    ['頭像配對', data.summary.avatarMatched, '位可放入評語旁'],
+    ['續課興趣', continuationStats().courseInterested, '位留下 AI 主題興趣'],
   ];
   $('#metric-grid').innerHTML = items.map(([label,value,note]) => `<article class="metric-card"><span>${label}</span><strong>${value}</strong><span>${note}</span></article>`).join('');
   $('#insight-grid').innerHTML = `<article class="insight-card"><h3>一句話結論</h3><p>${data.analysis.headline}</p></article><article class="insight-card"><h3>資料清理</h3><p>原始表格 ${data.summary.rawRows} 列，含空白列；有填答 ${data.summary.answeredRows} 列，排除 ${data.summary.excludedRows} 筆明顯測試資料後納入分析。</p></article>`;
+}
+function newFriends() {
+  return data.records.filter(r => r.identity === '新朋友');
+}
+function isShopWarm(record) {
+  return ['非常有興趣，想了解如何開始', '有點興趣，想先聽聽看制度'].includes(record.newFriend.shopInterest);
+}
+function continuationStats() {
+  const rows = newFriends();
+  const warm = rows.filter(isShopWarm);
+  const courseInterested = rows.filter(r => r.newFriend.aiInterest).length;
+  const consumer = rows.filter(r => r.newFriend.shopInterest === '只想當消費者，賺現金回饋就好').length;
+  const aiOnly = rows.filter(r => r.newFriend.shopInterest === '目前先專注學習 AI 技能就好').length;
+  return { total: rows.length, warm: warm.length, courseInterested, consumer, aiOnly };
+}
+function shortTopic(text) {
+  return String(text || '')
+    .split(/[,，、]/)
+    .map(x => x.replace(/\s*\(.+?\)\s*/g, '').trim())
+    .filter(Boolean)
+    .slice(0, 3)
+    .join('、') || '尚未填寫';
+}
+function followupLevel(record) {
+  if (record.newFriend.shopInterest === '非常有興趣，想了解如何開始') return ['優先評估', 'hot'];
+  if (record.newFriend.shopInterest === '有點興趣，想先聽聽看制度') return ['可約制度說明', 'warm'];
+  if (record.newFriend.aiInterest) return ['邀約下次主題課', 'course'];
+  return ['先維持互動', 'soft'];
+}
+function renderFollowup() {
+  const stats = continuationStats();
+  $('#followup-summary').innerHTML = [
+    ['Shop/制度評估', stats.warm, `${Math.round(stats.warm / stats.total * 100)}% 新朋友可後續評估`],
+    ['下次課程興趣', stats.courseInterested, `${Math.round(stats.courseInterested / stats.total * 100)}% 留下 AI 主題`],
+    ['消費者回饋', stats.consumer, '可從現金回饋切入'],
+    ['先學 AI 技能', stats.aiOnly, '適合先邀約進階實作課'],
+  ].map(([label, value, note]) => `<article class="followup-stat"><span>${label}</span><strong>${value}</strong><em>${note}</em></article>`).join('');
+
+  const groups = new Map();
+  newFriends().forEach(record => {
+    const inviter = record.inviter || '未填邀請人';
+    if (!groups.has(inviter)) groups.set(inviter, []);
+    groups.get(inviter).push(record);
+  });
+  const sorted = [...groups.entries()].sort((a, b) => {
+    const warmDiff = b[1].filter(isShopWarm).length - a[1].filter(isShopWarm).length;
+    return warmDiff || b[1].length - a[1].length || a[0].localeCompare(b[0], 'zh-Hant');
+  });
+  $('#followup-grid').innerHTML = sorted.map(([inviter, rows]) => {
+    const warmCount = rows.filter(isShopWarm).length;
+    const avgRecommend = rows.filter(r => r.newFriend.recommend !== null).reduce((sum, r, _, arr) => sum + r.newFriend.recommend / arr.length, 0);
+    const people = rows.map(r => {
+      const [label, cls] = followupLevel(r);
+      return `<li><div><strong>${r.name}</strong><span>${shortTopic(r.newFriend.aiInterest)}</span></div><mark class="${cls}">${label}</mark></li>`;
+    }).join('');
+    return `<article class="followup-card"><div class="followup-card-head"><div><span>邀請人</span><h3>${inviter}</h3></div><strong>${rows.length} 位</strong></div><div class="followup-card-metrics"><span>評估 ${warmCount}</span><span>推薦均分 ${avgRecommend ? avgRecommend.toFixed(1) : '—'}</span></div><ul>${people}</ul></article>`;
+  }).join('');
 }
 function chart(title, rows, wide=false) {
   const max = Math.max(...rows.map(r => r.value), 1);
@@ -87,6 +144,7 @@ function bind() {
 }
 renderHero();
 renderMetrics();
+renderFollowup();
 renderCharts();
 renderVoices();
 renderActions();
