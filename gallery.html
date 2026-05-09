@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="zh-Hant">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>AI 旅遊工作坊｜成果展示牆</title>
+    <meta name="description" content="AI 旅遊規劃師工作坊學員成果展示牆，依上傳者與作品照片展示每個人的 AI 旅遊作品。">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+TC:wght@400;500;700;900&family=Noto+Serif+JP:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/gallery.css">
+  </head>
+  <body class="gallery-page">
+    <nav class="gallery-nav">
+      <a class="gallery-brand" href="index.html"><span>AI</span>旅遊工作坊</a>
+      <div class="gallery-nav-links">
+        <a href="feedback-analysis.html">問卷分析</a>
+        <a href="index.html">課程首頁</a>
+      </div>
+    </nav>
+
+    <header class="gallery-hero">
+      <section class="hero-copy">
+        <p class="eyebrow">AI Travel Showcase</p>
+        <h1>把靈感、路線與想像，陳列成一面會發光的成果牆。</h1>
+        <p class="lead">這裡不是單純的照片清單，而是每位學員在工作坊完成作品的證據。每一張圖都代表一次理解、一次嘗試，以及一次把 AI 變成自己的能力。</p>
+        <div class="hero-actions">
+          <a class="primary-action" href="#peopleView">看每位上傳者</a>
+          <a class="secondary-action" href="#photosView">瀏覽全部作品</a>
+        </div>
+      </section>
+      <section class="hero-art" id="heroArt" aria-label="成果照片拼貼"></section>
+    </header>
+
+    <main class="gallery-main">
+      <section class="gallery-stats" aria-label="成果統計">
+        <article><span>成果照片</span><strong id="totalPhotos">0</strong></article>
+        <article><span>上傳者</span><strong id="totalPeople">0</strong></article>
+        <article><span>單人最高</span><strong id="topCount">0</strong></article>
+        <article><span>展覽更新</span><strong id="generatedAt">--</strong></article>
+      </section>
+
+      <section class="curator-note">
+        <p class="eyebrow">Curator Note</p>
+        <h2>這場工作坊真正留下來的，是「我也做得到」的感覺。</h2>
+        <p>當作品被放在同一面牆上，學員會看到自己不是孤單完成任務，而是一起把旅行想像、視覺風格、行程設計和個人故事做成可分享的成果。這份展示很適合在課後說明、夥伴回顧與下一場邀約時使用。</p>
+      </section>
+
+      <section class="gallery-toolbar" aria-label="篩選工具">
+        <label class="search">
+          <span>搜尋上傳者或檔名</span>
+          <input id="searchInput" type="search" placeholder="輸入姓名、暱稱或作品關鍵字">
+        </label>
+        <div class="view-tabs" role="tablist" aria-label="檢視模式">
+          <button class="tab is-active" type="button" data-view="people">依上傳者</button>
+          <button class="tab" type="button" data-view="photos">照片牆</button>
+        </div>
+      </section>
+
+      <section id="peopleView" class="people-grid" aria-label="依上傳者展示"></section>
+      <section id="photosView" class="photo-wall is-hidden" aria-label="照片牆"></section>
+    </main>
+
+    <dialog id="lightbox" class="lightbox">
+      <button class="close" type="button" aria-label="關閉">×</button>
+      <img id="lightboxImage" alt="">
+      <div class="lightbox-caption">
+        <strong id="lightboxName"></strong>
+        <span id="lightboxMeta"></span>
+      </div>
+    </dialog>
+
+    <script src="data/gallery-data.js"></script>
+    <script src="js/gallery.js"></script>
+  </body>
+</html>
