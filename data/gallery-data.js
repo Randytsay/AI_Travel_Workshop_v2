@@ -1,8 +1,135 @@
 window.GALLERY_DATA = {
-  "generatedAt": "2026/5/10 13:22:00",
-  "totalPhotos": 138,
+  "generatedAt": "2026/5/14 00:03:51",
+  "totalPhotos": 172,
   "totalPeople": 50,
   "people": [
+    {
+      "name": "何家楹 Sofia",
+      "count": 20,
+      "photos": [
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260509_055743_image_613165229517308092.jpg",
+          "localUrl": "assets/gallery/photos/20260509_055743_image_613165229517308092.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260509_075749_image_613177316914233690.jpg",
+          "localUrl": "assets/gallery/photos/20260509_075749_image_613177316914233690.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260509_075912_image_613177453396885845.jpg",
+          "localUrl": "assets/gallery/photos/20260509_075912_image_613177453396885845.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075149_image_613321669557092761.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075149_image_613321669557092761.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075150_image_613321671839055925.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075150_image_613321671839055925.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075151_image_613321673952723387.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075151_image_613321673952723387.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075152_image_613321675748147356.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075152_image_613321675748147356.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075153_image_613321677694042283.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075153_image_613321677694042283.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075154_image_613321679321432528.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075154_image_613321679321432528.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075155_image_613321681099817358.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075155_image_613321681099817358.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075157_image_613321683113083391.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075157_image_613321683113083391.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075158_image_613321686619521441.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075158_image_613321686619521441.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075200_image_613321688515346883.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075200_image_613321688515346883.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075201_image_613321690126746198.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075201_image_613321690126746198.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075201_image_613321692156788738.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075201_image_613321692156788738.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075203_image_613321693665952187.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075203_image_613321693665952187.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075204_image_613321695193202810.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075204_image_613321695193202810.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075204_image_613321696937509141.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075204_image_613321696937509141.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075205_image_613321698548646349.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075205_image_613321698548646349.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "何家楹 Sofia",
+          "fileName": "20260510_075207_image_613321700292952324.jpg",
+          "localUrl": "assets/gallery/photos/20260510_075207_image_613321700292952324.jpg",
+          "driveUrl": ""
+        }
+      ],
+      "firstPhoto": "./assets/photos/063_何家楹_Sofia_20260510_075207_image_613321700292952324.jpg"
+    },
     {
       "name": "蔡耀文Randy",
       "count": 20,
@@ -128,7 +255,128 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/104_蔡耀文Randy_20260509_135844_image_613213648143253836.jpg"
+      "firstPhoto": "./assets/photos/137_蔡耀文Randy_20260509_135844_image_613213648143253836.jpg"
+    },
+    {
+      "name": "王介芸AnnyWang",
+      "count": 19,
+      "photos": [
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260509_055809_image_613165272164991274.jpg",
+          "localUrl": "assets/gallery/photos/20260509_055809_image_613165272164991274.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260509_075737_image_613177289668034716.jpg",
+          "localUrl": "assets/gallery/photos/20260509_075737_image_613177289668034716.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260509_075744_image_613177301697298845.jpg",
+          "localUrl": "assets/gallery/photos/20260509_075744_image_613177301697298845.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102525_image_613337132177555988.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102525_image_613337132177555988.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102525_image_613337133117079825.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102525_image_613337133117079825.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102525_image_613337133821723216.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102525_image_613337133821723216.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102525_image_613337134425702694.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102525_image_613337134425702694.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102526_image_613337134962573402.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102526_image_613337134962573402.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102526_image_613337135566553386.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102526_image_613337135566553386.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102527_image_613337136271196195.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102527_image_613337136271196195.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102527_image_613337136774512981.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102527_image_613337136774512981.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102527_image_613337137077288979.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102527_image_613337137077288979.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102528_image_613337137580343315.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102528_image_613337137580343315.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102542_image_613337162812752230.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102542_image_613337162812752230.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102543_image_613337163282776325.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102543_image_613337163282776325.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102543_image_613337163970379947.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102543_image_613337163970379947.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102543_image_613337164524028538.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102543_image_613337164524028538.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102544_image_613337164993790382.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102544_image_613337164993790382.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "王介芸AnnyWang",
+          "fileName": "20260510_102544_image_613337165262225874.jpg",
+          "localUrl": "assets/gallery/photos/20260510_102544_image_613337165262225874.jpg",
+          "driveUrl": ""
+        }
+      ],
+      "firstPhoto": "./assets/photos/041_王介芸AnnyWang_20260510_102544_image_613337165262225874.jpg"
     },
     {
       "name": "佳惠（淨慧）🥬",
@@ -213,7 +461,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/053_佳惠_淨慧_20260510_050056_image_613304469320368380.jpg"
+      "firstPhoto": "./assets/photos/086_佳惠_淨慧_20260510_050056_image_613304469320368380.jpg"
     },
     {
       "name": "Cathy 妍君（凱西）",
@@ -280,7 +528,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/122_Cathy_妍君_凱西_20260509_085833_image_613183433568420015.jpg"
+      "firstPhoto": "./assets/photos/155_Cathy_妍君_凱西_20260509_085833_image_613183433568420015.jpg"
     },
     {
       "name": "🎂🌱許元元 🌟（馨元）",
@@ -427,7 +675,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/079_淑芳_20260509_081125_image_613178685012312608.jpg"
+      "firstPhoto": "./assets/photos/112_淑芳_20260509_081125_image_613178685012312608.jpg"
     },
     {
       "name": "林韋宏-小太陽",
@@ -458,7 +706,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/064_林韋宏-小太陽_20260509_075735_image_613177285490508172.jpg"
+      "firstPhoto": "./assets/photos/097_林韋宏-小太陽_20260509_075735_image_613177285490508172.jpg"
     },
     {
       "name": "飛翔的獅子（可婕可可）♠",
@@ -489,7 +737,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/071_飛翔的獅子_可婕可可_20260510_044151_image_613302526887854523.jpg"
+      "firstPhoto": "./assets/photos/104_飛翔的獅子_可婕可可_20260510_044151_image_613302526887854523.jpg"
     },
     {
       "name": "❤️Hi 玲緋（小秋）",
@@ -517,56 +765,6 @@ window.GALLERY_DATA = {
       "firstPhoto": "./assets/photos/005_Hi_玲緋_小秋_20260509_075915_image_613177464201413051.jpg"
     },
     {
-      "name": "王介芸AnnyWang",
-      "count": 3,
-      "photos": [
-        {
-          "displayName": "王介芸AnnyWang",
-          "fileName": "20260509_055809_image_613165272164991274.jpg",
-          "localUrl": "assets/gallery/photos/20260509_055809_image_613165272164991274.jpg",
-          "driveUrl": ""
-        },
-        {
-          "displayName": "王介芸AnnyWang",
-          "fileName": "20260509_075737_image_613177289668034716.jpg",
-          "localUrl": "assets/gallery/photos/20260509_075737_image_613177289668034716.jpg",
-          "driveUrl": ""
-        },
-        {
-          "displayName": "王介芸AnnyWang",
-          "fileName": "20260509_075744_image_613177301697298845.jpg",
-          "localUrl": "assets/gallery/photos/20260509_075744_image_613177301697298845.jpg",
-          "driveUrl": ""
-        }
-      ],
-      "firstPhoto": "./assets/photos/025_王介芸AnnyWang_20260509_075744_image_613177301697298845.jpg"
-    },
-    {
-      "name": "何家楹 Sofia",
-      "count": 3,
-      "photos": [
-        {
-          "displayName": "何家楹 Sofia",
-          "fileName": "20260509_055743_image_613165229517308092.jpg",
-          "localUrl": "assets/gallery/photos/20260509_055743_image_613165229517308092.jpg",
-          "driveUrl": ""
-        },
-        {
-          "displayName": "何家楹 Sofia",
-          "fileName": "20260509_075749_image_613177316914233690.jpg",
-          "localUrl": "assets/gallery/photos/20260509_075749_image_613177316914233690.jpg",
-          "driveUrl": ""
-        },
-        {
-          "displayName": "何家楹 Sofia",
-          "fileName": "20260509_075912_image_613177453396885845.jpg",
-          "localUrl": "assets/gallery/photos/20260509_075912_image_613177453396885845.jpg",
-          "driveUrl": ""
-        }
-      ],
-      "firstPhoto": "./assets/photos/030_何家楹_Sofia_20260509_075912_image_613177453396885845.jpg"
-    },
-    {
       "name": "李和宸（語婕）Erisa",
       "count": 3,
       "photos": [
@@ -589,7 +787,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/034_李和宸_語婕_Erisa_20260509_061140_image_613166635917770787.jpg"
+      "firstPhoto": "./assets/photos/067_李和宸_語婕_Erisa_20260509_061140_image_613166635917770787.jpg"
     },
     {
       "name": "佩瑩(小佩)",
@@ -614,7 +812,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/040_佩瑩_小佩_20260509_080658_image_613178239678677589.jpg"
+      "firstPhoto": "./assets/photos/073_佩瑩_小佩_20260509_080658_image_613178239678677589.jpg"
     },
     {
       "name": "宛伶Evanna｜LINeee暫時性短路",
@@ -639,7 +837,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/058_宛伶Evanna_LINeee暫時性短路_20260509_075156_image_613176722413584521.jpg"
+      "firstPhoto": "./assets/photos/091_宛伶Evanna_LINeee暫時性短路_20260509_075156_image_613176722413584521.jpg"
     },
     {
       "name": "纓茹（小櫻）🌸 Ying",
@@ -664,7 +862,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/111_纓茹_小櫻_Ying_20260509_080029_image_613177587933380834.jpg"
+      "firstPhoto": "./assets/photos/144_纓茹_小櫻_Ying_20260509_080029_image_613177587933380834.jpg"
     },
     {
       "name": "♪♫ 𝒱𝒾𝒸𝓀𝓎 秉樺♫♪♩·",
@@ -702,7 +900,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/036_李珮瑜_Grace_沐瑜_20260509_075727_image_613177283611459729.jpg"
+      "firstPhoto": "./assets/photos/069_李珮瑜_Grace_沐瑜_20260509_075727_image_613177283611459729.jpg"
     },
     {
       "name": "佳螢",
@@ -721,7 +919,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/055_佳螢_20260509_090257_image_613183876621140003.jpg"
+      "firstPhoto": "./assets/photos/088_佳螢_20260509_090257_image_613183876621140003.jpg"
     },
     {
       "name": "昀謙",
@@ -740,7 +938,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/060_昀謙_20260509_081001_image_613178538832429108.jpg"
+      "firstPhoto": "./assets/photos/093_昀謙_20260509_081001_image_613178538832429108.jpg"
     },
     {
       "name": "奕妏Esther",
@@ -759,7 +957,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/067_奕妏Esther_20260509_075902_image_613177426620711339.jpg"
+      "firstPhoto": "./assets/photos/100_奕妏Esther_20260509_075902_image_613177426620711339.jpg"
     },
     {
       "name": "薰卉-2026",
@@ -778,7 +976,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/106_薰卉-2026_20260509_075953_image_613177529045352848.jpg"
+      "firstPhoto": "./assets/photos/139_薰卉-2026_20260509_075953_image_613177529045352848.jpg"
     },
     {
       "name": "蘇佩珍",
@@ -797,7 +995,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/108_蘇佩珍_20260509_075507_image_613177048915509336.jpg"
+      "firstPhoto": "./assets/photos/141_蘇佩珍_20260509_075507_image_613177048915509336.jpg"
     },
     {
       "name": "Eugene Liu劉欽正",
@@ -816,7 +1014,26 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/125_Eugene_Liu劉欽正_20260509_075459_image_613177027121381462.jpg"
+      "firstPhoto": "./assets/photos/158_Eugene_Liu劉欽正_20260509_075459_image_613177027121381462.jpg"
+    },
+    {
+      "name": "Irene Pai-姍靈🌈",
+      "count": 2,
+      "photos": [
+        {
+          "displayName": "Irene Pai-姍靈🌈",
+          "fileName": "20260509_051728_image_613161178692846114.jpg",
+          "localUrl": "assets/gallery/photos/20260509_051728_image_613161178692846114.jpg",
+          "driveUrl": ""
+        },
+        {
+          "displayName": "Irene Pai-姍靈🌈",
+          "fileName": "20260510_093847_image_613332437644083448.jpg",
+          "localUrl": "assets/gallery/photos/20260510_093847_image_613332437644083448.jpg",
+          "driveUrl": ""
+        }
+      ],
+      "firstPhoto": "./assets/photos/160_Irene_Pai-姍靈_20260510_093847_image_613332437644083448.jpg"
     },
     {
       "name": "Mei Yu",
@@ -835,7 +1052,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/130_Mei_Yu_20260509_110359_image_613196061124854205.jpg"
+      "firstPhoto": "./assets/photos/164_Mei_Yu_20260509_110359_image_613196061124854205.jpg"
     },
     {
       "name": "Yvonne儷娟（揚&媗&祺）",
@@ -854,7 +1071,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/138_Yvonne儷娟_揚_媗_祺_20260509_075230_image_613176780865405294.jpg"
+      "firstPhoto": "./assets/photos/172_Yvonne儷娟_揚_媗_祺_20260509_075230_image_613176780865405294.jpg"
     },
     {
       "name": "方美月",
@@ -880,7 +1097,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/026_王佳音_KellyWang_20260509_051719_image_613161162519609651.jpg"
+      "firstPhoto": "./assets/photos/042_王佳音_KellyWang_20260509_051719_image_613161162519609651.jpg"
     },
     {
       "name": "玉妃",
@@ -893,7 +1110,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/027_玉妃_20260509_055757_image_613165251076030516.jpg"
+      "firstPhoto": "./assets/photos/043_玉妃_20260509_055757_image_613165251076030516.jpg"
     },
     {
       "name": "君豪",
@@ -906,7 +1123,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/031_君豪_20260509_060156_image_613165655037837721.jpg"
+      "firstPhoto": "./assets/photos/064_君豪_20260509_060156_image_613165655037837721.jpg"
     },
     {
       "name": "佩新 Bess",
@@ -919,7 +1136,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/037_佩新_Bess_20260509_055929_image_613165408496648805.jpg"
+      "firstPhoto": "./assets/photos/070_佩新_Bess_20260509_055929_image_613165408496648805.jpg"
     },
     {
       "name": "邱偉埕",
@@ -932,7 +1149,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/065_邱偉埕_20260509_060149_image_613165643545444404.jpg"
+      "firstPhoto": "./assets/photos/098_邱偉埕_20260509_060149_image_613165643545444404.jpg"
     },
     {
       "name": "家儀Queenie",
@@ -945,7 +1162,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/072_家儀Queenie_20260509_055714_image_613165178715897942.jpg"
+      "firstPhoto": "./assets/photos/105_家儀Queenie_20260509_055714_image_613165178715897942.jpg"
     },
     {
       "name": "徐碩鴻SC🎯BOSS(鴻哥)",
@@ -958,7 +1175,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/073_徐碩鴻SC_BOSS_鴻哥_20260509_060546_image_613166041266388995.jpg"
+      "firstPhoto": "./assets/photos/106_徐碩鴻SC_BOSS_鴻哥_20260509_060546_image_613166041266388995.jpg"
     },
     {
       "name": "袁兒",
@@ -971,7 +1188,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/074_袁兒_20260509_080047_image_613177619390660902.jpg"
+      "firstPhoto": "./assets/photos/107_袁兒_20260509_080047_image_613177619390660902.jpg"
     },
     {
       "name": "淑茹",
@@ -984,7 +1201,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/080_淑茹_20260509_055848_image_613165339894612521.jpg"
+      "firstPhoto": "./assets/photos/113_淑茹_20260509_055848_image_613165339894612521.jpg"
     },
     {
       "name": "陳雯",
@@ -997,7 +1214,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/081_陳雯_20260509_060028_image_613165503456215195.jpg"
+      "firstPhoto": "./assets/photos/114_陳雯_20260509_060028_image_613165503456215195.jpg"
     },
     {
       "name": "皓媛♡ya chan( ิ◕㉨◕ ิ)",
@@ -1010,7 +1227,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/082_皓媛_ya_chan_ᄌ_20260509_055727_image_613165203311296891.jpg"
+      "firstPhoto": "./assets/photos/115_皓媛_ya_chan_ᄌ_20260509_055727_image_613165203311296891.jpg"
     },
     {
       "name": "瑄~",
@@ -1023,7 +1240,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/083_瑄_20260509_060743_image_613166233482691024.jpg"
+      "firstPhoto": "./assets/photos/116_瑄_20260509_060743_image_613166233482691024.jpg"
     },
     {
       "name": "蔡氵絜",
@@ -1036,7 +1253,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/084_蔡氵絜_20260509_060553_image_613166047557583176.jpg"
+      "firstPhoto": "./assets/photos/117_蔡氵絜_20260509_060553_image_613166047557583176.jpg"
     },
     {
       "name": "Amy（秀瑛）",
@@ -1049,7 +1266,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/112_Amy_秀瑛_20260509_060748_image_613166246417924254.jpg"
+      "firstPhoto": "./assets/photos/145_Amy_秀瑛_20260509_060748_image_613166246417924254.jpg"
     },
     {
       "name": "Emilie",
@@ -1062,20 +1279,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/123_Emilie_20260509_055757_image_613165249633189889.jpg"
-    },
-    {
-      "name": "Irene Pai-姍靈🌈",
-      "count": 1,
-      "photos": [
-        {
-          "displayName": "Irene Pai-姍靈🌈",
-          "fileName": "20260509_051728_image_613161178692846114.jpg",
-          "localUrl": "assets/gallery/photos/20260509_051728_image_613161178692846114.jpg",
-          "driveUrl": ""
-        }
-      ],
-      "firstPhoto": "./assets/photos/126_Irene_Pai-姍靈_20260509_051728_image_613161178692846114.jpg"
+      "firstPhoto": "./assets/photos/156_Emilie_20260509_055757_image_613165249633189889.jpg"
     },
     {
       "name": "Joyce HH",
@@ -1088,7 +1292,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/127_Joyce_HH_20260509_055805_image_613165264481026389.jpg"
+      "firstPhoto": "./assets/photos/161_Joyce_HH_20260509_055805_image_613165264481026389.jpg"
     },
     {
       "name": "linyenjin",
@@ -1101,7 +1305,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/128_linyenjin_20260509_081340_image_613178915933913229.jpg"
+      "firstPhoto": "./assets/photos/162_linyenjin_20260509_081340_image_613178915933913229.jpg"
     },
     {
       "name": "Nancy 羅因琦",
@@ -1114,7 +1318,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/131_Nancy_羅因琦_20260509_055753_image_613165247922438452.jpg"
+      "firstPhoto": "./assets/photos/165_Nancy_羅因琦_20260509_055753_image_613165247922438452.jpg"
     },
     {
       "name": "Oliviae",
@@ -1127,7 +1331,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/132_Oliviae_20260509_060016_image_613165487903211674.jpg"
+      "firstPhoto": "./assets/photos/166_Oliviae_20260509_060016_image_613165487903211674.jpg"
     },
     {
       "name": "Sindy （敏慧）",
@@ -1140,7 +1344,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/133_Sindy_敏慧_20260509_060349_image_613165844151402635.jpg"
+      "firstPhoto": "./assets/photos/167_Sindy_敏慧_20260509_060349_image_613165844151402635.jpg"
     },
     {
       "name": "Yanger   峻傑",
@@ -1153,7 +1357,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/134_Yanger_峻傑_20260509_055722_image_613165188245356906.jpg"
+      "firstPhoto": "./assets/photos/168_Yanger_峻傑_20260509_055722_image_613165188245356906.jpg"
     },
     {
       "name": "yew yew幼娟",
@@ -1166,7 +1370,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/135_yew_yew幼娟_20260509_090317_image_613183902676156757.jpg"
+      "firstPhoto": "./assets/photos/169_yew_yew幼娟_20260509_090317_image_613183902676156757.jpg"
     },
     {
       "name": "YI-CHEN 逸蓁",
@@ -1179,7 +1383,7 @@ window.GALLERY_DATA = {
           "driveUrl": ""
         }
       ],
-      "firstPhoto": "./assets/photos/136_YI-CHEN_逸蓁_20260509_050845_image_613160300573360163.jpg"
+      "firstPhoto": "./assets/photos/170_YI-CHEN_逸蓁_20260509_050845_image_613160300573360163.jpg"
     }
   ],
   "photos": [
@@ -1334,6 +1538,102 @@ window.GALLERY_DATA = {
       "driveUrl": ""
     },
     {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102525_image_613337132177555988.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102525_image_613337132177555988.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102525_image_613337133117079825.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102525_image_613337133117079825.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102525_image_613337133821723216.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102525_image_613337133821723216.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102525_image_613337134425702694.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102525_image_613337134425702694.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102526_image_613337134962573402.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102526_image_613337134962573402.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102526_image_613337135566553386.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102526_image_613337135566553386.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102527_image_613337136271196195.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102527_image_613337136271196195.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102527_image_613337136774512981.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102527_image_613337136774512981.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102527_image_613337137077288979.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102527_image_613337137077288979.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102528_image_613337137580343315.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102528_image_613337137580343315.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102542_image_613337162812752230.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102542_image_613337162812752230.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102543_image_613337163282776325.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102543_image_613337163282776325.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102543_image_613337163970379947.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102543_image_613337163970379947.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102543_image_613337164524028538.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102543_image_613337164524028538.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102544_image_613337164993790382.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102544_image_613337164993790382.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "王介芸AnnyWang",
+      "fileName": "20260510_102544_image_613337165262225874.jpg",
+      "localUrl": "assets/gallery/photos/20260510_102544_image_613337165262225874.jpg",
+      "driveUrl": ""
+    },
+    {
       "displayName": "王佳音 KellyWang",
       "fileName": "20260509_051719_image_613161162519609651.jpg",
       "localUrl": "assets/gallery/photos/20260509_051719_image_613161162519609651.jpg",
@@ -1361,6 +1661,108 @@ window.GALLERY_DATA = {
       "displayName": "何家楹 Sofia",
       "fileName": "20260509_075912_image_613177453396885845.jpg",
       "localUrl": "assets/gallery/photos/20260509_075912_image_613177453396885845.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075149_image_613321669557092761.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075149_image_613321669557092761.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075150_image_613321671839055925.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075150_image_613321671839055925.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075151_image_613321673952723387.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075151_image_613321673952723387.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075152_image_613321675748147356.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075152_image_613321675748147356.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075153_image_613321677694042283.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075153_image_613321677694042283.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075154_image_613321679321432528.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075154_image_613321679321432528.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075155_image_613321681099817358.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075155_image_613321681099817358.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075157_image_613321683113083391.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075157_image_613321683113083391.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075158_image_613321686619521441.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075158_image_613321686619521441.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075200_image_613321688515346883.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075200_image_613321688515346883.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075201_image_613321690126746198.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075201_image_613321690126746198.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075201_image_613321692156788738.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075201_image_613321692156788738.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075203_image_613321693665952187.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075203_image_613321693665952187.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075204_image_613321695193202810.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075204_image_613321695193202810.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075204_image_613321696937509141.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075204_image_613321696937509141.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075205_image_613321698548646349.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075205_image_613321698548646349.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "何家楹 Sofia",
+      "fileName": "20260510_075207_image_613321700292952324.jpg",
+      "localUrl": "assets/gallery/photos/20260510_075207_image_613321700292952324.jpg",
       "driveUrl": ""
     },
     {
@@ -1937,6 +2339,12 @@ window.GALLERY_DATA = {
       "displayName": "Irene Pai-姍靈🌈",
       "fileName": "20260509_051728_image_613161178692846114.jpg",
       "localUrl": "assets/gallery/photos/20260509_051728_image_613161178692846114.jpg",
+      "driveUrl": ""
+    },
+    {
+      "displayName": "Irene Pai-姍靈🌈",
+      "fileName": "20260510_093847_image_613332437644083448.jpg",
+      "localUrl": "assets/gallery/photos/20260510_093847_image_613332437644083448.jpg",
       "driveUrl": ""
     },
     {
